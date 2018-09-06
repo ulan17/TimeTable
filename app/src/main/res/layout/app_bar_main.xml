@@ -22,11 +22,9 @@
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="?actionBarSize"
             app:tabIndicatorColor="@color/colorAccent"
             app:tabBackground="@color/colorPrimary"
             app:tabGravity="fill"
-            app:tabIndicatorHeight="4dp"
             app:tabMode="scrollable">
         </android.support.design.widget.TabLayout>
     </android.support.design.widget.AppBarLayout>
@@ -39,6 +37,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:ico_icon="gmd_add" />
+        android:src="@drawable/baseline_add_white_24" />
 
 </android.support.design.widget.CoordinatorLayout>
