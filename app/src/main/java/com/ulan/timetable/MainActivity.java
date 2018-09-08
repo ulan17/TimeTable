@@ -1,10 +1,12 @@
 package com.ulan.timetable;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,7 +16,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 
+import com.ulan.timetable.Adapters.FragmentsTabAdapter;
 import com.ulan.timetable.Fragments.FridayFragment;
 import com.ulan.timetable.Fragments.MondayFragment;
 import com.ulan.timetable.Fragments.SaturdayFragment;
@@ -22,27 +27,27 @@ import com.ulan.timetable.Fragments.SundayFragment;
 import com.ulan.timetable.Fragments.ThursdayFragment;
 import com.ulan.timetable.Fragments.TuesdayFragment;
 import com.ulan.timetable.Fragments.WednesdayFragment;
+import com.ulan.timetable.Utils.DbHelper;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    FragmentsTabAdapter adapter;
+    String[] s = {"Monday", "Tuesday", "Wednesday"};
+    public ViewPager getViewPager() {
+        return viewPager;
+    }
+
+    private ViewPager viewPager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        adapter = new FragmentsTabAdapter(getSupportFragmentManager());
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
@@ -51,12 +56,53 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         initTabFragment();
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Add subject");
+        Context context = getApplicationContext();
+        LinearLayout layout = new LinearLayout(context);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        final EditText input = new EditText(this);
+        layout.addView(input);
+        final EditText room = new EditText(this);
+        layout.addView(room);
+        builder.setView(layout);
+
+
+        builder.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                DbHelper dbHelper = new DbHelper(MainActivity.this);
+                Week week = new Week();
+                week.setSubject(input.getText().toString());
+                week.setFragment(adapter.getItem(viewPager.getCurrentItem()).toString());
+                week.setRoom(room.getText().toString());
+                dbHelper.insertUserDetails(week);
+                viewPager.getAdapter().notifyDataSetChanged();
+
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        final AlertDialog ad = builder.create();
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ad.show();
+            }
+        });
     }
 
     public void initTabFragment() {
-        ViewPager viewPager = findViewById(R.id.viewPager);
+        viewPager = findViewById(R.id.viewPager);
         TabLayout tabLayout = findViewById(R.id.tabLayout);
-        FragmentsTabAdapter adapter = new FragmentsTabAdapter(getSupportFragmentManager());
         adapter.addFragment(new MondayFragment(), "Monday");
         adapter.addFragment(new TuesdayFragment(), "Tuesday");
         adapter.addFragment(new WednesdayFragment(), "Wednesday");
