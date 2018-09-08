@@ -12,4 +12,7 @@
     <string name="subject">Subject</string>
     <string name="time">Time</string>
     <string name="room">Room</string>
+    <string name="week">Week</string>
+    <string name="timetable">TimeTable</string>
+    <string name="ulan_nurym_gmail_com">ulan.nurym@gmail.com</string>
 </resources>
