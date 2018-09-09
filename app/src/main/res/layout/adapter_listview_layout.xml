@@ -1,39 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:weightSum="100">
+    android:layout_height="wrap_content"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:descendantFocusability="beforeDescendants">
 
-
-    <TextView
-        android:gravity="center"
-        android:textAlignment="center"
-        android:text="@string/subject"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:id="@+id/subject"
-        android:layout_weight="66.6"/>
-
-    <LinearLayout
-        android:orientation="vertical"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="33.3">
+        android:descendantFocusability="afterDescendants"
+        android:orientation="vertical"
+        android:paddingBottom="15dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="15dp">
 
         <TextView
-            android:gravity="center"
-            android:text="@string/time"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:id="@+id/time"/>
+            android:id="@+id/subject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
+            android:text="@string/subject"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/subjectimage"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:gravity="center"
+            android:id="@+id/room"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:text="@string/room"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:id="@+id/room" />
-    </LinearLayout>
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/roomimage"
+            app:layout_constraintTop_toBottomOf="@+id/subject"
+            app:layout_constraintVertical_bias="0.0" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/time"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/timeimage"
+            app:layout_constraintTop_toBottomOf="@+id/room" />
+
+        <ImageView
+            android:id="@+id/subjectimage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="2dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/baseline_subject_black_24" />
+
+        <ImageView
+            android:id="@+id/roomimage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/subjectimage"
+            app:srcCompat="@drawable/baseline_meeting_room_black_24" />
+
+        <ImageView
+            android:id="@+id/timeimage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/roomimage"
+            app:srcCompat="@drawable/baseline_access_time_black_24" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</FrameLayout>

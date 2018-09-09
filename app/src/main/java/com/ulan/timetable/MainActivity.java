@@ -32,7 +32,6 @@ import com.ulan.timetable.Utils.DbHelper;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     FragmentsTabAdapter adapter;
-    String[] s = {"Monday", "Tuesday", "Wednesday"};
     public ViewPager getViewPager() {
         return viewPager;
     }
@@ -62,9 +61,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Context context = getApplicationContext();
         LinearLayout layout = new LinearLayout(context);
         layout.setOrientation(LinearLayout.VERTICAL);
-        final EditText input = new EditText(this);
-        layout.addView(input);
+        final EditText subject = new EditText(this);
+        subject.setHint("Subject");
+        layout.addView(subject);
         final EditText room = new EditText(this);
+        room.setHint("Room");
         layout.addView(room);
         builder.setView(layout);
 
@@ -74,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(DialogInterface dialog, int which) {
                 DbHelper dbHelper = new DbHelper(MainActivity.this);
                 Week week = new Week();
-                week.setSubject(input.getText().toString());
+                week.setSubject(subject.getText().toString());
                 week.setFragment(adapter.getItem(viewPager.getCurrentItem()).toString());
                 week.setRoom(room.getText().toString());
                 dbHelper.insertUserDetails(week);
