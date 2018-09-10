@@ -23,7 +23,6 @@ public class WeekListAdapter extends ArrayAdapter<Week> {
 
     private Context mContext;
     private int mResource;
-    private int lastPosition = -1;
 
 
     private static class ViewHolder {
@@ -42,36 +41,27 @@ public class WeekListAdapter extends ArrayAdapter<Week> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         String subject = getItem(position).getSubject();
-        int time = getItem(position).getTime();
+        String time = getItem(position).getTime();
         String room = getItem(position).getRoom();
 
-        Week week = new Week(subject, room);
-
-        //create the view result for showing the animation
-        final View result;
-
-        //ViewHolder object
+        Week week = new Week(subject, room, time);
         ViewHolder holder;
 
         if(convertView == null){
             LayoutInflater inflater = LayoutInflater.from(mContext);
             convertView = inflater.inflate(mResource, parent, false);
             holder= new ViewHolder();
-            holder.subject = (TextView) convertView.findViewById(R.id.subject);
-           // holder.time = (TextView) convertView.findViewById(R.id.time);
-            holder.room = (TextView) convertView.findViewById(R.id.room);
-
-            result = convertView;
-
+            holder.subject = convertView.findViewById(R.id.subject);
+            holder.time = convertView.findViewById(R.id.time);
+            holder.room = convertView.findViewById(R.id.room);
             convertView.setTag(holder);
         }
         else{
             holder = (ViewHolder) convertView.getTag();
-            result = convertView;
         }
         holder.subject.setText(week.getSubject());
         holder.room.setText(week.getRoom());
-
+        holder.time.setText(week.getTime());
         return convertView;
     }
 }

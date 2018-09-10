@@ -55,7 +55,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         initTabFragment();
+        initDialog();
+    }
 
+    public void initTabFragment() {
+        viewPager = findViewById(R.id.viewPager);
+        TabLayout tabLayout = findViewById(R.id.tabLayout);
+        adapter.addFragment(new MondayFragment(), "Monday");
+        adapter.addFragment(new TuesdayFragment(), "Tuesday");
+        adapter.addFragment(new WednesdayFragment(), "Wednesday");
+        adapter.addFragment(new ThursdayFragment(), "Thursday");
+        adapter.addFragment(new FridayFragment(), "Friday");
+        adapter.addFragment(new SaturdayFragment(), "Saturday");
+        adapter.addFragment(new SundayFragment(), "Sunday");
+        viewPager.setAdapter(adapter);
+        tabLayout.setupWithViewPager(viewPager);
+    }
+
+    public void initDialog() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Add subject");
         Context context = getApplicationContext();
@@ -67,8 +84,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         final EditText room = new EditText(this);
         room.setHint("Room");
         layout.addView(room);
+        final EditText time = new EditText(this);
+        time.setHint("Time");
+        layout.addView(time);
         builder.setView(layout);
-
 
         builder.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
             @Override
@@ -78,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 week.setSubject(subject.getText().toString());
                 week.setFragment(adapter.getItem(viewPager.getCurrentItem()).toString());
                 week.setRoom(room.getText().toString());
+                week.setTime(time.getText().toString());
                 dbHelper.insertUserDetails(week);
                 viewPager.getAdapter().notifyDataSetChanged();
 
@@ -101,19 +121,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
-    public void initTabFragment() {
-        viewPager = findViewById(R.id.viewPager);
-        TabLayout tabLayout = findViewById(R.id.tabLayout);
-        adapter.addFragment(new MondayFragment(), "Monday");
-        adapter.addFragment(new TuesdayFragment(), "Tuesday");
-        adapter.addFragment(new WednesdayFragment(), "Wednesday");
-        adapter.addFragment(new ThursdayFragment(), "Thursday");
-        adapter.addFragment(new FridayFragment(), "Friday");
-        adapter.addFragment(new SaturdayFragment(), "Saturday");
-        adapter.addFragment(new SundayFragment(), "Sunday");
-        viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
-    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

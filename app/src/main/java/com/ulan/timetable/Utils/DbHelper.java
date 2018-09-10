@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.ulan.timetable.Week;
 
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -26,7 +27,6 @@ public class DbHelper extends SQLiteOpenHelper{
     private static final String KEY_FRAGMENT = "fragment";
     private static final String KEY_TIME = "room";
     private static final String KEY_ROOM = "time";
-    private Context mContext;
 
     public DbHelper(Context context){
         super(context , DB_NAME, null, DB_VERSION);
@@ -39,7 +39,8 @@ public class DbHelper extends SQLiteOpenHelper{
                 + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + KEY_SUBJECT + " TEXT,"
                 + KEY_FRAGMENT + " TEXT,"
-                + KEY_ROOM + " TEXT" + ")";
+                + KEY_ROOM + " TEXT,"
+                + KEY_TIME + " TEXT" + ")";
         db.execSQL(CREATE_TB);
     }
 
@@ -50,14 +51,12 @@ public class DbHelper extends SQLiteOpenHelper{
     }
 
     public void insertUserDetails(Week week){
-        //Get the Data Repository in write mode
         SQLiteDatabase db = this.getWritableDatabase();
-        //Create a new map of values, where column names are the keys
         ContentValues cValues = new ContentValues();
         cValues.put(KEY_SUBJECT, week.getSubject());
         cValues.put(KEY_FRAGMENT, week.getFragment());
         cValues.put(KEY_ROOM, week.getRoom());
-        // Insert the new row, returning the primary key value of the new row
+        cValues.put(KEY_TIME, week.getTime());
         db.insert(TIMETABLE,null, cValues);
         db.update(TIMETABLE, cValues, KEY_FRAGMENT, null);
         db.close();
@@ -93,6 +92,7 @@ public class DbHelper extends SQLiteOpenHelper{
             week = new Week();
             week.setSubject(cursor.getString(cursor.getColumnIndex(KEY_SUBJECT)));
             week.setRoom(cursor.getString(cursor.getColumnIndex(KEY_ROOM)));
+            week.setTime(cursor.getString(cursor.getColumnIndex(KEY_TIME)));
             weeklist.add(week);
         }
         return  weeklist;
