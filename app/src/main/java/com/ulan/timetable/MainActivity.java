@@ -18,7 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-
+import android.widget.ListView;
 import com.ulan.timetable.Adapters.FragmentsTabAdapter;
 import com.ulan.timetable.Fragments.FridayFragment;
 import com.ulan.timetable.Fragments.MondayFragment;
@@ -35,8 +35,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public ViewPager getViewPager() {
         return viewPager;
     }
-
     private ViewPager viewPager;
+    private ListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
