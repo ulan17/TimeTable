@@ -6,6 +6,7 @@ package com.ulan.timetable;
 public class Week {
 
     private String subject, fragment, room, time;
+    private int id;
 
     public Week() {}
 
@@ -13,6 +14,14 @@ public class Week {
         this.subject = subject;
         this.room = room;
         this.time = time;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFragment() {

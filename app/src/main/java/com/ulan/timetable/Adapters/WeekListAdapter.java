@@ -23,7 +23,8 @@ public class WeekListAdapter extends ArrayAdapter<Week> {
 
     private Context mContext;
     private int mResource;
-
+    private ArrayList<Week> weeklist;
+    private Week week;
 
     private static class ViewHolder {
         TextView subject;
@@ -35,6 +36,7 @@ public class WeekListAdapter extends ArrayAdapter<Week> {
         super(context, resource, objects);
         mContext = context;
         mResource = resource;
+        weeklist = objects;
     }
 
     @NonNull
@@ -44,7 +46,7 @@ public class WeekListAdapter extends ArrayAdapter<Week> {
         String time = getItem(position).getTime();
         String room = getItem(position).getRoom();
 
-        Week week = new Week(subject, room, time);
+        week = new Week(subject, room, time);
         ViewHolder holder;
 
         if(convertView == null){
@@ -64,4 +66,17 @@ public class WeekListAdapter extends ArrayAdapter<Week> {
         holder.time.setText(week.getTime());
         return convertView;
     }
+
+    public ArrayList<Week> getWeeklist() {
+        return weeklist;
+    }
+
+    public void setWeeklist(ArrayList<Week> weeklist) {
+        this.weeklist = weeklist;
+    }
+
+    public Week getWeek() {
+        return week;
+    }
+
 }

@@ -20,24 +20,38 @@ import com.ulan.timetable.R;
  * Created by Ulan on 06.09.2018.
  */
 public class SundayFragment extends Fragment {
+    private DbHelper db;
+    private ListView listView;
+    private WeekListAdapter adapter;
+    private int listposition = 0;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_sunday, container, false);
-        DbHelper db = new DbHelper(getActivity());
-        ListView listView = view.findViewById(R.id.sundaylist);
+        db = new DbHelper(getActivity());
+        listView = view.findViewById(R.id.sundaylist);
 
-        WeekListAdapter adapter = new WeekListAdapter(getActivity(), R.layout.adapter_listview_layout, db.getData("Sunday"));
+        adapter = new WeekListAdapter(getActivity(), R.layout.adapter_listview_layout, db.getData("Sunday"));
         listView.setAdapter(adapter);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         listView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
             @Override
             public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
+                listposition = position;
             }
 
             @Override
             public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_delete:
+                        db.deleteUser(adapter.getItem(listposition).getId());
+                        db.updateData(adapter.getWeek());
+                        adapter.getWeeklist().remove(listposition);
+                        adapter.notifyDataSetChanged();
+                        mode.finish();
+                        return true;
+                }
                 return false;
             }
 

@@ -33,8 +33,7 @@ public class DbHelper extends SQLiteOpenHelper{
 
     }
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
+     public void onCreate(SQLiteDatabase db) {
         String CREATE_TB = "CREATE TABLE " + TIMETABLE + "("
                 + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + KEY_SUBJECT + " TEXT,"
@@ -62,9 +61,20 @@ public class DbHelper extends SQLiteOpenHelper{
         db.close();
     }
 
-    public void deleteUser(int userid) {
+    public void deleteUser(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TIMETABLE,KEY_ID + " = ? ", new String[]{String.valueOf(userid)});
+        db.delete(TIMETABLE,KEY_ID + " = ? ", new String[]{String.valueOf(id)});
+        db.close();
+    }
+
+    public void updateData(Week week) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(KEY_SUBJECT,week.getSubject());
+        contentValues.put(KEY_FRAGMENT, week.getFragment());
+        contentValues.put(KEY_ROOM,week.getRoom());
+        contentValues.put(KEY_TIME,week.getTime());
+        db.update(TIMETABLE, contentValues, KEY_FRAGMENT, null);
         db.close();
     }
 
@@ -90,6 +100,7 @@ public class DbHelper extends SQLiteOpenHelper{
         Cursor cursor = db.rawQuery("SELECT * FROM "+TIMETABLE+" WHERE "+KEY_FRAGMENT+" LIKE '"+fragment+"%'",null);
         while (cursor.moveToNext()){
             week = new Week();
+            week.setId(cursor.getInt(0));
             week.setSubject(cursor.getString(cursor.getColumnIndex(KEY_SUBJECT)));
             week.setRoom(cursor.getString(cursor.getColumnIndex(KEY_ROOM)));
             week.setTime(cursor.getString(cursor.getColumnIndex(KEY_TIME)));
