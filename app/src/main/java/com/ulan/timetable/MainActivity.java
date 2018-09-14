@@ -19,6 +19,8 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import com.ulan.timetable.Adapters.FragmentsTabAdapter;
 import com.ulan.timetable.Fragments.FridayFragment;
 import com.ulan.timetable.Fragments.MondayFragment;
@@ -76,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Add subject");
         Context context = getApplicationContext();
-        LinearLayout layout = new LinearLayout(context);
+        final LinearLayout layout = new LinearLayout(context);
         layout.setOrientation(LinearLayout.VERTICAL);
         final EditText subject = new EditText(this);
         subject.setHint("Subject");
@@ -92,15 +94,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         builder.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                DbHelper dbHelper = new DbHelper(MainActivity.this);
-                Week week = new Week();
-                week.setSubject(subject.getText().toString());
-                week.setFragment(adapter.getItem(viewPager.getCurrentItem()).toString());
-                week.setRoom(room.getText().toString());
-                week.setTime(time.getText().toString());
-                dbHelper.insertUserDetails(week);
-                viewPager.getAdapter().notifyDataSetChanged();
+                if(subject.getText().toString().equals("") || time.getText().toString().equals("") || room.getText().toString().equals("")) //name is the name of the Edittext in code
+                {
+                    Toast.makeText(getBaseContext(), "Please, fill in all the fields", Toast.LENGTH_SHORT).show();
 
+                }
+                else
+                {
+                    DbHelper dbHelper = new DbHelper(MainActivity.this);
+                    Week week = new Week();
+                    week.setSubject(subject.getText().toString());
+                    week.setFragment(adapter.getItem(viewPager.getCurrentItem()).toString());
+                    week.setRoom(room.getText().toString());
+                    week.setTime(time.getText().toString());
+                    dbHelper.insertUserDetails(week);
+                    viewPager.getAdapter().notifyDataSetChanged();
+                }
             }
         });
 

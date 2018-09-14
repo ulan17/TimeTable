@@ -5,10 +5,13 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.SaturdayFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <ListView
         android:id="@+id/saturdaylist"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:listSelector="@android:color/transparent"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@null"
+        />
 
 </FrameLayout>
