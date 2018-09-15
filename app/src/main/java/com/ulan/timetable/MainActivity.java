@@ -83,6 +83,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         final EditText subject = new EditText(this);
         subject.setHint("Subject");
         layout.addView(subject);
+        final EditText teacher = new EditText(this);
+        teacher.setHint("Teacher");
+        layout.addView(teacher);
         final EditText room = new EditText(this);
         room.setHint("Room");
         layout.addView(room);
@@ -105,11 +108,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     Week week = new Week();
                     week.setSubject(subject.getText().toString());
                     week.setFragment(adapter.getItem(viewPager.getCurrentItem()).toString());
+                    week.setTeacher(teacher.getText().toString());
                     week.setRoom(room.getText().toString());
                     week.setTime(time.getText().toString());
                     dbHelper.insertWeekDetails(week);
                     viewPager.getAdapter().notifyDataSetChanged();
                 }
+                // Clean editText after inserting data
+                subject.setText("");
+                teacher.setText("");
+                room.setText("");
+                time.setText("");
             }
         });
 

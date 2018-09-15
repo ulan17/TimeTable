@@ -44,38 +44,38 @@
             android:layout_marginBottom="2dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:text="@string/room"
             android:textAlignment="center"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/roomimage"
-            app:layout_constraintTop_toBottomOf="@+id/subject"
-            app:layout_constraintVertical_bias="0.538" />
+            app:layout_constraintTop_toBottomOf="@+id/teacher" />
 
         <TextView
             android:id="@+id/time"
             android:layout_width="125dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:text="@string/time"
             android:textAlignment="center"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/subject" />
+            app:layout_constraintTop_toBottomOf="@+id/teacher" />
 
         <ImageView
             android:id="@+id/roomimage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/subject"
+            app:layout_constraintTop_toBottomOf="@+id/teacher"
             app:srcCompat="@drawable/baseline_meeting_room_black_24" />
 
         <ImageView
@@ -85,11 +85,12 @@
             android:layout_marginBottom="2dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/time"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toBottomOf="@+id/subject"
+            app:layout_constraintTop_toBottomOf="@+id/teacher"
             app:srcCompat="@drawable/baseline_access_time_black_24" />
 
         <android.support.constraint.Guideline
@@ -98,6 +99,21 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5" />
+
+        <TextView
+            android:id="@+id/teacher"
+            android:layout_width="324dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:text="Teacher"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/subject"
+            app:layout_constraintStart_toStartOf="@+id/subject"
+            app:layout_constraintTop_toBottomOf="@+id/subject" />
 
     </android.support.constraint.ConstraintLayout>
 
