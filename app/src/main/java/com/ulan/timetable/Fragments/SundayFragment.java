@@ -2,6 +2,7 @@ package com.ulan.timetable.Fragments;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.SparseBooleanArray;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -15,6 +16,9 @@ import android.widget.ListView;
 import com.ulan.timetable.Adapters.WeekListAdapter;
 import com.ulan.timetable.Utils.DbHelper;
 import com.ulan.timetable.R;
+import com.ulan.timetable.Week;
+
+import java.util.ArrayList;
 
 /**
  * Created by Ulan on 06.09.2018.
@@ -39,15 +43,24 @@ public class SundayFragment extends Fragment {
             @Override
             public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
                 listposition = position;
+                final int checkedCount  = listView.getCheckedItemCount();
+                mode.setTitle(checkedCount  + "  Selected");
             }
 
             @Override
             public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.action_delete:
-                        db.deleteUser(adapter.getItem(listposition).getId());
+                        ArrayList<Week> removelist = new ArrayList<>();
+                        SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
+                        for (int i = 0; i < checkedItems.size(); i++) {
+                            if (checkedItems.valueAt(i)) {
+                                db.deleteDataById(adapter.getItem(i).getId());
+                                removelist.add(adapter.getWeeklist().get(i));
+                            }
+                        }
+                        adapter.getWeeklist().removeAll(removelist);
                         db.updateData(adapter.getWeek());
-                        adapter.getWeeklist().remove(listposition);
                         adapter.notifyDataSetChanged();
                         mode.finish();
                         return true;

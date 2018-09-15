@@ -49,7 +49,7 @@ public class DbHelper extends SQLiteOpenHelper{
         onCreate(db);
     }
 
-    public void insertUserDetails(Week week){
+    public void insertWeekDetails(Week week){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cValues = new ContentValues();
         cValues.put(KEY_SUBJECT, week.getSubject());
@@ -61,7 +61,7 @@ public class DbHelper extends SQLiteOpenHelper{
         db.close();
     }
 
-    public void deleteUser(int id) {
+    public void deleteDataById(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TIMETABLE,KEY_ID + " = ? ", new String[]{String.valueOf(id)});
         db.close();
