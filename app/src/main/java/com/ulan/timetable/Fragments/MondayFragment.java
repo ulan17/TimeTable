@@ -1,7 +1,10 @@
 package com.ulan.timetable.Fragments;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.SparseBooleanArray;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
@@ -11,6 +14,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -46,7 +51,7 @@ public class MondayFragment extends Fragment {
             }
 
             @Override
-            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+            public boolean onActionItemClicked(final ActionMode mode, MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.action_delete:
                         ArrayList<Week> removelist = new ArrayList<>();
@@ -61,6 +66,62 @@ public class MondayFragment extends Fragment {
                         db.updateData(adapter.getWeek());
                         adapter.notifyDataSetChanged();
                         mode.finish();
+                        return true;
+
+                    case R.id.action_edit:
+                        if(listView.getCheckedItemCount() == 1) {
+                            final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                            builder.setTitle("Edit subject");
+                            Context context = getContext();
+                            final LinearLayout layout = new LinearLayout(context);
+                            layout.setOrientation(LinearLayout.VERTICAL);
+                            final EditText subject = new EditText(getActivity());
+                            layout.addView(subject);
+                            final EditText teacher = new EditText(getActivity());
+                            layout.addView(teacher);
+                            final EditText room = new EditText(getActivity());
+                            layout.addView(room);
+                            final EditText time = new EditText(getActivity());
+                            layout.addView(time);
+                            builder.setView(layout);
+
+                            subject.setText(adapter.getItem(listposition).getSubject());
+                            teacher.setText(adapter.getItem(listposition).getTeacher());
+                            room.setText(adapter.getItem(listposition).getRoom());
+                            time.setText(adapter.getItem(listposition).getTime());
+
+                            builder.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    if (subject.getText().toString().equals("") || time.getText().toString().equals("") || room.getText().toString().equals("")) //name is the name of the Edittext in code
+                                    {
+                                        Toast.makeText(getContext(), "Please, fill in all the fields", Toast.LENGTH_SHORT).show();
+
+                                    } else {
+                                        Week week = adapter.getWeeklist().get(listposition);
+                                        week.setSubject(subject.getText().toString());
+                                        week.setTeacher(teacher.getText().toString());
+                                        week.setRoom(room.getText().toString());
+                                        week.setTime(time.getText().toString());
+                                        db.updateData(week);
+                                        adapter.notifyDataSetChanged();
+                                        mode.finish();
+                                    }
+                                }
+                            });
+                            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+
+                            final AlertDialog ad = builder.create();
+                            ad.show();
+                        } else {
+                            Toast.makeText(getActivity(), "Please, select one item", Toast.LENGTH_LONG).show();
+                            mode.finish();
+                        }
                         return true;
                 }
                 return false;

@@ -19,7 +19,7 @@ import java.util.HashMap;
  */
 public class DbHelper extends SQLiteOpenHelper{
 
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 3;
     private static final String DB_NAME = "timetabledb";
     private static final String TIMETABLE = "timetable";
     private static final String KEY_ID = "id";
@@ -74,11 +74,10 @@ public class DbHelper extends SQLiteOpenHelper{
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(KEY_SUBJECT,week.getSubject());
-        contentValues.put(KEY_FRAGMENT, week.getFragment());
         contentValues.put(KEY_TEACHER, week.getTeacher());
         contentValues.put(KEY_ROOM,week.getRoom());
         contentValues.put(KEY_TIME,week.getTime());
-        db.update(TIMETABLE, contentValues, KEY_FRAGMENT, null);
+        db.update(TIMETABLE, contentValues, KEY_ID + " = " + week.getId(), null);
         db.close();
     }
 

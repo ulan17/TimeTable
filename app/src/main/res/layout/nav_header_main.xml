@@ -31,6 +31,6 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/ulan_nurym_gmail_com" />
+        android:text="@string/ulan_nurymov_gmail_com" />
 
 </LinearLayout>

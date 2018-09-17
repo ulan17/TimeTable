@@ -14,6 +14,7 @@
     <string name="room">Room</string>
     <string name="week">Week</string>
     <string name="timetable">TimeTable</string>
-    <string name="ulan_nurym_gmail_com">ulan.nurym@gmail.com</string>
+    <string name="ulan_nurymov_gmail_com">ulan.nurymov@gmail.com</string>
     <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
 </resources>
