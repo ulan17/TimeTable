@@ -1,5 +1,6 @@
 package com.ulan.timetable;
 
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,6 +21,8 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.ulan.timetable.Adapters.FragmentsTabAdapter;
@@ -30,6 +34,10 @@ import com.ulan.timetable.Fragments.ThursdayFragment;
 import com.ulan.timetable.Fragments.TuesdayFragment;
 import com.ulan.timetable.Fragments.WednesdayFragment;
 import com.ulan.timetable.Utils.DbHelper;
+
+import java.util.Calendar;
+
+import static java.lang.String.valueOf;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -57,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         initTabFragment();
-        initDialog();
+        initCustomDialog();
     }
 
     public void initTabFragment() {
@@ -74,67 +82,99 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tabLayout.setupWithViewPager(viewPager);
     }
 
-    public void initDialog() {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Add subject");
-        Context context = getApplicationContext();
-        final LinearLayout layout = new LinearLayout(context);
-        layout.setOrientation(LinearLayout.VERTICAL);
-        final EditText subject = new EditText(this);
-        subject.setHint("Subject");
-        layout.addView(subject);
-        final EditText teacher = new EditText(this);
-        teacher.setHint("Teacher");
-        layout.addView(teacher);
-        final EditText room = new EditText(this);
-        room.setHint("Room");
-        layout.addView(room);
-        final EditText time = new EditText(this);
-        time.setHint("Time");
-        layout.addView(time);
-        builder.setView(layout);
+    public void initCustomDialog() {
+        LayoutInflater inflater = getLayoutInflater();
+        View alertLayout = inflater.inflate(R.layout.dialog_add_subject, null);
+        final EditText subject = alertLayout.findViewById(R.id.subject_dialog);
+        final EditText teacher = alertLayout.findViewById(R.id.teacher_dialog);
+        final EditText room = alertLayout.findViewById(R.id.room_dialog);
+        final TextView from_time = alertLayout.findViewById(R.id.from_time);
+        final TextView to_time = alertLayout.findViewById(R.id.to_time);
+        final Week week = new Week();
 
-        builder.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+        from_time.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if(subject.getText().toString().equals("") || time.getText().toString().equals("") || room.getText().toString().equals("")) //name is the name of the Edittext in code
-                {
-                    Toast.makeText(getBaseContext(), "Please, fill in all the fields", Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
 
-                }
-                else
-                {
-                    DbHelper dbHelper = new DbHelper(MainActivity.this);
-                    Week week = new Week();
-                    week.setSubject(subject.getText().toString());
-                    week.setFragment(adapter.getItem(viewPager.getCurrentItem()).toString());
-                    week.setTeacher(teacher.getText().toString());
-                    week.setRoom(room.getText().toString());
-                    week.setTime(time.getText().toString());
-                    dbHelper.insertWeekDetails(week);
-                    viewPager.getAdapter().notifyDataSetChanged();
-                }
-                // Clean editText after inserting data
-                subject.setText("");
-                teacher.setText("");
-                room.setText("");
-                time.setText("");
+                final Calendar c = Calendar.getInstance();
+                int mHour = c.get(Calendar.HOUR_OF_DAY);
+                int mMinute = c.get(Calendar.MINUTE);
+                TimePickerDialog timePickerDialog = new TimePickerDialog(MainActivity.this,
+                        new TimePickerDialog.OnTimeSetListener() {
+
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay,
+                                                  int minute) {
+                                from_time.setText(String.format("%02d:%02d", hourOfDay, minute));
+                                week.setFromTime(String.format("%02d:%02d", hourOfDay, minute));
+                            }
+                        }, mHour, mMinute, true);
+                timePickerDialog.setTitle("Select time");
+                timePickerDialog.show(); }});
+
+        to_time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar c = Calendar.getInstance();
+                int hour = c.get(Calendar.HOUR_OF_DAY);
+                int minute = c.get(Calendar.MINUTE);
+                TimePickerDialog timePickerDialog = new TimePickerDialog(MainActivity.this,
+                        new TimePickerDialog.OnTimeSetListener() {
+
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay,
+                                                  int minute) {
+                                to_time.setText(String.format("%02d:%02d", hourOfDay, minute));
+                                week.setToTime(String.format("%02d:%02d", hourOfDay, minute));
+                            }
+                        }, hour, minute, true);
+                timePickerDialog.setTitle("Select time");
+                timePickerDialog.show();
             }
         });
 
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Add subject");
+        alert.setView(alertLayout);
+        alert.setCancelable(false);
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
             }
         });
 
-        final AlertDialog ad = builder.create();
+        alert.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(subject.getText().toString().equals("") || !from_time.getText().toString().matches(".*\\d+.*") || !to_time.getText().toString().matches(".*\\d+.*") || room.getText().toString().equals("") || teacher.getText().toString().equals(""))
+                {
+                    Toast.makeText(getBaseContext(), "Please, fill in all the fields", Toast.LENGTH_SHORT).show();
+
+                }
+                else {
+                    DbHelper dbHelper = new DbHelper(MainActivity.this);
+                    week.setSubject(subject.getText().toString());
+                    week.setFragment(adapter.getItem(viewPager.getCurrentItem()).toString());
+                    week.setTeacher(teacher.getText().toString());
+                    week.setRoom(room.getText().toString());
+                    dbHelper.insertWeekDetails(week);
+                    viewPager.getAdapter().notifyDataSetChanged();
+                }
+                subject.setText("");
+                teacher.setText("");
+                room.setText("");
+                from_time.setText(R.string.select_time);
+                to_time.setText(R.string.select_time);
+
+            }
+        });
+        final AlertDialog dialog = alert.create();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ad.show();
+                dialog.show();
             }
         });
     }

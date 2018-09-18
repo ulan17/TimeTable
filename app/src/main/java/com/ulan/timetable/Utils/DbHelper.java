@@ -26,8 +26,9 @@ public class DbHelper extends SQLiteOpenHelper{
     private static final String KEY_SUBJECT = "subject";
     private static final String KEY_FRAGMENT = "fragment";
     private static final String KEY_TEACHER = "teacher";
-    private static final String KEY_TIME = "room";
-    private static final String KEY_ROOM = "time";
+    private static final String KEY_ROOM = "room";
+    private static final String KEY_FROM_TIME = "fromtime";
+    private static final String KEY_TO_TIME = "totime";
 
     public DbHelper(Context context){
         super(context , DB_NAME, null, DB_VERSION);
@@ -41,7 +42,8 @@ public class DbHelper extends SQLiteOpenHelper{
                 + KEY_FRAGMENT + " TEXT,"
                 + KEY_TEACHER + " TEXT,"
                 + KEY_ROOM + " TEXT,"
-                + KEY_TIME + " TEXT" + ")";
+                + KEY_FROM_TIME + " TEXT,"
+                + KEY_TO_TIME + " TEXT"+ ")";
         db.execSQL(CREATE_TB);
     }
 
@@ -58,7 +60,8 @@ public class DbHelper extends SQLiteOpenHelper{
         contentValues.put(KEY_FRAGMENT, week.getFragment());
         contentValues.put(KEY_TEACHER, week.getTeacher());
         contentValues.put(KEY_ROOM, week.getRoom());
-        contentValues.put(KEY_TIME, week.getTime());
+        contentValues.put(KEY_FROM_TIME, week.getFromTime());
+        contentValues.put(KEY_TO_TIME, week.getToTime());
         db.insert(TIMETABLE,null, contentValues);
         db.update(TIMETABLE, contentValues, KEY_FRAGMENT, null);
         db.close();
@@ -76,7 +79,8 @@ public class DbHelper extends SQLiteOpenHelper{
         contentValues.put(KEY_SUBJECT,week.getSubject());
         contentValues.put(KEY_TEACHER, week.getTeacher());
         contentValues.put(KEY_ROOM,week.getRoom());
-        contentValues.put(KEY_TIME,week.getTime());
+        contentValues.put(KEY_FROM_TIME,week.getFromTime());
+        contentValues.put(KEY_TO_TIME, week.getToTime());
         db.update(TIMETABLE, contentValues, KEY_ID + " = " + week.getId(), null);
         db.close();
     }
@@ -93,7 +97,8 @@ public class DbHelper extends SQLiteOpenHelper{
             week.setSubject(cursor.getString(cursor.getColumnIndex(KEY_SUBJECT)));
             week.setTeacher(cursor.getString(cursor.getColumnIndex(KEY_TEACHER)));
             week.setRoom(cursor.getString(cursor.getColumnIndex(KEY_ROOM)));
-            week.setTime(cursor.getString(cursor.getColumnIndex(KEY_TIME)));
+            week.setFromTime(cursor.getString(cursor.getColumnIndex(KEY_FROM_TIME)));
+            week.setToTime(cursor.getString(cursor.getColumnIndex(KEY_TO_TIME)));
             weeklist.add(week);
         }
         return  weeklist;

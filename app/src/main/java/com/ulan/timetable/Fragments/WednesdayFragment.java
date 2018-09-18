@@ -1,5 +1,6 @@
 package com.ulan.timetable.Fragments;
 
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -17,6 +18,8 @@ import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.ulan.timetable.Adapters.WeekListAdapter;
@@ -25,6 +28,7 @@ import com.ulan.timetable.R;
 import com.ulan.timetable.Week;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class WednesdayFragment extends Fragment {
     private DbHelper db;
@@ -70,53 +74,94 @@ public class WednesdayFragment extends Fragment {
 
                     case R.id.action_edit:
                         if(listView.getCheckedItemCount() == 1) {
-                            final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                            builder.setTitle("Edit subject");
-                            Context context = getContext();
-                            final LinearLayout layout = new LinearLayout(context);
-                            layout.setOrientation(LinearLayout.VERTICAL);
-                            final EditText subject = new EditText(getActivity());
-                            layout.addView(subject);
-                            final EditText teacher = new EditText(getActivity());
-                            layout.addView(teacher);
-                            final EditText room = new EditText(getActivity());
-                            layout.addView(room);
-                            final EditText time = new EditText(getActivity());
-                            layout.addView(time);
-                            builder.setView(layout);
+                            LayoutInflater inflater = getLayoutInflater();
+                            View alertLayout = inflater.inflate(R.layout.dialog_add_subject, null);
+                            final EditText subject = alertLayout.findViewById(R.id.subject_dialog);
+                            final EditText teacher = alertLayout.findViewById(R.id.teacher_dialog);
+                            final EditText room = alertLayout.findViewById(R.id.room_dialog);
+                            final TextView from_time = alertLayout.findViewById(R.id.from_time);
+                            final TextView to_time = alertLayout.findViewById(R.id.to_time);
+                            final Week week = adapter.getWeeklist().get(listposition);
 
                             subject.setText(adapter.getItem(listposition).getSubject());
                             teacher.setText(adapter.getItem(listposition).getTeacher());
                             room.setText(adapter.getItem(listposition).getRoom());
-                            time.setText(adapter.getItem(listposition).getTime());
+                            from_time.setText(adapter.getItem(listposition).getFromTime());
+                            to_time.setText(adapter.getItem(listposition).getToTime());
 
-                            builder.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+                            from_time.setOnClickListener(new View.OnClickListener() {
+
+                                @Override
+                                public void onClick(View v) {
+                                    final Calendar c = Calendar.getInstance();
+                                    int mHour = c.get(Calendar.HOUR_OF_DAY);
+                                    int mMinute = c.get(Calendar.MINUTE);
+                                    TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(),
+                                            new TimePickerDialog.OnTimeSetListener() {
+
+                                                @Override
+                                                public void onTimeSet(TimePicker view, int hourOfDay,
+                                                                      int minute) {
+                                                    from_time.setText(String.format("%02d:%02d", hourOfDay, minute));
+                                                    week.setFromTime(String.format("%02d:%02d", hourOfDay, minute));
+                                                }
+                                            }, mHour, mMinute, true);
+                                    timePickerDialog.setTitle("Select time");
+                                    timePickerDialog.show();
+                                }
+                            });
+
+                            to_time.setOnClickListener(new View.OnClickListener() {
+
+                                @Override
+                                public void onClick(View v) {
+                                    final Calendar c = Calendar.getInstance();
+                                    int hour = c.get(Calendar.HOUR_OF_DAY);
+                                    int minute = c.get(Calendar.MINUTE);
+                                    TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(),
+                                            new TimePickerDialog.OnTimeSetListener() {
+
+                                                @Override
+                                                public void onTimeSet(TimePicker view, int hourOfDay,
+                                                                      int minute) {
+                                                    to_time.setText(String.format("%02d:%02d", hourOfDay, minute));
+                                                    week.setToTime(String.format("%02d:%02d", hourOfDay, minute));
+                                                }
+                                            }, hour, minute, true);
+                                    timePickerDialog.setTitle("Select time");
+                                    timePickerDialog.show();
+                                }
+                            });
+
+                            AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+                            alert.setTitle("Edit subject");
+                            alert.setView(alertLayout);
+                            alert.setCancelable(false);
+                            alert.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    if (subject.getText().toString().equals("") || time.getText().toString().equals("") || room.getText().toString().equals("")) //name is the name of the Edittext in code
+                                    if (subject.getText().toString().equals("") || from_time.getText().toString().equals("") || to_time.getText().toString().equals("") || room.getText().toString().equals("")) //name is the name of the Edittext in code
                                     {
                                         Toast.makeText(getContext(), "Please, fill in all the fields", Toast.LENGTH_SHORT).show();
 
                                     } else {
-                                        Week week = adapter.getWeeklist().get(listposition);
                                         week.setSubject(subject.getText().toString());
                                         week.setTeacher(teacher.getText().toString());
                                         week.setRoom(room.getText().toString());
-                                        week.setTime(time.getText().toString());
                                         db.updateData(week);
                                         adapter.notifyDataSetChanged();
                                         mode.finish();
                                     }
                                 }
                             });
-                            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.dismiss();
                                 }
                             });
 
-                            final AlertDialog ad = builder.create();
+                            final AlertDialog ad = alert.create();
                             ad.show();
                         } else {
                             Toast.makeText(getActivity(), "Please, select one item", Toast.LENGTH_LONG).show();

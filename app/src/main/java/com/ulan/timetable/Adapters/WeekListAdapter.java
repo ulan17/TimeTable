@@ -45,10 +45,11 @@ public class WeekListAdapter extends ArrayAdapter<Week> {
     public View getView(int position, View convertView, ViewGroup parent) {
         String subject = getItem(position).getSubject();
         String teacher = getItem(position).getTeacher();
-        String time = getItem(position).getTime();
+        String time_from = getItem(position).getFromTime();
+        String time_to = getItem(position).getToTime();
         String room = getItem(position).getRoom();
 
-        week = new Week(subject, teacher, room, time);
+        week = new Week(subject, teacher, room, time_from, time_to);
         ViewHolder holder;
 
         if(convertView == null){
@@ -67,7 +68,7 @@ public class WeekListAdapter extends ArrayAdapter<Week> {
         holder.subject.setText(week.getSubject());
         holder.teacher.setText(week.getTeacher());
         holder.room.setText(week.getRoom());
-        holder.time.setText(week.getTime());
+        holder.time.setText(week.getFromTime() + " - " + week.getToTime());
         return convertView;
     }
 

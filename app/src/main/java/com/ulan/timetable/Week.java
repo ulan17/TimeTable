@@ -5,16 +5,17 @@ package com.ulan.timetable;
  */
 public class Week {
 
-    private String subject, fragment, teacher, room, time;
+    private String subject, fragment, teacher, room, fromtime, totime, time;
     private int id;
 
     public Week() {}
 
-    public Week(String subject, String teacher, String room, String time) {
+    public Week(String subject, String teacher, String room, String fromtime, String totime) {
         this.subject = subject;
         this.teacher = teacher;
         this.room = room;
-        this.time = time;
+        this.fromtime = fromtime;
+        this.totime = totime;
     }
 
     public int getId() {
@@ -33,12 +34,20 @@ public class Week {
         this.fragment = fragment;
     }
 
-    public String getTime() {
-        return time;
+    public String getFromTime() {
+        return fromtime;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setFromTime(String fromtime) {
+        this.fromtime = fromtime;
+    }
+
+    public String getToTime() {
+        return totime;
+    }
+
+    public void setToTime(String totime) {
+        this.totime = totime;
     }
 
     public String getRoom() {
@@ -67,5 +76,13 @@ public class Week {
 
     public String toString() {
         return subject;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }
