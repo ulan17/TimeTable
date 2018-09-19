@@ -1,7 +1,6 @@
-package com.ulan.timetable;
+package com.ulan.timetable.Activities;
 
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -19,7 +18,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -33,11 +31,12 @@ import com.ulan.timetable.Fragments.SundayFragment;
 import com.ulan.timetable.Fragments.ThursdayFragment;
 import com.ulan.timetable.Fragments.TuesdayFragment;
 import com.ulan.timetable.Fragments.WednesdayFragment;
+import com.ulan.timetable.R;
 import com.ulan.timetable.Utils.DbHelper;
+import com.ulan.timetable.Week;
 
 import java.util.Calendar;
 
-import static java.lang.String.valueOf;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -71,6 +70,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void initTabFragment() {
         viewPager = findViewById(R.id.viewPager);
         TabLayout tabLayout = findViewById(R.id.tabLayout);
+        Calendar calendar = Calendar.getInstance();
+        int day = calendar.get(Calendar.DAY_OF_WEEK);
         adapter.addFragment(new MondayFragment(), "Monday");
         adapter.addFragment(new TuesdayFragment(), "Tuesday");
         adapter.addFragment(new WednesdayFragment(), "Wednesday");
@@ -79,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         adapter.addFragment(new SaturdayFragment(), "Saturday");
         adapter.addFragment(new SundayFragment(), "Sunday");
         viewPager.setAdapter(adapter);
+        viewPager.setCurrentItem(day == 1 ? 6 : day-2, true);
         tabLayout.setupWithViewPager(viewPager);
     }
 
@@ -166,7 +168,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 room.setText("");
                 from_time.setText(R.string.select_time);
                 to_time.setText(R.string.select_time);
-
             }
         });
         final AlertDialog dialog = alert.create();
@@ -209,7 +210,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.week) {
-            // Handle the camera action
             // I am still working on it
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
