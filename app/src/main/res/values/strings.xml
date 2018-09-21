@@ -18,4 +18,6 @@
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
     <string name="select_time">Select time</string>
+    <string name="title_activity_homeworks">HomeworksActivity</string>
+    <string name="homeworks">Homeworks</string>
 </resources>

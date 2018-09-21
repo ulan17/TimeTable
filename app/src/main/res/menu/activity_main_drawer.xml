@@ -10,4 +10,11 @@
             android:title="@string/week" />
     </group>
 
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/homework"
+            android:icon="@drawable/ic_menu_share"
+            android:title="@string/homeworks" />
+    </group>
+
 </menu>

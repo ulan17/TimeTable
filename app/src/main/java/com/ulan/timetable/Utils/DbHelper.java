@@ -8,6 +8,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.ulan.timetable.Homework;
 import com.ulan.timetable.Week;
 
 import java.security.Key;
@@ -30,6 +31,13 @@ public class DbHelper extends SQLiteOpenHelper{
     private static final String KEY_FROM_TIME = "fromtime";
     private static final String KEY_TO_TIME = "totime";
 
+
+    private static final String HOMEWORKS = "homeworks";
+    private static final String HOMEWORKS_ID  = "homeworksid";
+    private static final String HOMEWORKS_SUBJECT = "homeworkssubject";
+    private static final String HOMEWORKS_DESCRIPTION = "homeworksdescription";
+    private static final String HOMEWORKS_DATE = "homeworksdate";
+
     public DbHelper(Context context){
         super(context , DB_NAME, null, DB_VERSION);
 
@@ -44,12 +52,28 @@ public class DbHelper extends SQLiteOpenHelper{
                 + KEY_ROOM + " TEXT,"
                 + KEY_FROM_TIME + " TEXT,"
                 + KEY_TO_TIME + " TEXT"+ ")";
+
+        String CREATE_HOMEWORK = "CREATE TABLE " + HOMEWORKS + "("
+                + HOMEWORKS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + HOMEWORKS_SUBJECT + " TEXT,"
+                + HOMEWORKS_DESCRIPTION + " TEXT,"
+                + HOMEWORKS_DATE + " TEXT" + ")";
+
+
         db.execSQL(CREATE_TB);
+        db.execSQL(CREATE_HOMEWORK);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TIMETABLE);
+        switch (oldVersion) {
+            case 1:
+                db.execSQL("DROP TABLE IF EXISTS " + TIMETABLE);
+
+            case 2:
+                db.execSQL("DROP TABLE IF EXISTS " + HOMEWORKS);
+                break;
+        }
         onCreate(db);
     }
 
@@ -102,6 +126,31 @@ public class DbHelper extends SQLiteOpenHelper{
             weeklist.add(week);
         }
         return  weeklist;
+    }
+
+    public void insertHomework(Homework homework) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(HOMEWORKS_SUBJECT, homework.getSubject());
+        contentValues.put(HOMEWORKS_DESCRIPTION, homework.getDescription());
+        contentValues.put(HOMEWORKS_DATE, homework.getDate());
+        db.insert(HOMEWORKS,null, contentValues);
+        db.close();
+    }
+
+    public ArrayList<Homework> getHomework () {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<Homework> homelist = new ArrayList<>();
+        Homework homework = new Homework();
+        String query = "SELECT * FROM "+ HOMEWORKS;
+        Cursor cursor = db.rawQuery(query,null);
+        while (cursor.moveToNext()){
+            homework.setSubject(cursor.getString(cursor.getColumnIndex(HOMEWORKS_SUBJECT)));
+            homework.setDescription(cursor.getString(cursor.getColumnIndex(HOMEWORKS_DESCRIPTION)));
+            homework.setDate(cursor.getString(cursor.getColumnIndex(HOMEWORKS_DATE)));
+            homelist.add(homework);
+        }
+        return  homelist;
     }
 
 }
