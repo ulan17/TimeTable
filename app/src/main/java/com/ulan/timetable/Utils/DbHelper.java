@@ -20,7 +20,7 @@ import java.util.HashMap;
  */
 public class DbHelper extends SQLiteOpenHelper{
 
-    private static final int DB_VERSION = 3;
+    private static final int DB_VERSION = 2;
     private static final String DB_NAME = "timetabledb";
     private static final String TIMETABLE = "timetable";
     private static final String KEY_ID = "id";
@@ -58,7 +58,6 @@ public class DbHelper extends SQLiteOpenHelper{
                 + HOMEWORKS_SUBJECT + " TEXT,"
                 + HOMEWORKS_DESCRIPTION + " TEXT,"
                 + HOMEWORKS_DATE + " TEXT" + ")";
-
 
         db.execSQL(CREATE_TB);
         db.execSQL(CREATE_HOMEWORK);
@@ -138,19 +137,32 @@ public class DbHelper extends SQLiteOpenHelper{
         db.close();
     }
 
+    public void updateHomework(Homework homework) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(HOMEWORKS_SUBJECT, homework.getSubject());
+        contentValues.put(HOMEWORKS_DESCRIPTION, homework.getDescription());
+        contentValues.put(HOMEWORKS_DATE, homework.getDate());
+        db.update(HOMEWORKS, contentValues, HOMEWORKS_ID + " = " + homework.getId(), null);
+        db.close();
+    }
+
+
     public ArrayList<Homework> getHomework () {
         SQLiteDatabase db = this.getWritableDatabase();
         ArrayList<Homework> homelist = new ArrayList<>();
-        Homework homework = new Homework();
-        String query = "SELECT * FROM "+ HOMEWORKS;
-        Cursor cursor = db.rawQuery(query,null);
+        Homework homework;
+        Cursor cursor = db.rawQuery("SELECT * FROM "+ HOMEWORKS,null);
         while (cursor.moveToNext()){
+            homework = new Homework();
+            homework.setId(cursor.getInt(0));
             homework.setSubject(cursor.getString(cursor.getColumnIndex(HOMEWORKS_SUBJECT)));
             homework.setDescription(cursor.getString(cursor.getColumnIndex(HOMEWORKS_DESCRIPTION)));
             homework.setDate(cursor.getString(cursor.getColumnIndex(HOMEWORKS_DATE)));
             homelist.add(homework);
         }
+        cursor.close();
+        db.close();
         return  homelist;
     }
-
 }

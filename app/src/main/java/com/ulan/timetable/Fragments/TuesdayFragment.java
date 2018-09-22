@@ -1,10 +1,8 @@
 package com.ulan.timetable.Fragments;
 
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.util.SparseBooleanArray;
@@ -17,14 +15,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.ulan.timetable.Adapters.WeekListAdapter;
-import com.ulan.timetable.MainActivity;
 import com.ulan.timetable.Utils.DbHelper;
 import com.ulan.timetable.R;
 import com.ulan.timetable.Week;

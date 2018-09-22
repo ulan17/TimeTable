@@ -22,7 +22,7 @@
         android:paddingTop="15dp">
 
         <TextView
-            android:id="@+id/subject"
+            android:id="@+id/subjecthomework"
             android:layout_width="324dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
@@ -38,82 +38,55 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/room"
-            android:layout_width="128dp"
-            android:layout_height="wrap_content"
+            android:id="@+id/datehomework"
+            android:layout_width="265dp"
+            android:layout_height="24dp"
             android:layout_marginBottom="2dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:text="@string/room"
+            android:layout_marginEnd="31dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="5dp"
+            android:text="Date"
             android:textAlignment="center"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/roomimage"
-            app:layout_constraintTop_toBottomOf="@+id/teacher" />
-
-        <TextView
-            android:id="@+id/time"
-            android:layout_width="125dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:layout_marginTop="4dp"
-            android:text="@string/time"
-            android:textAlignment="center"
+            android:textAllCaps="true"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/teacher" />
-
-        <ImageView
-            android:id="@+id/roomimage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:layout_marginTop="4dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/teacher"
-            app:srcCompat="@drawable/baseline_meeting_room_black_24" />
+            app:layout_constraintTop_toBottomOf="@+id/descriptionhomework" />
 
         <ImageView
             android:id="@+id/timeimage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/time"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toBottomOf="@+id/teacher"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/descriptionhomework"
+            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/baseline_access_time_black_24" />
 
-        <android.support.constraint.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5" />
-
         <TextView
-            android:id="@+id/teacher"
+            android:id="@+id/descriptionhomework"
             android:layout_width="324dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
-            android:text="Teacher"
+            android:text="DESCRIPTION"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/subject"
-            app:layout_constraintStart_toStartOf="@+id/subject"
-            app:layout_constraintTop_toBottomOf="@+id/subject" />
+            app:layout_constraintEnd_toEndOf="@+id/subjecthomework"
+            app:layout_constraintStart_toStartOf="@+id/subjecthomework"
+            app:layout_constraintTop_toBottomOf="@+id/subjecthomework" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
 
     </android.support.constraint.ConstraintLayout>
 

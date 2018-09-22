@@ -12,19 +12,14 @@
         android:layout_height="match_parent">
 
 
-        <TextView
-            android:id="@+id/homeworks"
-            android:layout_width="292dp"
-            android:layout_height="427dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <ListView
+            android:id="@+id/homeworklist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:listSelector="@android:color/transparent"
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="@null"
+            />
     </android.support.constraint.ConstraintLayout>
 
     <android.support.design.widget.FloatingActionButton

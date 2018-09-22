@@ -5,10 +5,11 @@ package com.ulan.timetable;
  */
 public class Homework {
     String subject, description, date;
+    int id;
 
     public Homework() {}
 
-    Homework(String subject, String description, String date) {
+    public Homework(String subject, String description, String date) {
         this.subject = subject;
         this.description = description;
         this.date = date;
@@ -35,5 +36,13 @@ public class Homework {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
