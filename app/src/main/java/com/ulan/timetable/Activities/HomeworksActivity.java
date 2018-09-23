@@ -38,6 +38,7 @@ public class HomeworksActivity extends AppCompatActivity {
     private ListView listView;
     private HomeworksListAdapter adapter;
     private DbHelper db;
+    private int listposition = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +54,9 @@ public class HomeworksActivity extends AppCompatActivity {
         listView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
             @Override
             public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
-                final int checkedCount  = listView.getCheckedItemCount();
-                mode.setTitle(checkedCount  + "  Selected");
+                listposition = position;
+                final int checkedCount = listView.getCheckedItemCount();
+                mode.setTitle(checkedCount + "  Selected");
             }
 
             @Override
@@ -70,7 +72,7 @@ public class HomeworksActivity extends AppCompatActivity {
             }
 
             @Override
-            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+            public boolean onActionItemClicked(final ActionMode mode, MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.action_delete:
                         ArrayList<Homework> removelist = new ArrayList<>();
@@ -86,10 +88,77 @@ public class HomeworksActivity extends AppCompatActivity {
                           adapter.notifyDataSetChanged();
                           mode.finish();
                         return true;
+
+                    case R.id.action_edit:
+                        if (listView.getCheckedItemCount() == 1) {
+                            LayoutInflater inflater = getLayoutInflater();
+                            View alertLayout = inflater.inflate(R.layout.dialog_add_homework, null);
+                            final EditText subject = alertLayout.findViewById(R.id.subjecthomework);
+                            final EditText description = alertLayout.findViewById(R.id.descriptionhomework);
+                            final TextView date = alertLayout.findViewById(R.id.datehomework);
+                            final Homework homework = adapter.getHomeworklist().get(listposition);
+
+                            subject.setText(adapter.getItem(listposition).getSubject());
+                            description.setText(adapter.getItem(listposition).getDescription());
+                            date.setText(adapter.getItem(listposition).getDate());
+
+                            date.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    final Calendar calendar = Calendar.getInstance();
+                                    int mYear = calendar.get(Calendar.YEAR);
+                                    int mMonth = calendar.get(Calendar.MONTH);
+                                    int mdayofMonth = calendar.get(Calendar.DAY_OF_MONTH);
+                                    DatePickerDialog datePickerDialog = new DatePickerDialog(HomeworksActivity.this, new DatePickerDialog.OnDateSetListener() {
+                                        @Override
+                                        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                                            date.setText(String.format("%02d:%02d:%02d", dayOfMonth, month + 1, year));
+                                            homework.setDate(String.format("%02d:%02d:%02d", dayOfMonth, month + 1, year));
+                                        }
+                                    }, mYear, mMonth, mdayofMonth);
+                                    datePickerDialog.setTitle("Select date");
+                                    datePickerDialog.show();
+                                }
+                            });
+
+                            AlertDialog.Builder alert = new AlertDialog.Builder(HomeworksActivity.this);
+                            alert.setTitle("Edit homework");
+                            alert.setView(alertLayout);
+                            alert.setCancelable(false);
+                            alert.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    if (subject.getText().toString().equals("") || !date.getText().toString().matches(".*\\d+.*") || description.getText().toString().equals("")) {
+                                        Toast.makeText(getBaseContext(), "Please, fill in all the fields", Toast.LENGTH_SHORT).show();
+
+                                    } else {
+                                        DbHelper dbHelper = new DbHelper(HomeworksActivity.this);
+                                        homework.setSubject(subject.getText().toString());
+                                        homework.setDescription(description.getText().toString());
+                                        dbHelper.updateHomework(homework);
+                                        adapter.notifyDataSetChanged();
+                                        mode.finish();
+                                    }
+                                }
+                            });
+
+                            alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+
+                            final AlertDialog dialog = alert.create();
+                            dialog.show();
+                            return true;
+                        } else {
+                            Toast.makeText(HomeworksActivity.this, "Please, select one item", Toast.LENGTH_LONG).show();
+                            mode.finish();
+                        }
                 }
                 return false;
             }
-
             @Override
             public void onDestroyActionMode(ActionMode mode) {
             }
