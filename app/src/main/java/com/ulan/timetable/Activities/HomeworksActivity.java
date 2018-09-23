@@ -1,5 +1,6 @@
 package com.ulan.timetable.Activities;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.design.widget.FloatingActionButton;
@@ -8,14 +9,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
 import android.view.ActionMode;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.ulan.timetable.Adapters.HomeworksListAdapter;
@@ -25,6 +30,7 @@ import com.ulan.timetable.Utils.DbHelper;
 import com.ulan.timetable.Week;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Objects;
 
 public class HomeworksActivity extends AppCompatActivity {
@@ -91,41 +97,66 @@ public class HomeworksActivity extends AppCompatActivity {
     }
 
     public void initCustomDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Add homework");
-        final LinearLayout layout = new LinearLayout(context);
-        layout.setOrientation(LinearLayout.VERTICAL);
-        final EditText subject = new EditText(context);
-        layout.addView(subject);
-        final EditText description = new EditText(context);
-        layout.addView(description);
-        final EditText date = new EditText(context);
-        layout.addView(date);
-        builder.setView(layout);
+        LayoutInflater inflater = getLayoutInflater();
+        View alertLayout = inflater.inflate(R.layout.dialog_add_homework, null);
+        final EditText subject = alertLayout.findViewById(R.id.subjecthomework);
+        final EditText description = alertLayout.findViewById(R.id.descriptionhomework);
+        final TextView date = alertLayout.findViewById(R.id.datehomework);
+        final Homework homework = new Homework();
 
-        builder.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+        date.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Homework homework = new Homework();
-                DbHelper dbHelper = new DbHelper(HomeworksActivity.this);
-                homework.setSubject(subject.getText().toString());
-                homework.setDescription(description.getText().toString());
-                homework.setDate(date.getText().toString());
-                dbHelper.insertHomework(homework);
-                adapter.clear();
-                adapter.addAll(db.getHomework());
-                adapter.notifyDataSetChanged();
+            public void onClick(View v) {
+                final Calendar calendar = Calendar.getInstance();
+                int mYear = calendar.get(Calendar.YEAR);
+                int mMonth = calendar.get(Calendar.MONTH);
+                int mdayofMonth = calendar.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(HomeworksActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        date.setText(String.format("%02d:%02d:%02d", dayOfMonth, month+1, year));
+                        homework.setDate(String.format("%02d:%02d:%02d", dayOfMonth, month+1, year));
+                    }
+                }, mYear, mMonth, mdayofMonth);
+                datePickerDialog.setTitle("Select date");
+                datePickerDialog.show();
             }
         });
 
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Add homework");
+        alert.setView(alertLayout);
+        alert.setCancelable(false);
+        alert.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(subject.getText().toString().equals("") || !date.getText().toString().matches(".*\\d+.*") || description.getText().toString().equals(""))
+                {
+                    Toast.makeText(getBaseContext(), "Please, fill in all the fields", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    DbHelper dbHelper = new DbHelper(HomeworksActivity.this);
+                    homework.setSubject(subject.getText().toString());
+                    homework.setDescription(description.getText().toString());
+                    dbHelper.insertHomework(homework);
+                    adapter.clear();
+                    adapter.addAll(db.getHomework());
+                    adapter.notifyDataSetChanged();
+                }
+                subject.setText("");
+                description.setText("");
+                date.setText(R.string.select_date);
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
             }
         });
 
-        final AlertDialog dialog = builder.create();
+        final AlertDialog dialog = alert.create();
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
