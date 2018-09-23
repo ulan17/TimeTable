@@ -147,8 +147,14 @@ public class DbHelper extends SQLiteOpenHelper{
         db.close();
     }
 
+    public void deleteHomeworkById(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(HOMEWORKS,HOMEWORKS_ID + " = ? ", new String[]{String.valueOf(id)});
+        db.close();
+    }
 
-    public ArrayList<Homework> getHomework () {
+
+    public ArrayList<Homework> getHomework() {
         SQLiteDatabase db = this.getWritableDatabase();
         ArrayList<Homework> homelist = new ArrayList<>();
         Homework homework;
