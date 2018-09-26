@@ -17,17 +17,14 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import com.ulan.timetable.Adapters.HomeworksListAdapter;
 import com.ulan.timetable.Homework;
 import com.ulan.timetable.R;
 import com.ulan.timetable.Utils.DbHelper;
-import com.ulan.timetable.Week;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -47,7 +44,7 @@ public class HomeworksActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         db = new DbHelper(HomeworksActivity.this);
         listView = findViewById(R.id.homeworklist);
-        adapter = new HomeworksListAdapter(HomeworksActivity.this, R.layout.homework_listview_adapter, db.getHomework());
+        adapter = new HomeworksListAdapter(HomeworksActivity.this, R.layout.homeworks_listview_adapter, db.getHomework());
         listView.setAdapter(adapter);
         initCustomDialog();
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);

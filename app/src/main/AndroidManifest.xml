@@ -24,7 +24,8 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".Activities.HomeworksActivity"
+        <activity
+            android:name=".Activities.HomeworksActivity"
             android:label="@string/homeworks"
             android:parentActivityName=".Activities.MainActivity"/>
         <meta-data
