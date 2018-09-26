@@ -24,6 +24,7 @@ public class FragmentsTabAdapter  extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         return mFragmentList.get(position);
     }
+
     public void addFragment(Fragment fragment, String title) {
         mFragmentList.add(fragment);
         mFragmentTitleList.add(title);
@@ -41,5 +42,14 @@ public class FragmentsTabAdapter  extends FragmentStatePagerAdapter {
     @Override
     public int getItemPosition(@NonNull Object object) {
         return POSITION_NONE;
+    }
+
+    public List<Fragment> getFragmentList() {
+        return mFragmentList;
+    }
+
+    public void removeFragment(Fragment fragment, int position) {
+        mFragmentList.remove(position);
+        mFragmentTitleList.remove(position);
     }
 }

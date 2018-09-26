@@ -3,11 +3,13 @@ package com.ulan.timetable.Activities;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -18,8 +20,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -46,7 +48,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return viewPager;
     }
     private ViewPager viewPager;
-    private ListView listView;
+    private boolean switchState;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,18 +57,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         adapter = new FragmentsTabAdapter(getSupportFragmentManager());
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         initTabFragment();
         initCustomDialog();
+        initSwitch(navigationView);
+
+        if(switchState) changeTabFragments(true);
+
     }
 
     public void initTabFragment() {
@@ -78,8 +83,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         adapter.addFragment(new WednesdayFragment(), "Wednesday");
         adapter.addFragment(new ThursdayFragment(), "Thursday");
         adapter.addFragment(new FridayFragment(), "Friday");
-        adapter.addFragment(new SaturdayFragment(), "Saturday");
-        adapter.addFragment(new SundayFragment(), "Sunday");
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(day == 1 ? 6 : day-2, true);
         tabLayout.setupWithViewPager(viewPager);
@@ -181,6 +184,40 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
+    public void initSwitch(NavigationView navigationView) {
+        Menu menu = navigationView.getMenu();
+        MenuItem menuItem = menu.findItem(R.id.weeksettings);
+        final View actionView = menuItem.getActionView();
+        SwitchCompat switcher = (SwitchCompat) actionView.findViewById(R.id.drawer_switch);
+        SharedPreferences sharedPref = getSharedPreferences("com.ulan.timetable", 0);
+        switchState = sharedPref.getBoolean("isChecked", false);
+        switcher.setChecked(switchState);
+        switcher.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                changeTabFragments(isChecked);
+                SharedPreferences sharedPref = getSharedPreferences("com.ulan.timetable", 0);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putBoolean("isChecked", isChecked);
+                editor.apply();
+            }
+        });
+    }
+
+    public void changeTabFragments(boolean isChecked) {
+        if(isChecked) {
+            adapter.addFragment(new SaturdayFragment(), "Saturday");
+            adapter.addFragment(new SundayFragment(), "Sunday");
+        } else {
+            if(adapter.getFragmentList().size() > 5) {
+                adapter.removeFragment(new SaturdayFragment(), 5);
+                adapter.removeFragment(new SundayFragment(), 5);
+            }
+        }
+        adapter.notifyDataSetChanged();
+    }
+
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -215,7 +252,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.homework) {
             Intent intent = new Intent(MainActivity.this, HomeworksActivity.class);
             startActivity(intent);
-        }
+        } else if (id == R.id.weeksettings) { }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
