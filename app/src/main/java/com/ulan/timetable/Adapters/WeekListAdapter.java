@@ -76,10 +76,6 @@ public class WeekListAdapter extends ArrayAdapter<Week> {
         return weeklist;
     }
 
-    public void setWeeklist(ArrayList<Week> weeklist) {
-        this.weeklist = weeklist;
-    }
-
     public Week getWeek() {
         return week;
     }

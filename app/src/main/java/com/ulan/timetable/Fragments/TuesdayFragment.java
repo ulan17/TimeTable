@@ -172,7 +172,6 @@ public class TuesdayFragment extends Fragment {
 
             @Override
             public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-                // not even need to inflate anything in order to ActionMode to appear
                 MenuInflater menuInflater = mode.getMenuInflater();
                 menuInflater.inflate(R.menu.toolbar_action_mode, menu);
                 return true;

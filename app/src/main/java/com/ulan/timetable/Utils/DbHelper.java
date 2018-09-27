@@ -3,17 +3,13 @@ package com.ulan.timetable.Utils;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseErrorHandler;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.ulan.timetable.Homework;
 import com.ulan.timetable.Week;
 
-import java.security.Key;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by Ulan on 07.09.2018.
@@ -31,7 +27,6 @@ public class DbHelper extends SQLiteOpenHelper{
     private static final String KEY_FROM_TIME = "fromtime";
     private static final String KEY_TO_TIME = "totime";
 
-
     private static final String HOMEWORKS = "homeworks";
     private static final String HOMEWORKS_ID  = "homeworksid";
     private static final String HOMEWORKS_SUBJECT = "homeworkssubject";
@@ -44,7 +39,7 @@ public class DbHelper extends SQLiteOpenHelper{
     }
 
      public void onCreate(SQLiteDatabase db) {
-        String CREATE_TB = "CREATE TABLE " + TIMETABLE + "("
+        String CREATE_TIMETABLE = "CREATE TABLE " + TIMETABLE + "("
                 + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + KEY_SUBJECT + " TEXT,"
                 + KEY_FRAGMENT + " TEXT,"
@@ -59,7 +54,7 @@ public class DbHelper extends SQLiteOpenHelper{
                 + HOMEWORKS_DESCRIPTION + " TEXT,"
                 + HOMEWORKS_DATE + " TEXT" + ")";
 
-        db.execSQL(CREATE_TB);
+        db.execSQL(CREATE_TIMETABLE);
         db.execSQL(CREATE_HOMEWORK);
     }
 
@@ -76,6 +71,7 @@ public class DbHelper extends SQLiteOpenHelper{
         onCreate(db);
     }
 
+    // For Week fragments
     public void insertWeekDetails(Week week){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -127,6 +123,7 @@ public class DbHelper extends SQLiteOpenHelper{
         return  weeklist;
     }
 
+    // For Homework activity
     public void insertHomework(Homework homework) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();

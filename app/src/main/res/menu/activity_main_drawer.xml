@@ -6,7 +6,7 @@
 
     <item
         android:id="@+id/weeksettings"
-        android:title="7 days of the week"
+        android:title="@string/seven_days_of_the_week"
         android:icon="@drawable/baseline_settings_black_18"
         app:actionLayout="@layout/layout_switch"
         />
@@ -21,7 +21,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/homework"
-            android:icon="@drawable/baseline_list_black_18"
+            android:icon="@drawable/baseline_book_black_18"
             android:title="@string/homeworks" />
     </group>
 

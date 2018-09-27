@@ -74,10 +74,6 @@ public class HomeworksListAdapter extends ArrayAdapter<Homework> {
         return homeworklist;
     }
 
-    public void setWeeklist(ArrayList<Homework> homeworklist) {
-        this.homeworklist = homeworklist;
-    }
-
     public Homework getHomework() {
         return homework;
     }
