@@ -5,6 +5,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -242,18 +244,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.week) {
-            // I am still working on it
-        } else if (id == R.id.homework) {
-            Intent intent = new Intent(MainActivity.this, HomeworksActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.weeksettings) { }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.homework:
+                Intent homework = new Intent(MainActivity.this, HomeworksActivity.class);
+                startActivity(homework);
+                return true;
+            case R.id.notes:
+                Intent note = new Intent(MainActivity.this, NotesActivity.class);
+                startActivity(note);
+                return true;
+            case R.id.weeksettings:
+                return true;
+            default:
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+                return true;
+        }
     }
 }

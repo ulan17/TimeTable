@@ -27,10 +27,19 @@
         <activity
             android:name=".Activities.HomeworksActivity"
             android:label="@string/homeworks"
-            android:parentActivityName=".Activities.MainActivity"/>
+            android:parentActivityName=".Activities.MainActivity" />
+
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
-            android:value=".Activities.HomeworksActivity"/>
+            android:value=".Activities.HomeworksActivity" />
+
+        <activity
+            android:name=".Activities.NotesActivity"
+            android:label="Notes"
+            android:parentActivityName=".Activities.MainActivity" />
+        <activity android:name=".Activities.NoteInfoActivity"
+            android:label="Notes"
+            android:parentActivityName=".Activities.NotesActivity" />
     </application>
 
 </manifest>

@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.ulan.timetable.Homework;
+import com.ulan.timetable.Note;
 import com.ulan.timetable.Week;
 
 import java.util.ArrayList;
@@ -33,9 +34,13 @@ public class DbHelper extends SQLiteOpenHelper{
     private static final String HOMEWORKS_DESCRIPTION = "homeworksdescription";
     private static final String HOMEWORKS_DATE = "homeworksdate";
 
+    private static final String NOTES = "notes";
+    private static final String NOTES_ID = "id";
+    private static final String NOTES_TITLE = "title";
+    private static final String NOTES_TEXT = "text";
+
     public DbHelper(Context context){
         super(context , DB_NAME, null, DB_VERSION);
-
     }
 
      public void onCreate(SQLiteDatabase db) {
@@ -48,14 +53,20 @@ public class DbHelper extends SQLiteOpenHelper{
                 + KEY_FROM_TIME + " TEXT,"
                 + KEY_TO_TIME + " TEXT"+ ")";
 
-        String CREATE_HOMEWORK = "CREATE TABLE " + HOMEWORKS + "("
+        String CREATE_HOMEWORKS = "CREATE TABLE " + HOMEWORKS + "("
                 + HOMEWORKS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + HOMEWORKS_SUBJECT + " TEXT,"
                 + HOMEWORKS_DESCRIPTION + " TEXT,"
                 + HOMEWORKS_DATE + " TEXT" + ")";
 
+        String CREATE_NOTES = "CREATE TABLE " + NOTES + "("
+                + NOTES_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + NOTES_TITLE + " TEXT,"
+                + NOTES_TEXT + " TEXT" + ")";
+
         db.execSQL(CREATE_TIMETABLE);
-        db.execSQL(CREATE_HOMEWORK);
+        db.execSQL(CREATE_HOMEWORKS);
+        db.execSQL(CREATE_NOTES);
     }
 
     @Override
@@ -66,6 +77,9 @@ public class DbHelper extends SQLiteOpenHelper{
 
             case 2:
                 db.execSQL("DROP TABLE IF EXISTS " + HOMEWORKS);
+
+            case 3:
+                db.execSQL("DROP TABLE IF EXISTS " + NOTES);
                 break;
         }
         onCreate(db);
@@ -167,5 +181,47 @@ public class DbHelper extends SQLiteOpenHelper{
         cursor.close();
         db.close();
         return  homelist;
+    }
+
+    //For Notes activity
+    public void insertNote(Note note) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(NOTES_TITLE, note.getTitle());
+        contentValues.put(NOTES_TEXT, note.getText());
+        db.insert(NOTES, null, contentValues);
+        db.close();
+    }
+
+    public void updateNote(Note note)  {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(NOTES_TITLE, note.getTitle());
+        contentValues.put(NOTES_TEXT, note.getText());
+        db.update(NOTES, contentValues, NOTES_ID + " = " + note.getId(), null);
+        db.close();
+    }
+
+    public void deleteNote(Note note) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(NOTES, NOTES_ID + " =? ", new String[] {String.valueOf(note.getId())});
+        db.close();
+    }
+
+    public ArrayList<Note> getNote() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<Note> notelist = new ArrayList<>();
+        Note note;
+        Cursor cursor = db.rawQuery("SELECT * FROM " + NOTES, null);
+        while (cursor.moveToNext()) {
+            note = new Note();
+            note.setId(cursor.getInt(cursor.getColumnIndex(NOTES_ID)));
+            note.setTitle(cursor.getString(cursor.getColumnIndex(NOTES_TITLE)));
+            note.setText(cursor.getString(cursor.getColumnIndex(NOTES_TEXT)));
+            notelist.add(note);
+        }
+        cursor.close();
+        db.close();
+        return notelist;
     }
 }

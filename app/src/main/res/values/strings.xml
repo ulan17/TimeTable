@@ -27,4 +27,9 @@
     <string name="deadline">Deadline:</string>
     <string name="description">Description:</string>
     <string name="subject_homework">Subject:</string>
+
+    <!-- Homeworks Activity strings -->
+    <string name="notes">Notes</string>
+    <string name="title">Title</string>
+
 </resources>

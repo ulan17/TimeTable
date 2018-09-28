@@ -13,16 +13,16 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/week"
-            android:icon="@drawable/baseline_view_week_black_18"
-            android:title="@string/week" />
+            android:id="@+id/homework"
+            android:icon="@drawable/baseline_book_black_18"
+            android:title="@string/homeworks" />
     </group>
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/homework"
-            android:icon="@drawable/baseline_book_black_18"
-            android:title="@string/homeworks" />
+            android:id="@+id/notes"
+            android:icon="@drawable/baseline_note_black_18"
+            android:title="@string/notes" />
     </group>
 
 </menu>
