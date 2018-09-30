@@ -23,7 +23,7 @@
 
         <TextView
             android:id="@+id/subject"
-            android:layout_width="324dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
             android:layout_marginStart="4dp"
@@ -39,58 +39,54 @@
 
         <TextView
             android:id="@+id/room"
-            android:layout_width="128dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
             android:text="@string/room"
             android:textAlignment="center"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/roomimage"
             app:layout_constraintTop_toBottomOf="@+id/teacher" />
 
         <TextView
             android:id="@+id/time"
-            android:layout_width="125dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
             android:text="@string/time"
             android:textAlignment="center"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/teacher" />
+            app:layout_constraintEnd_toEndOf="@+id/teacher"
+            app:layout_constraintStart_toEndOf="@+id/timeimage"
+            app:layout_constraintTop_toBottomOf="@+id/teacher"
+            app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
             android:id="@+id/roomimage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
-            android:layout_marginTop="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/teacher"
+            app:layout_constraintStart_toStartOf="@+id/teacher"
+            app:layout_constraintTop_toTopOf="@+id/room"
+            app:layout_constraintVertical_bias="0.263"
             app:srcCompat="@drawable/baseline_meeting_room_black_24" />
 
         <ImageView
             android:id="@+id/timeimage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/time"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toBottomOf="@+id/teacher"
+            app:layout_constraintTop_toTopOf="@+id/time"
+            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/baseline_access_time_black_24" />
 
         <android.support.constraint.Guideline
@@ -102,10 +98,8 @@
 
         <TextView
             android:id="@+id/teacher"
-            android:layout_width="324dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
             android:text="Teacher"
             android:textAlignment="center"

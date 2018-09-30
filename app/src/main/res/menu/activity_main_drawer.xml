@@ -8,7 +8,7 @@
         android:id="@+id/weeksettings"
         android:title="@string/seven_days_of_the_week"
         android:icon="@drawable/baseline_settings_black_18"
-        app:actionLayout="@layout/layout_switch"
+        app:actionLayout="@layout/switch_layout"
         />
 
     <group android:checkableBehavior="single">

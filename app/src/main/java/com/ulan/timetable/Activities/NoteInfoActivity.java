@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.ulan.timetable.Note;
 import com.ulan.timetable.R;
@@ -33,6 +34,7 @@ public class NoteInfoActivity extends AppCompatActivity {
     public void onBackPressed() {
         note.setText(text.getText().toString());
         db.updateNote(note);
+        Toast.makeText(NoteInfoActivity.this, "Saved", Toast.LENGTH_SHORT).show();
         super.onBackPressed();
     }
 
@@ -42,6 +44,7 @@ public class NoteInfoActivity extends AppCompatActivity {
             case android.R.id.home:
                 note.setText(text.getText().toString());
                 db.updateNote(note);
+                Toast.makeText(NoteInfoActivity.this, "Saved", Toast.LENGTH_SHORT).show();
                 super.onBackPressed();
                 return true;
 

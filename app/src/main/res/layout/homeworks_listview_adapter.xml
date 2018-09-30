@@ -23,7 +23,7 @@
 
         <TextView
             android:id="@+id/subjecthomework"
-            android:layout_width="324dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
             android:layout_marginStart="4dp"
@@ -39,19 +39,17 @@
 
         <TextView
             android:id="@+id/datehomework"
-            android:layout_width="265dp"
-            android:layout_height="24dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
-            android:layout_marginEnd="31dp"
-            android:layout_marginStart="32dp"
             android:layout_marginTop="5dp"
             android:text="Date"
             android:textAlignment="center"
             android:textAllCaps="true"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/descriptionhomework"
+            app:layout_constraintStart_toStartOf="@+id/descriptionhomework"
             app:layout_constraintTop_toBottomOf="@+id/descriptionhomework" />
 
         <ImageView
@@ -61,17 +59,15 @@
             android:layout_marginBottom="2dp"
             android:layout_marginTop="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/descriptionhomework"
             app:layout_constraintTop_toBottomOf="@+id/descriptionhomework"
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/baseline_access_time_black_24" />
 
         <TextView
             android:id="@+id/descriptionhomework"
-            android:layout_width="324dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
             android:text="DESCRIPTION"
             android:textAlignment="center"
