@@ -7,10 +7,12 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.ulan.timetable.Adapters.NotesListAdapter;
 import com.ulan.timetable.Note;
@@ -41,26 +43,34 @@ public class NotesActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        initDialog();
-        adapter.notifyDataSetChanged();
+        initCustomDialog();
     }
 
-    private void initDialog() {
+    private void initCustomDialog() {
+        LayoutInflater inflater = getLayoutInflater();
+        View alertLayout = inflater.inflate(R.layout.dialog_add_note, null);
+        final EditText title = alertLayout.findViewById(R.id.titlenote);
+
         final AlertDialog.Builder dialog = new AlertDialog.Builder(context);
         dialog.setTitle("Add note");
-        final EditText title = new EditText(context);
-        dialog.setView(title);
+        dialog.setView(alertLayout);
+        dialog.setCancelable(false);
         final Note note = new Note();
 
         dialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                DbHelper dbHelper = new DbHelper(context);
-                note.setTitle(title.getText().toString());
-                dbHelper.insertNote(note);
-                adapter.clear();
-                adapter.addAll(dbHelper.getNote());
-                adapter.notifyDataSetChanged();
+                if(title.getText().toString().equals("")){
+                    Toast.makeText(getBaseContext(), "Please, fill in all the fields", Toast.LENGTH_SHORT).show();
+                } else {
+                    DbHelper dbHelper = new DbHelper(context);
+                    note.setTitle(title.getText().toString());
+                    dbHelper.insertNote(note);
+                    adapter.clear();
+                    adapter.addAll(dbHelper.getNote());
+                    adapter.notifyDataSetChanged();
+                }
+                title.setText("");
             }
         });
 
