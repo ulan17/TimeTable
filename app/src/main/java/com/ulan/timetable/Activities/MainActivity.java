@@ -208,8 +208,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void changeTabFragments(boolean isChecked) {
         if(isChecked) {
+            TabLayout tabLayout = findViewById(R.id.tabLayout);
+            Calendar calendar = Calendar.getInstance();
+            int day = calendar.get(Calendar.DAY_OF_WEEK);
             adapter.addFragment(new SaturdayFragment(), "Saturday");
             adapter.addFragment(new SundayFragment(), "Sunday");
+            viewPager.setAdapter(adapter);
+            viewPager.setCurrentItem(day == 1 ? 6 : day-2, true);
+            tabLayout.setupWithViewPager(viewPager);
         } else {
             if(adapter.getFragmentList().size() > 5) {
                 adapter.removeFragment(new SaturdayFragment(), 5);
@@ -237,11 +243,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                Toast.makeText(MainActivity.this, "We're working on it. :)", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
