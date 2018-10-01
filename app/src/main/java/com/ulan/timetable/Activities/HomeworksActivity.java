@@ -153,8 +153,9 @@ public class HomeworksActivity extends AppCompatActivity {
                             Toast.makeText(HomeworksActivity.this, "Please, select one item", Toast.LENGTH_LONG).show();
                             mode.finish();
                         }
+                    default:
+                        return false;
                 }
-                return false;
             }
             @Override
             public void onDestroyActionMode(ActionMode mode) {
