@@ -60,6 +60,7 @@ public class NotesActivity extends AppCompatActivity {
             public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
                 final int checkedCount = listView.getCheckedItemCount();
                 mode.setTitle(checkedCount + " Selected");
+                listposition = position;
             }
 
             @Override
@@ -75,7 +76,7 @@ public class NotesActivity extends AppCompatActivity {
             }
 
             @Override
-            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+            public boolean onActionItemClicked(final ActionMode mode, MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.action_delete:
                         ArrayList<Note> removelist = new ArrayList<>();
@@ -91,6 +92,50 @@ public class NotesActivity extends AppCompatActivity {
                         adapter.notifyDataSetChanged();
                         mode.finish();
                         return true;
+
+                    case R.id.action_edit:
+                        if(listView.getCheckedItemCount() == 1) {
+                            LayoutInflater inflater = getLayoutInflater();
+                            View alertLayout = inflater.inflate(R.layout.dialog_add_note, null);
+                            final EditText title = alertLayout.findViewById(R.id.titlenote);
+                            final Note note = adapter.getNotelist().get(listposition);
+                            title.setText(note.getTitle());
+
+                            AlertDialog.Builder alert = new AlertDialog.Builder(NotesActivity.this);
+                            alert.setTitle("Edit note");
+                            alert.setView(alertLayout);
+                            alert.setCancelable(false);
+                            alert.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    if (title.getText().toString().equals("")) {
+                                        Toast.makeText(getBaseContext(), "Please, fill in all the fields", Toast.LENGTH_SHORT).show();
+
+                                    } else {
+                                        DbHelper dbHelper = new DbHelper(NotesActivity.this);
+                                        note.setTitle(title.getText().toString());
+                                        dbHelper.updateNote(note);
+                                        adapter.notifyDataSetChanged();
+                                        mode.finish();
+                                    }
+                                }
+                            });
+
+                            alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+
+                            final AlertDialog dialog = alert.create();
+                            dialog.show();
+                            return true;
+                        } else {
+                            Toast.makeText(NotesActivity.this, "Please, select one item", Toast.LENGTH_LONG).show();
+                            mode.finish();
+                        }
+
                     default:
                         return false;
                 }
