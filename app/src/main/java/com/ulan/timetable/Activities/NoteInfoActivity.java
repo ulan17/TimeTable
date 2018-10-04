@@ -7,7 +7,7 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.ulan.timetable.Note;
+import com.ulan.timetable.Model.Note;
 import com.ulan.timetable.R;
 import com.ulan.timetable.Utils.DbHelper;
 

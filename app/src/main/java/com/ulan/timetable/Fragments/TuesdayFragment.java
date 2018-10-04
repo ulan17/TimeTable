@@ -23,7 +23,7 @@ import android.widget.Toast;
 import com.ulan.timetable.Adapters.WeekListAdapter;
 import com.ulan.timetable.Utils.DbHelper;
 import com.ulan.timetable.R;
-import com.ulan.timetable.Week;
+import com.ulan.timetable.Model.Week;
 
 import java.util.ArrayList;
 import java.util.Calendar;

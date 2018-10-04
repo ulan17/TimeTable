@@ -6,9 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.ulan.timetable.Homework;
-import com.ulan.timetable.Note;
-import com.ulan.timetable.Week;
+import com.ulan.timetable.Model.Homework;
+import com.ulan.timetable.Model.Note;
+import com.ulan.timetable.Model.Week;
 
 import java.util.ArrayList;
 

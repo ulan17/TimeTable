@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.ulan.timetable.Homework;
+import com.ulan.timetable.Model.Homework;
 import com.ulan.timetable.R;
 import java.util.ArrayList;
 

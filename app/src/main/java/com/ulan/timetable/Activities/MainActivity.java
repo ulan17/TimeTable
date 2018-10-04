@@ -37,7 +37,7 @@ import com.ulan.timetable.Fragments.TuesdayFragment;
 import com.ulan.timetable.Fragments.WednesdayFragment;
 import com.ulan.timetable.R;
 import com.ulan.timetable.Utils.DbHelper;
-import com.ulan.timetable.Week;
+import com.ulan.timetable.Model.Week;
 
 import java.util.Calendar;
 

@@ -22,7 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ulan.timetable.Adapters.HomeworksListAdapter;
-import com.ulan.timetable.Homework;
+import com.ulan.timetable.Model.Homework;
 import com.ulan.timetable.R;
 import com.ulan.timetable.Utils.DbHelper;
 
