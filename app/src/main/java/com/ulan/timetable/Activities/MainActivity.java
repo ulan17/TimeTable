@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -166,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     week.setFragment(adapter.getItem(viewPager.getCurrentItem()).toString());
                     week.setTeacher(teacher.getText().toString());
                     week.setRoom(room.getText().toString());
-                    dbHelper.insertWeekDetails(week);
+                    dbHelper.insertWeek(week);
                     viewPager.getAdapter().notifyDataSetChanged();
                 }
                 subject.setText("");

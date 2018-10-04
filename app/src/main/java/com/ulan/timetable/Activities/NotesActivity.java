@@ -83,7 +83,7 @@ public class NotesActivity extends AppCompatActivity {
                         SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
                         for (int i = 0; i < checkedItems.size(); i++) {
                             if (checkedItems.valueAt(i)) {
-                                db.deleteNote(adapter.getItem(i));
+                                db.deleteNoteById(adapter.getItem(i));
                                 removelist.add(adapter.getNotelist().get(i));
                             }
                         }
