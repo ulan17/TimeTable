@@ -6,9 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.ulan.timetable.Homework;
-import com.ulan.timetable.Note;
-import com.ulan.timetable.Week;
+import com.ulan.timetable.Model.Homework;
+import com.ulan.timetable.Model.Note;
+import com.ulan.timetable.Model.Week;
 
 import java.util.ArrayList;
 
@@ -20,19 +20,19 @@ public class DbHelper extends SQLiteOpenHelper{
     private static final int DB_VERSION = 2;
     private static final String DB_NAME = "timetabledb";
     private static final String TIMETABLE = "timetable";
-    private static final String KEY_ID = "id";
-    private static final String KEY_SUBJECT = "subject";
-    private static final String KEY_FRAGMENT = "fragment";
-    private static final String KEY_TEACHER = "teacher";
-    private static final String KEY_ROOM = "room";
-    private static final String KEY_FROM_TIME = "fromtime";
-    private static final String KEY_TO_TIME = "totime";
+    private static final String TIMETABLE_ID = "id";
+    private static final String TIMETABLE_SUBJECT = "subject";
+    private static final String TIMETABLE_FRAGMENT = "fragment";
+    private static final String TIMETABLE_TEACHER = "teacher";
+    private static final String TIMETABLE_ROOM = "room";
+    private static final String TIMETABLE_FROM_TIME = "fromtime";
+    private static final String TIMETABLE_TO_TIME = "totime";
 
     private static final String HOMEWORKS = "homeworks";
-    private static final String HOMEWORKS_ID  = "homeworksid";
-    private static final String HOMEWORKS_SUBJECT = "homeworkssubject";
-    private static final String HOMEWORKS_DESCRIPTION = "homeworksdescription";
-    private static final String HOMEWORKS_DATE = "homeworksdate";
+    private static final String HOMEWORKS_ID  = "id";
+    private static final String HOMEWORKS_SUBJECT = "subject";
+    private static final String HOMEWORKS_DESCRIPTION = "description";
+    private static final String HOMEWORKS_DATE = "date";
 
     private static final String NOTES = "notes";
     private static final String NOTES_ID = "id";
@@ -45,13 +45,13 @@ public class DbHelper extends SQLiteOpenHelper{
 
      public void onCreate(SQLiteDatabase db) {
         String CREATE_TIMETABLE = "CREATE TABLE " + TIMETABLE + "("
-                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + KEY_SUBJECT + " TEXT,"
-                + KEY_FRAGMENT + " TEXT,"
-                + KEY_TEACHER + " TEXT,"
-                + KEY_ROOM + " TEXT,"
-                + KEY_FROM_TIME + " TEXT,"
-                + KEY_TO_TIME + " TEXT"+ ")";
+                + TIMETABLE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + TIMETABLE_SUBJECT + " TEXT,"
+                + TIMETABLE_FRAGMENT + " TEXT,"
+                + TIMETABLE_TEACHER + " TEXT,"
+                + TIMETABLE_ROOM + " TEXT,"
+                + TIMETABLE_FROM_TIME + " TEXT,"
+                + TIMETABLE_TO_TIME + " TEXT"+ ")";
 
         String CREATE_HOMEWORKS = "CREATE TABLE " + HOMEWORKS + "("
                 + HOMEWORKS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -86,52 +86,52 @@ public class DbHelper extends SQLiteOpenHelper{
     }
 
     // For Week fragments
-    public void insertWeekDetails(Week week){
+    public void insertWeek(Week week){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(KEY_SUBJECT, week.getSubject());
-        contentValues.put(KEY_FRAGMENT, week.getFragment());
-        contentValues.put(KEY_TEACHER, week.getTeacher());
-        contentValues.put(KEY_ROOM, week.getRoom());
-        contentValues.put(KEY_FROM_TIME, week.getFromTime());
-        contentValues.put(KEY_TO_TIME, week.getToTime());
+        contentValues.put(TIMETABLE_SUBJECT, week.getSubject());
+        contentValues.put(TIMETABLE_FRAGMENT, week.getFragment());
+        contentValues.put(TIMETABLE_TEACHER, week.getTeacher());
+        contentValues.put(TIMETABLE_ROOM, week.getRoom());
+        contentValues.put(TIMETABLE_FROM_TIME, week.getFromTime());
+        contentValues.put(TIMETABLE_TO_TIME, week.getToTime());
         db.insert(TIMETABLE,null, contentValues);
-        db.update(TIMETABLE, contentValues, KEY_FRAGMENT, null);
+        db.update(TIMETABLE, contentValues, TIMETABLE_FRAGMENT, null);
         db.close();
     }
 
-    public void deleteDataById(int id) {
+    public void deleteWeekById(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TIMETABLE,KEY_ID + " = ? ", new String[]{String.valueOf(id)});
+        db.delete(TIMETABLE, TIMETABLE_ID + " = ? ", new String[]{String.valueOf(id)});
         db.close();
     }
 
-    public void updateData(Week week) {
+    public void updateWeek(Week week) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(KEY_SUBJECT,week.getSubject());
-        contentValues.put(KEY_TEACHER, week.getTeacher());
-        contentValues.put(KEY_ROOM,week.getRoom());
-        contentValues.put(KEY_FROM_TIME,week.getFromTime());
-        contentValues.put(KEY_TO_TIME, week.getToTime());
-        db.update(TIMETABLE, contentValues, KEY_ID + " = " + week.getId(), null);
+        contentValues.put(TIMETABLE_SUBJECT, week.getSubject());
+        contentValues.put(TIMETABLE_TEACHER, week.getTeacher());
+        contentValues.put(TIMETABLE_ROOM, week.getRoom());
+        contentValues.put(TIMETABLE_FROM_TIME,week.getFromTime());
+        contentValues.put(TIMETABLE_TO_TIME, week.getToTime());
+        db.update(TIMETABLE, contentValues, TIMETABLE_ID + " = " + week.getId(), null);
         db.close();
     }
 
-    public ArrayList<Week> getData(String fragment){
+    public ArrayList<Week> getWeek(String fragment){
         SQLiteDatabase db = this.getWritableDatabase();
 
         ArrayList<Week> weeklist = new ArrayList<>();
         Week week;
-        Cursor cursor = db.rawQuery("SELECT * FROM "+TIMETABLE+" WHERE "+KEY_FRAGMENT+" LIKE '"+fragment+"%'",null);
+        Cursor cursor = db.rawQuery("SELECT * FROM "+TIMETABLE+" WHERE "+ TIMETABLE_FRAGMENT +" LIKE '"+fragment+"%'",null);
         while (cursor.moveToNext()){
             week = new Week();
-            week.setId(cursor.getInt(0));
-            week.setSubject(cursor.getString(cursor.getColumnIndex(KEY_SUBJECT)));
-            week.setTeacher(cursor.getString(cursor.getColumnIndex(KEY_TEACHER)));
-            week.setRoom(cursor.getString(cursor.getColumnIndex(KEY_ROOM)));
-            week.setFromTime(cursor.getString(cursor.getColumnIndex(KEY_FROM_TIME)));
-            week.setToTime(cursor.getString(cursor.getColumnIndex(KEY_TO_TIME)));
+            week.setId(cursor.getInt(cursor.getColumnIndex(TIMETABLE_ID)));
+            week.setSubject(cursor.getString(cursor.getColumnIndex(TIMETABLE_SUBJECT)));
+            week.setTeacher(cursor.getString(cursor.getColumnIndex(TIMETABLE_TEACHER)));
+            week.setRoom(cursor.getString(cursor.getColumnIndex(TIMETABLE_ROOM)));
+            week.setFromTime(cursor.getString(cursor.getColumnIndex(TIMETABLE_FROM_TIME)));
+            week.setToTime(cursor.getString(cursor.getColumnIndex(TIMETABLE_TO_TIME)));
             weeklist.add(week);
         }
         return  weeklist;
@@ -172,7 +172,7 @@ public class DbHelper extends SQLiteOpenHelper{
         Cursor cursor = db.rawQuery("SELECT * FROM "+ HOMEWORKS,null);
         while (cursor.moveToNext()){
             homework = new Homework();
-            homework.setId(cursor.getInt(0));
+            homework.setId(cursor.getInt(cursor.getColumnIndex(HOMEWORKS_ID)));
             homework.setSubject(cursor.getString(cursor.getColumnIndex(HOMEWORKS_SUBJECT)));
             homework.setDescription(cursor.getString(cursor.getColumnIndex(HOMEWORKS_DESCRIPTION)));
             homework.setDate(cursor.getString(cursor.getColumnIndex(HOMEWORKS_DATE)));
@@ -202,7 +202,7 @@ public class DbHelper extends SQLiteOpenHelper{
         db.close();
     }
 
-    public void deleteNote(Note note) {
+    public void deleteNoteById(Note note) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(NOTES, NOTES_ID + " =? ", new String[] {String.valueOf(note.getId())});
         db.close();

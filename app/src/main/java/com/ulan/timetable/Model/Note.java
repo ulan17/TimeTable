@@ -1,4 +1,4 @@
-package com.ulan.timetable;
+package com.ulan.timetable.Model;
 
 import android.os.Parcelable;
 

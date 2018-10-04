@@ -23,7 +23,7 @@ import android.widget.Toast;
 import com.ulan.timetable.Adapters.WeekListAdapter;
 import com.ulan.timetable.Utils.DbHelper;
 import com.ulan.timetable.R;
-import com.ulan.timetable.Week;
+import com.ulan.timetable.Model.Week;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -40,7 +40,7 @@ public class SaturdayFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_saturday, container, false);
         db = new DbHelper(getActivity());
         listView = view.findViewById(R.id.saturdaylist);
-        adapter = new WeekListAdapter(getActivity(), R.layout.week_listview_adapter, db.getData("Saturday"));
+        adapter = new WeekListAdapter(getActivity(), R.layout.week_listview_adapter, db.getWeek("Saturday"));
         listView.setAdapter(adapter);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         listView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
@@ -59,12 +59,12 @@ public class SaturdayFragment extends Fragment {
                         SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
                         for (int i = 0; i < checkedItems.size(); i++) {
                             if (checkedItems.valueAt(i)) {
-                                db.deleteDataById(adapter.getItem(i).getId());
+                                db.deleteWeekById(adapter.getItem(i).getId());
                                 removelist.add(adapter.getWeeklist().get(i));
                             }
                         }
                         adapter.getWeeklist().removeAll(removelist);
-                        db.updateData(adapter.getWeek());
+                        db.updateWeek(adapter.getWeek());
                         adapter.notifyDataSetChanged();
                         mode.finish();
                         return true;
@@ -145,7 +145,7 @@ public class SaturdayFragment extends Fragment {
                                         week.setSubject(subject.getText().toString());
                                         week.setTeacher(teacher.getText().toString());
                                         week.setRoom(room.getText().toString());
-                                        db.updateData(week);
+                                        db.updateWeek(week);
                                         adapter.notifyDataSetChanged();
                                         mode.finish();
                                     }

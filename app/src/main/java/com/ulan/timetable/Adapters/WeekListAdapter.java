@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.ulan.timetable.R;
-import com.ulan.timetable.Week;
+import com.ulan.timetable.Model.Week;
 
 import java.util.ArrayList;
 

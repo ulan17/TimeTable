@@ -1,4 +1,4 @@
-package com.ulan.timetable;
+package com.ulan.timetable.Model;
 
 /**
  * Created by Ulan on 21.09.2018.
