@@ -264,6 +264,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return true;
             case R.id.weeksettings:
                 return true;
+            case R.id.teachers:
+                Intent teacher = new Intent(MainActivity.this, TeachersActivity.class);
+                startActivity(teacher);
+                return true;
             default:
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);

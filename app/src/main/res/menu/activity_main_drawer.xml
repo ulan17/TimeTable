@@ -25,4 +25,10 @@
             android:title="@string/notes" />
     </group>
 
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/teachers"
+            android:title="@string/teachers" />
+    </group>
+
 </menu>

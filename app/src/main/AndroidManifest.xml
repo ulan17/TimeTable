@@ -37,9 +37,13 @@
             android:name=".Activities.NotesActivity"
             android:label="Notes"
             android:parentActivityName=".Activities.MainActivity" />
-        <activity android:name=".Activities.NoteInfoActivity"
+        <activity
+            android:name=".Activities.NoteInfoActivity"
             android:label="Notes"
             android:parentActivityName=".Activities.NotesActivity" />
+        <activity android:name=".Activities.TeachersActivity"
+            android:label="Teachers"
+            android:parentActivityName=".Activities.MainActivity" />
     </application>
 
 </manifest>
