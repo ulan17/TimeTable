@@ -41,7 +41,7 @@ public class TuesdayFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_tuesday, container, false);
         db = new DbHelper(getActivity());
         listView = view.findViewById(R.id.tuesdaylist);
-        adapter = new WeekListAdapter(getActivity(), R.layout.week_listview_adapter, db.getWeek("Tuesday"));
+        adapter = new WeekListAdapter(getActivity(), R.layout.listview_week_adapter, db.getWeek("Tuesday"));
         listView.setAdapter(adapter);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         listView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {

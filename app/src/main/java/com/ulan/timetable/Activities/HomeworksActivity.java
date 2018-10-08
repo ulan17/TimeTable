@@ -44,7 +44,7 @@ public class HomeworksActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         db = new DbHelper(HomeworksActivity.this);
         listView = findViewById(R.id.homeworklist);
-        adapter = new HomeworksListAdapter(HomeworksActivity.this, R.layout.homeworks_listview_adapter, db.getHomework());
+        adapter = new HomeworksListAdapter(HomeworksActivity.this, R.layout.listview_homeworks_adapter, db.getHomework());
         listView.setAdapter(adapter);
         initCustomDialog();
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);

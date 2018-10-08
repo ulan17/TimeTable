@@ -40,7 +40,7 @@ public class NotesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notes);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         db = new DbHelper(context);
-        adapter = new NotesListAdapter(NotesActivity.this, R.layout.notes_listview_adapter, db.getNote());
+        adapter = new NotesListAdapter(NotesActivity.this, R.layout.listview_notes_adapter, db.getNote());
         listView = findViewById(R.id.notelist);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

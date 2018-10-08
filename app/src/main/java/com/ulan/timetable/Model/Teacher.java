@@ -7,6 +7,15 @@ public class Teacher {
     private String name, post, phonenumber, email;
     private int id;
 
+    public Teacher() {
+    }
+    public Teacher(String name, String post, String phonenumber, String email) {
+        this.name = name;
+        this.post = post;
+        this.phonenumber = phonenumber;
+        this.email = email;
+    }
+
     public String getName() {
         return name;
     }

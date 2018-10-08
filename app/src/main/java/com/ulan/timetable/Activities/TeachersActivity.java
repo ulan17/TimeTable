@@ -1,5 +1,6 @@
 package com.ulan.timetable.Activities;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -8,20 +9,29 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.ListView;
 
+import com.ulan.timetable.Adapters.TeachersListAdapter;
 import com.ulan.timetable.Model.Teacher;
 import com.ulan.timetable.R;
 import com.ulan.timetable.Utils.DbHelper;
 
-import java.util.Arrays;
 
 public class TeachersActivity extends AppCompatActivity {
 
+    private Context context = this;
+    private ListView listView;
+    private DbHelper db;
+    private TeachersListAdapter adapter;
+    private int listposition = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teachers);
+        db = new DbHelper(context);
+        adapter = new TeachersListAdapter(context, R.layout.listview_teachers_adapter, db.getTeacher());
+        listView = findViewById(R.id.teacherlist);
+        listView.setAdapter(adapter);
         initDialog();
     }
 
@@ -49,8 +59,10 @@ public class TeachersActivity extends AppCompatActivity {
                 teacher.setPost(post.getText().toString());
                 teacher.setPhonenumber(phone.getText().toString());
                 teacher.setEmail(email.getText().toString());
-
                 dbHelper.insertTeacher(teacher);
+                adapter.clear();
+                adapter.addAll(dbHelper.getTeacher());
+                adapter.notifyDataSetChanged();
             }
         });
 
