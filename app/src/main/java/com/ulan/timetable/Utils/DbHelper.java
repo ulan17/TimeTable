@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.ulan.timetable.Model.Homework;
 import com.ulan.timetable.Model.Note;
+import com.ulan.timetable.Model.Teacher;
 import com.ulan.timetable.Model.Week;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
  */
 public class DbHelper extends SQLiteOpenHelper{
 
-    private static final int DB_VERSION = 2;
+    private static final int DB_VERSION = 4;
     private static final String DB_NAME = "timetabledb";
     private static final String TIMETABLE = "timetable";
     private static final String TIMETABLE_ID = "id";
@@ -38,6 +39,13 @@ public class DbHelper extends SQLiteOpenHelper{
     private static final String NOTES_ID = "id";
     private static final String NOTES_TITLE = "title";
     private static final String NOTES_TEXT = "text";
+
+    public static final String TEACHERS = "teachers";
+    public static final String TEACHERS_ID = "id";
+    public static final String TEACHERS_NAME = "name";
+    public static final String TEACHERS_POST = "post";
+    public static final String TEACHERS_PHONE_NUMBER = "phonenumber";
+    public static final String TEACHERS_EMAIL = "email";
 
     public DbHelper(Context context){
         super(context , DB_NAME, null, DB_VERSION);
@@ -64,9 +72,17 @@ public class DbHelper extends SQLiteOpenHelper{
                 + NOTES_TITLE + " TEXT,"
                 + NOTES_TEXT + " TEXT" + ")";
 
+        String CREATE_TEACHERS = "CREATE TABLE " + TEACHERS + "("
+                + TEACHERS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + TEACHERS_NAME + " TEXT,"
+                + TEACHERS_POST + " TEXT,"
+                + TEACHERS_PHONE_NUMBER + " TEXT,"
+                + TEACHERS_EMAIL + " TEXT" + ")";
+
         db.execSQL(CREATE_TIMETABLE);
         db.execSQL(CREATE_HOMEWORKS);
         db.execSQL(CREATE_NOTES);
+        db.execSQL(CREATE_TEACHERS);
     }
 
     @Override
@@ -80,6 +96,9 @@ public class DbHelper extends SQLiteOpenHelper{
 
             case 3:
                 db.execSQL("DROP TABLE IF EXISTS " + NOTES);
+
+            case 4:
+                db.execSQL("DROP TABLE IF EXISTS " + TEACHERS);
                 break;
         }
         onCreate(db);
@@ -223,5 +242,53 @@ public class DbHelper extends SQLiteOpenHelper{
         cursor.close();
         db.close();
         return notelist;
+    }
+
+    // For Teachers activity
+    public void insertTeacher(Teacher teacher) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(TEACHERS_NAME, teacher.getName());
+        contentValues.put(TEACHERS_POST, teacher.getPost());
+        contentValues.put(TEACHERS_PHONE_NUMBER, teacher.getPhonenumber());
+        contentValues.put(TEACHERS_EMAIL, teacher.getEmail());
+        db.insert(TEACHERS, null, contentValues);
+        db.close();
+    }
+
+    public void updateTeacher(Teacher teacher) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(TEACHERS_NAME, teacher.getName());
+        contentValues.put(TEACHERS_POST, teacher.getPost());
+        contentValues.put(TEACHERS_PHONE_NUMBER, teacher.getPhonenumber());
+        contentValues.put(TEACHERS_EMAIL, teacher.getEmail());
+        db.update(TEACHERS, contentValues, TEACHERS_ID + " = " + teacher.getId(), null);
+        db.close();
+    }
+
+    public void deleteTeacherById(Teacher teacher) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TEACHERS, TEACHERS_ID + " =? ", new String[] {String.valueOf(teacher.getId())});
+        db.close();
+    }
+
+    public ArrayList<Teacher> getTeacher() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<Teacher> teacherlist = new ArrayList<>();
+        Teacher teacher;
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TEACHERS, null);
+        while (cursor.moveToNext()) {
+            teacher = new Teacher();
+            teacher.setId(cursor.getInt(cursor.getColumnIndex(TEACHERS_ID)));
+            teacher.setName(cursor.getString(cursor.getColumnIndex(TEACHERS_NAME)));
+            teacher.setPost(cursor.getString(cursor.getColumnIndex(TEACHERS_POST)));
+            teacher.setPhonenumber(cursor.getString(cursor.getColumnIndex(TEACHERS_EMAIL)));
+            teacher.setEmail(cursor.getString(cursor.getColumnIndex(TEACHERS_PHONE_NUMBER)));
+            teacherlist.add(teacher);
+        }
+        cursor.close();
+        db.close();
+        return teacherlist;
     }
 }
