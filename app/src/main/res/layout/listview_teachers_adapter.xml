@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
             android:layout_marginTop="4dp"
-            android:text="Email"
+            android:text="@string/email_list"
             android:textAlignment="center"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -40,16 +40,16 @@
             android:id="@+id/nameteacher"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
+            android:layout_marginEnd="32dp"
             android:layout_marginStart="4dp"
             android:layout_marginTop="2dp"
-            android:text="Name"
+            android:text="@string/name_list"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/personimage"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -57,7 +57,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Phone number"
+            android:text="@string/phone_number_list"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textSize="18sp"
@@ -70,14 +70,16 @@
             android:id="@+id/postteacher"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
-            android:text="Post"
+            android:text="@string/post_list"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/nameteacher"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/nameteacher"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/nameteacher" />
 
         <android.support.constraint.Guideline
@@ -86,6 +88,16 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5" />
+
+        <ImageView
+            android:id="@+id/personimage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="2dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/baseline_person_black_24" />
 
     </android.support.constraint.ConstraintLayout>
 

@@ -71,11 +71,11 @@ public class TeachersListAdapter  extends ArrayAdapter<Teacher> {
         return convertView;
     }
 
-    public ArrayList<Teacher> getWeeklist() {
+    public ArrayList<Teacher> getTeacherlist() {
         return teacherlist;
     }
 
-    public Teacher getWeek() {
+    public Teacher getTeacher() {
         return teacher;
     }
 

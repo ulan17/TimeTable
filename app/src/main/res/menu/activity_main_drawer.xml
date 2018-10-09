@@ -13,6 +13,13 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/teachers"
+            android:icon="@drawable/baseline_people_black_18"
+            android:title="@string/teachers" />
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
             android:id="@+id/homework"
             android:icon="@drawable/baseline_book_black_18"
             android:title="@string/homeworks" />
@@ -23,12 +30,6 @@
             android:id="@+id/notes"
             android:icon="@drawable/baseline_note_black_18"
             android:title="@string/notes" />
-    </group>
-
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/teachers"
-            android:title="@string/teachers" />
     </group>
 
 </menu>

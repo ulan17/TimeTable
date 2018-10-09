@@ -283,8 +283,8 @@ public class DbHelper extends SQLiteOpenHelper{
             teacher.setId(cursor.getInt(cursor.getColumnIndex(TEACHERS_ID)));
             teacher.setName(cursor.getString(cursor.getColumnIndex(TEACHERS_NAME)));
             teacher.setPost(cursor.getString(cursor.getColumnIndex(TEACHERS_POST)));
-            teacher.setPhonenumber(cursor.getString(cursor.getColumnIndex(TEACHERS_EMAIL)));
-            teacher.setEmail(cursor.getString(cursor.getColumnIndex(TEACHERS_PHONE_NUMBER)));
+            teacher.setPhonenumber(cursor.getString(cursor.getColumnIndex(TEACHERS_PHONE_NUMBER)));
+            teacher.setEmail(cursor.getString(cursor.getColumnIndex(TEACHERS_EMAIL)));
             teacherlist.add(teacher);
         }
         cursor.close();
