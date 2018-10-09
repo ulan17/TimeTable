@@ -36,5 +36,9 @@
     <string name="post">Post:</string>
     <string name="phonenumber">Phone:</string>
     <string name="email">Email:</string>
+    <string name="name_list">Name</string>
+    <string name="phone_number_list">Phone number</string>
+    <string name="post_list">Post</string>
+    <string name="email_list">Email</string>
 
 </resources>
