@@ -67,7 +67,7 @@ public class TeachersActivity extends AppCompatActivity {
             }
 
             @Override
-            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+            public boolean onActionItemClicked(final ActionMode mode, MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.action_delete:
                         ArrayList<Teacher> removelist = new ArrayList<>();
@@ -77,10 +77,63 @@ public class TeachersActivity extends AppCompatActivity {
                                 db.deleteTeacherById(adapter.getItem(i));
                                 removelist.add(adapter.getTeacherlist().get(i));
                             }
+                        }
+                        adapter.getTeacherlist().removeAll(removelist);
+                        db.updateTeacher(adapter.getTeacher());
+                        adapter.notifyDataSetChanged();
+                        mode.finish();
+                        return true;
+                    case R.id.action_edit:
+                        if(listView.getCheckedItemCount() == 1) {
+                            LayoutInflater layoutInflater = getLayoutInflater();
+                            View alertLayout = layoutInflater.inflate(R.layout.dialog_add_teacher, null);
+                            final EditText name = alertLayout.findViewById(R.id.name_dialog);
+                            final EditText post = alertLayout.findViewById(R.id.post_dialog);
+                            final EditText phonenumber = alertLayout.findViewById(R.id.phonenumber_dialog);
+                            final EditText email = alertLayout.findViewById(R.id.email_dialog);
+                            final Teacher teacher = adapter.getTeacherlist().get(listposition);
 
-                            adapter.getTeacherlist().removeAll(removelist);
-                            db.updateTeacher(adapter.getTeacher());
-                            adapter.notifyDataSetChanged();
+                            name.setText(teacher.getName());
+                            post.setText(teacher.getPost());
+                            phonenumber.setText(teacher.getPhonenumber());
+                            email.setText(teacher.getEmail());
+
+                            final AlertDialog.Builder alert = new AlertDialog.Builder(context);
+                            alert.setTitle("Edit teacher");
+                            alert.setCancelable(false);
+                            alert.setView(alertLayout);
+
+                            alert.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    if (name.getText().toString().equals("") || post.getText().toString().equals("") || phonenumber.getText().toString().equals("") || email.getText().toString().equals("")) {
+                                        Toast.makeText(getBaseContext(), "Please, fill in all the fields", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        DbHelper dbHelper = new DbHelper(context);
+                                        teacher.setName(name.getText().toString());
+                                        teacher.setPost(post.getText().toString());
+                                        teacher.setPhonenumber(phonenumber.getText().toString());
+                                        teacher.setEmail(email.getText().toString());
+
+                                        dbHelper.updateTeacher(teacher);
+                                        adapter.notifyDataSetChanged();
+                                        mode.finish();
+                                    }
+                                }
+                            });
+
+                            alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                    mode.finish();
+                                }
+                            });
+                            final AlertDialog dialog = alert.create();
+                            dialog.show();
+                            return true;
+                        } else {
+                            Toast.makeText(TeachersActivity.this, "Please, select one item", Toast.LENGTH_LONG).show();
                             mode.finish();
                         }
                     default:
@@ -89,7 +142,6 @@ public class TeachersActivity extends AppCompatActivity {
             }
             @Override
             public void onDestroyActionMode(ActionMode mode) {
-
             }
         });
     }
@@ -102,7 +154,7 @@ public class TeachersActivity extends AppCompatActivity {
         final EditText phonenumber = alertLayout.findViewById(R.id.phonenumber_dialog);
         final EditText email = alertLayout.findViewById(R.id.email_dialog);
 
-        final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        final AlertDialog.Builder dialog = new AlertDialog.Builder(context);
         dialog.setTitle("Add teacher");
         dialog.setCancelable(false);
         dialog.setView(alertLayout);
