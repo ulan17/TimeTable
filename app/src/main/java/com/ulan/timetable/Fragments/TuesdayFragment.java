@@ -62,9 +62,10 @@ public class TuesdayFragment extends Fragment {
                         ArrayList<Week> removelist = new ArrayList<>();
                         SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
                         for (int i = 0; i < checkedItems.size(); i++) {
-                            if (checkedItems.valueAt(i)) {
-                                db.deleteWeekById(Objects.requireNonNull(adapter.getItem(i)).getId());
-                                removelist.add(adapter.getWeeklist().get(i));
+                            int key = checkedItems.keyAt(i);
+                            if (checkedItems.get(key)) {
+                                db.deleteWeekById(adapter.getItem(key));
+                                removelist.add(adapter.getWeeklist().get(key));
                             }
                         }
                         adapter.getWeeklist().removeAll(removelist);

@@ -75,9 +75,10 @@ public class HomeworksActivity extends AppCompatActivity {
                         ArrayList<Homework> removelist = new ArrayList<>();
                         SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
                         for (int i = 0; i < checkedItems.size(); i++) {
-                            if (checkedItems.valueAt(i)) {
-                                db.deleteHomeworkById(Objects.requireNonNull(adapter.getItem(i)).getId());
-                                removelist.add(adapter.getHomeworklist().get(i));
+                            int key = checkedItems.keyAt(i);
+                            if (checkedItems.get(key)) {
+                                db.deleteHomeworkById(adapter.getItem(key));
+                                removelist.add(adapter.getHomeworklist().get(key));
                             }
                         }
                           adapter.getHomeworklist().removeAll(removelist);

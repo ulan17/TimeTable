@@ -73,9 +73,10 @@ public class TeachersActivity extends AppCompatActivity {
                         ArrayList<Teacher> removelist = new ArrayList<>();
                         SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
                         for(int i = 0; i < checkedItems.size(); i++) {
-                            if(checkedItems.valueAt(i)) {
-                                db.deleteTeacherById(adapter.getItem(i));
-                                removelist.add(adapter.getTeacherlist().get(i));
+                            int key = checkedItems.keyAt(i);
+                            if (checkedItems.get(key)) {
+                                db.deleteTeacherById(adapter.getItem(key));
+                                removelist.add(adapter.getTeacherlist().get(key));
                             }
                         }
                         adapter.getTeacherlist().removeAll(removelist);

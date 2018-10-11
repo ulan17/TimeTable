@@ -119,9 +119,9 @@ public class DbHelper extends SQLiteOpenHelper{
         db.close();
     }
 
-    public void deleteWeekById(int id) {
+    public void deleteWeekById(Week week) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TIMETABLE, TIMETABLE_ID + " = ? ", new String[]{String.valueOf(id)});
+        db.delete(TIMETABLE, TIMETABLE_ID + " = ? ", new String[]{String.valueOf(week.getId())});
         db.close();
     }
 
@@ -177,9 +177,9 @@ public class DbHelper extends SQLiteOpenHelper{
         db.close();
     }
 
-    public void deleteHomeworkById(int id) {
+    public void deleteHomeworkById(Homework homework) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(HOMEWORKS,HOMEWORKS_ID + " = ? ", new String[]{String.valueOf(id)});
+        db.delete(HOMEWORKS,HOMEWORKS_ID + " = ? ", new String[]{String.valueOf(homework.getId())});
         db.close();
     }
 
