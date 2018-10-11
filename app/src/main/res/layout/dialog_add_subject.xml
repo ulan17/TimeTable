@@ -15,7 +15,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".3"
-            android:text="Subject:" />
+            android:text="@string/subject_textview" />
 
         <EditText
             android:id="@+id/subject_dialog"
@@ -36,7 +36,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".3"
-            android:text="Teacher:" />
+            android:text="@string/teacher_textview" />
 
         <EditText
             android:id="@+id/teacher_dialog"
@@ -57,7 +57,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".3"
-            android:text="Room:" />
+            android:text="@string/room_textview" />
 
         <EditText
             android:id="@+id/room_dialog"
@@ -79,14 +79,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".3"
-            android:text="From:" />
+            android:text="@string/from_textview" />
 
         <TextView
             android:id="@+id/from_time"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".3"
-            android:text="Select time"
+            android:text="@string/select_time"
             android:textAllCaps="true"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -102,7 +102,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".3"
-            android:text="To:" />
+            android:text="@string/to_textview" />
 
         <TextView
             android:id="@+id/to_time"
@@ -115,4 +115,25 @@
             android:textStyle="bold" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:text="@string/cancel"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cancel"
+            style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog" />
+
+        <Button
+            android:text="@string/save"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/save"
+            style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog" />
+
+    </LinearLayout>
 </LinearLayout>

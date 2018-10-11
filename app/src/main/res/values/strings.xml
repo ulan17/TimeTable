@@ -16,6 +16,13 @@
     <string name="seven_days_of_the_week">7 Days of the Week</string>
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="to_textview">To:</string>
+    <string name="from_textview">From:</string>
+    <string name="teacher_textview">Teacher:</string>
+    <string name="subject_textview">Subject:</string>
+    <string name="room_textview">Room:</string>
     <string name="select_time">Select time</string>
 
     <!-- Homeworks Activity strings -->
@@ -40,5 +47,4 @@
     <string name="phone_number_list">Phone number</string>
     <string name="post_list">Post</string>
     <string name="email_list">Email</string>
-
 </resources>

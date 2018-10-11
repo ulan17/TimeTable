@@ -1,10 +1,11 @@
 package com.ulan.timetable.Fragments;
 
 import android.app.TimePickerDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.util.SparseBooleanArray;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
@@ -14,11 +15,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.ulan.timetable.Adapters.WeekListAdapter;
 import com.ulan.timetable.Utils.DbHelper;
@@ -27,6 +28,8 @@ import com.ulan.timetable.Model.Week;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ThursdayFragment extends Fragment {
     private DbHelper db;
@@ -73,10 +76,14 @@ public class ThursdayFragment extends Fragment {
                     case R.id.action_edit:
                         if(listView.getCheckedItemCount() == 1) {
                             LayoutInflater inflater = getLayoutInflater();
-                            View alertLayout = inflater.inflate(R.layout.dialog_add_subject, null);
+                            final View alertLayout = inflater.inflate(R.layout.dialog_add_subject, null);
+                            final HashMap<String, EditText> editTextHashs = new HashMap<>();
                             final EditText subject = alertLayout.findViewById(R.id.subject_dialog);
+                            editTextHashs.put("Subject", subject);
                             final EditText teacher = alertLayout.findViewById(R.id.teacher_dialog);
+                            editTextHashs.put("Teacher", teacher);
                             final EditText room = alertLayout.findViewById(R.id.room_dialog);
+                            editTextHashs.put("Room", room);
                             final TextView from_time = alertLayout.findViewById(R.id.from_time);
                             final TextView to_time = alertLayout.findViewById(R.id.to_time);
                             final Week week = adapter.getWeeklist().get(listposition);
@@ -131,17 +138,34 @@ public class ThursdayFragment extends Fragment {
                                 }
                             });
 
-                            AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+                            final AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
                             alert.setTitle("Edit subject");
-                            alert.setView(alertLayout);
                             alert.setCancelable(false);
-                            alert.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    if (subject.getText().toString().equals("") || from_time.getText().toString().equals("") || to_time.getText().toString().equals("") || room.getText().toString().equals("")) //name is the name of the Edittext in code
-                                    {
-                                        Toast.makeText(getContext(), "Please, fill in all the fields", Toast.LENGTH_SHORT).show();
+                            final Button cancel = alertLayout.findViewById(R.id.cancel);
+                            final Button save = alertLayout.findViewById(R.id.save);
+                            alert.setView(alertLayout);
+                            final AlertDialog dialog = alert.create();
+                            dialog.show();
 
+                            cancel.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.dismiss();
+                                }
+                            });
+
+                            save.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    if(TextUtils.isEmpty(subject.getText()) || TextUtils.isEmpty(teacher.getText()) || TextUtils.isEmpty(room.getText())) {
+                                        for (Map.Entry<String, EditText> entry : editTextHashs.entrySet()) {
+                                            if(TextUtils.isEmpty(entry.getValue().getText())) {
+                                                entry.getValue().setError(entry.getKey() + " field can not be empty!");
+                                                entry.getValue().requestFocus();
+                                            }
+                                        }
+                                    } else if(!from_time.getText().toString().matches(".*\\d+.*") || !to_time.getText().toString().matches(".*\\d+.*")) {
+                                        Snackbar.make(alertLayout, "Time field can not be empty!", Snackbar.LENGTH_LONG).show();
                                     } else {
                                         week.setSubject(subject.getText().toString());
                                         week.setTeacher(teacher.getText().toString());
@@ -149,20 +173,12 @@ public class ThursdayFragment extends Fragment {
                                         db.updateWeek(week);
                                         adapter.notifyDataSetChanged();
                                         mode.finish();
+                                        dialog.dismiss();
                                     }
                                 }
                             });
-                            alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            });
-
-                            final AlertDialog ad = alert.create();
-                            ad.show();
                         } else {
-                            Toast.makeText(getActivity(), "Please, select one item", Toast.LENGTH_LONG).show();
+                            Snackbar.make(getView(), "Please, select one item.", Snackbar.LENGTH_LONG).show();
                             mode.finish();
                         }
                         return true;

@@ -1,16 +1,17 @@
 package com.ulan.timetable.Activities;
 
 import android.app.TimePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SwitchCompat;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -21,6 +22,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -40,6 +42,8 @@ import com.ulan.timetable.Utils.DbHelper;
 import com.ulan.timetable.Model.Week;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -91,10 +95,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void initCustomDialog() {
         LayoutInflater inflater = getLayoutInflater();
-        View alertLayout = inflater.inflate(R.layout.dialog_add_subject, null);
+        final View alertLayout = inflater.inflate(R.layout.dialog_add_subject, null);
+        final HashMap<String, EditText> editTextHashs = new HashMap<>();
         final EditText subject = alertLayout.findViewById(R.id.subject_dialog);
+        editTextHashs.put("Subject", subject);
         final EditText teacher = alertLayout.findViewById(R.id.teacher_dialog);
+        editTextHashs.put("Teacher", teacher);
         final EditText room = alertLayout.findViewById(R.id.room_dialog);
+        editTextHashs.put("Room", room);
         final TextView from_time = alertLayout.findViewById(R.id.from_time);
         final TextView to_time = alertLayout.findViewById(R.id.to_time);
         final Week week = new Week();
@@ -102,7 +110,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         from_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 final Calendar c = Calendar.getInstance();
                 int mHour = c.get(Calendar.HOUR_OF_DAY);
                 int mMinute = c.get(Calendar.MINUTE);
@@ -140,26 +147,41 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        final AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle("Add subject");
-        alert.setView(alertLayout);
         alert.setCancelable(false);
-        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        Button cancel = alertLayout.findViewById(R.id.cancel);
+        Button submit = alertLayout.findViewById(R.id.save);
+        alert.setView(alertLayout);
+        final AlertDialog dialog = alert.create();
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(View view) {
+                dialog.show();
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 dialog.dismiss();
             }
         });
 
-        alert.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+        submit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if(subject.getText().toString().equals("") || !from_time.getText().toString().matches(".*\\d+.*") || !to_time.getText().toString().matches(".*\\d+.*") || room.getText().toString().equals("") || teacher.getText().toString().equals(""))
-                {
-                    Toast.makeText(getBaseContext(), "Please, fill in all the fields", Toast.LENGTH_SHORT).show();
-
-                }
-                else {
+            public void onClick(View v) {
+                if(TextUtils.isEmpty(subject.getText()) || TextUtils.isEmpty(teacher.getText()) || TextUtils.isEmpty(room.getText())) {
+                    for (Map.Entry<String, EditText> entry : editTextHashs.entrySet()) {
+                        if(TextUtils.isEmpty(entry.getValue().getText())) {
+                            entry.getValue().setError(entry.getKey() + " field can not be empty!");
+                            entry.getValue().requestFocus();
+                        }
+                    }
+                } else if(!from_time.getText().toString().matches(".*\\d+.*") || !to_time.getText().toString().matches(".*\\d+.*")) {
+                    Snackbar.make(alertLayout, "Time field can not be empty!", Snackbar.LENGTH_LONG).show();
+                } else {
                     DbHelper dbHelper = new DbHelper(MainActivity.this);
                     week.setSubject(subject.getText().toString());
                     week.setFragment(adapter.getItem(viewPager.getCurrentItem()).toString());
@@ -167,20 +189,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     week.setRoom(room.getText().toString());
                     dbHelper.insertWeek(week);
                     viewPager.getAdapter().notifyDataSetChanged();
+
+                    subject.setText("");
+                    teacher.setText("");
+                    room.setText("");
+                    from_time.setText(R.string.select_time);
+                    to_time.setText(R.string.select_time);
+
+                    dialog.dismiss();
                 }
-                subject.setText("");
-                teacher.setText("");
-                room.setText("");
-                from_time.setText(R.string.select_time);
-                to_time.setText(R.string.select_time);
-            }
-        });
-        final AlertDialog dialog = alert.create();
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.show();
             }
         });
     }
