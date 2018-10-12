@@ -2,10 +2,13 @@ package com.ulan.timetable.Activities;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.SparseBooleanArray;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
@@ -14,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -24,6 +28,8 @@ import com.ulan.timetable.R;
 import com.ulan.timetable.Utils.DbHelper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class TeachersActivity extends AppCompatActivity {
@@ -33,11 +39,13 @@ public class TeachersActivity extends AppCompatActivity {
     private DbHelper db;
     private TeachersListAdapter adapter;
     private int listposition = 0;
+    CoordinatorLayout coordinatorLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teachers);
+        coordinatorLayout = findViewById(R.id.coordinatorLayout);
         db = new DbHelper(context);
         adapter = new TeachersListAdapter(context, R.layout.listview_teachers_adapter, db.getTeacher());
         listView = findViewById(R.id.teacherlist);
@@ -87,11 +95,16 @@ public class TeachersActivity extends AppCompatActivity {
                     case R.id.action_edit:
                         if(listView.getCheckedItemCount() == 1) {
                             LayoutInflater layoutInflater = getLayoutInflater();
-                            View alertLayout = layoutInflater.inflate(R.layout.dialog_add_teacher, null);
+                            final View alertLayout = layoutInflater.inflate(R.layout.dialog_add_teacher, null);
+                            final HashMap<String, EditText> editTextHashs = new HashMap<>();
                             final EditText name = alertLayout.findViewById(R.id.name_dialog);
+                            editTextHashs.put("Name", name);
                             final EditText post = alertLayout.findViewById(R.id.post_dialog);
+                            editTextHashs.put("Post", post);
                             final EditText phonenumber = alertLayout.findViewById(R.id.phonenumber_dialog);
+                            editTextHashs.put("Phone", phonenumber);
                             final EditText email = alertLayout.findViewById(R.id.email_dialog);
+                            editTextHashs.put("Email", email);
                             final Teacher teacher = adapter.getTeacherlist().get(listposition);
 
                             name.setText(teacher.getName());
@@ -102,39 +115,45 @@ public class TeachersActivity extends AppCompatActivity {
                             final AlertDialog.Builder alert = new AlertDialog.Builder(context);
                             alert.setTitle("Edit teacher");
                             alert.setCancelable(false);
+                            final Button cancel = alertLayout.findViewById(R.id.cancel);
+                            final Button save = alertLayout.findViewById(R.id.save);
                             alert.setView(alertLayout);
+                            final AlertDialog dialog = alert.create();
+                            dialog.show();
 
-                            alert.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+                            cancel.setOnClickListener(new View.OnClickListener() {
                                 @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    if (name.getText().toString().equals("") || post.getText().toString().equals("") || phonenumber.getText().toString().equals("") || email.getText().toString().equals("")) {
-                                        Toast.makeText(getBaseContext(), "Please, fill in all the fields", Toast.LENGTH_SHORT).show();
+                                public void onClick(View v) {
+                                    dialog.dismiss();
+                                }
+                            });
+
+                            save.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    if(TextUtils.isEmpty(name.getText()) || TextUtils.isEmpty(post.getText()) || TextUtils.isEmpty(phonenumber.getText()) || TextUtils.isEmpty(email.getText())) {
+                                        for (Map.Entry<String, EditText> entry : editTextHashs.entrySet()) {
+                                            if(TextUtils.isEmpty(entry.getValue().getText())) {
+                                                entry.getValue().setError(entry.getKey() + " field can not be empty!");
+                                                entry.getValue().requestFocus();
+                                            }
+                                        }
                                     } else {
                                         DbHelper dbHelper = new DbHelper(context);
                                         teacher.setName(name.getText().toString());
                                         teacher.setPost(post.getText().toString());
                                         teacher.setPhonenumber(phonenumber.getText().toString());
                                         teacher.setEmail(email.getText().toString());
-
                                         dbHelper.updateTeacher(teacher);
                                         adapter.notifyDataSetChanged();
+                                        dialog.dismiss();
                                         mode.finish();
                                     }
                                 }
                             });
-
-                            alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                    mode.finish();
-                                }
-                            });
-                            final AlertDialog dialog = alert.create();
-                            dialog.show();
                             return true;
                         } else {
-                            Toast.makeText(TeachersActivity.this, "Please, select one item", Toast.LENGTH_LONG).show();
+                            Snackbar.make(coordinatorLayout, "Please, select one item.", Snackbar.LENGTH_LONG).show();
                             mode.finish();
                         }
                     default:
@@ -149,23 +168,49 @@ public class TeachersActivity extends AppCompatActivity {
 
     public void initCustomDialog() {
         LayoutInflater layoutInflater = getLayoutInflater();
-        View alertLayout = layoutInflater.inflate(R.layout.dialog_add_teacher, null);
+        final View alertLayout = layoutInflater.inflate(R.layout.dialog_add_teacher, null);
+        final HashMap<String, EditText> editTextHashs = new HashMap<>();
         final EditText name = alertLayout.findViewById(R.id.name_dialog);
+        editTextHashs.put("Name", name);
         final EditText post = alertLayout.findViewById(R.id.post_dialog);
+        editTextHashs.put("Post", post);
         final EditText phonenumber = alertLayout.findViewById(R.id.phonenumber_dialog);
+        editTextHashs.put("Phone", phonenumber);
         final EditText email = alertLayout.findViewById(R.id.email_dialog);
+        editTextHashs.put("Email", email);
 
-        final AlertDialog.Builder dialog = new AlertDialog.Builder(context);
-        dialog.setTitle("Add teacher");
-        dialog.setCancelable(false);
-        dialog.setView(alertLayout);
-
-        dialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+        final AlertDialog.Builder alert = new AlertDialog.Builder(context);
+        alert.setTitle("Add teacher");
+        alert.setCancelable(false);
+        final Button cancel = alertLayout.findViewById(R.id.cancel);
+        final Button save = alertLayout.findViewById(R.id.save);
+        alert.setView(alertLayout);
+        final AlertDialog dialog = alert.create();
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if(name.getText().toString().equals("") || post.getText().toString().equals("") || phonenumber.getText().toString().equals("") || email.getText().toString().equals("")) {
-                    Toast.makeText(getBaseContext(), "Please, fill in all the fields", Toast.LENGTH_SHORT).show();
+            public void onClick(View view) {
+                dialog.show();
+            }
+        });
 
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(TextUtils.isEmpty(name.getText()) || TextUtils.isEmpty(post.getText()) || TextUtils.isEmpty(phonenumber.getText()) || TextUtils.isEmpty(email.getText())) {
+                    for (Map.Entry<String, EditText> entry : editTextHashs.entrySet()) {
+                        if(TextUtils.isEmpty(entry.getValue().getText())) {
+                            entry.getValue().setError(entry.getKey() + " field can not be empty!");
+                            entry.getValue().requestFocus();
+                        }
+                    }
                 } else {
                     DbHelper dbHelper = new DbHelper(getApplicationContext());
                     Teacher teacher = new Teacher();
@@ -177,27 +222,14 @@ public class TeachersActivity extends AppCompatActivity {
                     adapter.clear();
                     adapter.addAll(dbHelper.getTeacher());
                     adapter.notifyDataSetChanged();
+
+                    name.setText("");
+                    post.setText("");
+                    phonenumber.setText("");
+                    email.setText("");
+
+                    dialog.dismiss();
                 }
-                name.setText("");
-                post.setText("");
-                phonenumber.setText("");
-                email.setText("");
-            }
-        });
-
-        dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-
-        final AlertDialog alert = dialog.create();
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                alert.show();
             }
         });
     }
