@@ -48,7 +48,7 @@ public class HomeworksActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homeworks);
-        coordinatorLayout = findViewById(R.id.coordinatorHomework);
+        coordinatorLayout = findViewById(R.id.coordinatorHomeworks);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         db = new DbHelper(context);
         listView = findViewById(R.id.homeworklist);

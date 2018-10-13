@@ -45,7 +45,7 @@ public class TeachersActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teachers);
-        coordinatorLayout = findViewById(R.id.coordinatorLayout);
+        coordinatorLayout = findViewById(R.id.coordinatorTeachers);
         db = new DbHelper(context);
         adapter = new TeachersListAdapter(context, R.layout.listview_teachers_adapter, db.getTeacher());
         listView = findViewById(R.id.teacherlist);
