@@ -4,28 +4,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:showIn="navigation_view">
 
+    <group android:id="@+id/menu_top"
+        android:checkableBehavior="none">
     <item
         android:id="@+id/weeksettings"
         android:title="@string/seven_days_of_the_week"
-        android:icon="@drawable/baseline_settings_black_18"
+        android:icon="@drawable/baseline_view_week_black_18"
         app:actionLayout="@layout/switch_layout"
         />
+    </group>
 
-    <group android:checkableBehavior="single">
+    <group android:id="@+id/menu_bottom"
+        android:checkableBehavior="none">
         <item
             android:id="@+id/teachers"
             android:icon="@drawable/baseline_people_black_18"
             android:title="@string/teachers" />
-    </group>
 
-    <group android:checkableBehavior="single">
         <item
             android:id="@+id/homework"
             android:icon="@drawable/baseline_book_black_18"
             android:title="@string/homeworks" />
-    </group>
-
-    <group android:checkableBehavior="single">
         <item
             android:id="@+id/notes"
             android:icon="@drawable/baseline_note_black_18"
