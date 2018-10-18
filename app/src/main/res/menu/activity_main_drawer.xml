@@ -4,13 +4,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:showIn="navigation_view">
 
-    <group android:id="@+id/menu_top"
+    <!--<group android:id="@+id/menu_top"-->
+        <!--android:checkableBehavior="none">-->
+        <!--<item-->
+            <!--android:id="@+id/schoolwebsitemenu"-->
+            <!--android:title="School website" />-->
+    <!--</group>-->
+
+    <group android:id="@+id/menu_settings"
         android:checkableBehavior="none">
-    <item
-        android:id="@+id/weeksettings"
-        android:title="@string/seven_days_of_the_week"
-        android:icon="@drawable/baseline_view_week_black_18"
-        app:actionLayout="@layout/switch_layout"
+        <item
+            android:id="@+id/weeksettings"
+            android:title="@string/seven_days_of_the_week"
+            android:icon="@drawable/baseline_view_week_black_18"
+            app:actionLayout="@layout/switch_layout"
         />
     </group>
 
