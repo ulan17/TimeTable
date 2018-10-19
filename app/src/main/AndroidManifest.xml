@@ -46,9 +46,6 @@
             android:name=".Activities.TeachersActivity"
             android:label="Teachers"
             android:parentActivityName=".Activities.MainActivity" />
-        <activity android:name=".Activities.SchoolWebsiteActivity"
-            android:label="School website"
-            android:parentActivityName=".Activities.MainActivity" />
     </application>
 
 </manifest>

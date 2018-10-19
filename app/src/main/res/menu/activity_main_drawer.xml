@@ -4,12 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:showIn="navigation_view">
 
-    <!--<group android:id="@+id/menu_top"-->
-        <!--android:checkableBehavior="none">-->
-        <!--<item-->
-            <!--android:id="@+id/schoolwebsitemenu"-->
-            <!--android:title="School website" />-->
-    <!--</group>-->
+    <group android:id="@+id/menu_top"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/schoolwebsitemenu"
+            android:title="                School website" />
+    </group>
 
     <group android:id="@+id/menu_settings"
         android:checkableBehavior="none">
