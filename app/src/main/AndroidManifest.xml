@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ulan.timetable">
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -41,7 +42,8 @@
             android:name=".Activities.NoteInfoActivity"
             android:label="Notes"
             android:parentActivityName=".Activities.NotesActivity" />
-        <activity android:name=".Activities.TeachersActivity"
+        <activity
+            android:name=".Activities.TeachersActivity"
             android:label="Teachers"
             android:parentActivityName=".Activities.MainActivity" />
     </application>

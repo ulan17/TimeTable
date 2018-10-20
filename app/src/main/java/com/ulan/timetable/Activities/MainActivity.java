@@ -1,15 +1,22 @@
 package com.ulan.timetable.Activities;
 
 import android.app.TimePickerDialog;
+import android.content.ActivityNotFoundException;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.SwitchCompat;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -41,9 +48,13 @@ import com.ulan.timetable.R;
 import com.ulan.timetable.Utils.DbHelper;
 import com.ulan.timetable.Model.Week;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.ulan.timetable.Utils.BrowserUtil.openUrlInChromeCustomTab;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -54,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     private ViewPager viewPager;
     private boolean switchState;
-
+    private String schoolWebsite;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -271,6 +282,68 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.schoolwebsitemenu:
+                final SharedPreferences sharedPref = getSharedPreferences("com.ulan.timetable", 0);
+                schoolWebsite = sharedPref.getString("schoolwebsite", null);
+
+                if(TextUtils.isEmpty(schoolWebsite)) {
+                    LayoutInflater inflater = getLayoutInflater();
+                    final View alertLayout = inflater.inflate(R.layout.dialog_add_website, null);
+                    final EditText url = alertLayout.findViewById(R.id.schoolwebsite_dialog);
+                    final Button cancel = alertLayout.findViewById(R.id.cancel);
+                    final Button save = alertLayout.findViewById(R.id.save);
+                    final AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
+                    url.setText(schoolWebsite);
+                    alert.setTitle("Add school website");
+                    alert.setView(alertLayout);
+                    final AlertDialog dialog = alert.create();
+                    dialog.show();
+
+                    cancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    save.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if(TextUtils.isEmpty(url.getText())) {
+                                url.setError("Url can not be empty!");
+                                url.requestFocus();
+                            } else {
+                                SharedPreferences.Editor editor = sharedPref.edit();
+                                editor.putString("schoolwebsite", url.getText().toString()).apply();
+                                dialog.dismiss();
+                            }
+                        }
+                    });
+                } else {
+                    AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
+                    alert.setMessage("Your school website is " + schoolWebsite + "\n" + "Is it true?");
+                    alert.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            SharedPreferences.Editor editor = sharedPref.edit();
+                            editor.putString("schoolwebsite", "").apply();
+                            dialog.cancel();
+                        }
+                    });
+                    alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            openUrlInChromeCustomTab(getApplicationContext(), schoolWebsite);
+                        }
+                    });
+                    final AlertDialog dialog = alert.create();
+                    dialog.show();
+                }
+                return true;
+            case R.id.teachers:
+                Intent teacher = new Intent(MainActivity.this, TeachersActivity.class);
+                startActivity(teacher);
+                return true;
             case R.id.homework:
                 Intent homework = new Intent(MainActivity.this, HomeworksActivity.class);
                 startActivity(homework);
@@ -280,10 +353,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(note);
                 return true;
             case R.id.weeksettings:
-                return true;
-            case R.id.teachers:
-                Intent teacher = new Intent(MainActivity.this, TeachersActivity.class);
-                startActivity(teacher);
                 return true;
             default:
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

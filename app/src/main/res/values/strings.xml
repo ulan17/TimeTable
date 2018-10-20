@@ -24,6 +24,7 @@
     <string name="subject_textview">Subject:</string>
     <string name="room_textview">Room:</string>
     <string name="select_time">Select time</string>
+    <string name="school_website">School website</string>
 
     <!-- Homeworks Activity strings -->
     <string name="title_activity_homeworks">HomeworksActivity</string>
