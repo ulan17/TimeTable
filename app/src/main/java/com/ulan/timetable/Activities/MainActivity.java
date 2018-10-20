@@ -1,22 +1,16 @@
 package com.ulan.timetable.Activities;
 
 import android.app.TimePickerDialog;
-import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.SwitchCompat;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -48,8 +42,6 @@ import com.ulan.timetable.R;
 import com.ulan.timetable.Utils.DbHelper;
 import com.ulan.timetable.Model.Week;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -66,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ViewPager viewPager;
     private boolean switchState;
     private String schoolWebsite;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -310,7 +303,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         @Override
                         public void onClick(View v) {
                             if(TextUtils.isEmpty(url.getText())) {
-                                url.setError("Url can not be empty!");
+                                url.setError("School website field can not be empty!");
                                 url.requestFocus();
                             } else {
                                 SharedPreferences.Editor editor = sharedPref.edit();
