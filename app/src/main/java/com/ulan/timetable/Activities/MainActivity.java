@@ -48,6 +48,8 @@ import com.ulan.timetable.R;
 import com.ulan.timetable.Utils.DbHelper;
 import com.ulan.timetable.Model.Week;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -281,41 +283,61 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.schoolwebsitemenu:
-                SharedPreferences sharedPref = getSharedPreferences("com.ulan.timetable", 0);
+                final SharedPreferences sharedPref = getSharedPreferences("com.ulan.timetable", 0);
                 schoolWebsite = sharedPref.getString("schoolwebsite", null);
 
                 if(TextUtils.isEmpty(schoolWebsite)) {
+                    LayoutInflater inflater = getLayoutInflater();
+                    final View alertLayout = inflater.inflate(R.layout.dialog_add_website, null);
+                    final EditText url = alertLayout.findViewById(R.id.schoolwebsite_dialog);
+                    final Button cancel = alertLayout.findViewById(R.id.cancel);
+                    final Button save = alertLayout.findViewById(R.id.save);
                     final AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
-                    final EditText url = new EditText(MainActivity.this);
+                    url.setText(schoolWebsite);
                     alert.setTitle("Add school website");
-                    alert.setMessage("Please, set your school website.");
-                    alert.setView(url);
+                    alert.setView(alertLayout);
+                    final AlertDialog dialog = alert.create();
+                    dialog.show();
 
-                    alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    cancel.setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                        public void onClick(View v) {
                             dialog.dismiss();
                         }
                     });
-                    alert.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+
+                    save.setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                        public void onClick(View v) {
                             if(TextUtils.isEmpty(url.getText())) {
                                 url.setError("Url can not be empty!");
                                 url.requestFocus();
                             } else {
-                                SharedPreferences sharedPref = getSharedPreferences("com.ulan.timetable", 0);
                                 SharedPreferences.Editor editor = sharedPref.edit();
-                                editor.putString("schoolwebsite", "https://" + url.getText().toString());
-                                editor.apply();
+                                editor.putString("schoolwebsite", url.getText().toString()).apply();
+                                dialog.dismiss();
                             }
                         }
                     });
-
-                    AlertDialog dialog = alert.create();
-                    dialog.show();
                 } else {
-                    openUrlInChromeCustomTab(this, schoolWebsite);
+                    AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
+                    alert.setMessage("Your school website is " + schoolWebsite + "\n" + "Is it true?");
+                    alert.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            SharedPreferences.Editor editor = sharedPref.edit();
+                            editor.putString("schoolwebsite", "").apply();
+                            dialog.cancel();
+                        }
+                    });
+                    alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            openUrlInChromeCustomTab(getApplicationContext(), schoolWebsite);
+                        }
+                    });
+                    final AlertDialog dialog = alert.create();
+                    dialog.show();
                 }
                 return true;
             case R.id.teachers:

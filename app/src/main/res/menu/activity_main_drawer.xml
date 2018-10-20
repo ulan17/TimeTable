@@ -8,7 +8,8 @@
         android:checkableBehavior="none">
         <item
             android:id="@+id/schoolwebsitemenu"
-            android:title="                School website" />
+            android:icon="@drawable/baseline_open_in_browser_black_18"
+            android:title="@string/school_website" />
     </group>
 
     <group android:id="@+id/menu_settings"

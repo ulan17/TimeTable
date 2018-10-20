@@ -15,7 +15,7 @@ public class BrowserUtil {
             CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
             CustomTabsIntent customTabsIntent = builder.build();
             customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            customTabsIntent.launchUrl(context, Uri.parse(url));
+            customTabsIntent.launchUrl(context, Uri.parse("http://" + url));
         } catch (ActivityNotFoundException e) {
             // might not available.
             //openUrlLinkInWebView(context, url);
