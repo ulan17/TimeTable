@@ -1,4 +1,8 @@
 # TimeTable
+<h1 align=center>
+<img src="logo-files/horizontal.png" width=50%>
+</h1>
+
 Timetable is an Android Application, which allows you to save timetable and homeworks.
 
 The source code is open, you can contribute to it.
