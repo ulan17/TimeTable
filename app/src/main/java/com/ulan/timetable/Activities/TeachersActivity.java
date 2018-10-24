@@ -1,7 +1,6 @@
 package com.ulan.timetable.Activities;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -20,7 +19,6 @@ import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.ulan.timetable.Adapters.TeachersListAdapter;
 import com.ulan.timetable.Model.Teacher;
@@ -223,11 +221,11 @@ public class TeachersActivity extends AppCompatActivity {
                     adapter.addAll(dbHelper.getTeacher());
                     adapter.notifyDataSetChanged();
 
-                    name.setText("");
-                    post.setText("");
-                    phonenumber.setText("");
-                    email.setText("");
-
+                    name.getText().clear();
+                    post.getText().clear();
+                    phonenumber.getText().clear();
+                    email.getText().clear();
+                    name.requestFocus();
                     dialog.dismiss();
                 }
             }

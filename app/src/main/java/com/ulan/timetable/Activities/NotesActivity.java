@@ -51,7 +51,7 @@ public class NotesActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(context, NoteInfoActivity.class);
-                intent.putExtra("key", adapter.getNotelist().get(position));
+                intent.putExtra("note", adapter.getNotelist().get(position));
                 startActivity(intent);
             }
         });
@@ -137,11 +137,11 @@ public class NotesActivity extends AppCompatActivity {
                                     }
                                 }
                             });
-                            return true;
                         } else {
                             Snackbar.make(coordinatorLayout, "Please, select one item.", Snackbar.LENGTH_LONG).show();
-                            mode.finish();
                         }
+                        mode.finish();
+                        return true;
                     default:
                         return false;
                 }
@@ -192,7 +192,7 @@ public class NotesActivity extends AppCompatActivity {
                     adapter.addAll(dbHelper.getNote());
                     adapter.notifyDataSetChanged();
 
-                    title.setText("");
+                    title.getText().clear();
                     dialog.dismiss();
                 }
             }

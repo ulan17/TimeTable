@@ -257,10 +257,10 @@ public class HomeworksActivity extends AppCompatActivity {
                     adapter.addAll(db.getHomework());
                     adapter.notifyDataSetChanged();
 
-                    subject.setText("");
-                    description.setText("");
+                    subject.getText().clear();
+                    description.getText().clear();
                     date.setText(R.string.select_date);
-
+                    subject.requestFocus();
                     dialog.dismiss();
                 }
             }

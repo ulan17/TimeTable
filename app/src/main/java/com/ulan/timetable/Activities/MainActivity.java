@@ -194,12 +194,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     dbHelper.insertWeek(week);
                     viewPager.getAdapter().notifyDataSetChanged();
 
-                    subject.setText("");
-                    teacher.setText("");
-                    room.setText("");
+                    subject.getText().clear();
+                    teacher.getText().clear();
+                    room.getText().clear();
                     from_time.setText(R.string.select_time);
                     to_time.setText(R.string.select_time);
-
+                    subject.requestFocus();
                     dialog.dismiss();
                 }
             }

@@ -22,8 +22,7 @@ public class NoteInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_info);
         db = new DbHelper(NoteInfoActivity.this);
-        Intent intent = getIntent();
-        note = (Note) intent.getSerializableExtra("key");
+        note = (Note) getIntent().getSerializableExtra("note");
         text = findViewById(R.id.edittextNote);
         if(note.getText() != null) {
             text.setText(note.getText());
@@ -47,7 +46,6 @@ public class NoteInfoActivity extends AppCompatActivity {
                 Toast.makeText(NoteInfoActivity.this, "Saved", Toast.LENGTH_SHORT).show();
                 super.onBackPressed();
                 return true;
-
             default:
                 return super.onOptionsItemSelected(item);
         }
