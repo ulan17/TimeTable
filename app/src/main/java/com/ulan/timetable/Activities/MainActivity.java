@@ -11,7 +11,7 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.SwitchCompat;
+import android.support.v7.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,11 +24,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.ulan.timetable.Adapters.FragmentsTabAdapter;
 import com.ulan.timetable.Fragments.FridayFragment;
@@ -56,13 +54,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return viewPager;
     }
     private ViewPager viewPager;
-    private boolean switchState;
+    private boolean switchSevenDays;
     private String schoolWebsite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        PreferenceManager.setDefaultValues(this, R.xml.settings, false);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         adapter = new FragmentsTabAdapter(getSupportFragmentManager());
@@ -76,9 +75,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         initTabFragment();
         initCustomDialog();
-        initSwitch(navigationView);
+        initSwitch();
 
-        if(switchState) changeTabFragments(true);
+        if(switchSevenDays) changeTabFragments(true);
 
     }
 
@@ -206,24 +205,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
-    public void initSwitch(NavigationView navigationView) {
-        Menu menu = navigationView.getMenu();
-        MenuItem menuItem = menu.findItem(R.id.weeksettings);
-        final View actionView = menuItem.getActionView();
-        SwitchCompat switcher = (SwitchCompat) actionView.findViewById(R.id.drawer_switch);
-        SharedPreferences sharedPref = getSharedPreferences("com.ulan.timetable", 0);
-        switchState = sharedPref.getBoolean("isChecked", false);
-        switcher.setChecked(switchState);
-        switcher.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                changeTabFragments(isChecked);
-                SharedPreferences sharedPref = getSharedPreferences("com.ulan.timetable", 0);
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putBoolean("isChecked", isChecked);
-                editor.apply();
-            }
-        });
+    public void initSwitch() {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        switchSevenDays = sharedPref.getBoolean(SettingsActivity.KEY_SEVEN_DAYS_SETTING, false);
     }
 
     public void changeTabFragments(boolean isChecked) {
@@ -265,7 +249,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings:
-                Toast.makeText(MainActivity.this, "We're working on it. :)", Toast.LENGTH_SHORT).show();
+                Intent settings = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(settings);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -345,7 +330,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent note = new Intent(MainActivity.this, NotesActivity.class);
                 startActivity(note);
                 return true;
-            case R.id.weeksettings:
+            case R.id.settings:
+                Intent settings = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(settings);
                 return true;
             default:
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

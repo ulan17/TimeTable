@@ -12,17 +12,7 @@
             android:title="@string/school_website" />
     </group>
 
-    <group android:id="@+id/menu_settings"
-        android:checkableBehavior="none">
-        <item
-            android:id="@+id/weeksettings"
-            android:title="@string/seven_days_of_the_week"
-            android:icon="@drawable/baseline_view_week_black_18"
-            app:actionLayout="@layout/switch_layout"
-        />
-    </group>
-
-    <group android:id="@+id/menu_bottom"
+    <group android:id="@+id/menu_mid"
         android:checkableBehavior="none">
         <item
             android:id="@+id/teachers"
@@ -37,6 +27,14 @@
             android:id="@+id/notes"
             android:icon="@drawable/baseline_note_black_18"
             android:title="@string/notes" />
+    </group>
+
+    <group android:id="@+id/menu_down"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/settings"
+            android:icon="@drawable/baseline_settings_black_18"
+            android:title="@string/action_settings" />
     </group>
 
 </menu>

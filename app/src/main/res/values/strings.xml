@@ -48,4 +48,7 @@
     <string name="phone_number_list">Phone number</string>
     <string name="post_list">Post</string>
     <string name="email_list">Email</string>
+
+    <!-- Settings Activity strings -->
+    <string name="sevendays_setting">Enable 7 Days of the Week</string>
 </resources>
