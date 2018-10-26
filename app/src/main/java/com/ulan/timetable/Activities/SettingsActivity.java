@@ -9,6 +9,7 @@ import com.ulan.timetable.R;
 public class SettingsActivity extends AppCompatActivity {
     public static final String
             KEY_SEVEN_DAYS_SETTING = "sevendays";
+    public static final String KEY_SCHOOL_WEBSITE_SETTING = "schoolwebsite";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -7,4 +7,11 @@
         android:icon="@drawable/baseline_view_week_black_18"
         android:title="@string/seven_days_of_the_week"
         android:summary="@string/sevendays_setting" />
+    <EditTextPreference
+        android:key="schoolwebsite"
+        android:selectAllOnFocus="true"
+        android:icon="@drawable/baseline_open_in_browser_black_18"
+        android:singleLine="true"
+        android:title="@string/school_website_setting"
+        android:summary="@string/school_website_setting_summary"/>
 </PreferenceScreen>

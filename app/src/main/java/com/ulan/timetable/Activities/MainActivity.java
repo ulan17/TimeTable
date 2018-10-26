@@ -1,7 +1,6 @@
 package com.ulan.timetable.Activities;
 
 import android.app.TimePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -25,6 +24,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -55,22 +55,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     private ViewPager viewPager;
     private boolean switchSevenDays;
-    private String schoolWebsite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         PreferenceManager.setDefaultValues(this, R.xml.settings, false);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         adapter = new FragmentsTabAdapter(getSupportFragmentManager());
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         initTabFragment();
@@ -157,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Button submit = alertLayout.findViewById(R.id.save);
         alert.setView(alertLayout);
         final AlertDialog dialog = alert.create();
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -231,7 +230,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -259,63 +258,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        final NavigationView navigationView = findViewById(R.id.nav_view);
         switch (item.getItemId()) {
             case R.id.schoolwebsitemenu:
-                final SharedPreferences sharedPref = getSharedPreferences("com.ulan.timetable", 0);
-                schoolWebsite = sharedPref.getString("schoolwebsite", null);
-
-                if(TextUtils.isEmpty(schoolWebsite)) {
-                    LayoutInflater inflater = getLayoutInflater();
-                    final View alertLayout = inflater.inflate(R.layout.dialog_add_website, null);
-                    final EditText url = alertLayout.findViewById(R.id.schoolwebsite_dialog);
-                    final Button cancel = alertLayout.findViewById(R.id.cancel);
-                    final Button save = alertLayout.findViewById(R.id.save);
-                    final AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
-                    url.setText(schoolWebsite);
-                    alert.setTitle("Add school website");
-                    alert.setView(alertLayout);
-                    final AlertDialog dialog = alert.create();
-                    dialog.show();
-
-                    cancel.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            dialog.dismiss();
-                        }
-                    });
-
-                    save.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if(TextUtils.isEmpty(url.getText())) {
-                                url.setError("School website field can not be empty!");
-                                url.requestFocus();
-                            } else {
-                                SharedPreferences.Editor editor = sharedPref.edit();
-                                editor.putString("schoolwebsite", url.getText().toString()).apply();
-                                dialog.dismiss();
-                            }
-                        }
-                    });
+                String schoolWebsite = PreferenceManager.getDefaultSharedPreferences(this).getString(SettingsActivity.KEY_SCHOOL_WEBSITE_SETTING, null);
+                if(!TextUtils.isEmpty(schoolWebsite)) {
+                    openUrlInChromeCustomTab(getApplicationContext(), schoolWebsite);
                 } else {
-                    AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
-                    alert.setMessage("Your school website is " + schoolWebsite + "\n" + "Is it true?");
-                    alert.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            SharedPreferences.Editor editor = sharedPref.edit();
-                            editor.putString("schoolwebsite", "").apply();
-                            dialog.cancel();
-                        }
-                    });
-                    alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            openUrlInChromeCustomTab(getApplicationContext(), schoolWebsite);
-                        }
-                    });
-                    final AlertDialog dialog = alert.create();
-                    dialog.show();
+                    Snackbar.make(navigationView, "Please, set URL of your school website in settings.", Snackbar.LENGTH_SHORT).show();
                 }
                 return true;
             case R.id.teachers:
@@ -335,7 +285,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(settings);
                 return true;
             default:
-                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                DrawerLayout drawer = findViewById(R.id.drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);
                 return true;
         }
