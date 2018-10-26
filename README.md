@@ -7,7 +7,7 @@ Timetable is an Android Application, which allows you to save timetable, homewor
 
 ### Contribute
 
-You are welcome to contribute with issues, pull-requests and ideas. And to contribute to this project, please fork the project and submit a pull request.
+You are welcome to contribute with issues, pull requests and ideas. And to contribute to this project, please fork the project and submit a pull request. 
 
 ### Screenshots
 <img alt="1 screenshot" src="screenshots/timetable_screenshot_1.png" width="31%" style="max-width:100%;"> &nbsp;&nbsp;&nbsp;&nbsp; <img alt="1 screenshot" src="screenshots/timetable_screenshot_2.png" width="31%" style="max-width:100%;"> &nbsp;&nbsp;&nbsp;&nbsp; <img alt="1 screenshot" src="screenshots/timetable_screenshot_3.png" width="31%" style="max-width:100%;">
