@@ -1,15 +1,12 @@
 package com.ulan.timetable.Activities;
 
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -22,11 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.SeekBar;
-import android.widget.TextView;
-import android.widget.TimePicker;
+
 
 import com.ulan.timetable.Adapters.FragmentsTabAdapter;
 import com.ulan.timetable.Fragments.FridayFragment;
@@ -37,12 +30,11 @@ import com.ulan.timetable.Fragments.ThursdayFragment;
 import com.ulan.timetable.Fragments.TuesdayFragment;
 import com.ulan.timetable.Fragments.WednesdayFragment;
 import com.ulan.timetable.R;
-import com.ulan.timetable.Utils.DbHelper;
-import com.ulan.timetable.Model.Week;
+import com.ulan.timetable.Utils.AlertDialogsHelper;
+
 
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
+
 
 import static com.ulan.timetable.Utils.BrowserUtil.openUrlInChromeCustomTab;
 
@@ -85,11 +77,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         Calendar calendar = Calendar.getInstance();
         int day = calendar.get(Calendar.DAY_OF_WEEK);
-        adapter.addFragment(new MondayFragment(), "Monday");
-        adapter.addFragment(new TuesdayFragment(), "Tuesday");
-        adapter.addFragment(new WednesdayFragment(), "Wednesday");
-        adapter.addFragment(new ThursdayFragment(), "Thursday");
-        adapter.addFragment(new FridayFragment(), "Friday");
+        adapter.addFragment(new MondayFragment(), getResources().getString(R.string.monday));
+        adapter.addFragment(new TuesdayFragment(), getResources().getString(R.string.tuesday));
+        adapter.addFragment(new WednesdayFragment(), getResources().getString(R.string.wednesday));
+        adapter.addFragment(new ThursdayFragment(), getResources().getString(R.string.thursday));
+        adapter.addFragment(new FridayFragment(), getResources().getString(R.string.friday));
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(day == 1 ? 6 : day-2, true);
         tabLayout.setupWithViewPager(viewPager);
@@ -98,110 +90,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void initCustomDialog() {
         LayoutInflater inflater = getLayoutInflater();
         final View alertLayout = inflater.inflate(R.layout.dialog_add_subject, null);
-        final HashMap<String, EditText> editTextHashs = new HashMap<>();
-        final EditText subject = alertLayout.findViewById(R.id.subject_dialog);
-        editTextHashs.put("Subject", subject);
-        final EditText teacher = alertLayout.findViewById(R.id.teacher_dialog);
-        editTextHashs.put("Teacher", teacher);
-        final EditText room = alertLayout.findViewById(R.id.room_dialog);
-        editTextHashs.put("Room", room);
-        final TextView from_time = alertLayout.findViewById(R.id.from_time);
-        final TextView to_time = alertLayout.findViewById(R.id.to_time);
-        final Week week = new Week();
-
-        from_time.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Calendar c = Calendar.getInstance();
-                int mHour = c.get(Calendar.HOUR_OF_DAY);
-                int mMinute = c.get(Calendar.MINUTE);
-                TimePickerDialog timePickerDialog = new TimePickerDialog(MainActivity.this,
-                        new TimePickerDialog.OnTimeSetListener() {
-
-                            @Override
-                            public void onTimeSet(TimePicker view, int hourOfDay,
-                                                  int minute) {
-                                from_time.setText(String.format("%02d:%02d", hourOfDay, minute));
-                                week.setFromTime(String.format("%02d:%02d", hourOfDay, minute));
-                            }
-                        }, mHour, mMinute, true);
-                timePickerDialog.setTitle("Select time");
-                timePickerDialog.show(); }});
-
-        to_time.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Calendar c = Calendar.getInstance();
-                int hour = c.get(Calendar.HOUR_OF_DAY);
-                int minute = c.get(Calendar.MINUTE);
-                TimePickerDialog timePickerDialog = new TimePickerDialog(MainActivity.this,
-                        new TimePickerDialog.OnTimeSetListener() {
-
-                            @Override
-                            public void onTimeSet(TimePicker view, int hourOfDay,
-                                                  int minute) {
-                                to_time.setText(String.format("%02d:%02d", hourOfDay, minute));
-                                week.setToTime(String.format("%02d:%02d", hourOfDay, minute));
-                            }
-                        }, hour, minute, true);
-                timePickerDialog.setTitle("Select time");
-                timePickerDialog.show();
-            }
-        });
-
-        final AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle("Add subject");
-        alert.setCancelable(false);
-        Button cancel = alertLayout.findViewById(R.id.cancel);
-        Button submit = alertLayout.findViewById(R.id.save);
-        alert.setView(alertLayout);
-        final AlertDialog dialog = alert.create();
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.show();
-            }
-        });
-
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(TextUtils.isEmpty(subject.getText()) || TextUtils.isEmpty(teacher.getText()) || TextUtils.isEmpty(room.getText())) {
-                    for (Map.Entry<String, EditText> entry : editTextHashs.entrySet()) {
-                        if(TextUtils.isEmpty(entry.getValue().getText())) {
-                            entry.getValue().setError(entry.getKey() + " field can not be empty!");
-                            entry.getValue().requestFocus();
-                        }
-                    }
-                } else if(!from_time.getText().toString().matches(".*\\d+.*") || !to_time.getText().toString().matches(".*\\d+.*")) {
-                    Snackbar.make(alertLayout, "Time field can not be empty!", Snackbar.LENGTH_LONG).show();
-                } else {
-                    DbHelper dbHelper = new DbHelper(MainActivity.this);
-                    week.setSubject(subject.getText().toString());
-                    week.setFragment(adapter.getItem(viewPager.getCurrentItem()).toString());
-                    week.setTeacher(teacher.getText().toString());
-                    week.setRoom(room.getText().toString());
-                    dbHelper.insertWeek(week);
-                    viewPager.getAdapter().notifyDataSetChanged();
-
-                    subject.getText().clear();
-                    teacher.getText().clear();
-                    room.getText().clear();
-                    from_time.setText(R.string.select_time);
-                    to_time.setText(R.string.select_time);
-                    subject.requestFocus();
-                    dialog.dismiss();
-                }
-            }
-        });
+        AlertDialogsHelper.getAddSubjectDialog(MainActivity.this, alertLayout, adapter, viewPager);
     }
 
     public void initSwitch() {
@@ -214,8 +103,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             TabLayout tabLayout = findViewById(R.id.tabLayout);
             Calendar calendar = Calendar.getInstance();
             int day = calendar.get(Calendar.DAY_OF_WEEK);
-            adapter.addFragment(new SaturdayFragment(), "Saturday");
-            adapter.addFragment(new SundayFragment(), "Sunday");
+            adapter.addFragment(new SaturdayFragment(), getResources().getString(R.string.saturday));
+            adapter.addFragment(new SundayFragment(), getResources().getString(R.string.sunday));
             viewPager.setAdapter(adapter);
             viewPager.setCurrentItem(day == 1 ? 6 : day-2, true);
             tabLayout.setupWithViewPager(viewPager);
@@ -265,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if(!TextUtils.isEmpty(schoolWebsite)) {
                     openUrlInChromeCustomTab(getApplicationContext(), schoolWebsite);
                 } else {
-                    Snackbar.make(navigationView, "Please, set URL of your school website in settings.", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(navigationView, R.string.school_website_snackbar, Snackbar.LENGTH_SHORT).show();
                 }
                 return true;
             case R.id.teachers:

@@ -21,9 +21,7 @@ import com.ulan.timetable.R;
 import com.ulan.timetable.Model.Week;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Objects;
 
 public class ThursdayFragment extends Fragment {
     private DbHelper db;
@@ -45,7 +43,7 @@ public class ThursdayFragment extends Fragment {
             public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
                 listposition = position;
                 final int checkedCount  = listView.getCheckedItemCount();
-                mode.setTitle(checkedCount  + "  Selected");
+                mode.setTitle(checkedCount  + " " + getResources().getString(R.string.selected));
             }
 
             @Override
@@ -71,9 +69,9 @@ public class ThursdayFragment extends Fragment {
                     case R.id.action_edit:
                         if(listView.getCheckedItemCount() == 1) {
                             final View alertLayout = getLayoutInflater().inflate(R.layout.dialog_add_subject, null);
-                            AlertDialogsHelper.getEditDialog(getContext(), alertLayout, adapter, listposition);
+                            AlertDialogsHelper.getEditSubjectDialog(getActivity(), alertLayout, adapter, listposition);
                         } else {
-                            Snackbar.make(getView(), "Please, select one item.", Snackbar.LENGTH_LONG).show();
+                            Snackbar.make(Objects.requireNonNull(getView()), R.string.select_one_item, Snackbar.LENGTH_LONG).show();
                         }
                         mode.finish();
                         return true;

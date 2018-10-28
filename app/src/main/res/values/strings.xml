@@ -6,14 +6,30 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
+    <!-- Fragments strings -->
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    <string name="sunday">Sunday</string>
+    <string name="select_one_item">Please, select one item.</string>
+    <string name="selected">Selected</string>
+
     <!-- Main Activity strings -->
-    <string name="subject">Subject</string>
-    <string name="time">Time</string>
-    <string name="room">Room</string>
-    <string name="week">Week</string>
     <string name="timetable">TimeTable</string>
     <string name="ulan_nurymov_gmail_com">ulan.nurymov@gmail.com</string>
     <string name="seven_days_of_the_week">7 Days of the Week</string>
+    <string name="add_subject">Add subject</string>
+    <string name="edit_subject">Edit subject</string>
+    <string name="subject">Subject</string>
+    <string name="field_error">field can not be empty!</string>
+    <string name="teacher">Teacher</string>
+    <string name="time">Time</string>
+    <string name="time_error">Time field can not be empty!</string>
+    <string name="room">Room</string>
+    <string name="week">Week</string>
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
     <string name="save">Save</string>
@@ -25,6 +41,8 @@
     <string name="room_textview">Room:</string>
     <string name="select_time">Select time</string>
     <string name="school_website">School website</string>
+    <string name="school_website_snackbar">Please, set URL of your school website in settings.</string>
+
 
     <!-- Homeworks Activity strings -->
     <string name="title_activity_homeworks">HomeworksActivity</string>
