@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/name"
+            android:text="@string/name_dialog"
             android:layout_weight=".3" />
 
         <EditText
@@ -35,7 +35,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/post"
+            android:text="@string/post_dialog"
             android:layout_weight=".3"/>
 
         <EditText
@@ -55,7 +55,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".3"
-            android:text="@string/phonenumber" />
+            android:text="@string/phonenumber_dialog" />
 
         <EditText
             android:id="@+id/phonenumber_dialog"
@@ -75,7 +75,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/email"
+            android:text="@string/email_dialog"
             android:layout_weight=".3"/>
 
         <EditText

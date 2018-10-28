@@ -35,7 +35,7 @@ public class WednesdayFragment extends Fragment {
         db = new DbHelper(getActivity());
         listView = view.findViewById(R.id.wednesdaylist);
 
-        adapter = new WeekListAdapter(getActivity(), R.layout.listview_week_adapter, db.getWeek("Wednesday"));
+        adapter = new WeekListAdapter(getActivity(), R.layout.listview_week_adapter, db.getWeek(getResources().getString(R.string.wednesday)));
         listView.setAdapter(adapter);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         listView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
@@ -70,7 +70,7 @@ public class WednesdayFragment extends Fragment {
                             final View alertLayout = getLayoutInflater().inflate(R.layout.dialog_add_subject, null);
                             AlertDialogsHelper.getEditSubjectDialog(getActivity(), alertLayout, adapter, listposition);
                         } else {
-                            Snackbar.make(Objects.requireNonNull(getView()), R.string.select_one_item, Snackbar.LENGTH_LONG).show();
+                            Snackbar.make(Objects.requireNonNull(getView()), R.string.select_snackbar, Snackbar.LENGTH_LONG).show();
                         }
                         mode.finish();
                         return true;

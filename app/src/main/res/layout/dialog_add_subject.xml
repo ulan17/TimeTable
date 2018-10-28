@@ -15,7 +15,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".3"
-            android:text="@string/subject_textview" />
+            android:text="@string/subject_dialog" />
 
         <EditText
             android:id="@+id/subject_dialog"
@@ -36,7 +36,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".3"
-            android:text="@string/teacher_textview" />
+            android:text="@string/teacher_dialog" />
 
         <EditText
             android:id="@+id/teacher_dialog"
@@ -57,7 +57,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".3"
-            android:text="@string/room_textview" />
+            android:text="@string/room_dialog" />
 
         <EditText
             android:id="@+id/room_dialog"
@@ -79,7 +79,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".3"
-            android:text="@string/from_textview" />
+            android:text="@string/time_from_dialog" />
 
         <TextView
             android:id="@+id/from_time"
@@ -102,7 +102,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".3"
-            android:text="@string/to_textview" />
+            android:text="@string/time_to_dialog" />
 
         <TextView
             android:id="@+id/to_time"
