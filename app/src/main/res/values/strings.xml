@@ -53,6 +53,9 @@
     <string name="description_dialog">Description:</string>
     <string name="desctiption">Desctiption</string>
     <string name="date_error">Date field can not be empty!</string>
+    <string name="edit_homework">Edit homework</string>
+    <string name="add_homework">Add homework</string>
+    <string name="deadline_snackbar">"Deadline field can not be empty!</string>
     <!-- Notes Activity strings -->
     <string name="notes">Notes</string>
     <string name="title_dialog">Title:</string>

@@ -9,7 +9,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.preference.PreferenceManager;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -88,8 +87,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void initCustomDialog() {
-        LayoutInflater inflater = getLayoutInflater();
-        final View alertLayout = inflater.inflate(R.layout.dialog_add_subject, null);
+        final View alertLayout = getLayoutInflater().inflate(R.layout.dialog_add_subject, null);
         AlertDialogsHelper.getAddSubjectDialog(MainActivity.this, alertLayout, adapter, viewPager);
     }
 
