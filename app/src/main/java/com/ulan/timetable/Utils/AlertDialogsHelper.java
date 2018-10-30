@@ -15,11 +15,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.ulan.timetable.Activities.NotesActivity;
 import com.ulan.timetable.Adapters.FragmentsTabAdapter;
 import com.ulan.timetable.Adapters.HomeworksListAdapter;
+import com.ulan.timetable.Adapters.NotesListAdapter;
 import com.ulan.timetable.Adapters.TeachersListAdapter;
 import com.ulan.timetable.Adapters.WeekListAdapter;
 import com.ulan.timetable.Model.Homework;
+import com.ulan.timetable.Model.Note;
 import com.ulan.timetable.Model.Teacher;
 import com.ulan.timetable.Model.Week;
 import com.ulan.timetable.R;
@@ -515,6 +518,92 @@ public class AlertDialogsHelper {
                     phone_number.getText().clear();
                     email.getText().clear();
                     name.requestFocus();
+                    dialog.dismiss();
+                }
+            }
+        });
+    }
+
+    public static void getEditNoteDialog(final Activity activity, final View alertLayout, final NotesListAdapter adapter, int listposition) {
+        final EditText title = alertLayout.findViewById(R.id.titlenote);
+        final Note note = adapter.getNotelist().get(listposition);
+        title.setText(note.getTitle());
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(activity);
+        alert.setTitle(R.string.edit_note);
+        final Button cancel = alertLayout.findViewById(R.id.cancel);
+        final Button save = alertLayout.findViewById(R.id.save);
+        alert.setView(alertLayout);
+        alert.setCancelable(false);
+        final AlertDialog dialog = alert.create();
+        dialog.show();
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(TextUtils.isEmpty(title.getText())) {
+                    title.setError(activity.getResources().getString(R.string.title_error));
+                    title.requestFocus();
+                } else {
+                    DbHelper dbHelper = new DbHelper(activity);
+                    note.setTitle(title.getText().toString());
+                    dbHelper.updateNote(note);
+                    adapter.notifyDataSetChanged();
+                    dialog.dismiss();
+                }
+            }
+        });
+    }
+
+    public static void getAddNoteDialog(final Activity activity, final View alertLayout, final NotesListAdapter adapter) {
+        final EditText title = alertLayout.findViewById(R.id.titlenote);
+        final Note note = new Note();
+
+        final AlertDialog.Builder alert = new AlertDialog.Builder(activity);
+        alert.setTitle(R.string.add_note);
+        final Button cancel = alertLayout.findViewById(R.id.cancel);
+        final Button save = alertLayout.findViewById(R.id.save);
+        alert.setView(alertLayout);
+        alert.setCancelable(false);
+        final AlertDialog dialog = alert.create();
+        FloatingActionButton fab = activity.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.show();
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(TextUtils.isEmpty(title.getText())) {
+                    title.setError(activity.getResources().getString(R.string.title_error));
+                    title.requestFocus();
+                } else {
+                    DbHelper dbHelper = new DbHelper(activity);
+                    note.setTitle(title.getText().toString());
+                    dbHelper.insertNote(note);
+
+                    adapter.clear();
+                    adapter.addAll(dbHelper.getNote());
+                    adapter.notifyDataSetChanged();
+
+                    title.getText().clear();
                     dialog.dismiss();
                 }
             }

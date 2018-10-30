@@ -60,6 +60,9 @@
     <!-- Notes Activity strings -->
     <string name="notes">Notes</string>
     <string name="title_dialog">Title:</string>
+    <string name="add_note">Add note</string>
+    <string name="edit_note">Edit note</string>
+    <string name="title_error">Title field can not be empty!</string>
 
     <!-- Teachers Activity strings -->
     <string name="teachers">Teachers</string>

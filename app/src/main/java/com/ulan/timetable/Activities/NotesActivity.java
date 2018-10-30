@@ -25,6 +25,7 @@ import android.widget.ListView;
 import com.ulan.timetable.Adapters.NotesListAdapter;
 import com.ulan.timetable.Model.Note;
 import com.ulan.timetable.R;
+import com.ulan.timetable.Utils.AlertDialogsHelper;
 import com.ulan.timetable.Utils.DbHelper;
 
 import java.util.ArrayList;
@@ -63,7 +64,7 @@ public class NotesActivity extends AppCompatActivity {
             @Override
             public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
                 final int checkedCount = listView.getCheckedItemCount();
-                mode.setTitle(checkedCount + " Selected");
+                mode.setTitle(checkedCount + " " + getResources().getString(R.string.selected));
                 listposition = position;
             }
 
@@ -100,45 +101,10 @@ public class NotesActivity extends AppCompatActivity {
 
                     case R.id.action_edit:
                         if(listView.getCheckedItemCount() == 1) {
-                            LayoutInflater inflater = getLayoutInflater();
-                            final View alertLayout = inflater.inflate(R.layout.dialog_add_note, null);
-                            final EditText title = alertLayout.findViewById(R.id.titlenote);
-                            final Note note = adapter.getNotelist().get(listposition);
-                            title.setText(note.getTitle());
-                            AlertDialog.Builder alert = new AlertDialog.Builder(NotesActivity.this);
-                            alert.setTitle("Edit note");
-                            final Button cancel = alertLayout.findViewById(R.id.cancel);
-                            final Button save = alertLayout.findViewById(R.id.save);
-                            alert.setView(alertLayout);
-                            alert.setCancelable(false);
-                            final AlertDialog dialog = alert.create();
-                            dialog.show();
-
-                            cancel.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    dialog.dismiss();
-                                }
-                            });
-
-                            save.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    if(TextUtils.isEmpty(title.getText())) {
-                                        title.setError("Title field can not be empty!");
-                                        title.requestFocus();
-                                    } else {
-                                        DbHelper dbHelper = new DbHelper(NotesActivity.this);
-                                        note.setTitle(title.getText().toString());
-                                        dbHelper.updateNote(note);
-                                        adapter.notifyDataSetChanged();
-                                        mode.finish();
-                                        dialog.dismiss();
-                                    }
-                                }
-                            });
+                            final View alertLayout = getLayoutInflater().inflate(R.layout.dialog_add_note, null);
+                            AlertDialogsHelper.getEditNoteDialog(NotesActivity.this, alertLayout, adapter, listposition);
                         } else {
-                            Snackbar.make(coordinatorLayout, "Please, select one item.", Snackbar.LENGTH_LONG).show();
+                            Snackbar.make(coordinatorLayout, R.string.select_snackbar, Snackbar.LENGTH_LONG).show();
                         }
                         mode.finish();
                         return true;
@@ -152,51 +118,8 @@ public class NotesActivity extends AppCompatActivity {
     }
 
     private void initCustomDialog() {
-        LayoutInflater inflater = getLayoutInflater();
-        final View alertLayout = inflater.inflate(R.layout.dialog_add_note, null);
-        final EditText title = alertLayout.findViewById(R.id.titlenote);
-        final AlertDialog.Builder alert = new AlertDialog.Builder(context);
-        alert.setTitle("Add note");
-        final Button cancel = alertLayout.findViewById(R.id.cancel);
-        final Button save = alertLayout.findViewById(R.id.save);
-        alert.setView(alertLayout);
-        alert.setCancelable(false);
-        final AlertDialog dialog = alert.create();
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.show();
-            }
-        });
-
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(TextUtils.isEmpty(title.getText())) {
-                    title.setError("Title field can not be empty!");
-                    title.requestFocus();
-                } else {
-                    DbHelper dbHelper = new DbHelper(context);
-                    final Note note = new Note();
-                    note.setTitle(title.getText().toString());
-                    dbHelper.insertNote(note);
-                    adapter.clear();
-                    adapter.addAll(dbHelper.getNote());
-                    adapter.notifyDataSetChanged();
-
-                    title.getText().clear();
-                    dialog.dismiss();
-                }
-            }
-        });
+        final View alertLayout = getLayoutInflater().inflate(R.layout.dialog_add_note, null);
+        AlertDialogsHelper.getAddNoteDialog(NotesActivity.this, alertLayout, adapter);
     }
 
     @Override
