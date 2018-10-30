@@ -17,8 +17,10 @@ import android.widget.TimePicker;
 
 import com.ulan.timetable.Adapters.FragmentsTabAdapter;
 import com.ulan.timetable.Adapters.HomeworksListAdapter;
+import com.ulan.timetable.Adapters.TeachersListAdapter;
 import com.ulan.timetable.Adapters.WeekListAdapter;
 import com.ulan.timetable.Model.Homework;
+import com.ulan.timetable.Model.Teacher;
 import com.ulan.timetable.Model.Week;
 import com.ulan.timetable.R;
 
@@ -389,6 +391,130 @@ public class AlertDialogsHelper {
                     description.getText().clear();
                     date.setText(R.string.select_date);
                     subject.requestFocus();
+                    dialog.dismiss();
+                }
+            }
+        });
+    }
+
+    public static void getEditTeacherDialog(final Activity activity, final View alertLayout, final TeachersListAdapter adapter, int listposition) {
+        final HashMap<Integer, EditText> editTextHashs = new HashMap<>();
+        final EditText name = alertLayout.findViewById(R.id.name_dialog);
+        editTextHashs.put(R.string.name, name);
+        final EditText post = alertLayout.findViewById(R.id.post_dialog);
+        editTextHashs.put(R.string.post, post);
+        final EditText phone_number = alertLayout.findViewById(R.id.phonenumber_dialog);
+        editTextHashs.put(R.string.phone_number, phone_number);
+        final EditText email = alertLayout.findViewById(R.id.email_dialog);
+        editTextHashs.put(R.string.email, email);
+        final Teacher teacher = adapter.getTeacherlist().get(listposition);
+
+        name.setText(teacher.getName());
+        post.setText(teacher.getPost());
+        phone_number.setText(teacher.getPhonenumber());
+        email.setText(teacher.getEmail());
+
+        final AlertDialog.Builder alert = new AlertDialog.Builder(activity);
+        alert.setTitle(R.string.edit_teacher);
+        alert.setCancelable(false);
+        final Button cancel = alertLayout.findViewById(R.id.cancel);
+        final Button save = alertLayout.findViewById(R.id.save);
+        alert.setView(alertLayout);
+        final AlertDialog dialog = alert.create();
+        dialog.show();
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(TextUtils.isEmpty(name.getText()) || TextUtils.isEmpty(post.getText()) || TextUtils.isEmpty(phone_number.getText()) || TextUtils.isEmpty(email.getText())) {
+                    for (Map.Entry<Integer, EditText> entry : editTextHashs.entrySet()) {
+                        if(TextUtils.isEmpty(entry.getValue().getText())) {
+                            entry.getValue().setError(activity.getResources().getString(entry.getKey()) + " " + activity.getResources().getString(R.string.field_error));
+                            entry.getValue().requestFocus();
+                        }
+                    }
+                } else {
+                    DbHelper dbHelper = new DbHelper(activity);
+                    teacher.setName(name.getText().toString());
+                    teacher.setPost(post.getText().toString());
+                    teacher.setPhonenumber(phone_number.getText().toString());
+                    teacher.setEmail(email.getText().toString());
+                    dbHelper.updateTeacher(teacher);
+                    adapter.notifyDataSetChanged();
+                    dialog.dismiss();
+                }
+            }
+        });
+    }
+
+    public static void getAddTeacherDialog(final Activity activity, final View alertLayout, final TeachersListAdapter adapter) {
+        final HashMap<Integer, EditText> editTextHashs = new HashMap<>();
+        final EditText name = alertLayout.findViewById(R.id.name_dialog);
+        editTextHashs.put(R.string.name, name);
+        final EditText post = alertLayout.findViewById(R.id.post_dialog);
+        editTextHashs.put(R.string.post, post);
+        final EditText phone_number = alertLayout.findViewById(R.id.phonenumber_dialog);
+        editTextHashs.put(R.string.phone_number, phone_number);
+        final EditText email = alertLayout.findViewById(R.id.email_dialog);
+        editTextHashs.put(R.string.email, email);
+        final Teacher teacher = new Teacher();
+
+        final AlertDialog.Builder alert = new AlertDialog.Builder(activity);
+        alert.setTitle("Add teacher");
+        alert.setCancelable(false);
+        final Button cancel = alertLayout.findViewById(R.id.cancel);
+        final Button save = alertLayout.findViewById(R.id.save);
+        alert.setView(alertLayout);
+        final AlertDialog dialog = alert.create();
+        FloatingActionButton fab = activity.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.show();
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(TextUtils.isEmpty(name.getText()) || TextUtils.isEmpty(post.getText()) || TextUtils.isEmpty(phone_number.getText()) || TextUtils.isEmpty(email.getText())) {
+                    for (Map.Entry<Integer, EditText> entry : editTextHashs.entrySet()) {
+                        if(TextUtils.isEmpty(entry.getValue().getText())) {
+                            entry.getValue().setError(activity.getResources().getString(entry.getKey()) + " " + activity.getResources().getString(R.string.field_error));
+                            entry.getValue().requestFocus();
+                        }
+                    }
+                } else {
+                    DbHelper dbHelper = new DbHelper(activity);
+                    teacher.setName(name.getText().toString());
+                    teacher.setPost(post.getText().toString());
+                    teacher.setPhonenumber(phone_number.getText().toString());
+                    teacher.setEmail(email.getText().toString());
+                    dbHelper.insertTeacher(teacher);
+
+                    adapter.clear();
+                    adapter.addAll(dbHelper.getTeacher());
+                    adapter.notifyDataSetChanged();
+
+                    name.getText().clear();
+                    post.getText().clear();
+                    phone_number.getText().clear();
+                    email.getText().clear();
+                    name.requestFocus();
                     dialog.dismiss();
                 }
             }

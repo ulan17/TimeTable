@@ -56,20 +56,23 @@
     <string name="edit_homework">Edit homework</string>
     <string name="add_homework">Add homework</string>
     <string name="deadline_snackbar">"Deadline field can not be empty!</string>
+
     <!-- Notes Activity strings -->
     <string name="notes">Notes</string>
     <string name="title_dialog">Title:</string>
 
     <!-- Teachers Activity strings -->
     <string name="teachers">Teachers</string>
+    <string name="add_teacher">Add teacher</string>
+    <string name="edit_teacher">Edit teacher</string>
     <string name="name_dialog">Name:</string>
     <string name="post_dialog">Post:</string>
     <string name="phonenumber_dialog">Phone:</string>
     <string name="email_dialog">Email:</string>
-    <string name="name_list">Name</string>
-    <string name="phone_number_list">Phone number</string>
-    <string name="post_list">Post</string>
-    <string name="email_list">Email</string>
+    <string name="name">Name</string>
+    <string name="phone_number">Phone number</string>
+    <string name="post">Post</string>
+    <string name="email">Email</string>
 
     <!-- Settings Activity strings -->
     <string name="sevendays_setting">Enable 7 Days of the Week</string>

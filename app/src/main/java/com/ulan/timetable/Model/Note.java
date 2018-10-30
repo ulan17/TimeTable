@@ -1,9 +1,7 @@
 package com.ulan.timetable.Model;
 
-import android.os.Parcelable;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 /**
  * Created by Ulan on 28.09.2018.
