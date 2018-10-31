@@ -15,7 +15,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import com.ulan.timetable.Activities.NotesActivity;
 import com.ulan.timetable.Adapters.FragmentsTabAdapter;
 import com.ulan.timetable.Adapters.HomeworksListAdapter;
 import com.ulan.timetable.Adapters.NotesListAdapter;
@@ -269,8 +268,8 @@ public class AlertDialogsHelper {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(activity, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        date.setText(String.format("%02d:%02d:%02d", dayOfMonth, month + 1, year));
-                        homework.setDate(String.format("%02d:%02d:%02d", dayOfMonth, month + 1, year));
+                        date.setText(String.format("%02d-%02d-%02d", year, month+1, dayOfMonth));
+                        homework.setDate(String.format("%02d-%02d-%02d", year, month+1, dayOfMonth));
                     }
                 }, mYear, mMonth, mdayofMonth);
                 datePickerDialog.setTitle(R.string.select_date);
@@ -337,8 +336,8 @@ public class AlertDialogsHelper {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(activity, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        date.setText(String.format("%02d:%02d:%02d", dayOfMonth, month+1, year));
-                        homework.setDate(String.format("%02d:%02d:%02d", dayOfMonth, month+1, year));
+                        date.setText(String.format("%02d-%02d-%02d", year, month+1, dayOfMonth));
+                        homework.setDate(String.format("%02d-%02d-%02d", year, month+1, dayOfMonth));
                     }
                 }, mYear, mMonth, mdayofMonth);
                 datePickerDialog.setTitle(R.string.select_date);

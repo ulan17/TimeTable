@@ -48,7 +48,7 @@ public class HomeworksActivity extends AppCompatActivity {
             public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
                 listposition = position;
                 final int checkedCount = listView.getCheckedItemCount();
-                mode.setTitle(checkedCount + "  Selected");
+                mode.setTitle(checkedCount + " " + getResources().getString(R.string.selected));
             }
 
             @Override

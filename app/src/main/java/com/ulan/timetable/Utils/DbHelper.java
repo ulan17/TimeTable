@@ -40,12 +40,12 @@ public class DbHelper extends SQLiteOpenHelper{
     private static final String NOTES_TITLE = "title";
     private static final String NOTES_TEXT = "text";
 
-    public static final String TEACHERS = "teachers";
-    public static final String TEACHERS_ID = "id";
-    public static final String TEACHERS_NAME = "name";
-    public static final String TEACHERS_POST = "post";
-    public static final String TEACHERS_PHONE_NUMBER = "phonenumber";
-    public static final String TEACHERS_EMAIL = "email";
+    private static final String TEACHERS = "teachers";
+    private static final String TEACHERS_ID = "id";
+    private static final String TEACHERS_NAME = "name";
+    private static final String TEACHERS_POST = "post";
+    private static final String TEACHERS_PHONE_NUMBER = "phonenumber";
+    private static final String TEACHERS_EMAIL = "email";
 
     public DbHelper(Context context){
         super(context , DB_NAME, null, DB_VERSION);
@@ -144,7 +144,7 @@ public class DbHelper extends SQLiteOpenHelper{
 
         ArrayList<Week> weeklist = new ArrayList<>();
         Week week;
-        Cursor cursor = db.rawQuery("SELECT * FROM "+TIMETABLE+" WHERE "+ TIMETABLE_FRAGMENT +" LIKE '"+fragment+"%'",null);
+        Cursor cursor = db.rawQuery("SELECT * FROM ( SELECT * FROM "+TIMETABLE+" ORDER BY " + TIMETABLE_FROM_TIME + " ) WHERE "+ TIMETABLE_FRAGMENT +" LIKE '"+fragment+"%'",null);
         while (cursor.moveToNext()){
             week = new Week();
             week.setId(cursor.getInt(cursor.getColumnIndex(TIMETABLE_ID)));
@@ -192,7 +192,7 @@ public class DbHelper extends SQLiteOpenHelper{
         SQLiteDatabase db = this.getWritableDatabase();
         ArrayList<Homework> homelist = new ArrayList<>();
         Homework homework;
-        Cursor cursor = db.rawQuery("SELECT * FROM "+ HOMEWORKS,null);
+        Cursor cursor = db.rawQuery("SELECT * FROM "+ HOMEWORKS + " ORDER BY datetime(" + HOMEWORKS_DATE + ") ASC",null);
         while (cursor.moveToNext()){
             homework = new Homework();
             homework.setId(cursor.getInt(cursor.getColumnIndex(HOMEWORKS_ID)));
