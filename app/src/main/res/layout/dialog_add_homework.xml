@@ -15,7 +15,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".3"
-            android:text="@string/subject_dialog" />
+            android:text="@string/subject_dialog"
+            android:textColor="@android:color/black" />
 
         <EditText
             android:id="@+id/subjecthomework"
@@ -23,6 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_weight=".7"
             android:imeOptions="actionDone"
+            android:inputType="text"
             android:singleLine="true" />
     </LinearLayout>
 
@@ -36,7 +38,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".3"
-            android:text="@string/description_dialog" />
+            android:text="@string/description_dialog"
+            android:textColor="@android:color/black" />
 
         <EditText
             android:id="@+id/descriptionhomework"
@@ -44,6 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_weight=".7"
             android:imeOptions="actionDone"
+            android:inputType="text"
             android:singleLine="true" />
     </LinearLayout>
 
@@ -57,7 +61,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".3"
-            android:text="@string/deadline_dialog" />
+            android:text="@string/deadline_dialog"
+            android:textColor="@android:color/black" />
 
         <TextView
             android:id="@+id/datehomework"
