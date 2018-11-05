@@ -14,4 +14,4 @@ You are welcome to contribute with issues, pull requests and ideas. And to contr
 
 ### Licence
 
-The source code is licensed under the [MIT](https://github.com/ulan17/TimeTable/blob/master/LICENSE) license. 
+The source code is licensed under the [GNU v3 Public License](https://github.com/ulan17/TimeTable/blob/master/LICENSE). 
