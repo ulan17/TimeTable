@@ -19,13 +19,13 @@ import com.ulan.timetable.Adapters.FragmentsTabAdapter;
 import com.ulan.timetable.Adapters.HomeworksListAdapter;
 import com.ulan.timetable.Adapters.NotesListAdapter;
 import com.ulan.timetable.Adapters.TeachersListAdapter;
-import com.ulan.timetable.Adapters.WeekListAdapter;
 import com.ulan.timetable.Model.Homework;
 import com.ulan.timetable.Model.Note;
 import com.ulan.timetable.Model.Teacher;
 import com.ulan.timetable.Model.Week;
 import com.ulan.timetable.R;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,7 +36,7 @@ import java.util.Objects;
  */
 public class AlertDialogsHelper {
 
-    public static void getEditSubjectDialog(final Activity activity, final View alertLayout, final WeekListAdapter adapter, int listposition) {
+    public static void getEditSubjectDialog(final Activity activity, final View alertLayout, final ArrayList<Week> adapter, int position) {
         final HashMap<Integer, EditText> editTextHashs = new HashMap<>();
         final EditText subject = alertLayout.findViewById(R.id.subject_dialog);
         editTextHashs.put(R.string.subject, subject);
@@ -46,13 +46,13 @@ public class AlertDialogsHelper {
         editTextHashs.put(R.string.room, room);
         final TextView from_time = alertLayout.findViewById(R.id.from_time);
         final TextView to_time = alertLayout.findViewById(R.id.to_time);
-        final Week week = adapter.getWeeklist().get(listposition);
+        final Week week = adapter.get(position);
 
-        subject.setText(adapter.getItem(listposition).getSubject());
-        teacher.setText(adapter.getItem(listposition).getTeacher());
-        room.setText(adapter.getItem(listposition).getRoom());
-        from_time.setText(adapter.getItem(listposition).getFromTime());
-        to_time.setText(adapter.getItem(listposition).getToTime());
+        subject.setText(adapter.get(position).getSubject());
+        teacher.setText(adapter.get(position).getTeacher());
+        room.setText(adapter.get(position).getRoom());
+        from_time.setText(adapter.get(position).getFromTime());
+        to_time.setText(adapter.get(position).getToTime());
 
         from_time.setOnClickListener(new View.OnClickListener() {
 
@@ -132,7 +132,6 @@ public class AlertDialogsHelper {
                     week.setTeacher(teacher.getText().toString());
                     week.setRoom(room.getText().toString());
                     db.updateWeek(week);
-                    adapter.notifyDataSetChanged();
                     dialog.dismiss();
                 }
             }
