@@ -27,6 +27,7 @@ import java.util.Objects;
  * Created by Ulan on 06.09.2018.
  */
 public class SundayFragment extends Fragment {
+    public static final String KEY_SUNDAY_FRAGMENT = "Sunday";
     private DbHelper db;
     private ListView listView;
     private WeekListAdapter adapter;
@@ -37,7 +38,7 @@ public class SundayFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_sunday, container, false);
         db = new DbHelper(getActivity());
         listView = view.findViewById(R.id.sundaylist);
-        adapter = new WeekListAdapter(getActivity(), R.layout.listview_week_adapter, db.getWeek(getResources().getString(R.string.sunday)));
+        adapter = new WeekListAdapter(getActivity(), R.layout.listview_week_adapter, db.getWeek(KEY_SUNDAY_FRAGMENT));
         listView.setAdapter(adapter);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         listView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {

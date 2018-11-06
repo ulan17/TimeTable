@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.ulan.timetable.Adapters.WeekListAdapter;
@@ -25,6 +26,7 @@ import java.util.Objects;
 
 
 public class FridayFragment extends Fragment {
+    public static final String KEY_FRIDAY_FRAGMENT = "Friday";
     private DbHelper db;
     private ListView listView;
     private WeekListAdapter adapter;
@@ -36,7 +38,7 @@ public class FridayFragment extends Fragment {
         db = new DbHelper(getActivity());
         listView = view.findViewById(R.id.fridaylist);
 
-        adapter = new WeekListAdapter(getActivity(), R.layout.listview_week_adapter, db.getWeek(getResources().getString(R.string.friday)));
+        adapter = new WeekListAdapter(getActivity(), R.layout.listview_week_adapter, db.getWeek(KEY_FRIDAY_FRAGMENT));
         listView.setAdapter(adapter);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         listView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
@@ -45,6 +47,15 @@ public class FridayFragment extends Fragment {
                 listposition = position;
                 final int checkedCount  = listView.getCheckedItemCount();
                 mode.setTitle(checkedCount  + " " + getResources().getString(R.string.selected));
+                ImageView popup = getActivity().findViewById(R.id.popupbtn);
+                SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
+                for (int i = 0; i < checkedItems.size(); i++) {
+                    int key = checkedItems.keyAt(i);
+                    if (checkedItems.get(key)) {
+                        popup.setVisibility(View.INVISIBLE);
+                    }
+                }
+
             }
 
             @Override

@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class MondayFragment extends Fragment {
+    public static final String KEY_MONDAY_FRAGMENT = "Monday";
     private DbHelper db;
     private ListView listView;
     private WeekListAdapter adapter;
@@ -34,7 +35,7 @@ public class MondayFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_monday, container, false);
         db = new DbHelper(getActivity());
         listView = view.findViewById(R.id.mondaylist);
-        adapter = new WeekListAdapter(getActivity(), R.layout.listview_week_adapter, db.getWeek(getResources().getString(R.string.monday)));
+        adapter = new WeekListAdapter(getActivity(), R.layout.listview_week_adapter, db.getWeek(KEY_MONDAY_FRAGMENT));
         listView.setAdapter(adapter);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         listView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
