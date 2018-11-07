@@ -3,8 +3,8 @@ package com.ulan.timetable.Activities;
 import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.SparseBooleanArray;
 import android.view.ActionMode;
 import android.view.Menu;
@@ -14,7 +14,7 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
-import com.ulan.timetable.Adapters.HomeworksListAdapter;
+import com.ulan.timetable.Adapters.HomeworksAdapter;
 import com.ulan.timetable.Model.Homework;
 import com.ulan.timetable.R;
 import com.ulan.timetable.Utils.AlertDialogsHelper;
@@ -27,21 +27,32 @@ public class HomeworksActivity extends AppCompatActivity {
 
     private Context context = this;
     private ListView listView;
-    private HomeworksListAdapter adapter;
+    private HomeworksAdapter adapter;
     private DbHelper db;
     private int listposition = 0;
-    private CoordinatorLayout coordinatorLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homeworks);
-        coordinatorLayout = findViewById(R.id.coordinatorHomeworks);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        initAll();
+    }
+
+    private void initAll() {
+        setupAdapter();
+        setupListViewMultiSelect();
+        setupCustomDialog();
+    }
+
+    private void setupAdapter() {
         db = new DbHelper(context);
         listView = findViewById(R.id.homeworklist);
-        adapter = new HomeworksListAdapter(context, R.layout.listview_homeworks_adapter, db.getHomework());
+        adapter = new HomeworksAdapter(context, R.layout.listview_homeworks_adapter, db.getHomework());
         listView.setAdapter(adapter);
-        initCustomDialog();
+    }
+
+    private void setupListViewMultiSelect() {
+        final CoordinatorLayout coordinatorLayout = findViewById(R.id.coordinatorHomeworks);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         listView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
             @Override
@@ -73,13 +84,13 @@ public class HomeworksActivity extends AppCompatActivity {
                             int key = checkedItems.keyAt(i);
                             if (checkedItems.get(key)) {
                                 db.deleteHomeworkById(adapter.getItem(key));
-                                removelist.add(adapter.getHomeworklist().get(key));
+                                removelist.add(adapter.getHomeworkList().get(key));
                             }
                         }
-                          adapter.getHomeworklist().removeAll(removelist);
-                          db.updateHomework(adapter.getHomework());
-                          adapter.notifyDataSetChanged();
-                          mode.finish();
+                        adapter.getHomeworkList().removeAll(removelist);
+                        db.updateHomework(adapter.getHomework());
+                        adapter.notifyDataSetChanged();
+                        mode.finish();
                         return true;
 
                     case R.id.action_edit:
@@ -101,7 +112,7 @@ public class HomeworksActivity extends AppCompatActivity {
         });
     }
 
-    public void initCustomDialog() {
+    private void setupCustomDialog() {
         final View alertLayout = getLayoutInflater().inflate(R.layout.dialog_add_homework, null);
         AlertDialogsHelper.getAddHomeworkDialog(HomeworksActivity.this, alertLayout, adapter);
     }

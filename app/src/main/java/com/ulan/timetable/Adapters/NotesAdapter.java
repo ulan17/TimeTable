@@ -13,14 +13,14 @@ import com.ulan.timetable.Model.Note;
 import com.ulan.timetable.R;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 /**
  * Created by Ulan on 28.09.2018.
  */
-public class NotesListAdapter extends ArrayAdapter<Note> {
+public class NotesAdapter extends ArrayAdapter<Note> {
 
-    private static final String TAG = "NotesListAdapter";
     private int mResource;
     private Context mContext;
     private ArrayList<Note> notelist;
@@ -30,7 +30,7 @@ public class NotesListAdapter extends ArrayAdapter<Note> {
         TextView title;
     }
 
-    public NotesListAdapter(Context context, int resource, ArrayList<Note> objects) {
+    public NotesAdapter(Context context, int resource, ArrayList<Note> objects) {
         super(context, resource, objects);
         this.mContext = context;
         this.mResource = resource;
@@ -40,8 +40,8 @@ public class NotesListAdapter extends ArrayAdapter<Note> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        String title = getItem(position).getTitle();
-        String text = getItem(position).getText();
+        String title = Objects.requireNonNull(getItem(position)).getTitle();
+        String text = Objects.requireNonNull(getItem(position)).getText();
 
         note = new Note(title, text);
         ViewHolder holder;
@@ -65,7 +65,7 @@ public class NotesListAdapter extends ArrayAdapter<Note> {
         return super.getItemId(position);
     }
 
-    public ArrayList<Note> getNotelist() {
+    public ArrayList<Note> getNoteList() {
         return notelist;
     }
 

@@ -11,13 +11,12 @@ import android.widget.TextView;
 import com.ulan.timetable.Model.Homework;
 import com.ulan.timetable.R;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Created by Ulan on 21.09.2018.
  */
-public class HomeworksListAdapter extends ArrayAdapter<Homework> {
-
-    private static final String TAG = "Homeworkslistadapter";
+public class HomeworksAdapter extends ArrayAdapter<Homework> {
 
     private Context mContext;
     private int mResource;
@@ -30,7 +29,7 @@ public class HomeworksListAdapter extends ArrayAdapter<Homework> {
         TextView date;
     }
 
-    public HomeworksListAdapter(Context context, int resource, ArrayList<Homework> objects) {
+    public HomeworksAdapter(Context context, int resource, ArrayList<Homework> objects) {
         super(context, resource, objects);
         mContext = context;
         mResource = resource;
@@ -39,10 +38,10 @@ public class HomeworksListAdapter extends ArrayAdapter<Homework> {
 
     @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        String subject = getItem(position).getSubject();
-        String description = getItem(position).getDescription();
-        String date = getItem(position).getDate();
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+        String subject = Objects.requireNonNull(getItem(position)).getSubject();
+        String description = Objects.requireNonNull(getItem(position)).getDescription();
+        String date = Objects.requireNonNull(getItem(position)).getDate();
 
         homework = new Homework(subject, description, date);
         ViewHolder holder;
@@ -70,7 +69,7 @@ public class HomeworksListAdapter extends ArrayAdapter<Homework> {
         return super.getItemId(position);
     }
 
-    public ArrayList<Homework> getHomeworklist() {
+    public ArrayList<Homework> getHomeworkList() {
         return homeworklist;
     }
 

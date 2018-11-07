@@ -12,13 +12,12 @@ import com.ulan.timetable.Model.Teacher;
 import com.ulan.timetable.R;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Created by Ulan on 08.10.2018.
  */
-public class TeachersListAdapter  extends ArrayAdapter<Teacher> {
-
-    private static final String TAG = "WeekListAdapter";
+public class TeachersAdapter extends ArrayAdapter<Teacher> {
 
     private Context mContext;
     private int mResource;
@@ -32,7 +31,7 @@ public class TeachersListAdapter  extends ArrayAdapter<Teacher> {
         TextView email;
     }
 
-    public TeachersListAdapter(Context context, int resource, ArrayList<Teacher> objects) {
+    public TeachersAdapter(Context context, int resource, ArrayList<Teacher> objects) {
         super(context, resource, objects);
         mContext = context;
         mResource = resource;
@@ -41,11 +40,11 @@ public class TeachersListAdapter  extends ArrayAdapter<Teacher> {
 
     @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        String name = getItem(position).getName();
-        String post = getItem(position).getPost();
-        String phonenumber = getItem(position).getPhonenumber();
-        String email = getItem(position).getEmail();
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+        String name = Objects.requireNonNull(getItem(position)).getName();
+        String post = Objects.requireNonNull(getItem(position)).getPost();
+        String phonenumber = Objects.requireNonNull(getItem(position)).getPhonenumber();
+        String email = Objects.requireNonNull(getItem(position)).getEmail();
 
 
         teacher = new Teacher(name, post, phonenumber, email);
@@ -71,7 +70,7 @@ public class TeachersListAdapter  extends ArrayAdapter<Teacher> {
         return convertView;
     }
 
-    public ArrayList<Teacher> getTeacherlist() {
+    public ArrayList<Teacher> getTeacherList() {
         return teacherlist;
     }
 

@@ -40,10 +40,7 @@ import static com.ulan.timetable.Utils.BrowserUtil.openUrlInChromeCustomTab;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    FragmentsTabAdapter adapter;
-    public ViewPager getViewPager() {
-        return viewPager;
-    }
+    private FragmentsTabAdapter adapter;
     private ViewPager viewPager;
     private boolean switchSevenDays;
 
@@ -51,27 +48,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initAll();
+    }
+
+    private void initAll() {
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
         PreferenceManager.setDefaultValues(this, R.xml.settings, false);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        adapter = new FragmentsTabAdapter(getSupportFragmentManager());
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
 
-        initTabFragment();
-        initCustomDialog();
-        initSwitch();
+        setupFragments();
+        setupCustomDialog();
+        setupSevenDaysPref();
 
-        if(switchSevenDays) changeTabFragments(true);
-
+        if(switchSevenDays) changeFragments(true);
     }
 
-    public void initTabFragment() {
+    private void setupFragments() {
+        adapter = new FragmentsTabAdapter(getSupportFragmentManager());
         viewPager = findViewById(R.id.viewPager);
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         Calendar calendar = Calendar.getInstance();
@@ -86,17 +87,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tabLayout.setupWithViewPager(viewPager);
     }
 
-    public void initCustomDialog() {
-        final View alertLayout = getLayoutInflater().inflate(R.layout.dialog_add_subject, null);
-        AlertDialogsHelper.getAddSubjectDialog(MainActivity.this, alertLayout, adapter, viewPager);
-    }
-
-    public void initSwitch() {
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        switchSevenDays = sharedPref.getBoolean(SettingsActivity.KEY_SEVEN_DAYS_SETTING, false);
-    }
-
-    public void changeTabFragments(boolean isChecked) {
+    private void changeFragments(boolean isChecked) {
         if(isChecked) {
             TabLayout tabLayout = findViewById(R.id.tabLayout);
             Calendar calendar = Calendar.getInstance();
@@ -113,6 +104,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
         adapter.notifyDataSetChanged();
+    }
+    
+    private void setupCustomDialog() {
+        final View alertLayout = getLayoutInflater().inflate(R.layout.dialog_add_subject, null);
+        AlertDialogsHelper.getAddSubjectDialog(MainActivity.this, alertLayout, adapter, viewPager);
+    }
+
+    private void setupSevenDaysPref() {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        switchSevenDays = sharedPref.getBoolean(SettingsActivity.KEY_SEVEN_DAYS_SETTING, false);
     }
 
     @Override

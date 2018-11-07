@@ -16,9 +16,9 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.ulan.timetable.Adapters.FragmentsTabAdapter;
-import com.ulan.timetable.Adapters.HomeworksListAdapter;
-import com.ulan.timetable.Adapters.NotesListAdapter;
-import com.ulan.timetable.Adapters.TeachersListAdapter;
+import com.ulan.timetable.Adapters.HomeworksAdapter;
+import com.ulan.timetable.Adapters.NotesAdapter;
+import com.ulan.timetable.Adapters.TeachersAdapter;
 import com.ulan.timetable.Model.Homework;
 import com.ulan.timetable.Model.Note;
 import com.ulan.timetable.Model.Teacher;
@@ -244,14 +244,14 @@ public class AlertDialogsHelper {
         });
     }
 
-    public static void getEditHomeworkDialog(final Activity activity, final View alertLayout, final HomeworksListAdapter adapter, int listposition) {
+    public static void getEditHomeworkDialog(final Activity activity, final View alertLayout, final HomeworksAdapter adapter, int listposition) {
         final HashMap<Integer, EditText> editTextHashs = new HashMap<>();
         final EditText subject = alertLayout.findViewById(R.id.subjecthomework);
         editTextHashs.put(R.string.subject, subject);
         final EditText description = alertLayout.findViewById(R.id.descriptionhomework);
         editTextHashs.put(R.string.desctiption, description);
         final TextView date = alertLayout.findViewById(R.id.datehomework);
-        final Homework homework = adapter.getHomeworklist().get(listposition);
+        final Homework homework = adapter.getHomeworkList().get(listposition);
 
         subject.setText(Objects.requireNonNull(adapter.getItem(listposition)).getSubject());
         description.setText(Objects.requireNonNull(adapter.getItem(listposition)).getDescription());
@@ -316,7 +316,7 @@ public class AlertDialogsHelper {
             });
     }
 
-    public static void getAddHomeworkDialog(final Activity activity, final View alertLayout, final HomeworksListAdapter adapter) {
+    public static void getAddHomeworkDialog(final Activity activity, final View alertLayout, final HomeworksAdapter adapter) {
         final HashMap<Integer, EditText> editTextHashs = new HashMap<>();
         final EditText subject = alertLayout.findViewById(R.id.subjecthomework);
         editTextHashs.put(R.string.subject, subject);
@@ -398,7 +398,7 @@ public class AlertDialogsHelper {
         });
     }
 
-    public static void getEditTeacherDialog(final Activity activity, final View alertLayout, final TeachersListAdapter adapter, int listposition) {
+    public static void getEditTeacherDialog(final Activity activity, final View alertLayout, final TeachersAdapter adapter, int listposition) {
         final HashMap<Integer, EditText> editTextHashs = new HashMap<>();
         final EditText name = alertLayout.findViewById(R.id.name_dialog);
         editTextHashs.put(R.string.name, name);
@@ -408,7 +408,7 @@ public class AlertDialogsHelper {
         editTextHashs.put(R.string.phone_number, phone_number);
         final EditText email = alertLayout.findViewById(R.id.email_dialog);
         editTextHashs.put(R.string.email, email);
-        final Teacher teacher = adapter.getTeacherlist().get(listposition);
+        final Teacher teacher = adapter.getTeacherList().get(listposition);
 
         name.setText(teacher.getName());
         post.setText(teacher.getPost());
@@ -455,7 +455,7 @@ public class AlertDialogsHelper {
         });
     }
 
-    public static void getAddTeacherDialog(final Activity activity, final View alertLayout, final TeachersListAdapter adapter) {
+    public static void getAddTeacherDialog(final Activity activity, final View alertLayout, final TeachersAdapter adapter) {
         final HashMap<Integer, EditText> editTextHashs = new HashMap<>();
         final EditText name = alertLayout.findViewById(R.id.name_dialog);
         editTextHashs.put(R.string.name, name);
@@ -522,9 +522,9 @@ public class AlertDialogsHelper {
         });
     }
 
-    public static void getEditNoteDialog(final Activity activity, final View alertLayout, final NotesListAdapter adapter, int listposition) {
+    public static void getEditNoteDialog(final Activity activity, final View alertLayout, final NotesAdapter adapter, int listposition) {
         final EditText title = alertLayout.findViewById(R.id.titlenote);
-        final Note note = adapter.getNotelist().get(listposition);
+        final Note note = adapter.getNoteList().get(listposition);
         title.setText(note.getTitle());
 
         AlertDialog.Builder alert = new AlertDialog.Builder(activity);
@@ -560,7 +560,7 @@ public class AlertDialogsHelper {
         });
     }
 
-    public static void getAddNoteDialog(final Activity activity, final View alertLayout, final NotesListAdapter adapter) {
+    public static void getAddNoteDialog(final Activity activity, final View alertLayout, final NotesAdapter adapter) {
         final EditText title = alertLayout.findViewById(R.id.titlenote);
         final Note note = new Note();
 

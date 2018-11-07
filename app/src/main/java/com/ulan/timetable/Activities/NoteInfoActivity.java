@@ -1,6 +1,5 @@
 package com.ulan.timetable.Activities;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -21,8 +20,12 @@ public class NoteInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_info);
+        setupIntent();
+    }
+
+    private void setupIntent() {
         db = new DbHelper(NoteInfoActivity.this);
-        note = (Note) getIntent().getSerializableExtra("note");
+        note = (Note) getIntent().getSerializableExtra(NotesActivity.KEY_NOTE);
         text = findViewById(R.id.edittextNote);
         if(note.getText() != null) {
             text.setText(note.getText());
@@ -33,7 +36,7 @@ public class NoteInfoActivity extends AppCompatActivity {
     public void onBackPressed() {
         note.setText(text.getText().toString());
         db.updateNote(note);
-        Toast.makeText(NoteInfoActivity.this, "Saved", Toast.LENGTH_SHORT).show();
+        Toast.makeText(NoteInfoActivity.this, getResources().getString(R.string.saved), Toast.LENGTH_SHORT).show();
         super.onBackPressed();
     }
 
@@ -43,7 +46,7 @@ public class NoteInfoActivity extends AppCompatActivity {
             case android.R.id.home:
                 note.setText(text.getText().toString());
                 db.updateNote(note);
-                Toast.makeText(NoteInfoActivity.this, "Saved", Toast.LENGTH_SHORT).show();
+                Toast.makeText(NoteInfoActivity.this, getResources().getString(R.string.saved), Toast.LENGTH_SHORT).show();
                 super.onBackPressed();
                 return true;
             default:

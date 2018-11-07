@@ -2,15 +2,20 @@ package com.ulan.timetable.Adapters;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ActionMode;
 import android.support.v7.widget.PopupMenu;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,9 +31,7 @@ import java.util.Objects;
 /**
  * Created by Ulan on 08.09.2018.
  */
-public class WeekListAdapter extends ArrayAdapter<Week> {
-
-    private static final String TAG = "WeekListAdapter";
+public class WeekAdapter extends ArrayAdapter<Week> {
 
     private Activity mActivity;
     private int mResource;
@@ -43,7 +46,7 @@ public class WeekListAdapter extends ArrayAdapter<Week> {
         ImageView popup;
     }
 
-    public WeekListAdapter(Activity activity, int resource, ArrayList<Week> objects) {
+    public WeekAdapter(Activity activity, int resource, ArrayList<Week> objects) {
         super(activity, resource, objects);
         mActivity = activity;
         mResource = resource;
@@ -53,7 +56,7 @@ public class WeekListAdapter extends ArrayAdapter<Week> {
     @SuppressLint("SetTextI18n")
     @NonNull
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, @NonNull ViewGroup parent) {
         String subject = Objects.requireNonNull(getItem(position)).getSubject();
         String teacher = Objects.requireNonNull(getItem(position)).getTeacher();
         String time_from = Objects.requireNonNull(getItem(position)).getFromTime();
@@ -116,7 +119,7 @@ public class WeekListAdapter extends ArrayAdapter<Week> {
         return convertView;
     }
 
-    public ArrayList<Week> getWeeklist() {
+    public ArrayList<Week> getWeekList() {
         return weeklist;
     }
 

@@ -14,7 +14,7 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
-import com.ulan.timetable.Adapters.TeachersListAdapter;
+import com.ulan.timetable.Adapters.TeachersAdapter;
 import com.ulan.timetable.Model.Teacher;
 import com.ulan.timetable.R;
 import com.ulan.timetable.Utils.AlertDialogsHelper;
@@ -29,22 +29,31 @@ public class TeachersActivity extends AppCompatActivity {
     private Context context = this;
     private ListView listView;
     private DbHelper db;
-    private TeachersListAdapter adapter;
+    private TeachersAdapter adapter;
     private int listposition = 0;
-    CoordinatorLayout coordinatorLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teachers);
-        coordinatorLayout = findViewById(R.id.coordinatorTeachers);
+        initAll();
+    }
+
+    private void initAll() {
+        setupAdapter();
+        setupListViewMultiSelect();
+        setupCustomDialog();
+    }
+
+    private void setupAdapter() {
         db = new DbHelper(context);
-        adapter = new TeachersListAdapter(context, R.layout.listview_teachers_adapter, db.getTeacher());
+        adapter = new TeachersAdapter(context, R.layout.listview_teachers_adapter, db.getTeacher());
         listView = findViewById(R.id.teacherlist);
         listView.setAdapter(adapter);
+    }
 
-        initCustomDialog();
-
+    private void setupListViewMultiSelect() {
+        final CoordinatorLayout coordinatorLayout = findViewById(R.id.coordinatorTeachers);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         listView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
             @Override
@@ -76,10 +85,10 @@ public class TeachersActivity extends AppCompatActivity {
                             int key = checkedItems.keyAt(i);
                             if (checkedItems.get(key)) {
                                 db.deleteTeacherById(adapter.getItem(key));
-                                removelist.add(adapter.getTeacherlist().get(key));
+                                removelist.add(adapter.getTeacherList().get(key));
                             }
                         }
-                        adapter.getTeacherlist().removeAll(removelist);
+                        adapter.getTeacherList().removeAll(removelist);
                         db.updateTeacher(adapter.getTeacher());
                         adapter.notifyDataSetChanged();
                         mode.finish();
@@ -103,7 +112,7 @@ public class TeachersActivity extends AppCompatActivity {
         });
     }
 
-    public void initCustomDialog() {
+    private void setupCustomDialog() {
         final View alertLayout = getLayoutInflater().inflate(R.layout.dialog_add_teacher, null);
         AlertDialogsHelper.getAddTeacherDialog(TeachersActivity.this, alertLayout, adapter);
     }
