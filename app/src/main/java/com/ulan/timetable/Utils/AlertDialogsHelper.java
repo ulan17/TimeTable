@@ -30,6 +30,8 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Ulan on 22.10.2018.
@@ -226,8 +228,9 @@ public class AlertDialogsHelper {
                     Snackbar.make(alertLayout, R.string.time_error, Snackbar.LENGTH_LONG).show();
                 } else {
                     DbHelper dbHelper = new DbHelper(activity);
+                    Matcher fragment = Pattern.compile("(.*Fragment)").matcher(adapter.getItem(viewPager.getCurrentItem()).toString());
                     week.setSubject(subject.getText().toString());
-                    week.setFragment(adapter.getItem(viewPager.getCurrentItem()).toString());
+                    week.setFragment(fragment.find() ? fragment.group() : null);
                     week.setTeacher(teacher.getText().toString());
                     week.setRoom(room.getText().toString());
                     dbHelper.insertWeek(week);

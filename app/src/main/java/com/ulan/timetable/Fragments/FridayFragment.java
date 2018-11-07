@@ -26,7 +26,7 @@ import java.util.Objects;
 
 public class FridayFragment extends Fragment {
 
-    private static final String KEY_FRIDAY_FRAGMENT = "Friday";
+    public static final String KEY_FRIDAY_FRAGMENT = "Friday";
     private DbHelper db;
     private ListView listView;
     private WeekAdapter adapter;
