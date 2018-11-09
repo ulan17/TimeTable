@@ -2,21 +2,16 @@ package com.ulan.timetable.Adapters;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.ActionMode;
 import android.support.v7.widget.PopupMenu;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.ulan.timetable.R;
@@ -37,6 +32,7 @@ public class WeekAdapter extends ArrayAdapter<Week> {
     private int mResource;
     private ArrayList<Week> weeklist;
     private Week week;
+    private ListView mListView;
 
     private static class ViewHolder {
         TextView subject;
@@ -46,11 +42,12 @@ public class WeekAdapter extends ArrayAdapter<Week> {
         ImageView popup;
     }
 
-    public WeekAdapter(Activity activity, int resource, ArrayList<Week> objects) {
+    public WeekAdapter(Activity activity, ListView listView, int resource, ArrayList<Week> objects) {
         super(activity, resource, objects);
         mActivity = activity;
         mResource = resource;
         weeklist = objects;
+        mListView = listView;
     }
 
     @SuppressLint("SetTextI18n")
@@ -86,7 +83,6 @@ public class WeekAdapter extends ArrayAdapter<Week> {
         holder.room.setText(week.getRoom());
         holder.time.setText(week.getFromTime() + " - " + week.getToTime());
         holder.popup.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 final PopupMenu popup = new PopupMenu(mActivity, holder.popup);
@@ -106,14 +102,16 @@ public class WeekAdapter extends ArrayAdapter<Week> {
                                 final View alertLayout = mActivity.getLayoutInflater().inflate(R.layout.dialog_add_subject, null);
                                 AlertDialogsHelper.getEditSubjectDialog(mActivity, alertLayout, weeklist, position);
                                 return true;
-                                default:
-                                    return onMenuItemClick(item);
+                            default:
+                                return onMenuItemClick(item);
                         }
                     }
                 });
                 popup.show();
             }
         });
+
+        hidePopUpMenu(holder);
 
         // holder.mConstraintLayout.setBackground(mActivity.getDrawable(week.getColor()));
         return convertView;
@@ -127,4 +125,17 @@ public class WeekAdapter extends ArrayAdapter<Week> {
         return week;
     }
 
+    private void hidePopUpMenu(ViewHolder holder) {
+        SparseBooleanArray checkedItems = mListView.getCheckedItemPositions();
+        if (checkedItems.size() > 0) {
+            for (int i = 0; i < checkedItems.size(); i++) {
+                int key = checkedItems.keyAt(i);
+                if (checkedItems.get(key)) {
+                    holder.popup.setVisibility(View.INVISIBLE);
+                    }
+            }
+        } else {
+            holder.popup.setVisibility(View.VISIBLE);
+        }
+    }
 }

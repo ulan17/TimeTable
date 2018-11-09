@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.ulan.timetable.Adapters.WeekAdapter;
@@ -30,6 +31,7 @@ public class MondayFragment extends Fragment {
     private ListView listView;
     private WeekAdapter adapter;
     private int listposition;
+    private ImageView popup;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,13 +39,14 @@ public class MondayFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_monday, container, false);
         setupAdapter(view);
         setupListViewMultiSelect();
+        popup = view.findViewById(R.id.popupbtn);
         return view;
     }
 
     private void setupAdapter(View view) {
         db = new DbHelper(getActivity());
         listView = view.findViewById(R.id.mondaylist);
-        adapter = new WeekAdapter(getActivity(), R.layout.listview_week_adapter, db.getWeek(KEY_MONDAY_FRAGMENT));
+        adapter = new WeekAdapter(getActivity(), listView, R.layout.listview_week_adapter, db.getWeek(KEY_MONDAY_FRAGMENT));
         listView.setAdapter(adapter);
     }
 

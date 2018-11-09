@@ -136,7 +136,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="2dp"
-                android:background="?android:selectableItemBackground"
+                android:background="?selectableItemBackgroundBorderless"
                 card_view:layout_constraintEnd_toEndOf="parent"
                 card_view:layout_constraintTop_toTopOf="@+id/subject"
                 card_view:srcCompat="@drawable/baseline_expand_more_black_24" />

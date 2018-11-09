@@ -44,7 +44,7 @@ public class TuesdayFragment extends Fragment {
     private void setupAdapter(View view) {
         db = new DbHelper(getActivity());
         listView = view.findViewById(R.id.tuesdaylist);
-        adapter = new WeekAdapter(getActivity(), R.layout.listview_week_adapter, db.getWeek(KEY_TUESDAY_FRAGMENT));
+        adapter = new WeekAdapter(getActivity(), listView, R.layout.listview_week_adapter, db.getWeek(KEY_TUESDAY_FRAGMENT));
         listView.setAdapter(adapter);
     }
 
