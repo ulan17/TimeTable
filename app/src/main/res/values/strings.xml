@@ -44,6 +44,9 @@
     <string name="room_dialog">Room:</string>
     <string name="select_time">Select time</string>
     <string name="select_color">Select color</string>
+    <string name="choose_time">Choose time</string>
+    <string name="choose_date">Choose date</string>
+    <string name="choose_color">Choose color</string>
 
     <!-- Homeworks Activity strings -->
     <string name="title_activity_homeworks">HomeworksActivity</string>

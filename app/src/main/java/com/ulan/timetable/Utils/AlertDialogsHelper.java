@@ -80,7 +80,7 @@ public class AlertDialogsHelper {
                                 week.setFromTime(String.format("%02d:%02d", hourOfDay, minute));
                             }
                         }, mHour, mMinute, true);
-                timePickerDialog.setTitle(R.string.select_time);
+                timePickerDialog.setTitle(R.string.choose_time);
                 timePickerDialog.show();
             }
         });
@@ -102,7 +102,7 @@ public class AlertDialogsHelper {
                                 week.setToTime(String.format("%02d:%02d", hourOfDay, minute));
                             }
                         }, hour, minute, true);
-                timePickerDialog.setTitle(R.string.select_time);
+                timePickerDialog.setTitle(R.string.choose_time);
                 timePickerDialog.show();
             }
         });
@@ -111,12 +111,13 @@ public class AlertDialogsHelper {
             @Override
             public void onClick(View v) {
                 final ColorPicker colorPicker = new ColorPicker(activity);
+                colorPicker.setTitle(activity.getResources().getString(R.string.choose_color));
                 colorPicker.show();
                 colorPicker.setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
                     @Override
                     public void onChooseColor(int position,int color) {
                         week.setColor(color != 0 ? color : Color.WHITE);
-                        select_color.setBackgroundColor(color);
+                        select_color.setBackgroundColor(color != 0 ? color : Color.WHITE);
                     }
 
                     @Override
@@ -197,7 +198,7 @@ public class AlertDialogsHelper {
                                 week.setFromTime(String.format("%02d:%02d", hourOfDay, minute));
                             }
                         }, mHour, mMinute, true);
-                timePickerDialog.setTitle(R.string.select_time);
+                timePickerDialog.setTitle(R.string.choose_time);
                 timePickerDialog.show(); }});
 
         to_time.setOnClickListener(new View.OnClickListener() {
@@ -216,7 +217,7 @@ public class AlertDialogsHelper {
                                 week.setToTime(String.format("%02d:%02d", hourOfDay, minute));
                             }
                         }, hour, minute, true);
-                timePickerDialog.setTitle(R.string.select_time);
+                timePickerDialog.setTitle(R.string.choose_time);
                 timePickerDialog.show();
             }
         });
@@ -225,12 +226,13 @@ public class AlertDialogsHelper {
             @Override
             public void onClick(View v) {
                 final ColorPicker colorPicker = new ColorPicker(activity);
+                colorPicker.setTitle(activity.getResources().getString(R.string.choose_color));
                 colorPicker.show();
                 colorPicker.setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
                     @Override
                     public void onChooseColor(int position,int color) {
                         week.setColor(color);
-                        select_color.setBackgroundColor(color);
+                        select_color.setBackgroundColor(color != 0 ? color : Color.WHITE);
                     }
 
                     @Override
@@ -323,7 +325,7 @@ public class AlertDialogsHelper {
                         homework.setDate(String.format("%02d-%02d-%02d", year, month+1, dayOfMonth));
                     }
                 }, mYear, mMonth, mdayofMonth);
-                datePickerDialog.setTitle(R.string.select_date);
+                datePickerDialog.setTitle(R.string.choose_date);
                 datePickerDialog.show();
             }
         });
@@ -391,7 +393,7 @@ public class AlertDialogsHelper {
                         homework.setDate(String.format("%02d-%02d-%02d", year, month+1, dayOfMonth));
                     }
                 }, mYear, mMonth, mdayofMonth);
-                datePickerDialog.setTitle(R.string.select_date);
+                datePickerDialog.setTitle(R.string.choose_date);
                 datePickerDialog.show();
             }
         });
