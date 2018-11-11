@@ -6,16 +6,17 @@ package com.ulan.timetable.Model;
 public class Week {
 
     private String subject, fragment, teacher, room, fromtime, totime, time;
-    private int id;
+    private int id, color;
 
     public Week() {}
 
-    public Week(String subject, String teacher, String room, String fromtime, String totime) {
+    public Week(String subject, String teacher, String room, String fromtime, String totime, int color) {
         this.subject = subject;
         this.teacher = teacher;
         this.room = room;
         this.fromtime = fromtime;
         this.totime = totime;
+        this.color = color;
     }
 
     public int getId() {
@@ -84,5 +85,13 @@ public class Week {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
     }
 }

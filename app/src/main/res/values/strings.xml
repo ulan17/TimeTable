@@ -43,6 +43,7 @@
     <string name="teacher_dialog">Teacher:</string>
     <string name="room_dialog">Room:</string>
     <string name="select_time">Select time</string>
+    <string name="select_color">Select color</string>
 
     <!-- Homeworks Activity strings -->
     <string name="title_activity_homeworks">HomeworksActivity</string>

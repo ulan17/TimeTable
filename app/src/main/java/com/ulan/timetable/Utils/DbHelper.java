@@ -28,6 +28,7 @@ public class DbHelper extends SQLiteOpenHelper{
     private static final String TIMETABLE_ROOM = "room";
     private static final String TIMETABLE_FROM_TIME = "fromtime";
     private static final String TIMETABLE_TO_TIME = "totime";
+    public static final String TIMETABLE_COLOR = "color";
 
     private static final String HOMEWORKS = "homeworks";
     private static final String HOMEWORKS_ID  = "id";
@@ -59,7 +60,8 @@ public class DbHelper extends SQLiteOpenHelper{
                 + TIMETABLE_TEACHER + " TEXT,"
                 + TIMETABLE_ROOM + " TEXT,"
                 + TIMETABLE_FROM_TIME + " TEXT,"
-                + TIMETABLE_TO_TIME + " TEXT"+ ")";
+                + TIMETABLE_TO_TIME + " TEXT,"
+                + TIMETABLE_COLOR + " INTEGER" +  ")";
 
         String CREATE_HOMEWORKS = "CREATE TABLE " + HOMEWORKS + "("
                 + HOMEWORKS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -116,6 +118,7 @@ public class DbHelper extends SQLiteOpenHelper{
         contentValues.put(TIMETABLE_ROOM, week.getRoom());
         contentValues.put(TIMETABLE_FROM_TIME, week.getFromTime());
         contentValues.put(TIMETABLE_TO_TIME, week.getToTime());
+        contentValues.put(TIMETABLE_COLOR, week.getColor());
         db.insert(TIMETABLE,null, contentValues);
         db.update(TIMETABLE, contentValues, TIMETABLE_FRAGMENT, null);
         db.close();
@@ -135,6 +138,7 @@ public class DbHelper extends SQLiteOpenHelper{
         contentValues.put(TIMETABLE_ROOM, week.getRoom());
         contentValues.put(TIMETABLE_FROM_TIME,week.getFromTime());
         contentValues.put(TIMETABLE_TO_TIME, week.getToTime());
+        contentValues.put(TIMETABLE_COLOR, week.getColor());
         db.update(TIMETABLE, contentValues, TIMETABLE_ID + " = " + week.getId(), null);
         db.close();
     }
@@ -153,6 +157,7 @@ public class DbHelper extends SQLiteOpenHelper{
             week.setRoom(cursor.getString(cursor.getColumnIndex(TIMETABLE_ROOM)));
             week.setFromTime(cursor.getString(cursor.getColumnIndex(TIMETABLE_FROM_TIME)));
             week.setToTime(cursor.getString(cursor.getColumnIndex(TIMETABLE_TO_TIME)));
+            week.setColor(cursor.getInt(cursor.getColumnIndex(TIMETABLE_COLOR)));
             weeklist.add(week);
         }
         return  weeklist;

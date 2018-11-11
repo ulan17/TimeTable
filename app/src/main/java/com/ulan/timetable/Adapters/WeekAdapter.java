@@ -2,7 +2,9 @@ package com.ulan.timetable.Adapters;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.PopupMenu;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
@@ -18,6 +20,7 @@ import com.ulan.timetable.R;
 import com.ulan.timetable.Model.Week;
 import com.ulan.timetable.Utils.AlertDialogsHelper;
 import com.ulan.timetable.Utils.DbHelper;
+import com.ulan.timetable.WeekActivity;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -33,6 +36,7 @@ public class WeekAdapter extends ArrayAdapter<Week> {
     private ArrayList<Week> weeklist;
     private Week week;
     private ListView mListView;
+    private int selectedIndex;
 
     private static class ViewHolder {
         TextView subject;
@@ -40,6 +44,7 @@ public class WeekAdapter extends ArrayAdapter<Week> {
         TextView time;
         TextView room;
         ImageView popup;
+        CardView cardView;
     }
 
     public WeekAdapter(Activity activity, ListView listView, int resource, ArrayList<Week> objects) {
@@ -59,8 +64,9 @@ public class WeekAdapter extends ArrayAdapter<Week> {
         String time_from = Objects.requireNonNull(getItem(position)).getFromTime();
         String time_to = Objects.requireNonNull(getItem(position)).getToTime();
         String room = Objects.requireNonNull(getItem(position)).getRoom();
+        int color = getItem(position).getColor();
 
-        week = new Week(subject, teacher, room, time_from, time_to);
+        week = new Week(subject, teacher, room, time_from, time_to, color);
         final ViewHolder holder;
 
         if(convertView == null){
@@ -72,6 +78,7 @@ public class WeekAdapter extends ArrayAdapter<Week> {
             holder.time = convertView.findViewById(R.id.time);
             holder.room = convertView.findViewById(R.id.room);
             holder.popup = convertView.findViewById(R.id.popupbtn);
+            holder.cardView = convertView.findViewById(R.id.week_cardview);
             convertView.setTag(holder);
         }
         else{
@@ -82,16 +89,17 @@ public class WeekAdapter extends ArrayAdapter<Week> {
         holder.teacher.setText(week.getTeacher());
         holder.room.setText(week.getRoom());
         holder.time.setText(week.getFromTime() + " - " + week.getToTime());
+        holder.cardView.setCardBackgroundColor(week.getColor() != 0 ? week.getColor() : Color.WHITE);
         holder.popup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final PopupMenu popup = new PopupMenu(mActivity, holder.popup);
+                final DbHelper db = new DbHelper(mActivity);
                 popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.delete_popup:
-                                DbHelper db = new DbHelper(mActivity);
                                 db.deleteWeekById(getItem(position));
                                 db.updateWeek(getItem(position));
                                 weeklist.remove(position);
@@ -100,7 +108,8 @@ public class WeekAdapter extends ArrayAdapter<Week> {
 
                             case R.id.edit_popup:
                                 final View alertLayout = mActivity.getLayoutInflater().inflate(R.layout.dialog_add_subject, null);
-                                AlertDialogsHelper.getEditSubjectDialog(mActivity, alertLayout, weeklist, position);
+                                AlertDialogsHelper.getEditSubjectDialog(mActivity, alertLayout, weeklist, mListView, position);
+                                notifyDataSetChanged();
                                 return true;
                             default:
                                 return onMenuItemClick(item);
@@ -112,7 +121,6 @@ public class WeekAdapter extends ArrayAdapter<Week> {
         });
 
         hidePopUpMenu(holder);
-
         // holder.mConstraintLayout.setBackground(mActivity.getDrawable(week.getColor()));
         return convertView;
     }

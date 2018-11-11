@@ -82,7 +82,7 @@ public class MondayFragment extends Fragment {
                     case R.id.action_edit:
                         if (listView.getCheckedItemCount() == 1) {
                             final View alertLayout = getLayoutInflater().inflate(R.layout.dialog_add_subject, null);
-                            AlertDialogsHelper.getEditSubjectDialog(getActivity(), alertLayout, adapter.getWeekList(), listposition);
+                            AlertDialogsHelper.getEditSubjectDialog(getActivity(), alertLayout, adapter.getWeekList(), listView, listposition);
                         } else {
                             Snackbar.make(Objects.requireNonNull(getView()), R.string.select_snackbar, Snackbar.LENGTH_LONG).show();
                         }
