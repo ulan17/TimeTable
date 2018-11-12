@@ -116,7 +116,7 @@ public class AlertDialogsHelper {
                 colorPicker.setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
                     @Override
                     public void onChooseColor(int position,int color) {
-                        week.setColor(color != 0 ? color : Color.WHITE);
+                        week.setColor(color);
                         select_color.setBackgroundColor(color != 0 ? color : Color.WHITE);
                     }
 
@@ -452,7 +452,7 @@ public class AlertDialogsHelper {
         });
     }
 
-    public static void getEditTeacherDialog(final Activity activity, final View alertLayout, final TeachersAdapter adapter, int listposition) {
+    public static void getEditTeacherDialog(final Activity activity, final View alertLayout, final ArrayList<Teacher> adapter, final ListView listView, int listposition) {
         final HashMap<Integer, EditText> editTextHashs = new HashMap<>();
         final EditText name = alertLayout.findViewById(R.id.name_dialog);
         editTextHashs.put(R.string.name, name);
@@ -462,7 +462,7 @@ public class AlertDialogsHelper {
         editTextHashs.put(R.string.phone_number, phone_number);
         final EditText email = alertLayout.findViewById(R.id.email_dialog);
         editTextHashs.put(R.string.email, email);
-        final Teacher teacher = adapter.getTeacherList().get(listposition);
+        final Teacher teacher = adapter.get(listposition);
 
         name.setText(teacher.getName());
         post.setText(teacher.getPost());
@@ -497,12 +497,13 @@ public class AlertDialogsHelper {
                     }
                 } else {
                     DbHelper dbHelper = new DbHelper(activity);
+                    TeachersAdapter teachersAdapter = (TeachersAdapter) listView.getAdapter();
                     teacher.setName(name.getText().toString());
                     teacher.setPost(post.getText().toString());
                     teacher.setPhonenumber(phone_number.getText().toString());
                     teacher.setEmail(email.getText().toString());
                     dbHelper.updateTeacher(teacher);
-                    adapter.notifyDataSetChanged();
+                    teachersAdapter.notifyDataSetChanged();
                     dialog.dismiss();
                 }
             }

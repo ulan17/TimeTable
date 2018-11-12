@@ -47,8 +47,8 @@ public class TeachersActivity extends AppCompatActivity {
 
     private void setupAdapter() {
         db = new DbHelper(context);
-        adapter = new TeachersAdapter(context, R.layout.listview_teachers_adapter, db.getTeacher());
         listView = findViewById(R.id.teacherlist);
+        adapter = new TeachersAdapter(TeachersActivity.this, listView, R.layout.listview_teachers_adapter, db.getTeacher());
         listView.setAdapter(adapter);
     }
 
@@ -96,7 +96,7 @@ public class TeachersActivity extends AppCompatActivity {
                     case R.id.action_edit:
                         if(listView.getCheckedItemCount() == 1) {
                             final View alertLayout = getLayoutInflater().inflate(R.layout.dialog_add_teacher, null);
-                            AlertDialogsHelper.getEditTeacherDialog(TeachersActivity.this, alertLayout, adapter, listposition);
+                            AlertDialogsHelper.getEditTeacherDialog(TeachersActivity.this, alertLayout, adapter.getTeacherList(), listView, listposition);
                         } else {
                             Snackbar.make(coordinatorLayout, R.string.select_snackbar, Snackbar.LENGTH_LONG).show();
                         }

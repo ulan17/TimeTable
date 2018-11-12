@@ -20,7 +20,6 @@ import com.ulan.timetable.R;
 import com.ulan.timetable.Model.Week;
 import com.ulan.timetable.Utils.AlertDialogsHelper;
 import com.ulan.timetable.Utils.DbHelper;
-import com.ulan.timetable.WeekActivity;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -36,7 +35,6 @@ public class WeekAdapter extends ArrayAdapter<Week> {
     private ArrayList<Week> weeklist;
     private Week week;
     private ListView mListView;
-    private int selectedIndex;
 
     private static class ViewHolder {
         TextView subject;
@@ -121,7 +119,7 @@ public class WeekAdapter extends ArrayAdapter<Week> {
         });
 
         hidePopUpMenu(holder);
-        // holder.mConstraintLayout.setBackground(mActivity.getDrawable(week.getColor()));
+
         return convertView;
     }
 
