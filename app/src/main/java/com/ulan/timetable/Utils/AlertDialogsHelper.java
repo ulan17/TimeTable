@@ -32,7 +32,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -298,18 +297,18 @@ public class AlertDialogsHelper {
         });
     }
 
-    public static void getEditHomeworkDialog(final Activity activity, final View alertLayout, final HomeworksAdapter adapter, int listposition) {
+    public static void getEditHomeworkDialog(final Activity activity, final View alertLayout, final ArrayList<Homework> adapter, final ListView listView, int listposition) {
         final HashMap<Integer, EditText> editTextHashs = new HashMap<>();
         final EditText subject = alertLayout.findViewById(R.id.subjecthomework);
         editTextHashs.put(R.string.subject, subject);
         final EditText description = alertLayout.findViewById(R.id.descriptionhomework);
         editTextHashs.put(R.string.desctiption, description);
         final TextView date = alertLayout.findViewById(R.id.datehomework);
-        final Homework homework = adapter.getHomeworkList().get(listposition);
+        final Homework homework = adapter.get(listposition);
 
-        subject.setText(Objects.requireNonNull(adapter.getItem(listposition)).getSubject());
-        description.setText(Objects.requireNonNull(adapter.getItem(listposition)).getDescription());
-        date.setText(Objects.requireNonNull(adapter.getItem(listposition)).getDate());
+        subject.setText(homework.getSubject());
+        description.setText(homework.getDescription());
+        date.setText(homework.getDate());
 
         date.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -360,10 +359,11 @@ public class AlertDialogsHelper {
                     Snackbar.make(alertLayout, R.string.deadline_snackbar, Snackbar.LENGTH_LONG).show();
                 } else {
                     DbHelper dbHelper = new DbHelper(activity);
+                    HomeworksAdapter homeworksAdapter = (HomeworksAdapter) listView.getAdapter();
                     homework.setSubject(subject.getText().toString());
                     homework.setDescription(description.getText().toString());
                     dbHelper.updateHomework(homework);
-                    adapter.notifyDataSetChanged();
+                    homeworksAdapter.notifyDataSetChanged();
                     dialog.dismiss();
                 }
             }

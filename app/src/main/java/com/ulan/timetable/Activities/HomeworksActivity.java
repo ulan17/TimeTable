@@ -47,7 +47,7 @@ public class HomeworksActivity extends AppCompatActivity {
     private void setupAdapter() {
         db = new DbHelper(context);
         listView = findViewById(R.id.homeworklist);
-        adapter = new HomeworksAdapter(context, R.layout.listview_homeworks_adapter, db.getHomework());
+        adapter = new HomeworksAdapter(HomeworksActivity.this, listView, R.layout.listview_homeworks_adapter, db.getHomework());
         listView.setAdapter(adapter);
     }
 
@@ -96,7 +96,7 @@ public class HomeworksActivity extends AppCompatActivity {
                     case R.id.action_edit:
                         if (listView.getCheckedItemCount() == 1) {
                             final View alertLayout = getLayoutInflater().inflate(R.layout.dialog_add_homework, null);
-                            AlertDialogsHelper.getEditHomeworkDialog(HomeworksActivity.this, alertLayout, adapter, listposition);
+                            AlertDialogsHelper.getEditHomeworkDialog(HomeworksActivity.this, alertLayout, adapter.getHomeworkList(), listView, listposition);
                         } else {
                             Snackbar.make(coordinatorLayout, R.string.select_snackbar, Snackbar.LENGTH_LONG).show();
                         }
