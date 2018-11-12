@@ -48,8 +48,8 @@ public class NotesActivity extends AppCompatActivity {
 
     private void setupAdapter() {
         db = new DbHelper(context);
-        adapter = new NotesAdapter(NotesActivity.this, R.layout.listview_notes_adapter, db.getNote());
         listView = findViewById(R.id.notelist);
+        adapter = new NotesAdapter(NotesActivity.this, listView, R.layout.listview_notes_adapter, db.getNote());
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -106,7 +106,7 @@ public class NotesActivity extends AppCompatActivity {
                     case R.id.action_edit:
                         if(listView.getCheckedItemCount() == 1) {
                             final View alertLayout = getLayoutInflater().inflate(R.layout.dialog_add_note, null);
-                            AlertDialogsHelper.getEditNoteDialog(NotesActivity.this, alertLayout, adapter, listposition);
+                            AlertDialogsHelper.getEditNoteDialog(NotesActivity.this, alertLayout, adapter.getNoteList(), listView, listposition);
                         } else {
                             Snackbar.make(coordinatorLayout, R.string.select_snackbar, Snackbar.LENGTH_LONG).show();
                         }

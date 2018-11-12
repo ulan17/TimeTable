@@ -577,9 +577,9 @@ public class AlertDialogsHelper {
         });
     }
 
-    public static void getEditNoteDialog(final Activity activity, final View alertLayout, final NotesAdapter adapter, int listposition) {
+    public static void getEditNoteDialog(final Activity activity, final View alertLayout, final ArrayList<Note> adapter, ListView listView, int listposition) {
         final EditText title = alertLayout.findViewById(R.id.titlenote);
-        final Note note = adapter.getNoteList().get(listposition);
+        final Note note = adapter.get(listposition);
         title.setText(note.getTitle());
 
         AlertDialog.Builder alert = new AlertDialog.Builder(activity);
@@ -608,7 +608,7 @@ public class AlertDialogsHelper {
                     DbHelper dbHelper = new DbHelper(activity);
                     note.setTitle(title.getText().toString());
                     dbHelper.updateNote(note);
-                    adapter.notifyDataSetChanged();
+
                     dialog.dismiss();
                 }
             }
