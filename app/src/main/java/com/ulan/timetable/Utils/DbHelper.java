@@ -28,13 +28,14 @@ public class DbHelper extends SQLiteOpenHelper{
     private static final String TIMETABLE_ROOM = "room";
     private static final String TIMETABLE_FROM_TIME = "fromtime";
     private static final String TIMETABLE_TO_TIME = "totime";
-    public static final String TIMETABLE_COLOR = "color";
+    private static final String TIMETABLE_COLOR = "color";
 
     private static final String HOMEWORKS = "homeworks";
     private static final String HOMEWORKS_ID  = "id";
     private static final String HOMEWORKS_SUBJECT = "subject";
     private static final String HOMEWORKS_DESCRIPTION = "description";
     private static final String HOMEWORKS_DATE = "date";
+    private static final String HOMEWORKS_COLOR = "color";
 
     private static final String NOTES = "notes";
     private static final String NOTES_ID = "id";
@@ -67,7 +68,8 @@ public class DbHelper extends SQLiteOpenHelper{
                 + HOMEWORKS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + HOMEWORKS_SUBJECT + " TEXT,"
                 + HOMEWORKS_DESCRIPTION + " TEXT,"
-                + HOMEWORKS_DATE + " TEXT" + ")";
+                + HOMEWORKS_DATE + " TEXT,"
+                + HOMEWORKS_COLOR + " INTEGER" + ")";
 
         String CREATE_NOTES = "CREATE TABLE " + NOTES + "("
                 + NOTES_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -172,6 +174,7 @@ public class DbHelper extends SQLiteOpenHelper{
         contentValues.put(HOMEWORKS_SUBJECT, homework.getSubject());
         contentValues.put(HOMEWORKS_DESCRIPTION, homework.getDescription());
         contentValues.put(HOMEWORKS_DATE, homework.getDate());
+        contentValues.put(HOMEWORKS_COLOR, homework.getColor());
         db.insert(HOMEWORKS,null, contentValues);
         db.close();
     }
@@ -182,6 +185,7 @@ public class DbHelper extends SQLiteOpenHelper{
         contentValues.put(HOMEWORKS_SUBJECT, homework.getSubject());
         contentValues.put(HOMEWORKS_DESCRIPTION, homework.getDescription());
         contentValues.put(HOMEWORKS_DATE, homework.getDate());
+        contentValues.put(HOMEWORKS_COLOR, homework.getColor());
         db.update(HOMEWORKS, contentValues, HOMEWORKS_ID + " = " + homework.getId(), null);
         db.close();
     }
@@ -204,6 +208,7 @@ public class DbHelper extends SQLiteOpenHelper{
             homework.setSubject(cursor.getString(cursor.getColumnIndex(HOMEWORKS_SUBJECT)));
             homework.setDescription(cursor.getString(cursor.getColumnIndex(HOMEWORKS_DESCRIPTION)));
             homework.setDate(cursor.getString(cursor.getColumnIndex(HOMEWORKS_DATE)));
+            homework.setColor(cursor.getInt(cursor.getColumnIndex(HOMEWORKS_COLOR)));
             homelist.add(homework);
         }
         cursor.close();

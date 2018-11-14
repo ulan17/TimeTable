@@ -4,15 +4,16 @@ package com.ulan.timetable.Model;
  * Created by Ulan on 21.09.2018.
  */
 public class Homework {
-    String subject, description, date;
-    int id;
+    private String subject, description, date;
+    private int id, color;
 
     public Homework() {}
 
-    public Homework(String subject, String description, String date) {
+    public Homework(String subject, String description, String date, int color) {
         this.subject = subject;
         this.description = description;
         this.date = date;
+        this.color = color;
     }
     public String getSubject() {
         return subject;
@@ -44,5 +45,13 @@ public class Homework {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
     }
 }

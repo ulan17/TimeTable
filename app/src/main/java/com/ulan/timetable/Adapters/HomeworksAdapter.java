@@ -1,7 +1,9 @@
 package com.ulan.timetable.Adapters;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -35,6 +37,7 @@ public class HomeworksAdapter extends ArrayAdapter<Homework> {
         TextView subject;
         TextView description;
         TextView date;
+        CardView cardView;
         ImageView popup;
     }
 
@@ -52,8 +55,9 @@ public class HomeworksAdapter extends ArrayAdapter<Homework> {
         String subject = Objects.requireNonNull(getItem(position)).getSubject();
         String description = Objects.requireNonNull(getItem(position)).getDescription();
         String date = Objects.requireNonNull(getItem(position)).getDate();
+        int color = Objects.requireNonNull(getItem(position)).getColor();
 
-        homework = new Homework(subject, description, date);
+        homework = new Homework(subject, description, date, color);
         final ViewHolder holder;
 
         if(convertView == null){
@@ -63,6 +67,7 @@ public class HomeworksAdapter extends ArrayAdapter<Homework> {
             holder.subject = convertView.findViewById(R.id.subjecthomework);
             holder.description = convertView.findViewById(R.id.descriptionhomework);
             holder.date = convertView.findViewById(R.id.datehomework);
+            holder.cardView = convertView.findViewById(R.id.homeworks_cardview);
             holder.popup = convertView.findViewById(R.id.popupbtn);
             convertView.setTag(holder);
         }
@@ -72,6 +77,7 @@ public class HomeworksAdapter extends ArrayAdapter<Homework> {
         holder.subject.setText(homework.getSubject());
         holder.description.setText(homework.getDescription());
         holder.date.setText(homework.getDate());
+        holder.cardView.setCardBackgroundColor(homework.getColor() != 0 ? homework.getColor() : Color.WHITE);
         holder.popup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

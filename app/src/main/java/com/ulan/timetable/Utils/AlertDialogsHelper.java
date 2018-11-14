@@ -304,11 +304,13 @@ public class AlertDialogsHelper {
         final EditText description = alertLayout.findViewById(R.id.descriptionhomework);
         editTextHashs.put(R.string.desctiption, description);
         final TextView date = alertLayout.findViewById(R.id.datehomework);
+        final Button select_color = alertLayout.findViewById(R.id.select_color);
         final Homework homework = adapter.get(listposition);
 
         subject.setText(homework.getSubject());
         description.setText(homework.getDescription());
         date.setText(homework.getDate());
+        select_color.setBackgroundColor(homework.getColor() != 0 ? homework.getColor() : Color.WHITE);
 
         date.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -326,6 +328,26 @@ public class AlertDialogsHelper {
                 }, mYear, mMonth, mdayofMonth);
                 datePickerDialog.setTitle(R.string.choose_date);
                 datePickerDialog.show();
+            }
+        });
+
+        select_color.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final ColorPicker colorPicker = new ColorPicker(activity);
+                colorPicker.setTitle(activity.getResources().getString(R.string.choose_color));
+                colorPicker.show();
+                colorPicker.setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
+                    @Override
+                    public void onChooseColor(int position,int color) {
+                        homework.setColor(color);
+                        select_color.setBackgroundColor(color != 0 ? color : Color.WHITE);
+                    }
+
+                    @Override
+                    public void onCancel(){
+                    }
+                });
             }
         });
 
@@ -377,6 +399,7 @@ public class AlertDialogsHelper {
         final EditText description = alertLayout.findViewById(R.id.descriptionhomework);
         editTextHashs.put(R.string.desctiption, description);
         final TextView date = alertLayout.findViewById(R.id.datehomework);
+        final Button select_color = alertLayout.findViewById(R.id.select_color);
         final Homework homework = new Homework();
 
         date.setOnClickListener(new View.OnClickListener() {
@@ -395,6 +418,26 @@ public class AlertDialogsHelper {
                 }, mYear, mMonth, mdayofMonth);
                 datePickerDialog.setTitle(R.string.choose_date);
                 datePickerDialog.show();
+            }
+        });
+
+        select_color.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final ColorPicker colorPicker = new ColorPicker(activity);
+                colorPicker.setTitle(activity.getResources().getString(R.string.choose_color));
+                colorPicker.show();
+                colorPicker.setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
+                    @Override
+                    public void onChooseColor(int position,int color) {
+                        homework.setColor(color);
+                        select_color.setBackgroundColor(color != 0 ? color : Color.WHITE);
+                    }
+
+                    @Override
+                    public void onCancel(){
+                    }
+                });
             }
         });
 
@@ -445,6 +488,7 @@ public class AlertDialogsHelper {
                     subject.getText().clear();
                     description.getText().clear();
                     date.setText(R.string.select_date);
+                    select_color.setBackgroundColor(Color.WHITE);
                     subject.requestFocus();
                     dialog.dismiss();
                 }
