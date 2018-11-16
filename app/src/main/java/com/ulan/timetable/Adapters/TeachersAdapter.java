@@ -1,7 +1,9 @@
 package com.ulan.timetable.Adapters;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -12,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.ulan.timetable.Activities.TeachersActivity;
 import com.ulan.timetable.Model.Teacher;
 import com.ulan.timetable.R;
 import com.ulan.timetable.Utils.AlertDialogsHelper;
@@ -37,6 +38,7 @@ public class TeachersAdapter extends ArrayAdapter<Teacher> {
         TextView post;
         TextView phonenumber;
         TextView email;
+        CardView cardView;
         ImageView popup;
     }
 
@@ -55,9 +57,9 @@ public class TeachersAdapter extends ArrayAdapter<Teacher> {
         String post = Objects.requireNonNull(getItem(position)).getPost();
         String phonenumber = Objects.requireNonNull(getItem(position)).getPhonenumber();
         String email = Objects.requireNonNull(getItem(position)).getEmail();
+        int color = Objects.requireNonNull(getItem(position)).getColor();
 
-
-        teacher = new Teacher(name, post, phonenumber, email);
+        teacher = new Teacher(name, post, phonenumber, email, color);
         final ViewHolder holder;
 
         if(convertView == null){
@@ -68,6 +70,7 @@ public class TeachersAdapter extends ArrayAdapter<Teacher> {
             holder.post = convertView.findViewById(R.id.postteacher);
             holder.phonenumber = convertView.findViewById(R.id.numberteacher);
             holder.email = convertView.findViewById(R.id.emailteacher);
+            holder.cardView = convertView.findViewById(R.id.teacher_cardview);
             holder.popup = convertView.findViewById(R.id.popupbtn);
             convertView.setTag(holder);
         }
@@ -78,6 +81,7 @@ public class TeachersAdapter extends ArrayAdapter<Teacher> {
         holder.post.setText(teacher.getPost());
         holder.phonenumber.setText(teacher.getPhonenumber());
         holder.email.setText(teacher.getEmail());
+        holder.cardView.setCardBackgroundColor(teacher.getColor() != 0 ? teacher.getColor() : Color.WHITE);
         holder.popup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

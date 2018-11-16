@@ -506,12 +506,34 @@ public class AlertDialogsHelper {
         editTextHashs.put(R.string.phone_number, phone_number);
         final EditText email = alertLayout.findViewById(R.id.email_dialog);
         editTextHashs.put(R.string.email, email);
+        final Button select_color = alertLayout.findViewById(R.id.select_color);
         final Teacher teacher = adapter.get(listposition);
 
         name.setText(teacher.getName());
         post.setText(teacher.getPost());
         phone_number.setText(teacher.getPhonenumber());
         email.setText(teacher.getEmail());
+        select_color.setBackgroundColor(teacher.getColor() != 0 ? teacher.getColor() : Color.WHITE);
+
+        select_color.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final ColorPicker colorPicker = new ColorPicker(activity);
+                colorPicker.setTitle(activity.getResources().getString(R.string.choose_color));
+                colorPicker.show();
+                colorPicker.setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
+                    @Override
+                    public void onChooseColor(int position,int color) {
+                        teacher.setColor(color);
+                        select_color.setBackgroundColor(color != 0 ? color : Color.WHITE);
+                    }
+
+                    @Override
+                    public void onCancel(){
+                    }
+                });
+            }
+        });
 
         final AlertDialog.Builder alert = new AlertDialog.Builder(activity);
         alert.setTitle(R.string.edit_teacher);
@@ -564,7 +586,28 @@ public class AlertDialogsHelper {
         editTextHashs.put(R.string.phone_number, phone_number);
         final EditText email = alertLayout.findViewById(R.id.email_dialog);
         editTextHashs.put(R.string.email, email);
+        final Button select_color = alertLayout.findViewById(R.id.select_color);
         final Teacher teacher = new Teacher();
+
+        select_color.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final ColorPicker colorPicker = new ColorPicker(activity);
+                colorPicker.setTitle(activity.getResources().getString(R.string.choose_color));
+                colorPicker.show();
+                colorPicker.setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
+                    @Override
+                    public void onChooseColor(int position,int color) {
+                        teacher.setColor(color);
+                        select_color.setBackgroundColor(color != 0 ? color : Color.WHITE);
+                    }
+
+                    @Override
+                    public void onCancel(){
+                    }
+                });
+            }
+        });
 
         final AlertDialog.Builder alert = new AlertDialog.Builder(activity);
         alert.setTitle(activity.getResources().getString(R.string.add_teacher));
@@ -614,6 +657,7 @@ public class AlertDialogsHelper {
                     post.getText().clear();
                     phone_number.getText().clear();
                     email.getText().clear();
+                    select_color.setBackgroundColor(Color.WHITE);
                     name.requestFocus();
                     dialog.dismiss();
                 }

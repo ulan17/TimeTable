@@ -48,6 +48,7 @@ public class DbHelper extends SQLiteOpenHelper{
     private static final String TEACHERS_POST = "post";
     private static final String TEACHERS_PHONE_NUMBER = "phonenumber";
     private static final String TEACHERS_EMAIL = "email";
+    private static final String TEACHERS_COLOR = "color";
 
     public DbHelper(Context context){
         super(context , DB_NAME, null, DB_VERSION);
@@ -81,7 +82,8 @@ public class DbHelper extends SQLiteOpenHelper{
                 + TEACHERS_NAME + " TEXT,"
                 + TEACHERS_POST + " TEXT,"
                 + TEACHERS_PHONE_NUMBER + " TEXT,"
-                + TEACHERS_EMAIL + " TEXT" + ")";
+                + TEACHERS_EMAIL + " TEXT,"
+                + TEACHERS_COLOR + " INTEGER" + ")";
 
         db.execSQL(CREATE_TIMETABLE);
         db.execSQL(CREATE_HOMEWORKS);
@@ -270,6 +272,7 @@ public class DbHelper extends SQLiteOpenHelper{
         contentValues.put(TEACHERS_POST, teacher.getPost());
         contentValues.put(TEACHERS_PHONE_NUMBER, teacher.getPhonenumber());
         contentValues.put(TEACHERS_EMAIL, teacher.getEmail());
+        contentValues.put(TEACHERS_COLOR, teacher.getColor());
         db.insert(TEACHERS, null, contentValues);
         db.close();
     }
@@ -281,6 +284,7 @@ public class DbHelper extends SQLiteOpenHelper{
         contentValues.put(TEACHERS_POST, teacher.getPost());
         contentValues.put(TEACHERS_PHONE_NUMBER, teacher.getPhonenumber());
         contentValues.put(TEACHERS_EMAIL, teacher.getEmail());
+        contentValues.put(TEACHERS_COLOR, teacher.getColor());
         db.update(TEACHERS, contentValues, TEACHERS_ID + " = " + teacher.getId(), null);
         db.close();
     }
@@ -303,6 +307,7 @@ public class DbHelper extends SQLiteOpenHelper{
             teacher.setPost(cursor.getString(cursor.getColumnIndex(TEACHERS_POST)));
             teacher.setPhonenumber(cursor.getString(cursor.getColumnIndex(TEACHERS_PHONE_NUMBER)));
             teacher.setEmail(cursor.getString(cursor.getColumnIndex(TEACHERS_EMAIL)));
+            teacher.setColor(cursor.getInt(cursor.getColumnIndex(TEACHERS_COLOR)));
             teacherlist.add(teacher);
         }
         cursor.close();
