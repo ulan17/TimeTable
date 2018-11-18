@@ -2,9 +2,11 @@ package com.ulan.timetable.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -39,6 +41,7 @@ public class NotesAdapter extends ArrayAdapter<Note> {
     private static class ViewHolder {
         TextView title;
         ImageView popup;
+        CardView cardView;
     }
 
     public NotesAdapter(Activity activity, ListView listView, int resource, ArrayList<Note> objects) {
@@ -54,8 +57,9 @@ public class NotesAdapter extends ArrayAdapter<Note> {
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         String title = Objects.requireNonNull(getItem(position)).getTitle();
         String text = Objects.requireNonNull(getItem(position)).getText();
+        int color = Objects.requireNonNull(getItem(position)).getColor();
 
-        note = new Note(title, text);
+        note = new Note(title, text, color);
         final ViewHolder holder;
 
         if(convertView == null) {
@@ -64,11 +68,13 @@ public class NotesAdapter extends ArrayAdapter<Note> {
             holder = new ViewHolder();
             holder.title = convertView.findViewById(R.id.titlenote);
             holder.popup = convertView.findViewById(R.id.popupbtn);
+            holder.cardView = convertView.findViewById(R.id.notes_cardview);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.title.setText(note.getTitle());
+        holder.cardView.setCardBackgroundColor(note.getColor() != 0 ? note.getColor() : Color.WHITE);
         holder.popup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -665,10 +665,32 @@ public class AlertDialogsHelper {
         });
     }
 
-    public static void getEditNoteDialog(final Activity activity, final View alertLayout, final ArrayList<Note> adapter, ListView listView, int listposition) {
+    public static void getEditNoteDialog(final Activity activity, final View alertLayout, final ArrayList<Note> adapter, final ListView listView, int listposition) {
         final EditText title = alertLayout.findViewById(R.id.titlenote);
+        final Button select_color = alertLayout.findViewById(R.id.select_color);
         final Note note = adapter.get(listposition);
         title.setText(note.getTitle());
+        select_color.setBackgroundColor(note.getColor() != 0 ? note.getColor() : Color.WHITE);
+
+        select_color.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final ColorPicker colorPicker = new ColorPicker(activity);
+                colorPicker.setTitle(activity.getResources().getString(R.string.choose_color));
+                colorPicker.show();
+                colorPicker.setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
+                    @Override
+                    public void onChooseColor(int position,int color) {
+                        note.setColor(color);
+                        select_color.setBackgroundColor(color != 0 ? color : Color.WHITE);
+                    }
+
+                    @Override
+                    public void onCancel(){
+                    }
+                });
+            }
+        });
 
         AlertDialog.Builder alert = new AlertDialog.Builder(activity);
         alert.setTitle(R.string.edit_note);
@@ -696,6 +718,8 @@ public class AlertDialogsHelper {
                     DbHelper dbHelper = new DbHelper(activity);
                     note.setTitle(title.getText().toString());
                     dbHelper.updateNote(note);
+                    NotesAdapter notesAdapter = (NotesAdapter) listView.getAdapter();
+                    notesAdapter.notifyDataSetChanged();
 
                     dialog.dismiss();
                 }
@@ -705,7 +729,28 @@ public class AlertDialogsHelper {
 
     public static void getAddNoteDialog(final Activity activity, final View alertLayout, final NotesAdapter adapter) {
         final EditText title = alertLayout.findViewById(R.id.titlenote);
+        final Button select_color = alertLayout.findViewById(R.id.select_color);
         final Note note = new Note();
+
+        select_color.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final ColorPicker colorPicker = new ColorPicker(activity);
+                colorPicker.setTitle(activity.getResources().getString(R.string.choose_color));
+                colorPicker.show();
+                colorPicker.setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
+                    @Override
+                    public void onChooseColor(int position,int color) {
+                        note.setColor(color);
+                        select_color.setBackgroundColor(color != 0 ? color : Color.WHITE);
+                    }
+
+                    @Override
+                    public void onCancel(){
+                    }
+                });
+            }
+        });
 
         final AlertDialog.Builder alert = new AlertDialog.Builder(activity);
         alert.setTitle(R.string.add_note);
@@ -745,6 +790,7 @@ public class AlertDialogsHelper {
                     adapter.notifyDataSetChanged();
 
                     title.getText().clear();
+                    select_color.setBackgroundColor(Color.WHITE);
                     dialog.dismiss();
                 }
             }
