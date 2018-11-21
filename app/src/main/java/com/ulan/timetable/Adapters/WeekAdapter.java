@@ -2,7 +2,6 @@ package com.ulan.timetable.Adapters;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.PopupMenu;
@@ -87,7 +86,7 @@ public class WeekAdapter extends ArrayAdapter<Week> {
         holder.teacher.setText(week.getTeacher());
         holder.room.setText(week.getRoom());
         holder.time.setText(week.getFromTime() + " - " + week.getToTime());
-        holder.cardView.setCardBackgroundColor(week.getColor() != 0 ? week.getColor() : Color.WHITE);
+        holder.cardView.setCardBackgroundColor(week.getColor());
         holder.popup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

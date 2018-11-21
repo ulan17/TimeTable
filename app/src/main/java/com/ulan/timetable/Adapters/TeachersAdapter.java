@@ -1,7 +1,6 @@
 package com.ulan.timetable.Adapters;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.PopupMenu;
@@ -82,7 +81,7 @@ public class TeachersAdapter extends ArrayAdapter<Teacher> {
         holder.post.setText(teacher.getPost());
         holder.phonenumber.setText(teacher.getPhonenumber());
         holder.email.setText(teacher.getEmail());
-        holder.cardView.setCardBackgroundColor(teacher.getColor() != 0 ? teacher.getColor() : Color.WHITE);
+        holder.cardView.setCardBackgroundColor(teacher.getColor());
         holder.popup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

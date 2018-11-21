@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.ViewPager;
@@ -115,7 +116,6 @@ public class AlertDialogsHelper {
                 colorPicker.setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
                     @Override
                     public void onChooseColor(int position,int color) {
-                        week.setColor(color);
                         select_color.setBackgroundColor(color != 0 ? color : Color.WHITE);
                     }
 
@@ -157,9 +157,11 @@ public class AlertDialogsHelper {
                 } else {
                     DbHelper db = new DbHelper(activity);
                     WeekAdapter weekAdapter = (WeekAdapter) listView.getAdapter(); // In order to get notifyDataSetChanged() method.
+                    ColorDrawable buttonColor = (ColorDrawable) select_color.getBackground();
                     week.setSubject(subject.getText().toString());
                     week.setTeacher(teacher.getText().toString());
                     week.setRoom(room.getText().toString());
+                    week.setColor(buttonColor.getColor());
                     db.updateWeek(week);
                     weekAdapter.notifyDataSetChanged();
                     dialog.dismiss();
@@ -230,7 +232,6 @@ public class AlertDialogsHelper {
                 colorPicker.setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
                     @Override
                     public void onChooseColor(int position,int color) {
-                        week.setColor(color);
                         select_color.setBackgroundColor(color != 0 ? color : Color.WHITE);
                     }
 
@@ -278,10 +279,12 @@ public class AlertDialogsHelper {
                 } else {
                     DbHelper dbHelper = new DbHelper(activity);
                     Matcher fragment = Pattern.compile("(.*Fragment)").matcher(adapter.getItem(viewPager.getCurrentItem()).toString());
+                    ColorDrawable buttonColor = (ColorDrawable) select_color.getBackground();
                     week.setSubject(subject.getText().toString());
                     week.setFragment(fragment.find() ? fragment.group() : null);
                     week.setTeacher(teacher.getText().toString());
                     week.setRoom(room.getText().toString());
+                    week.setColor(buttonColor.getColor());
                     dbHelper.insertWeek(week);
                     adapter.notifyDataSetChanged();
                     subject.getText().clear();
@@ -340,7 +343,6 @@ public class AlertDialogsHelper {
                 colorPicker.setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
                     @Override
                     public void onChooseColor(int position,int color) {
-                        homework.setColor(color);
                         select_color.setBackgroundColor(color != 0 ? color : Color.WHITE);
                     }
 
@@ -382,8 +384,10 @@ public class AlertDialogsHelper {
                 } else {
                     DbHelper dbHelper = new DbHelper(activity);
                     HomeworksAdapter homeworksAdapter = (HomeworksAdapter) listView.getAdapter();
+                    ColorDrawable buttonColor = (ColorDrawable) select_color.getBackground();
                     homework.setSubject(subject.getText().toString());
                     homework.setDescription(description.getText().toString());
+                    homework.setColor(buttonColor.getColor());
                     dbHelper.updateHomework(homework);
                     homeworksAdapter.notifyDataSetChanged();
                     dialog.dismiss();
@@ -430,7 +434,6 @@ public class AlertDialogsHelper {
                 colorPicker.setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
                     @Override
                     public void onChooseColor(int position,int color) {
-                        homework.setColor(color);
                         select_color.setBackgroundColor(color != 0 ? color : Color.WHITE);
                     }
 
@@ -477,8 +480,10 @@ public class AlertDialogsHelper {
                     Snackbar.make(alertLayout, R.string.deadline_snackbar, Snackbar.LENGTH_LONG).show();
                 } else {
                     DbHelper dbHelper = new DbHelper(activity);
+                    ColorDrawable buttonColor = (ColorDrawable) select_color.getBackground();
                     homework.setSubject(subject.getText().toString());
                     homework.setDescription(description.getText().toString());
+                    homework.setColor(buttonColor.getColor());
                     dbHelper.insertHomework(homework);
 
                     adapter.clear();
@@ -524,7 +529,6 @@ public class AlertDialogsHelper {
                 colorPicker.setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
                     @Override
                     public void onChooseColor(int position,int color) {
-                        teacher.setColor(color);
                         select_color.setBackgroundColor(color != 0 ? color : Color.WHITE);
                     }
 
@@ -564,10 +568,12 @@ public class AlertDialogsHelper {
                 } else {
                     DbHelper dbHelper = new DbHelper(activity);
                     TeachersAdapter teachersAdapter = (TeachersAdapter) listView.getAdapter();
+                    ColorDrawable buttonColor = (ColorDrawable) select_color.getBackground();
                     teacher.setName(name.getText().toString());
                     teacher.setPost(post.getText().toString());
                     teacher.setPhonenumber(phone_number.getText().toString());
                     teacher.setEmail(email.getText().toString());
+                    teacher.setColor(buttonColor.getColor());
                     dbHelper.updateTeacher(teacher);
                     teachersAdapter.notifyDataSetChanged();
                     dialog.dismiss();
@@ -598,7 +604,6 @@ public class AlertDialogsHelper {
                 colorPicker.setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
                     @Override
                     public void onChooseColor(int position,int color) {
-                        teacher.setColor(color);
                         select_color.setBackgroundColor(color != 0 ? color : Color.WHITE);
                     }
 
@@ -643,10 +648,12 @@ public class AlertDialogsHelper {
                     }
                 } else {
                     DbHelper dbHelper = new DbHelper(activity);
+                    ColorDrawable buttonColor = (ColorDrawable) select_color.getBackground();
                     teacher.setName(name.getText().toString());
                     teacher.setPost(post.getText().toString());
                     teacher.setPhonenumber(phone_number.getText().toString());
                     teacher.setEmail(email.getText().toString());
+                    teacher.setColor(buttonColor.getColor());
                     dbHelper.insertTeacher(teacher);
 
                     adapter.clear();
@@ -681,7 +688,6 @@ public class AlertDialogsHelper {
                 colorPicker.setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
                     @Override
                     public void onChooseColor(int position,int color) {
-                        note.setColor(color);
                         select_color.setBackgroundColor(color != 0 ? color : Color.WHITE);
                     }
 
@@ -716,7 +722,9 @@ public class AlertDialogsHelper {
                     title.requestFocus();
                 } else {
                     DbHelper dbHelper = new DbHelper(activity);
+                    ColorDrawable buttonColor = (ColorDrawable) select_color.getBackground();
                     note.setTitle(title.getText().toString());
+                    note.setColor(buttonColor.getColor());
                     dbHelper.updateNote(note);
                     NotesAdapter notesAdapter = (NotesAdapter) listView.getAdapter();
                     notesAdapter.notifyDataSetChanged();
@@ -741,7 +749,6 @@ public class AlertDialogsHelper {
                 colorPicker.setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
                     @Override
                     public void onChooseColor(int position,int color) {
-                        note.setColor(color);
                         select_color.setBackgroundColor(color != 0 ? color : Color.WHITE);
                     }
 
@@ -782,7 +789,9 @@ public class AlertDialogsHelper {
                     title.requestFocus();
                 } else {
                     DbHelper dbHelper = new DbHelper(activity);
+                    ColorDrawable buttonColor = (ColorDrawable) select_color.getBackground();
                     note.setTitle(title.getText().toString());
+                    note.setColor(buttonColor.getColor());
                     dbHelper.insertNote(note);
 
                     adapter.clear();

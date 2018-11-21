@@ -1,7 +1,6 @@
 package com.ulan.timetable.Adapters;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
@@ -72,7 +71,7 @@ public class NotesAdapter extends ArrayAdapter<Note> {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.title.setText(note.getTitle());
-        holder.cardView.setCardBackgroundColor(note.getColor() != 0 ? note.getColor() : Color.WHITE);
+        holder.cardView.setCardBackgroundColor(note.getColor());
         holder.popup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

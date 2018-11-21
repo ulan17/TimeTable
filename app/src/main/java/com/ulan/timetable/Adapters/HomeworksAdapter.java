@@ -1,7 +1,6 @@
 package com.ulan.timetable.Adapters;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.PopupMenu;
@@ -78,7 +77,7 @@ public class HomeworksAdapter extends ArrayAdapter<Homework> {
         holder.subject.setText(homework.getSubject());
         holder.description.setText(homework.getDescription());
         holder.date.setText(homework.getDate());
-        holder.cardView.setCardBackgroundColor(homework.getColor() != 0 ? homework.getColor() : Color.WHITE);
+        holder.cardView.setCardBackgroundColor(homework.getColor());
         holder.popup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
