@@ -1,7 +1,6 @@
 package com.ulan.timetable.Fragments;
 
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.SparseBooleanArray;
 import android.view.ActionMode;
@@ -16,13 +15,11 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.ulan.timetable.Adapters.WeekAdapter;
-import com.ulan.timetable.Utils.AlertDialogsHelper;
 import com.ulan.timetable.Utils.DbHelper;
 import com.ulan.timetable.R;
 import com.ulan.timetable.Model.Week;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class MondayFragment extends Fragment {
 
@@ -58,6 +55,7 @@ public class MondayFragment extends Fragment {
                 listposition = position;
                 final int checkedCount = listView.getCheckedItemCount();
                 mode.setTitle(checkedCount + " " + getResources().getString(R.string.selected));
+                if(checkedCount == 0) mode.finish();
             }
 
             @Override
@@ -76,16 +74,6 @@ public class MondayFragment extends Fragment {
                         adapter.getWeekList().removeAll(removelist);
                         db.updateWeek(adapter.getWeek());
                         adapter.notifyDataSetChanged();
-                        mode.finish();
-                        return true;
-
-                    case R.id.action_edit:
-                        if (listView.getCheckedItemCount() == 1) {
-                            final View alertLayout = getLayoutInflater().inflate(R.layout.dialog_add_subject, null);
-                            AlertDialogsHelper.getEditSubjectDialog(getActivity(), alertLayout, adapter.getWeekList(), listView, listposition);
-                        } else {
-                            Snackbar.make(Objects.requireNonNull(getView()), R.string.select_snackbar, Snackbar.LENGTH_LONG).show();
-                        }
                         mode.finish();
                         return true;
 

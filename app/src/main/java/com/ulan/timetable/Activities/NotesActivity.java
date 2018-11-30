@@ -103,15 +103,6 @@ public class NotesActivity extends AppCompatActivity {
                         mode.finish();
                         return true;
 
-                    case R.id.action_edit:
-                        if(listView.getCheckedItemCount() == 1) {
-                            final View alertLayout = getLayoutInflater().inflate(R.layout.dialog_add_note, null);
-                            AlertDialogsHelper.getEditNoteDialog(NotesActivity.this, alertLayout, adapter.getNoteList(), listView, listposition);
-                        } else {
-                            Snackbar.make(coordinatorLayout, R.string.select_snackbar, Snackbar.LENGTH_LONG).show();
-                        }
-                        mode.finish();
-                        return true;
                     default:
                         return false;
                 }

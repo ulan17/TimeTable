@@ -9,11 +9,4 @@
         android:orderInCategory="100"
         android:title="@string/delete"
         app:showAsAction="always" />
-
-    <item
-        android:id="@+id/action_edit"
-        android:icon="@drawable/baseline_edit_white_24"
-        android:orderInCategory="100"
-        android:title="@string/edit"
-        app:showAsAction="always" />
 </menu>

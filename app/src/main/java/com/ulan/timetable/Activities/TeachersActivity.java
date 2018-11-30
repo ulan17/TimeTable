@@ -93,15 +93,7 @@ public class TeachersActivity extends AppCompatActivity {
                         adapter.notifyDataSetChanged();
                         mode.finish();
                         return true;
-                    case R.id.action_edit:
-                        if(listView.getCheckedItemCount() == 1) {
-                            final View alertLayout = getLayoutInflater().inflate(R.layout.dialog_add_teacher, null);
-                            AlertDialogsHelper.getEditTeacherDialog(TeachersActivity.this, alertLayout, adapter.getTeacherList(), listView, listposition);
-                        } else {
-                            Snackbar.make(coordinatorLayout, R.string.select_snackbar, Snackbar.LENGTH_LONG).show();
-                        }
-                        mode.finish();
-                        return true;
+
                     default:
                         return false;
                 }

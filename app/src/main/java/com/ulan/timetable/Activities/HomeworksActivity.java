@@ -93,15 +93,6 @@ public class HomeworksActivity extends AppCompatActivity {
                         mode.finish();
                         return true;
 
-                    case R.id.action_edit:
-                        if (listView.getCheckedItemCount() == 1) {
-                            final View alertLayout = getLayoutInflater().inflate(R.layout.dialog_add_homework, null);
-                            AlertDialogsHelper.getEditHomeworkDialog(HomeworksActivity.this, alertLayout, adapter.getHomeworkList(), listView, listposition);
-                        } else {
-                            Snackbar.make(coordinatorLayout, R.string.select_snackbar, Snackbar.LENGTH_LONG).show();
-                        }
-                        mode.finish();
-                        return true;
                     default:
                         return false;
                 }
