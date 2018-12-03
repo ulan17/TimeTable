@@ -2,7 +2,6 @@ package com.ulan.timetable.Activities;
 
 import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.SparseBooleanArray;
@@ -52,7 +51,6 @@ public class HomeworksActivity extends AppCompatActivity {
     }
 
     private void setupListViewMultiSelect() {
-        final CoordinatorLayout coordinatorLayout = findViewById(R.id.coordinatorHomeworks);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         listView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
             @Override
