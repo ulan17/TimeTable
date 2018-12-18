@@ -2,24 +2,16 @@ package com.ulan.timetable.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.SparseBooleanArray;
-import android.view.ActionMode;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.ListView;
 
 import com.ulan.timetable.Adapters.WeekAdapter;
 import com.ulan.timetable.Utils.DbHelper;
 import com.ulan.timetable.R;
-import com.ulan.timetable.Model.Week;
 import com.ulan.timetable.Utils.FragmentHelper;
 
-import java.util.ArrayList;
 
 public class WednesdayFragment extends Fragment {
 

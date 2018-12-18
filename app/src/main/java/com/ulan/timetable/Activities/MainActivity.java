@@ -156,6 +156,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     Snackbar.make(navigationView, R.string.school_website_snackbar, Snackbar.LENGTH_SHORT).show();
                 }
                 return true;
+            case R.id.exams:
+                Intent exams = new Intent(MainActivity.this, ExamsActivity.class);
+                startActivity(exams);
+                return true;
             case R.id.teachers:
                 Intent teacher = new Intent(MainActivity.this, TeachersActivity.class);
                 startActivity(teacher);

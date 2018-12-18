@@ -18,11 +18,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.ulan.timetable.Adapters.ExamsAdapter;
 import com.ulan.timetable.Adapters.FragmentsTabAdapter;
 import com.ulan.timetable.Adapters.HomeworksAdapter;
 import com.ulan.timetable.Adapters.NotesAdapter;
 import com.ulan.timetable.Adapters.TeachersAdapter;
 import com.ulan.timetable.Adapters.WeekAdapter;
+import com.ulan.timetable.Model.Exam;
 import com.ulan.timetable.Model.Homework;
 import com.ulan.timetable.Model.Note;
 import com.ulan.timetable.Model.Teacher;
@@ -800,6 +802,140 @@ public class AlertDialogsHelper {
 
                     title.getText().clear();
                     select_color.setBackgroundColor(Color.WHITE);
+                    dialog.dismiss();
+                }
+            }
+        });
+    }
+
+    public static void getAddExamDialog(final Activity activity, final View alertLayout, final ExamsAdapter adapter) {
+        final HashMap<Integer, EditText> editTextHashs = new HashMap<>();
+        final EditText subject = alertLayout.findViewById(R.id.subjectexam_dialog);
+        editTextHashs.put(R.string.subject, subject);
+        final EditText teacher = alertLayout.findViewById(R.id.teacherexam_dialog);
+        editTextHashs.put(R.string.teacher, teacher);
+        final EditText room = alertLayout.findViewById(R.id.roomexam_dialog);
+        editTextHashs.put(R.string.room, room);
+        final TextView date = alertLayout.findViewById(R.id.dateexam_dialog);
+        final TextView time = alertLayout.findViewById(R.id.timeexam_dialog);
+        final Button select_color = alertLayout.findViewById(R.id.select_color);
+        final Exam exam = new Exam();
+
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar calendar = Calendar.getInstance();
+                int mYear = calendar.get(Calendar.YEAR);
+                int mMonth = calendar.get(Calendar.MONTH);
+                int mdayofMonth = calendar.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(activity, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        date.setText(String.format("%02d-%02d-%02d", year, month+1, dayOfMonth));
+                        exam.setDate(String.format("%02d-%02d-%02d", year, month+1, dayOfMonth));
+                    }
+                }, mYear, mMonth, mdayofMonth);
+                datePickerDialog.setTitle(R.string.choose_date);
+                datePickerDialog.show();
+            }
+        });
+
+        time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar c = Calendar.getInstance();
+                int mHour = c.get(Calendar.HOUR_OF_DAY);
+                int mMinute = c.get(Calendar.MINUTE);
+                TimePickerDialog timePickerDialog = new TimePickerDialog(activity,
+                        new TimePickerDialog.OnTimeSetListener() {
+
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay,
+                                                  int minute) {
+                                time.setText(String.format("%02d:%02d", hourOfDay, minute));
+                                exam.setTime(String.format("%02d:%02d", hourOfDay, minute));
+                            }
+                        }, mHour, mMinute, true);
+                timePickerDialog.setTitle(R.string.choose_time);
+                timePickerDialog.show();
+            }
+        });
+
+
+        select_color.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final ColorPicker colorPicker = new ColorPicker(activity);
+                colorPicker.setTitle(activity.getResources().getString(R.string.choose_color));
+                colorPicker.show();
+                colorPicker.setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
+                    @Override
+                    public void onChooseColor(int position,int color) {
+                        select_color.setBackgroundColor(color != 0 ? color : Color.WHITE);
+                    }
+
+                    @Override
+                    public void onCancel(){
+                    }
+                });
+            }
+        });
+
+        final AlertDialog.Builder alert = new AlertDialog.Builder(activity);
+        alert.setTitle(activity.getResources().getString(R.string.add_exam));
+        alert.setCancelable(false);
+        final Button cancel = alertLayout.findViewById(R.id.cancel);
+        final Button save = alertLayout.findViewById(R.id.save);
+        alert.setView(alertLayout);
+        final AlertDialog dialog = alert.create();
+        FloatingActionButton fab = activity.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.show();
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(TextUtils.isEmpty(subject.getText()) || TextUtils.isEmpty(teacher.getText()) || TextUtils.isEmpty(room.getText())) {
+                    for (Map.Entry<Integer, EditText> entry : editTextHashs.entrySet()) {
+                        if(TextUtils.isEmpty(entry.getValue().getText())) {
+                            entry.getValue().setError(activity.getResources().getString(entry.getKey()) + " " + activity.getResources().getString(R.string.field_error));
+                            entry.getValue().requestFocus();
+                        }
+                    }
+                } else if (!date.getText().toString().matches(".*\\d+.*")) {
+                    Snackbar.make(alertLayout, R.string.date_error, Snackbar.LENGTH_LONG).show();
+                } else if (!time.getText().toString().matches(".*\\d+.*")) {
+                    Snackbar.make(alertLayout, R.string.time_error, Snackbar.LENGTH_LONG).show();
+                } else {
+                    DbHelper dbHelper = new DbHelper(activity);
+//                    ColorDrawable buttonColor = (ColorDrawable) select_color.getBackground();
+                    exam.setSubject(subject.getText().toString());
+                    exam.setTeacher(teacher.getText().toString());
+                    exam.setRoom(room.getText().toString());
+
+                    dbHelper.insertExam(exam);
+
+                    adapter.clear();
+                    adapter.addAll(dbHelper.getExam());
+                    adapter.notifyDataSetChanged();
+
+                    subject.getText().clear();
+                    teacher.getText().clear();
+                    room.getText().clear();
+                    date.setText(R.string.select_date);
+                    time.setText(R.string.select_time);
+                    subject.requestFocus();
                     dialog.dismiss();
                 }
             }

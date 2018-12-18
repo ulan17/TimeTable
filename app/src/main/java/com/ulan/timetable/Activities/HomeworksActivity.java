@@ -1,7 +1,6 @@
 package com.ulan.timetable.Activities;
 
 import android.content.Context;
-import android.support.design.widget.CoordinatorLayout;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.SparseBooleanArray;

@@ -2,8 +2,6 @@ package com.ulan.timetable.Activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
@@ -31,7 +29,6 @@ public class NotesActivity extends AppCompatActivity {
     private ListView listView;
     private DbHelper db;
     private NotesAdapter adapter;
-    private int listposition = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,14 +59,12 @@ public class NotesActivity extends AppCompatActivity {
     }
 
     private void setupListViewMultiSelect() {
-        final CoordinatorLayout coordinatorLayout = findViewById(R.id.coordinatorNotes);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         listView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
             @Override
             public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
                 final int checkedCount = listView.getCheckedItemCount();
                 mode.setTitle(checkedCount + " " + getResources().getString(R.string.selected));
-                listposition = position;
             }
 
             @Override

@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.ulan.timetable.Model.Exam;
 import com.ulan.timetable.Model.Homework;
 import com.ulan.timetable.Model.Note;
 import com.ulan.timetable.Model.Teacher;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
  */
 public class DbHelper extends SQLiteOpenHelper{
 
-    private static final int DB_VERSION = 4;
+    private static final int DB_VERSION = 6;
     private static final String DB_NAME = "timetabledb";
     private static final String TIMETABLE = "timetable";
     private static final String WEEK_ID = "id";
@@ -50,6 +51,16 @@ public class DbHelper extends SQLiteOpenHelper{
     private static final String TEACHERS_PHONE_NUMBER = "phonenumber";
     private static final String TEACHERS_EMAIL = "email";
     private static final String TEACHERS_COLOR = "color";
+
+    private static final String EXAMS = "exams";
+    private static final String EXAMS_ID = "id";
+    private static final String EXAMS_SUBJECT = "subject";
+    private static final String EXAMS_TEACHER = "teacher";
+    private static final String EXAMS_ROOM = "room";
+    private static final String EXAMS_DATE = "date";
+    private static final String EXAMS_TIME = "time";
+    private static final String EXAMS_COLOR = "color";
+
 
     public DbHelper(Context context){
         super(context , DB_NAME, null, DB_VERSION);
@@ -87,10 +98,19 @@ public class DbHelper extends SQLiteOpenHelper{
                 + TEACHERS_EMAIL + " TEXT,"
                 + TEACHERS_COLOR + " INTEGER" + ")";
 
+        String CREATE_EXAMS = "CREATE TABLE " + EXAMS + "("
+                + EXAMS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + EXAMS_SUBJECT + " TEXT,"
+                + EXAMS_TEACHER + " TEXT,"
+                + EXAMS_ROOM + " TEXT,"
+                + EXAMS_DATE + " TEXT,"
+                + EXAMS_TIME + " TEXT" + ")";
+
         db.execSQL(CREATE_TIMETABLE);
         db.execSQL(CREATE_HOMEWORKS);
         db.execSQL(CREATE_NOTES);
         db.execSQL(CREATE_TEACHERS);
+        db.execSQL(CREATE_EXAMS);
     }
 
     @Override
@@ -107,6 +127,9 @@ public class DbHelper extends SQLiteOpenHelper{
 
             case 4:
                 db.execSQL("DROP TABLE IF EXISTS " + TEACHERS);
+
+            case 5:
+                db.execSQL("DROP TABLE IF EXISTS " + EXAMS);
                 break;
         }
         onCreate(db);
@@ -318,5 +341,58 @@ public class DbHelper extends SQLiteOpenHelper{
         cursor.close();
         db.close();
         return teacherlist;
+    }
+
+    /**
+     * Methods for Exams activity
+     **/
+    public void insertExam(Exam exam) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(EXAMS_SUBJECT, exam.getSubject());
+        contentValues.put(EXAMS_TEACHER, exam.getTeacher());
+        contentValues.put(EXAMS_ROOM, exam.getRoom());
+        contentValues.put(EXAMS_DATE, exam.getDate());
+        contentValues.put(EXAMS_TIME, exam.getTime());
+        db.insert(EXAMS, null, contentValues);
+        db.close();
+    }
+
+    public void updateExam(Exam exam) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(EXAMS_SUBJECT, exam.getSubject());
+        contentValues.put(EXAMS_TEACHER, exam.getTeacher());
+        contentValues.put(EXAMS_ROOM, exam.getRoom());
+        contentValues.put(EXAMS_DATE, exam.getDate());
+        contentValues.put(EXAMS_TIME, exam.getTime());
+        db.update(EXAMS, contentValues, EXAMS_ID + " = " + exam.getId(), null);
+        db.close();
+    }
+
+    public void deleteExamById(Exam exam) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(EXAMS, EXAMS_ID + " =? ", new String[] {String.valueOf(exam.getId())});
+        db.close();
+    }
+
+    public ArrayList<Exam> getExam() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<Exam> examslist = new ArrayList<>();
+        Exam exam;
+        Cursor cursor = db.rawQuery("SELECT * FROM " + EXAMS, null);
+        while (cursor.moveToNext()) {
+            exam = new Exam();
+            exam.setId(cursor.getInt(cursor.getColumnIndex(EXAMS_ID)));
+            exam.setSubject(cursor.getString(cursor.getColumnIndex(EXAMS_SUBJECT)));
+            exam.setTeacher(cursor.getString(cursor.getColumnIndex(EXAMS_TEACHER)));
+            exam.setRoom(cursor.getString(cursor.getColumnIndex(EXAMS_ROOM)));
+            exam.setDate(cursor.getString(cursor.getColumnIndex(EXAMS_DATE)));
+            exam.setTime(cursor.getString(cursor.getColumnIndex(EXAMS_TIME)));
+            examslist.add(exam);
+        }
+        cursor.close();
+        db.close();
+        return examslist;
     }
 }

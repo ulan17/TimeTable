@@ -84,6 +84,12 @@
     <string name="post">Post</string>
     <string name="email">Email</string>
 
+    <!-- Exams Activity strings -->
+    <string name="exams">Exams</string>
+    <string name="add_exam">Add exam</string>
+    <string name="date_dialog">Date:</string>
+    <string name="time_dialog">Time:</string>
+
     <!-- Settings Activity strings -->
     <string name="sevendays_setting">Enable 7 Days of the Week</string>
     <string name="school_website_setting">Change school website</string>
