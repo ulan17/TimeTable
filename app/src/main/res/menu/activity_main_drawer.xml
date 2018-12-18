@@ -31,7 +31,7 @@
             android:title="@string/homeworks" />
         <item
             android:id="@+id/notes"
-            android:icon="@drawable/baseline_note_black_18"
+            android:icon="@drawable/baseline_event_note_black_18"
             android:title="@string/notes" />
     </group>
 

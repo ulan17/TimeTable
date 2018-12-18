@@ -33,7 +33,7 @@
                 android:id="@+id/subject"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="34dp"
+                android:layout_marginStart="32dp"
                 android:layout_marginTop="2dp"
                 android:layout_marginEnd="8dp"
                 android:text="@string/subject"
@@ -42,7 +42,6 @@
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 card_view:layout_constraintEnd_toStartOf="@+id/popupbtn"
@@ -85,7 +84,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/teacher"
+                app:layout_constraintEnd_toEndOf="@+id/line"
                 app:layout_constraintStart_toEndOf="@+id/timeimage"
                 app:layout_constraintTop_toBottomOf="@+id/teacher"
                 app:layout_constraintVertical_bias="0.0" />
@@ -96,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="2dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/teacher"
+                app:layout_constraintStart_toStartOf="@+id/teacherimage"
                 app:layout_constraintTop_toTopOf="@+id/room"
                 app:layout_constraintVertical_bias="0.263"
                 app:srcCompat="@drawable/baseline_room_black_24" />
@@ -123,14 +122,17 @@
                 android:id="@+id/teacher"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="34dp"
                 android:text="@string/teacher"
                 android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="@+id/line"
-                app:layout_constraintStart_toStartOf="@+id/line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/teacherimage"
                 app:layout_constraintTop_toBottomOf="@+id/line" />
 
             <ImageView
@@ -142,6 +144,14 @@
                 card_view:layout_constraintEnd_toEndOf="parent"
                 card_view:layout_constraintTop_toTopOf="@+id/subject"
                 card_view:srcCompat="@drawable/baseline_expand_more_black_24" />
+
+            <ImageView
+                android:id="@+id/teacherimage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@+id/line"
+                app:layout_constraintTop_toTopOf="@+id/teacher"
+                card_view:srcCompat="@drawable/baseline_person_black_24" />
 
 
         </android.support.constraint.ConstraintLayout>
