@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
@@ -31,6 +32,9 @@ import com.ulan.timetable.Model.Teacher;
 import com.ulan.timetable.Model.Week;
 import com.ulan.timetable.R;
 
+import org.xdty.preference.colorpicker.ColorPickerDialog;
+import org.xdty.preference.colorpicker.ColorPickerSwatch;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -38,7 +42,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import petrov.kristiyan.colorpicker.ColorPicker;
 
 /**
  * Created by Ulan on 22.10.2018.
@@ -112,19 +115,24 @@ public class AlertDialogsHelper {
         select_color.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final ColorPicker colorPicker = new ColorPicker(activity);
-                colorPicker.setTitle(activity.getResources().getString(R.string.choose_color));
-                colorPicker.show();
-                colorPicker.setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
-                    @Override
-                    public void onChooseColor(int position,int color) {
-                        select_color.setBackgroundColor(color != 0 ? color : Color.WHITE);
-                    }
+                int mSelectedColor = ContextCompat.getColor(activity, R.color.white);
+                select_color.setBackgroundColor(mSelectedColor);
+                int[] mColors = activity.getResources().getIntArray(R.array.default_colors);
+                ColorPickerDialog dialog = ColorPickerDialog.newInstance(R.string.color_picker_default_title,
+                        mColors,
+                        mSelectedColor,
+                        5,
+                        ColorPickerDialog.SIZE_SMALL,
+                        true
+                );
 
+                dialog.setOnColorSelectedListener(new ColorPickerSwatch.OnColorSelectedListener() {
                     @Override
-                    public void onCancel(){
+                    public void onColorSelected(int color) {
+                        select_color.setBackgroundColor(color);
                     }
                 });
+                dialog.show(activity.getFragmentManager(), "color_dialog");
             }
         });
 
@@ -228,19 +236,24 @@ public class AlertDialogsHelper {
         select_color.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final ColorPicker colorPicker = new ColorPicker(activity);
-                colorPicker.setTitle(activity.getResources().getString(R.string.choose_color));
-                colorPicker.show();
-                colorPicker.setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
-                    @Override
-                    public void onChooseColor(int position,int color) {
-                        select_color.setBackgroundColor(color != 0 ? color : Color.WHITE);
-                    }
+                int mSelectedColor = ContextCompat.getColor(activity, R.color.white);
+                select_color.setBackgroundColor(mSelectedColor);
+                int[] mColors = activity.getResources().getIntArray(R.array.default_colors);
+                ColorPickerDialog dialog = ColorPickerDialog.newInstance(R.string.color_picker_default_title,
+                        mColors,
+                        mSelectedColor,
+                        5,
+                        ColorPickerDialog.SIZE_SMALL,
+                        true
+                );
 
+                dialog.setOnColorSelectedListener(new ColorPickerSwatch.OnColorSelectedListener() {
                     @Override
-                    public void onCancel(){
+                    public void onColorSelected(int color) {
+                        select_color.setBackgroundColor(color);
                     }
                 });
+                dialog.show(activity.getFragmentManager(), "color_dialog");
             }
         });
 
@@ -339,19 +352,24 @@ public class AlertDialogsHelper {
         select_color.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final ColorPicker colorPicker = new ColorPicker(activity);
-                colorPicker.setTitle(activity.getResources().getString(R.string.choose_color));
-                colorPicker.show();
-                colorPicker.setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
-                    @Override
-                    public void onChooseColor(int position,int color) {
-                        select_color.setBackgroundColor(color != 0 ? color : Color.WHITE);
-                    }
+                int mSelectedColor = ContextCompat.getColor(activity, R.color.white);
+                select_color.setBackgroundColor(mSelectedColor);
+                int[] mColors = activity.getResources().getIntArray(R.array.default_colors);
+                ColorPickerDialog dialog = ColorPickerDialog.newInstance(R.string.color_picker_default_title,
+                        mColors,
+                        mSelectedColor,
+                        5,
+                        ColorPickerDialog.SIZE_SMALL,
+                        true
+                );
 
+                dialog.setOnColorSelectedListener(new ColorPickerSwatch.OnColorSelectedListener() {
                     @Override
-                    public void onCancel(){
+                    public void onColorSelected(int color) {
+                        select_color.setBackgroundColor(color);
                     }
                 });
+                dialog.show(activity.getFragmentManager(), "color_dialog");
             }
         });
 
@@ -430,19 +448,24 @@ public class AlertDialogsHelper {
         select_color.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final ColorPicker colorPicker = new ColorPicker(activity);
-                colorPicker.setTitle(activity.getResources().getString(R.string.choose_color));
-                colorPicker.show();
-                colorPicker.setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
-                    @Override
-                    public void onChooseColor(int position,int color) {
-                        select_color.setBackgroundColor(color != 0 ? color : Color.WHITE);
-                    }
+                int mSelectedColor = ContextCompat.getColor(activity, R.color.white);
+                select_color.setBackgroundColor(mSelectedColor);
+                int[] mColors = activity.getResources().getIntArray(R.array.default_colors);
+                ColorPickerDialog dialog = ColorPickerDialog.newInstance(R.string.color_picker_default_title,
+                        mColors,
+                        mSelectedColor,
+                        5,
+                        ColorPickerDialog.SIZE_SMALL,
+                        true
+                );
 
+                dialog.setOnColorSelectedListener(new ColorPickerSwatch.OnColorSelectedListener() {
                     @Override
-                    public void onCancel(){
+                    public void onColorSelected(int color) {
+                        select_color.setBackgroundColor(color);
                     }
                 });
+                dialog.show(activity.getFragmentManager(), "color_dialog");
             }
         });
 
@@ -525,19 +548,24 @@ public class AlertDialogsHelper {
         select_color.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final ColorPicker colorPicker = new ColorPicker(activity);
-                colorPicker.setTitle(activity.getResources().getString(R.string.choose_color));
-                colorPicker.show();
-                colorPicker.setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
-                    @Override
-                    public void onChooseColor(int position,int color) {
-                        select_color.setBackgroundColor(color != 0 ? color : Color.WHITE);
-                    }
+                int mSelectedColor = ContextCompat.getColor(activity, R.color.white);
+                select_color.setBackgroundColor(mSelectedColor);
+                int[] mColors = activity.getResources().getIntArray(R.array.default_colors);
+                ColorPickerDialog dialog = ColorPickerDialog.newInstance(R.string.color_picker_default_title,
+                        mColors,
+                        mSelectedColor,
+                        5,
+                        ColorPickerDialog.SIZE_SMALL,
+                        true
+                );
 
+                dialog.setOnColorSelectedListener(new ColorPickerSwatch.OnColorSelectedListener() {
                     @Override
-                    public void onCancel(){
+                    public void onColorSelected(int color) {
+                        select_color.setBackgroundColor(color);
                     }
                 });
+                dialog.show(activity.getFragmentManager(), "color_dialog");
             }
         });
 
@@ -600,19 +628,24 @@ public class AlertDialogsHelper {
         select_color.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final ColorPicker colorPicker = new ColorPicker(activity);
-                colorPicker.setTitle(activity.getResources().getString(R.string.choose_color));
-                colorPicker.show();
-                colorPicker.setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
-                    @Override
-                    public void onChooseColor(int position,int color) {
-                        select_color.setBackgroundColor(color != 0 ? color : Color.WHITE);
-                    }
+                int mSelectedColor = ContextCompat.getColor(activity, R.color.white);
+                select_color.setBackgroundColor(mSelectedColor);
+                int[] mColors = activity.getResources().getIntArray(R.array.default_colors);
+                ColorPickerDialog dialog = ColorPickerDialog.newInstance(R.string.color_picker_default_title,
+                        mColors,
+                        mSelectedColor,
+                        5,
+                        ColorPickerDialog.SIZE_SMALL,
+                        true
+                );
 
+                dialog.setOnColorSelectedListener(new ColorPickerSwatch.OnColorSelectedListener() {
                     @Override
-                    public void onCancel(){
+                    public void onColorSelected(int color) {
+                        select_color.setBackgroundColor(color);
                     }
                 });
+                dialog.show(activity.getFragmentManager(), "color_dialog");
             }
         });
 
@@ -684,19 +717,24 @@ public class AlertDialogsHelper {
         select_color.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final ColorPicker colorPicker = new ColorPicker(activity);
-                colorPicker.setTitle(activity.getResources().getString(R.string.choose_color));
-                colorPicker.show();
-                colorPicker.setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
-                    @Override
-                    public void onChooseColor(int position,int color) {
-                        select_color.setBackgroundColor(color != 0 ? color : Color.WHITE);
-                    }
+                int mSelectedColor = ContextCompat.getColor(activity, R.color.white);
+                select_color.setBackgroundColor(mSelectedColor);
+                int[] mColors = activity.getResources().getIntArray(R.array.default_colors);
+                ColorPickerDialog dialog = ColorPickerDialog.newInstance(R.string.color_picker_default_title,
+                        mColors,
+                        mSelectedColor,
+                        5,
+                        ColorPickerDialog.SIZE_SMALL,
+                        true
+                );
 
+                dialog.setOnColorSelectedListener(new ColorPickerSwatch.OnColorSelectedListener() {
                     @Override
-                    public void onCancel(){
+                    public void onColorSelected(int color) {
+                        select_color.setBackgroundColor(color);
                     }
                 });
+                dialog.show(activity.getFragmentManager(), "color_dialog");
             }
         });
 
@@ -745,19 +783,24 @@ public class AlertDialogsHelper {
         select_color.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final ColorPicker colorPicker = new ColorPicker(activity);
-                colorPicker.setTitle(activity.getResources().getString(R.string.choose_color));
-                colorPicker.show();
-                colorPicker.setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
-                    @Override
-                    public void onChooseColor(int position,int color) {
-                        select_color.setBackgroundColor(color != 0 ? color : Color.WHITE);
-                    }
+                int mSelectedColor = ContextCompat.getColor(activity, R.color.white);
+                select_color.setBackgroundColor(mSelectedColor);
+                int[] mColors = activity.getResources().getIntArray(R.array.default_colors);
+                ColorPickerDialog dialog = ColorPickerDialog.newInstance(R.string.color_picker_default_title,
+                        mColors,
+                        mSelectedColor,
+                        5,
+                        ColorPickerDialog.SIZE_SMALL,
+                        true
+                );
 
+                dialog.setOnColorSelectedListener(new ColorPickerSwatch.OnColorSelectedListener() {
                     @Override
-                    public void onCancel(){
+                    public void onColorSelected(int color) {
+                        select_color.setBackgroundColor(color);
                     }
                 });
+                dialog.show(activity.getFragmentManager(), "color_dialog");
             }
         });
 
@@ -865,19 +908,24 @@ public class AlertDialogsHelper {
         select_color.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final ColorPicker colorPicker = new ColorPicker(activity);
-                colorPicker.setTitle(activity.getResources().getString(R.string.choose_color));
-                colorPicker.show();
-                colorPicker.setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
-                    @Override
-                    public void onChooseColor(int position,int color) {
-                        select_color.setBackgroundColor(color != 0 ? color : Color.WHITE);
-                    }
+                int mSelectedColor = ContextCompat.getColor(activity, R.color.white);
+                select_color.setBackgroundColor(mSelectedColor);
+                int[] mColors = activity.getResources().getIntArray(R.array.default_colors);
+                ColorPickerDialog dialog = ColorPickerDialog.newInstance(R.string.color_picker_default_title,
+                        mColors,
+                        mSelectedColor,
+                        5,
+                        ColorPickerDialog.SIZE_SMALL,
+                        true
+                );
 
+                dialog.setOnColorSelectedListener(new ColorPickerSwatch.OnColorSelectedListener() {
                     @Override
-                    public void onCancel(){
+                    public void onColorSelected(int color) {
+                        select_color.setBackgroundColor(color);
                     }
                 });
+                dialog.show(activity.getFragmentManager(), "color_dialog");
             }
         });
 
