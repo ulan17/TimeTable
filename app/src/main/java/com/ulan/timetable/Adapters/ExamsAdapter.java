@@ -117,7 +117,7 @@ public class ExamsAdapter extends ArrayAdapter<Exam> {
         return super.getItemId(position);
     }
 
-    public ArrayList<Exam> getExamlist() {
+    public ArrayList<Exam> getExamList() {
         return examlist;
     }
 
