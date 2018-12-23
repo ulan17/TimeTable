@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.PopupMenu;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.ulan.timetable.Model.Exam;
 import com.ulan.timetable.R;
+import com.ulan.timetable.Utils.AlertDialogsHelper;
 import com.ulan.timetable.Utils.DbHelper;
 
 import java.util.ArrayList;
@@ -57,8 +59,9 @@ public class ExamsAdapter extends ArrayAdapter<Exam> {
         String room = Objects.requireNonNull(getItem(position)).getRoom();
         String date = Objects.requireNonNull(getItem(position)).getDate();
         String time = Objects.requireNonNull(getItem(position)).getTime();
+        int color = Objects.requireNonNull(getItem(position)).getColor();
 
-        exam = new Exam(subject, teacher, date, time, room);
+        exam = new Exam(subject, teacher, date, time, room, color);
         final ViewHolder holder;
 
         if (convertView == null) {
@@ -81,6 +84,7 @@ public class ExamsAdapter extends ArrayAdapter<Exam> {
         holder.room.setText(exam.getRoom());
         holder.date.setText(exam.getDate());
         holder.time.setText(exam.getTime());
+        holder.cardView.setCardBackgroundColor(exam.getColor());
         holder.popup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,6 +103,7 @@ public class ExamsAdapter extends ArrayAdapter<Exam> {
 
                             case R.id.edit_popup:
                                 final View alertLayout = mActivity.getLayoutInflater().inflate(R.layout.dialog_add_exam, null);
+                                AlertDialogsHelper.getEditExamDialog(mActivity, alertLayout, examlist, mListView, position);
                                 notifyDataSetChanged();
                                 return true;
                             default:
@@ -109,6 +114,9 @@ public class ExamsAdapter extends ArrayAdapter<Exam> {
                 popup.show();
             }
         });
+
+        hidePopUpMenu(holder);
+
         return convertView;
     }
 
@@ -123,5 +131,19 @@ public class ExamsAdapter extends ArrayAdapter<Exam> {
 
     public Exam getExam() {
         return exam;
+    }
+
+    private void hidePopUpMenu(ViewHolder holder) {
+        SparseBooleanArray checkedItems = mListView.getCheckedItemPositions();
+        if (checkedItems.size() > 0) {
+            for (int i = 0; i < checkedItems.size(); i++) {
+                int key = checkedItems.keyAt(i);
+                if (checkedItems.get(key)) {
+                    holder.popup.setVisibility(View.INVISIBLE);
+                }
+            }
+        } else {
+            holder.popup.setVisibility(View.VISIBLE);
+        }
     }
 }

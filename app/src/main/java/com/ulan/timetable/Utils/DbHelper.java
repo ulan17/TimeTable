@@ -104,7 +104,8 @@ public class DbHelper extends SQLiteOpenHelper{
                 + EXAMS_TEACHER + " TEXT,"
                 + EXAMS_ROOM + " TEXT,"
                 + EXAMS_DATE + " TEXT,"
-                + EXAMS_TIME + " TEXT" + ")";
+                + EXAMS_TIME + " TEXT,"
+                + EXAMS_COLOR + " INTEGER" + ")";
 
         db.execSQL(CREATE_TIMETABLE);
         db.execSQL(CREATE_HOMEWORKS);
@@ -354,6 +355,7 @@ public class DbHelper extends SQLiteOpenHelper{
         contentValues.put(EXAMS_ROOM, exam.getRoom());
         contentValues.put(EXAMS_DATE, exam.getDate());
         contentValues.put(EXAMS_TIME, exam.getTime());
+        contentValues.put(EXAMS_COLOR, exam.getColor());
         db.insert(EXAMS, null, contentValues);
         db.close();
     }
@@ -366,6 +368,7 @@ public class DbHelper extends SQLiteOpenHelper{
         contentValues.put(EXAMS_ROOM, exam.getRoom());
         contentValues.put(EXAMS_DATE, exam.getDate());
         contentValues.put(EXAMS_TIME, exam.getTime());
+        contentValues.put(EXAMS_COLOR, exam.getColor());
         db.update(EXAMS, contentValues, EXAMS_ID + " = " + exam.getId(), null);
         db.close();
     }
@@ -389,6 +392,7 @@ public class DbHelper extends SQLiteOpenHelper{
             exam.setRoom(cursor.getString(cursor.getColumnIndex(EXAMS_ROOM)));
             exam.setDate(cursor.getString(cursor.getColumnIndex(EXAMS_DATE)));
             exam.setTime(cursor.getString(cursor.getColumnIndex(EXAMS_TIME)));
+            exam.setColor(cursor.getInt(cursor.getColumnIndex(EXAMS_COLOR)));
             examslist.add(exam);
         }
         cursor.close();

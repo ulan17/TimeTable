@@ -54,6 +54,7 @@ public class ExamsActivity extends AppCompatActivity {
             public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
                 final int checkedCount = listView.getCheckedItemCount();
                 mode.setTitle(checkedCount + " " + getResources().getString(R.string.selected));
+                if(checkedCount == 0) mode.finish();
             }
 
             @Override

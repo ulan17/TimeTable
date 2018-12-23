@@ -57,6 +57,7 @@ public class HomeworksActivity extends AppCompatActivity {
                 listposition = position;
                 final int checkedCount = listView.getCheckedItemCount();
                 mode.setTitle(checkedCount + " " + getResources().getString(R.string.selected));
+                if(checkedCount == 0) mode.finish();
             }
 
             @Override

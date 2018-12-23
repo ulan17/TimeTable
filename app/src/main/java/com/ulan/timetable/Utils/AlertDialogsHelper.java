@@ -851,6 +851,140 @@ public class AlertDialogsHelper {
         });
     }
 
+    public static void getEditExamDialog(final Activity activity, final View alertLayout, final ArrayList<Exam> adapter, final ListView listView, int listposition) {
+        final HashMap<Integer, EditText> editTextHashs = new HashMap<>();
+        final EditText subject = alertLayout.findViewById(R.id.subjectexam_dialog);
+        editTextHashs.put(R.string.subject, subject);
+        final EditText teacher = alertLayout.findViewById(R.id.teacherexam_dialog);
+        editTextHashs.put(R.string.teacher, teacher);
+        final EditText room = alertLayout.findViewById(R.id.roomexam_dialog);
+        editTextHashs.put(R.string.room, room);
+        final TextView date = alertLayout.findViewById(R.id.dateexam_dialog);
+        final TextView time = alertLayout.findViewById(R.id.timeexam_dialog);
+        final Button select_color = alertLayout.findViewById(R.id.select_color);
+        final Exam exam = adapter.get(listposition);
+
+        subject.setText(exam.getSubject());
+        teacher.setText(exam.getTeacher());
+        room.setText(exam.getRoom());
+        date.setText(exam.getDate());
+        time.setText(exam.getTime());
+        select_color.setBackgroundColor(exam.getColor());
+
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar calendar = Calendar.getInstance();
+                int mYear = calendar.get(Calendar.YEAR);
+                int mMonth = calendar.get(Calendar.MONTH);
+                int mdayofMonth = calendar.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(activity, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        date.setText(String.format("%02d-%02d-%02d", year, month+1, dayOfMonth));
+                        exam.setDate(String.format("%02d-%02d-%02d", year, month+1, dayOfMonth));
+                    }
+                }, mYear, mMonth, mdayofMonth);
+                datePickerDialog.setTitle(R.string.choose_date);
+                datePickerDialog.show();
+            }
+        });
+
+        time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar c = Calendar.getInstance();
+                int mHour = c.get(Calendar.HOUR_OF_DAY);
+                int mMinute = c.get(Calendar.MINUTE);
+                TimePickerDialog timePickerDialog = new TimePickerDialog(activity,
+                        new TimePickerDialog.OnTimeSetListener() {
+
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay,
+                                                  int minute) {
+                                time.setText(String.format("%02d:%02d", hourOfDay, minute));
+                                exam.setTime(String.format("%02d:%02d", hourOfDay, minute));
+                            }
+                        }, mHour, mMinute, true);
+                timePickerDialog.setTitle(R.string.choose_time);
+                timePickerDialog.show();
+            }
+        });
+
+
+        select_color.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int mSelectedColor = ContextCompat.getColor(activity, R.color.white);
+                select_color.setBackgroundColor(mSelectedColor);
+                int[] mColors = activity.getResources().getIntArray(R.array.default_colors);
+                ColorPickerDialog dialog = ColorPickerDialog.newInstance(R.string.color_picker_default_title,
+                        mColors,
+                        mSelectedColor,
+                        5,
+                        ColorPickerDialog.SIZE_SMALL,
+                        true
+                );
+
+                dialog.setOnColorSelectedListener(new ColorPickerSwatch.OnColorSelectedListener() {
+                    @Override
+                    public void onColorSelected(int color) {
+                        select_color.setBackgroundColor(color);
+                    }
+                });
+                dialog.show(activity.getFragmentManager(), "color_dialog");
+            }
+        });
+
+        final AlertDialog.Builder alert = new AlertDialog.Builder(activity);
+        alert.setTitle(activity.getResources().getString(R.string.add_exam));
+        alert.setCancelable(false);
+        final Button cancel = alertLayout.findViewById(R.id.cancel);
+        final Button save = alertLayout.findViewById(R.id.save);
+        alert.setView(alertLayout);
+        final AlertDialog dialog = alert.create();
+        dialog.show();
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(TextUtils.isEmpty(subject.getText()) || TextUtils.isEmpty(teacher.getText()) || TextUtils.isEmpty(room.getText())) {
+                    for (Map.Entry<Integer, EditText> entry : editTextHashs.entrySet()) {
+                        if(TextUtils.isEmpty(entry.getValue().getText())) {
+                            entry.getValue().setError(activity.getResources().getString(entry.getKey()) + " " + activity.getResources().getString(R.string.field_error));
+                            entry.getValue().requestFocus();
+                        }
+                    }
+                } else if (!date.getText().toString().matches(".*\\d+.*")) {
+                    Snackbar.make(alertLayout, R.string.date_error, Snackbar.LENGTH_LONG).show();
+                } else if (!time.getText().toString().matches(".*\\d+.*")) {
+                    Snackbar.make(alertLayout, R.string.time_error, Snackbar.LENGTH_LONG).show();
+                } else {
+                    DbHelper dbHelper = new DbHelper(activity);
+                    ColorDrawable buttonColor = (ColorDrawable) select_color.getBackground();
+                    exam.setSubject(subject.getText().toString());
+                    exam.setTeacher(teacher.getText().toString());
+                    exam.setRoom(room.getText().toString());
+                    exam.setColor(buttonColor.getColor());
+
+                    dbHelper.updateExam(exam);
+
+                    ExamsAdapter examsAdapter = (ExamsAdapter) listView.getAdapter();
+                    examsAdapter.notifyDataSetChanged();
+
+                    dialog.dismiss();
+                }
+            }
+        });
+    }
+
     public static void getAddExamDialog(final Activity activity, final View alertLayout, final ExamsAdapter adapter) {
         final HashMap<Integer, EditText> editTextHashs = new HashMap<>();
         final EditText subject = alertLayout.findViewById(R.id.subjectexam_dialog);
@@ -967,10 +1101,11 @@ public class AlertDialogsHelper {
                     Snackbar.make(alertLayout, R.string.time_error, Snackbar.LENGTH_LONG).show();
                 } else {
                     DbHelper dbHelper = new DbHelper(activity);
-//                    ColorDrawable buttonColor = (ColorDrawable) select_color.getBackground();
+                    ColorDrawable buttonColor = (ColorDrawable) select_color.getBackground();
                     exam.setSubject(subject.getText().toString());
                     exam.setTeacher(teacher.getText().toString());
                     exam.setRoom(room.getText().toString());
+                    exam.setColor(buttonColor.getColor());
 
                     dbHelper.insertExam(exam);
 
@@ -983,6 +1118,7 @@ public class AlertDialogsHelper {
                     room.getText().clear();
                     date.setText(R.string.select_date);
                     time.setText(R.string.select_time);
+                    select_color.setBackgroundColor(Color.WHITE);
                     subject.requestFocus();
                     dialog.dismiss();
                 }

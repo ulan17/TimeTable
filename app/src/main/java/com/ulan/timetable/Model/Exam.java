@@ -5,16 +5,17 @@ package com.ulan.timetable.Model;
  */
 public class Exam {
     private String subject, teacher, time, date, room;
-    private int id;
+    private int id, color;
 
     public Exam() {}
 
-    public Exam(String subject, String teacher, String time, String date, String room) {
+    public Exam(String subject, String teacher, String time, String date, String room, int color) {
         this.subject = subject;
         this.teacher = teacher;
         this.time = time;
         this.date = date;
         this.room = room;
+        this.color = color;
     }
 
     public String getSubject() {
@@ -63,5 +64,13 @@ public class Exam {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
     }
 }

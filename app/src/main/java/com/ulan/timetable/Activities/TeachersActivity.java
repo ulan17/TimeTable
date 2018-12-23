@@ -30,7 +30,6 @@ public class TeachersActivity extends AppCompatActivity {
     private ListView listView;
     private DbHelper db;
     private TeachersAdapter adapter;
-    private int listposition = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +59,7 @@ public class TeachersActivity extends AppCompatActivity {
             public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
                 final int checkedCount = listView.getCheckedItemCount();
                 mode.setTitle(checkedCount + " " + getResources().getString(R.string.selected));
-                listposition = position;
+                if(checkedCount == 0) mode.finish();
             }
 
             @Override
