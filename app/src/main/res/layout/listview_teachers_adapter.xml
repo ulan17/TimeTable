@@ -2,6 +2,7 @@
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -29,23 +30,21 @@
                 android:id="@+id/emailteacher"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
                 android:layout_marginTop="4dp"
-                android:layout_marginBottom="2dp"
                 android:text="@string/email"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/numberteacher"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/numberteacher"
-                app:layout_constraintTop_toBottomOf="@+id/numberteacher" />
+                card_view:layout_constraintEnd_toEndOf="@+id/numberteacher"
+                card_view:layout_constraintStart_toEndOf="@+id/imageView4"
+                card_view:layout_constraintTop_toBottomOf="@+id/numberteacher" />
 
             <TextView
                 android:id="@+id/nameteacher"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="2dp"
                 android:layout_marginEnd="32dp"
                 android:text="@string/name"
@@ -56,7 +55,8 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/personimage"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                card_view:layout_constraintStart_toStartOf="parent" />
 
             <View
                 android:id="@+id/line"
@@ -74,33 +74,32 @@
                 android:id="@+id/numberteacher"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
                 android:layout_marginTop="4dp"
                 android:text="@string/phone_number"
                 android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="@+id/postteacher"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/postteacher"
-                app:layout_constraintTop_toBottomOf="@+id/postteacher" />
+                card_view:layout_constraintEnd_toEndOf="@+id/postteacher"
+                card_view:layout_constraintStart_toEndOf="@+id/imageView5"
+                card_view:layout_constraintTop_toBottomOf="@+id/postteacher" />
 
             <TextView
                 android:id="@+id/postteacher"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="30dp"
                 android:text="@string/post"
                 android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/line" />
+                card_view:layout_constraintEnd_toEndOf="@+id/line"
+                card_view:layout_constraintStart_toEndOf="@+id/personimage"
+                card_view:layout_constraintTop_toBottomOf="@+id/line" />
 
             <android.support.constraint.Guideline
                 android:id="@+id/guideline2"
@@ -113,11 +112,9 @@
                 android:id="@+id/personimage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="2dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/baseline_person_black_24" />
+                app:srcCompat="@drawable/baseline_person_black_24"
+                card_view:layout_constraintStart_toStartOf="@+id/line"
+                card_view:layout_constraintTop_toTopOf="@+id/postteacher" />
 
             <ImageView
                 android:id="@+id/popupbtn"
@@ -128,6 +125,22 @@
                 card_view:layout_constraintEnd_toEndOf="parent"
                 card_view:layout_constraintTop_toTopOf="@+id/nameteacher"
                 card_view:srcCompat="@drawable/baseline_expand_more_black_24" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/baseline_email_black_24"
+                card_view:layout_constraintStart_toStartOf="@+id/imageView5"
+                card_view:layout_constraintTop_toTopOf="@+id/emailteacher" />
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/baseline_phone_black_24"
+                card_view:layout_constraintStart_toStartOf="@+id/personimage"
+                card_view:layout_constraintTop_toTopOf="@+id/numberteacher" />
 
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
