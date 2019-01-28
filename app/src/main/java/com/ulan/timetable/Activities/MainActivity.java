@@ -1,5 +1,7 @@
 package com.ulan.timetable.Activities;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -30,10 +32,9 @@ import com.ulan.timetable.Fragments.TuesdayFragment;
 import com.ulan.timetable.Fragments.WednesdayFragment;
 import com.ulan.timetable.R;
 import com.ulan.timetable.Utils.AlertDialogsHelper;
-
+import com.ulan.timetable.Utils.DailyReceiver;
 
 import java.util.Calendar;
-
 
 import static com.ulan.timetable.Utils.BrowserUtil.openUrlInChromeCustomTab;
 
@@ -69,6 +70,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setupSevenDaysPref();
 
         if(switchSevenDays) changeFragments(true);
+
+        setDailyAlarm();
     }
 
     private void setupFragments() {
@@ -116,6 +119,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switchSevenDays = sharedPref.getBoolean(SettingsActivity.KEY_SEVEN_DAYS_SETTING, false);
     }
 
+    private void setDailyAlarm() {
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+
+        Calendar cur = Calendar.getInstance();
+
+        if (cur.after(calendar)) {
+            calendar.add(Calendar.DATE, 1);
+        }
+
+        Intent myIntent = new Intent(this, DailyReceiver.class);
+        int ALARM1_ID = 10000;
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                this, ALARM1_ID, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) this.getSystemService(ALARM_SERVICE);
+        if (alarmManager != null) {
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+        }
+
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

@@ -95,4 +95,8 @@
     <string name="school_website_setting">Change school website</string>
     <string name="school_website_setting_summary">Change URL of your school website</string>
 
+    <!-- Notification -->
+    <string name="notification_title">Today\'s lessons</string>
+    <string name="do_not_have_lessons">You do not have lessons!</string>
+
 </resources>
