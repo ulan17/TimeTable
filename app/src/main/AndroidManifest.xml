@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Activities.MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -29,45 +29,45 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity
-            android:name=".Activities.HomeworksActivity"
+            android:name=".activities.HomeworksActivity"
             android:label="@string/homeworks"
-            android:parentActivityName=".Activities.MainActivity" />
+            android:parentActivityName=".activities.MainActivity" />
 
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
-            android:value=".Activities.HomeworksActivity" />
+            android:value=".activities.HomeworksActivity" />
 
         <activity
-            android:name=".Activities.NotesActivity"
+            android:name=".activities.NotesActivity"
             android:label="Notes"
-            android:parentActivityName=".Activities.MainActivity" />
+            android:parentActivityName=".activities.MainActivity" />
         <activity
-            android:name=".Activities.NoteInfoActivity"
+            android:name=".activities.NoteInfoActivity"
             android:label="Notes"
-            android:parentActivityName=".Activities.NotesActivity" />
+            android:parentActivityName=".activities.NotesActivity" />
         <activity
-            android:name=".Activities.TeachersActivity"
+            android:name=".activities.TeachersActivity"
             android:label="Teachers"
-            android:parentActivityName=".Activities.MainActivity" />
+            android:parentActivityName=".activities.MainActivity" />
         <activity
-            android:name=".Activities.SettingsActivity"
+            android:name=".activities.SettingsActivity"
             android:label="Settings"
-            android:parentActivityName=".Activities.MainActivity">
+            android:parentActivityName=".activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Activities.MainActivity" />
+                android:value=".activities.MainActivity" />
         </activity>
         <activity
-            android:name=".Activities.ExamsActivity"
+            android:name=".activities.ExamsActivity"
             android:label="Exams"
-            android:parentActivityName=".Activities.MainActivity" />
+            android:parentActivityName=".activities.MainActivity" />
 
         <receiver
-            android:name=".Utils.DailyReceiver"
+            android:name=".utils.DailyReceiver"
             android:enabled="true" />
 
         <receiver
-            android:name=".Utils.WakeUpAlarmReceiver"
+            android:name=".utils.WakeUpAlarmReceiver"
             android:enabled="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
