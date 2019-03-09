@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.NoteInfoActivity">
+    tools:context=".activities.NoteInfoActivity">
 
-    <com.ulan.timetable.Utils.LinedEditText
+    <com.ulan.timetable.utils.LinedEditText
         android:id="@+id/edittextNote"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

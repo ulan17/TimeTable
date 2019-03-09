@@ -5,7 +5,7 @@
     android:id="@+id/coordinatorNotes"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.NotesActivity"
+    tools:context=".activities.NotesActivity"
     android:orientation="vertical">
 
     <android.support.constraint.ConstraintLayout
