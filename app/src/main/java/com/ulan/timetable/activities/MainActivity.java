@@ -5,23 +5,24 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.preference.PreferenceManager;
 import android.text.TextUtils;
-import android.view.View;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.preference.PreferenceManager;
+import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.tabs.TabLayout;
+import com.ulan.timetable.R;
 import com.ulan.timetable.adapters.FragmentsTabAdapter;
 import com.ulan.timetable.fragments.FridayFragment;
 import com.ulan.timetable.fragments.MondayFragment;
@@ -30,7 +31,6 @@ import com.ulan.timetable.fragments.SundayFragment;
 import com.ulan.timetable.fragments.ThursdayFragment;
 import com.ulan.timetable.fragments.TuesdayFragment;
 import com.ulan.timetable.fragments.WednesdayFragment;
-import com.ulan.timetable.R;
 import com.ulan.timetable.utils.AlertDialogsHelper;
 import com.ulan.timetable.utils.DailyReceiver;
 
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setupCustomDialog();
         setupSevenDaysPref();
 
-        if(switchSevenDays) changeFragments(true);
+        if (switchSevenDays) changeFragments(true);
 
         setDailyAlarm();
     }
@@ -86,29 +86,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         adapter.addFragment(new ThursdayFragment(), getResources().getString(R.string.thursday));
         adapter.addFragment(new FridayFragment(), getResources().getString(R.string.friday));
         viewPager.setAdapter(adapter);
-        viewPager.setCurrentItem(day == 1 ? 6 : day-2, true);
+        viewPager.setCurrentItem(day == 1 ? 6 : day - 2, true);
         tabLayout.setupWithViewPager(viewPager);
     }
 
     private void changeFragments(boolean isChecked) {
-        if(isChecked) {
+        if (isChecked) {
             TabLayout tabLayout = findViewById(R.id.tabLayout);
             Calendar calendar = Calendar.getInstance();
             int day = calendar.get(Calendar.DAY_OF_WEEK);
             adapter.addFragment(new SaturdayFragment(), getResources().getString(R.string.saturday));
             adapter.addFragment(new SundayFragment(), getResources().getString(R.string.sunday));
             viewPager.setAdapter(adapter);
-            viewPager.setCurrentItem(day == 1 ? 6 : day-2, true);
+            viewPager.setCurrentItem(day == 1 ? 6 : day - 2, true);
             tabLayout.setupWithViewPager(viewPager);
         } else {
-            if(adapter.getFragmentList().size() > 5) {
+            if (adapter.getFragmentList().size() > 5) {
                 adapter.removeFragment(new SaturdayFragment(), 5);
                 adapter.removeFragment(new SundayFragment(), 5);
             }
         }
         adapter.notifyDataSetChanged();
     }
-    
+
     private void setupCustomDialog() {
         final View alertLayout = getLayoutInflater().inflate(R.layout.dialog_add_subject, null);
         AlertDialogsHelper.getAddSubjectDialog(MainActivity.this, alertLayout, adapter, viewPager);
@@ -143,6 +143,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
     }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -177,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (item.getItemId()) {
             case R.id.schoolwebsitemenu:
                 String schoolWebsite = PreferenceManager.getDefaultSharedPreferences(this).getString(SettingsActivity.KEY_SCHOOL_WEBSITE_SETTING, null);
-                if(!TextUtils.isEmpty(schoolWebsite)) {
+                if (!TextUtils.isEmpty(schoolWebsite)) {
                     openUrlInChromeCustomTab(getApplicationContext(), schoolWebsite);
                 } else {
                     Snackbar.make(navigationView, R.string.school_website_snackbar, Snackbar.LENGTH_SHORT).show();

@@ -1,15 +1,14 @@
 package com.ulan.timetable.fragments;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-
+import androidx.fragment.app.Fragment;
+import com.ulan.timetable.R;
 import com.ulan.timetable.adapters.WeekAdapter;
 import com.ulan.timetable.utils.DbHelper;
-import com.ulan.timetable.R;
 import com.ulan.timetable.utils.FragmentHelper;
 
 
