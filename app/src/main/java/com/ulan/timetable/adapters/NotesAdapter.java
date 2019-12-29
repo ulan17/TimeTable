@@ -1,10 +1,6 @@
 package com.ulan.timetable.adapters;
 
 import android.app.Activity;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.PopupMenu;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -14,6 +10,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.PopupMenu;
+import androidx.cardview.widget.CardView;
 
 import com.ulan.timetable.model.Note;
 import com.ulan.timetable.R;

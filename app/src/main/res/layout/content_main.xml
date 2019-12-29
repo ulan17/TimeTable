@@ -8,13 +8,13 @@
     tools:context=".activities.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </android.support.v4.view.ViewPager>
+    </androidx.viewpager.widget.ViewPager>
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

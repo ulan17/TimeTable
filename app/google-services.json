@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "436077303281",
+    "firebase_url": "https://timetable-e6129.firebaseio.com",
+    "project_id": "timetable-e6129",
+    "storage_bucket": "timetable-e6129.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:436077303281:android:844b815f9a9784aa586050",
+        "android_client_info": {
+          "package_name": "com.ulan.timetable"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "436077303281-eomhiu4gr9oi0iqtgcf7ft8eus6lqgsf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChbM3TDXNtRL5YaoRtgzd5Ps1PFnh24zw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "436077303281-eomhiu4gr9oi0iqtgcf7ft8eus6lqgsf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

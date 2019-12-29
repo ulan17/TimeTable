@@ -2,7 +2,6 @@ package com.ulan.timetable.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
 import android.view.ActionMode;
@@ -13,6 +12,8 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.ulan.timetable.adapters.NotesAdapter;
 import com.ulan.timetable.model.Note;
