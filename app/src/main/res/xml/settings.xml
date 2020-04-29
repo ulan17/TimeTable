@@ -34,7 +34,7 @@
         android:title="@string/set_notification_isOn" />
 
     <SwitchPreferenceCompat
-        android:defaultValue="true"
+        android:defaultValue="false"
         android:key="alwaysNotification"
         android:summary="@string/set_desc_alwaysNotification"
         android:title="@string/set_notification_showAlways" />

@@ -133,8 +133,8 @@ public class PreferenceUtil {
     }
 
 
-    public static boolean isAlwaysNotification() {
-        return false;
+    public static boolean isAlwaysNotification(Context context) {
+        return getBooleanSettings(context, "alwaysNotification", false);
     }
 
 

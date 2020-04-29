@@ -144,7 +144,7 @@ public class NotificationUtil {
                 .setContentIntent(pendingIntent);
 
 
-        if (PreferenceUtil.isAlwaysNotification()) {
+        if (PreferenceUtil.isAlwaysNotification(context)) {
             //Dismiss button intent
             Intent buttonIntent = new Intent(context, NotificationDismissButtonReceiver.class);
             buttonIntent.setAction("com.asdoi.gymwen.receivers.NotificationDismissButtonReceiver");

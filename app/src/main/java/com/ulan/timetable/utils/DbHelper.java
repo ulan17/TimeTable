@@ -406,6 +406,7 @@ public class DbHelper extends SQLiteOpenHelper{
         db.execSQL("DROP TABLE IF EXISTS " + TIMETABLE);
         db.execSQL("DROP TABLE IF EXISTS " + HOMEWORKS);
         db.execSQL("DROP TABLE IF EXISTS " + NOTES);
+        db.execSQL("DROP TABLE IF EXISTS " + TEACHERS);
         db.execSQL("DROP TABLE IF EXISTS " + EXAMS);
         db.close();
         onCreate(this.getWritableDatabase());
