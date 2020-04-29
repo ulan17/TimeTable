@@ -2,11 +2,13 @@ package com.ulan.timetable.utils;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.provider.CalendarContract;
 import android.text.TextUtils;
-import android.util.SparseArray;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -20,9 +22,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.pd.chocobar.ChocoBar;
 import com.ulan.timetable.R;
 import com.ulan.timetable.adapters.ExamsAdapter;
 import com.ulan.timetable.adapters.FragmentsTabAdapter;
@@ -37,13 +41,10 @@ import com.ulan.timetable.model.Note;
 import com.ulan.timetable.model.Teacher;
 import com.ulan.timetable.model.Week;
 
-import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
 
 import me.jfenn.colorpickerdialog.dialogs.ColorPickerDialog;
 import me.jfenn.colorpickerdialog.views.picker.RGBPickerView;
@@ -55,7 +56,7 @@ import me.jfenn.colorpickerdialog.views.picker.RGBPickerView;
 public class AlertDialogsHelper {
 
     public static void getEditSubjectDialog(@NonNull final AppCompatActivity activity, @NonNull final View alertLayout, @NonNull final ListView listView, @NonNull final Week week) {
-        final SparseArray<EditText> editTextHashs = new SparseArray<>();
+        final HashMap<Integer, EditText> editTextHashs = new HashMap<>();
         final EditText subject = alertLayout.findViewById(R.id.subject_dialog);
         editTextHashs.put(R.string.subject, subject);
         final EditText teacher = alertLayout.findViewById(R.id.teacher_dialog);
@@ -180,7 +181,7 @@ public class AlertDialogsHelper {
 
         save.setOnClickListener(v -> {
             if (TextUtils.isEmpty(subject.getText()) /*|| TextUtils.isEmpty(teacher.getText()) || TextUtils.isEmpty(room.getText())*/) {
-                for (Map.Entry<Integer, EditText> entry : getEntrySet(editTextHashs)) {
+                for (Map.Entry<Integer, EditText> entry : editTextHashs.entrySet()) {
                     if (TextUtils.isEmpty(entry.getValue().getText())) {
                         entry.getValue().setError(activity.getResources().getString(entry.getKey()) + " " + activity.getResources().getString(R.string.field_error));
                         entry.getValue().requestFocus();
@@ -204,7 +205,7 @@ public class AlertDialogsHelper {
     }
 
     public static void getAddSubjectDialog(@NonNull final AppCompatActivity activity, @NonNull final View alertLayout, @NonNull final FragmentsTabAdapter adapter, @NonNull final ViewPager viewPager) {
-        final SparseArray<EditText> editTextHashs = new SparseArray<>();
+        final HashMap<Integer, EditText> editTextHashs = new HashMap<>();
         final EditText subject = alertLayout.findViewById(R.id.subject_dialog);
         subject.requestFocus();
         editTextHashs.put(R.string.subject, subject);
@@ -326,7 +327,7 @@ public class AlertDialogsHelper {
 
         submit.setOnClickListener(v -> {
             if (TextUtils.isEmpty(subject.getText()) /*|| TextUtils.isEmpty(teacher.getText()) || TextUtils.isEmpty(room.getText())*/) {
-                for (Map.Entry<Integer, EditText> entry : getEntrySet(editTextHashs)) {
+                for (Map.Entry<Integer, EditText> entry : editTextHashs.entrySet()) {
                     if (TextUtils.isEmpty(entry.getValue().getText())) {
                         entry.getValue().setError(activity.getResources().getString(entry.getKey()) + " " + activity.getResources().getString(R.string.field_error));
                         entry.getValue().requestFocus();
@@ -356,7 +357,7 @@ public class AlertDialogsHelper {
     }
 
     public static void getEditHomeworkDialog(@NonNull final AppCompatActivity activity, @NonNull final View alertLayout, @NonNull final ArrayList<Homework> adapter, @NonNull final ListView listView, int listposition) {
-        final SparseArray<EditText> editTextHashs = new SparseArray<>();
+        final HashMap<Integer, EditText> editTextHashs = new HashMap<>();
         final EditText subject = alertLayout.findViewById(R.id.subjecthomework);
         editTextHashs.put(R.string.subject, subject);
         final EditText description = alertLayout.findViewById(R.id.descriptionhomework);
@@ -459,7 +460,7 @@ public class AlertDialogsHelper {
 
         save.setOnClickListener(v -> {
             if (TextUtils.isEmpty(subject.getText()) || TextUtils.isEmpty(description.getText())) {
-                for (Map.Entry<Integer, EditText> editText : getEntrySet(editTextHashs)) {
+                for (Map.Entry<Integer, EditText> editText : editTextHashs.entrySet()) {
                     if (TextUtils.isEmpty(editText.getValue().getText())) {
                         editText.getValue().setError(activity.getResources().getString(editText.getKey()) + " " + activity.getResources().getString(R.string.field_error));
                         editText.getValue().requestFocus();
@@ -476,12 +477,39 @@ public class AlertDialogsHelper {
                 new DbHelper(activity).updateHomework(homework);
                 homeworksAdapter.notifyDataSetChanged();
                 dialog.dismiss();
+
+                new MaterialDialog.Builder(activity)
+                        .content(R.string.add_to_calendar)
+                        .positiveText(R.string.yes)
+                        .onPositive((MaterialDialog s, DialogAction w) -> {
+                            String year = homework.getDate().substring(0, homework.getDate().indexOf("-"));
+                            String month = homework.getDate().substring(year.length() + 1, homework.getDate().indexOf("-") + year.length() - 1);
+                            String day = homework.getDate().substring(year.length() + month.length() + 2);
+
+                            Calendar timeCalendar = Calendar.getInstance();
+                            timeCalendar.set(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day), 0, 0);
+
+                            Intent intent = new Intent(Intent.ACTION_INSERT)
+                                    .setData(CalendarContract.Events.CONTENT_URI)
+                                    .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, timeCalendar.getTimeInMillis())
+                                    .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, timeCalendar.getTimeInMillis())
+                                    .putExtra(CalendarContract.Events.TITLE, subject.getText().toString())
+                                    .putExtra(CalendarContract.Events.DESCRIPTION, description.getText().toString());
+                            try {
+                                activity.startActivity(intent);
+                            } catch (ActivityNotFoundException e2) {
+                                ChocoBar.builder().setActivity(activity).setText(activity.getString(R.string.no_calendar_app)).setDuration(ChocoBar.LENGTH_LONG).red().show();
+                            }
+
+                        })
+                        .negativeText(R.string.no)
+                        .show();
             }
         });
     }
 
     public static void getAddHomeworkDialog(@NonNull final AppCompatActivity activity, @NonNull final View alertLayout, @NonNull final HomeworksAdapter adapter) {
-        final SparseArray<EditText> editTextHashs = new SparseArray<>();
+        final HashMap<Integer, EditText> editTextHashs = new HashMap<>();
         final EditText subject = alertLayout.findViewById(R.id.subjecthomework);
         editTextHashs.put(R.string.subject, subject);
         subject.requestFocus();
@@ -581,7 +609,7 @@ public class AlertDialogsHelper {
 
         save.setOnClickListener(v -> {
             if (TextUtils.isEmpty(subject.getText()) || TextUtils.isEmpty(description.getText())) {
-                for (Map.Entry<Integer, EditText> editText : getEntrySet(editTextHashs)) {
+                for (Map.Entry<Integer, EditText> editText : editTextHashs.entrySet()) {
                     if (TextUtils.isEmpty(editText.getValue().getText())) {
                         editText.getValue().setError(activity.getResources().getString(editText.getKey()) + " " + activity.getResources().getString(R.string.field_error));
                         editText.getValue().requestFocus();
@@ -608,10 +636,38 @@ public class AlertDialogsHelper {
                 select_color.setBackgroundColor(Color.WHITE);
                 subject.requestFocus();
                 dialog.dismiss();
+
+                if (homework.getDate() != null && !homework.getDate().trim().isEmpty()) {
+                    new MaterialDialog.Builder(activity)
+                            .content(R.string.add_to_calendar)
+                            .positiveText(R.string.yes)
+                            .onPositive((MaterialDialog s, DialogAction w) -> {
+                                String year = homework.getDate().substring(0, homework.getDate().indexOf("-"));
+                                String month = homework.getDate().substring(year.length() + 1, homework.getDate().indexOf("-") + year.length() - 1);
+                                String day = homework.getDate().substring(year.length() + month.length() + 2);
+
+                                Calendar timeCalendar = Calendar.getInstance();
+                                timeCalendar.set(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day), 0, 0);
+
+                                Intent intent = new Intent(Intent.ACTION_INSERT)
+                                        .setData(CalendarContract.Events.CONTENT_URI)
+                                        .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, timeCalendar.getTimeInMillis())
+                                        .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, timeCalendar.getTimeInMillis())
+                                        .putExtra(CalendarContract.Events.TITLE, subject.getText().toString())
+                                        .putExtra(CalendarContract.Events.DESCRIPTION, description.getText().toString());
+                                try {
+                                    activity.startActivity(intent);
+                                } catch (ActivityNotFoundException e2) {
+                                    ChocoBar.builder().setActivity(activity).setText(activity.getString(R.string.no_calendar_app)).setDuration(ChocoBar.LENGTH_LONG).red().show();
+                                }
+
+                            })
+                            .negativeText(R.string.no)
+                            .show();
+                }
             }
         });
     }
-
 
     public static void getEditTeacherDialog(final AppCompatActivity activity, final View alertLayout, final ArrayList<Teacher> adapter, final ListView listView, int listposition) {
         final HashMap<Integer, EditText> editTextHashs = new HashMap<>();
@@ -782,7 +838,6 @@ public class AlertDialogsHelper {
         });
     }
 
-
     public static void getEditNoteDialog(@NonNull final AppCompatActivity activity, @NonNull final View alertLayout, @NonNull final ArrayList<Note> adapter, @NonNull final ListView listView, int listposition) {
         final EditText title = alertLayout.findViewById(R.id.titlenote);
         final Button select_color = alertLayout.findViewById(R.id.select_color);
@@ -906,7 +961,7 @@ public class AlertDialogsHelper {
     }
 
     public static void getEditExamDialog(@NonNull final AppCompatActivity activity, @NonNull final View alertLayout, @NonNull final ArrayList<Exam> adapter, @NonNull final ListView listView, int listposition) {
-        final SparseArray<EditText> editTextHashs = new SparseArray<>();
+        final HashMap<Integer, EditText> editTextHashs = new HashMap<>();
         final EditText subject = alertLayout.findViewById(R.id.subjectexam_dialog);
         editTextHashs.put(R.string.subject, subject);
         final EditText teacher = alertLayout.findViewById(R.id.teacherexam_dialog);
@@ -1033,7 +1088,7 @@ public class AlertDialogsHelper {
 
         save.setOnClickListener(v -> {
             if (TextUtils.isEmpty(subject.getText())/* || TextUtils.isEmpty(teacher.getText()) || TextUtils.isEmpty(room.getText())*/) {
-                for (Map.Entry<Integer, EditText> entry : getEntrySet(editTextHashs)) {
+                for (Map.Entry<Integer, EditText> entry : editTextHashs.entrySet()) {
                     if (TextUtils.isEmpty(entry.getValue().getText())) {
                         entry.getValue().setError(activity.getResources().getString(entry.getKey()) + " " + activity.getResources().getString(R.string.field_error));
                         entry.getValue().requestFocus();
@@ -1056,6 +1111,43 @@ public class AlertDialogsHelper {
                 examsAdapter.notifyDataSetChanged();
 
                 dialog.dismiss();
+
+                new MaterialDialog.Builder(activity)
+                        .content(R.string.add_to_calendar)
+                        .positiveText(R.string.yes)
+                        .onPositive((MaterialDialog s, DialogAction w) -> {
+                            String year = exam.getDate().substring(0, exam.getDate().indexOf("-"));
+                            String month = exam.getDate().substring(year.length() + 1, exam.getDate().indexOf("-") + year.length() - 1);
+                            String day = exam.getDate().substring(year.length() + month.length() + 2);
+
+                            String hour, minute;
+                            if (exam.getTime() != null && !exam.getTime().trim().isEmpty()) {
+                                hour = exam.getTime().substring(0, exam.getTime().indexOf(":"));
+                                minute = exam.getTime().substring(hour.length() + 1);
+                            } else {
+                                hour = "0";
+                                minute = "0";
+                            }
+
+                            Calendar timeCalendar = Calendar.getInstance();
+                            timeCalendar.set(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day), Integer.parseInt(hour), Integer.parseInt(minute));
+
+                            Intent intent = new Intent(Intent.ACTION_INSERT)
+                                    .setData(CalendarContract.Events.CONTENT_URI)
+                                    .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, timeCalendar.getTimeInMillis())
+                                    .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, timeCalendar.getTimeInMillis())
+                                    .putExtra(CalendarContract.Events.TITLE, subject.getText().toString())
+                                    .putExtra(CalendarContract.Events.DESCRIPTION, teacher.getText().toString())
+                                    .putExtra(CalendarContract.Events.EVENT_LOCATION, room.getText().toString());
+                            try {
+                                activity.startActivity(intent);
+                            } catch (ActivityNotFoundException e2) {
+                                ChocoBar.builder().setActivity(activity).setText(activity.getString(R.string.no_calendar_app)).setDuration(ChocoBar.LENGTH_LONG).red().show();
+                            }
+
+                        })
+                        .negativeText(R.string.no)
+                        .show();
             }
         });
     }
@@ -1215,6 +1307,43 @@ public class AlertDialogsHelper {
                 select_color.setBackgroundColor(Color.WHITE);
                 subject.requestFocus();
                 dialog.dismiss();
+
+                new MaterialDialog.Builder(activity)
+                        .content(R.string.add_to_calendar)
+                        .positiveText(R.string.yes)
+                        .onPositive((MaterialDialog s, DialogAction w) -> {
+                            String year = exam.getDate().substring(0, exam.getDate().indexOf("-"));
+                            String month = exam.getDate().substring(year.length() + 1, exam.getDate().indexOf("-") + year.length() - 1);
+                            String day = exam.getDate().substring(year.length() + month.length() + 2);
+
+                            String hour, minute;
+                            if (exam.getTime() != null && !exam.getTime().trim().isEmpty()) {
+                                hour = exam.getTime().substring(0, exam.getTime().indexOf(":"));
+                                minute = exam.getTime().substring(hour.length() + 1);
+                            } else {
+                                hour = "0";
+                                minute = "0";
+                            }
+
+                            Calendar timeCalendar = Calendar.getInstance();
+                            timeCalendar.set(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day), Integer.parseInt(hour), Integer.parseInt(minute));
+
+                            Intent intent = new Intent(Intent.ACTION_INSERT)
+                                    .setData(CalendarContract.Events.CONTENT_URI)
+                                    .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, timeCalendar.getTimeInMillis())
+                                    .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, timeCalendar.getTimeInMillis())
+                                    .putExtra(CalendarContract.Events.TITLE, subject.getText().toString())
+                                    .putExtra(CalendarContract.Events.DESCRIPTION, teacher.getText().toString())
+                                    .putExtra(CalendarContract.Events.EVENT_LOCATION, room.getText().toString());
+                            try {
+                                activity.startActivity(intent);
+                            } catch (ActivityNotFoundException e2) {
+                                ChocoBar.builder().setActivity(activity).setText(activity.getString(R.string.no_calendar_app)).setDuration(ChocoBar.LENGTH_LONG).red().show();
+                            }
+
+                        })
+                        .negativeText(R.string.no)
+                        .show();
             }
         });
     }
@@ -1231,17 +1360,5 @@ public class AlertDialogsHelper {
                 .onNegative((dialog, which) -> dialog.dismiss())
                 .negativeText(context.getString(R.string.no))
                 .show();
-    }
-
-    @NonNull
-    private static Set<Map.Entry<Integer, EditText>> getEntrySet(@NonNull SparseArray<EditText> array) {
-        Set<Map.Entry<Integer, EditText>> entrySet = new TreeSet<>();
-        for (int i = 0; i < array.size(); i++) {
-            int key = array.keyAt(i);
-            EditText obj = array.get(key);
-            AbstractMap.SimpleEntry<Integer, EditText> entry = new AbstractMap.SimpleEntry<>(key, obj);
-            entrySet.add(entry);
-        }
-        return entrySet;
     }
 }

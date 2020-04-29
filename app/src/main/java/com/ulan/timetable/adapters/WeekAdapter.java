@@ -1,6 +1,7 @@
 package com.ulan.timetable.adapters;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.util.SparseBooleanArray;
@@ -22,6 +23,7 @@ import androidx.cardview.widget.CardView;
 import androidx.core.widget.ImageViewCompat;
 
 import com.ulan.timetable.R;
+import com.ulan.timetable.activities.TeachersActivity;
 import com.ulan.timetable.model.Week;
 import com.ulan.timetable.utils.AlertDialogsHelper;
 import com.ulan.timetable.utils.ColorPalette;
@@ -103,13 +105,15 @@ public class WeekAdapter extends ArrayAdapter<Week> {
 
         holder.subject.setText(week.getSubject());
         holder.teacher.setText(week.getTeacher());
+        TypedValue outValue = new TypedValue();
+        getContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground, outValue, true);
+        holder.teacher.setBackgroundResource(outValue.resourceId);
+        holder.teacher.setOnClickListener((View v) -> {
+            mActivity.startActivity(new Intent(mActivity, TeachersActivity.class));
+        });
 
         holder.room.setText(week.getRoom());
         holder.room.setOnClickListener(null);
-
-        TypedValue outValue = new TypedValue();
-        getContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground, outValue, true);
-        holder.room.setBackgroundResource(outValue.resourceId);
 
         holder.time.setText(week.getFromTime() + " - " + week.getToTime());
         holder.cardView.setCardBackgroundColor(week.getColor());

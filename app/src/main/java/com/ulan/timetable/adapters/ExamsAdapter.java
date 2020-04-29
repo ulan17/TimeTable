@@ -1,5 +1,6 @@
 package com.ulan.timetable.adapters;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.util.SparseBooleanArray;
@@ -21,6 +22,7 @@ import androidx.cardview.widget.CardView;
 import androidx.core.widget.ImageViewCompat;
 
 import com.ulan.timetable.R;
+import com.ulan.timetable.activities.TeachersActivity;
 import com.ulan.timetable.model.Exam;
 import com.ulan.timetable.utils.AlertDialogsHelper;
 import com.ulan.timetable.utils.ColorPalette;
@@ -103,14 +105,19 @@ public class ExamsAdapter extends ArrayAdapter<Exam> {
 
 
         holder.subject.setText(exam.getSubject());
-
-        holder.room.setText(exam.getRoom());
+        holder.teacher.setText(exam.getTeacher());
+        holder.teacher.setOnClickListener((View v) -> {
+            mActivity.startActivity(new Intent(mActivity, TeachersActivity.class));
+        });
         TypedValue outValue = new TypedValue();
         getContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground, outValue, true);
-        holder.room.setBackgroundResource(outValue.resourceId);
+        holder.teacher.setBackgroundResource(outValue.resourceId);
+
+        holder.room.setText(exam.getRoom());
 
         holder.date.setText(exam.getDate());
         holder.time.setText(exam.getTime());
+
         holder.cardView.setCardBackgroundColor(exam.getColor());
         holder.popup.setOnClickListener(v -> {
             final PopupMenu popup = new PopupMenu(getContext(), holder.popup);

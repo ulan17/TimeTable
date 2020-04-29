@@ -23,6 +23,7 @@ import java.util.ArrayList;
 
 
 public class HomeworksActivity extends AppCompatActivity {
+    public static final String ACTION_ADD_HOMEWORK = "addHomework";
 
     @NonNull
     private final AppCompatActivity context = this;
@@ -36,6 +37,9 @@ public class HomeworksActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homeworks);
         initAll();
+        if (ACTION_ADD_HOMEWORK.equalsIgnoreCase(getIntent().getAction())) {
+            findViewById(R.id.fab).performClick();
+        }
     }
 
     private void initAll() {

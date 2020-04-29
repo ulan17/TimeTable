@@ -32,7 +32,6 @@ import com.ajts.androidmads.library.ExcelToSQLite;
 import com.ajts.androidmads.library.SQLiteToExcel;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
-import com.jaredrummler.cyanea.app.CyaneaAppCompatActivity;
 import com.pd.chocobar.ChocoBar;
 import com.ulan.timetable.R;
 import com.ulan.timetable.adapters.FragmentsTabAdapter;
@@ -53,7 +52,7 @@ import saschpe.android.customtabs.CustomTabsHelper;
 import saschpe.android.customtabs.WebViewFallback;
 
 
-public class MainActivity extends CyaneaAppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private FragmentsTabAdapter adapter;
     private ViewPager viewPager;
