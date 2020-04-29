@@ -186,5 +186,6 @@
     <string name="delete_week">das Fach %1$s</string>
     <string name="delete_note">die Notiz %1$s</string>
     <string name="delete_exam">die Prüfung %1$s</string>
+    <string name="about_libs_title">Open-Source Bibliotheken</string>
 
 </resources>

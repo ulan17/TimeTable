@@ -157,4 +157,6 @@
     <string name="set_theme_black">Black</string>
     <string name="set_theme_auto">Automatic</string>
 
+    <string name="about_libs_title">Open-Source Libraries</string>
+
 </resources>

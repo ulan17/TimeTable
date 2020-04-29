@@ -108,45 +108,50 @@ public class TeachersAdapter extends ArrayAdapter<Teacher> {
         holder.name.setText(teacher.getName());
 
         holder.post.setText(teacher.getPost());
-        holder.post.setBackgroundResource(outValue.resourceId);
-        holder.post.setOnClickListener((View v) -> {
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse("geo:0,0?q=" + teacher.getPost()));
-            if (intent.resolveActivity(mActivity.getPackageManager()) != null) {
-                try {
-                    mActivity.startActivity(intent);
-                } catch (ActivityNotFoundException e2) {
-                    ChocoBar.builder().setActivity(mActivity).setText(mActivity.getString(R.string.no_navigation_app)).setDuration(ChocoBar.LENGTH_LONG).red().show();
+        if (teacher.getPost() != null && !teacher.getPost().trim().isEmpty()) {
+            holder.post.setBackgroundResource(outValue.resourceId);
+            holder.post.setOnClickListener((View v) -> {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("geo:0,0?q=" + teacher.getPost()));
+                if (intent.resolveActivity(mActivity.getPackageManager()) != null) {
+                    try {
+                        mActivity.startActivity(intent);
+                    } catch (ActivityNotFoundException e2) {
+                        ChocoBar.builder().setActivity(mActivity).setText(mActivity.getString(R.string.no_navigation_app)).setDuration(ChocoBar.LENGTH_LONG).red().show();
+                    }
                 }
-            }
-        });
+            });
+        }
 
         holder.phonenumber.setText(teacher.getPhonenumber());
-        holder.phonenumber.setBackgroundResource(outValue.resourceId);
-        holder.phonenumber.setBackgroundResource(outValue.resourceId);
-        holder.phonenumber.setOnClickListener((View v) -> {
-            Intent intent = new Intent(Intent.ACTION_DIAL);
-            intent.setData(Uri.parse("tel:" + phonenumber));
-            mActivity.startActivity(intent);
-        });
+        if (phonenumber != null && !phonenumber.trim().isEmpty()) {
+            holder.phonenumber.setBackgroundResource(outValue.resourceId);
+            holder.phonenumber.setOnClickListener((View v) -> {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + phonenumber));
+                mActivity.startActivity(intent);
+            });
+        }
 
 
         holder.email.setText(teacher.getEmail());
-        holder.email.setBackgroundResource(outValue.resourceId);
-        holder.email.setOnClickListener((View v) -> {
-            Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
-            emailIntent.setData(Uri.parse("mailto:" + teacher.getEmail()));
-            try {
-                mActivity.startActivity(emailIntent);
-            } catch (Exception e) {
+        if (teacher.getEmail() != null && !teacher.getEmail().trim().isEmpty()) {
+            holder.email.setBackgroundResource(outValue.resourceId);
+            holder.email.setOnClickListener((View v) -> {
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+                emailIntent.setData(Uri.parse("mailto:" + teacher.getEmail()));
                 try {
-                    emailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    getContext().startActivity(emailIntent);
-                } catch (ActivityNotFoundException e2) {
-                    ChocoBar.builder().setActivity(mActivity).setText(mActivity.getString(R.string.no_email_app)).setDuration(ChocoBar.LENGTH_LONG).red().show();
+                    mActivity.startActivity(emailIntent);
+                } catch (Exception e) {
+                    try {
+                        emailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        getContext().startActivity(emailIntent);
+                    } catch (ActivityNotFoundException e2) {
+                        ChocoBar.builder().setActivity(mActivity).setText(mActivity.getString(R.string.no_email_app)).setDuration(ChocoBar.LENGTH_LONG).red().show();
+                    }
                 }
-            }
-        });
+            });
+        }
 
         holder.cardView.setCardBackgroundColor(teacher.getColor());
         holder.popup.setOnClickListener(new View.OnClickListener() {

@@ -7,9 +7,9 @@ android {
     compileSdkVersion 29
     defaultConfig {
         applicationId "com.ulan.timetable"
-        minSdkVersion 21
+        minSdkVersion 17
         targetSdkVersion 29
-        versionCode 1
+        versionCode 10
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
@@ -18,6 +18,12 @@ android {
         release {
             minifyEnabled true
             shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        //To Avoid MultiDex
+        debug {
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -43,10 +49,10 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     implementation 'com.github.asdoi:ColorPickerDialog:a1d628430b'
-    implementation 'com.github.asdoi:SQLite2XL:e1b5e4d1cb'
+    implementation 'com.github.asdoi:SQLite2XL:88883cf56d'
     implementation 'saschpe.android:customtabs:3.0.2'
     implementation "com.mikepenz:aboutlibraries:8.1.2"
-    //noinspection GradleDependency
+    //noinspection NewerVersionAvailable,GradleDependency
     implementation 'org.apache.poi:poi:3.16'
     implementation 'com.github.stephenvinouze:shapetextdrawable:1.0.0'
     implementation 'com.github.Pradyuman7:ChocoBar:V1.0'
