@@ -64,4 +64,8 @@
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="SplashTheme" parent="AppTheme.Light">
+        <item name="android:windowBackground">@drawable/launch_screen</item>
+    </style>
 </resources>

@@ -118,7 +118,7 @@
     <string name="exams_activity_title">Exams</string>
     <string name="notification_summary_title">Today\'s lessons:</string>
     <string name="notification_next_week_title">Next lesson</string>
-    <string name="nav_drawer_description">Fork from ulan17</string>
+    <string name="nav_drawer_description">Forked from ulan17</string>
     <string name="time_from">from</string>
 
     <string name="channel">Timetable</string>
