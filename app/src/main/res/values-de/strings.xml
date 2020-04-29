@@ -1,0 +1,190 @@
+<!--
+  ~ Copyright (c) 2020 Felix Hollederer
+  ~     This file is part of GymWenApp.
+  ~
+  ~     GymWenApp is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     GymWenApp is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with GymWenApp.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+
+    <!-- Navigation Drawer -->
+    <string name="navigation_drawer_open">Navigation öffnen</string>
+    <string name="navigation_drawer_close">Navigation schließen</string>
+
+    <string name="menu_backup">Backup</string>
+    <string name="menu_restore">Wiederherstellen</string>
+
+    <!-- Main -->
+    <string name="action_settings">Einstellungen</string>
+
+    <!-- Settings -->
+    <string name="set_notification_isOn">Benachrichtigung anzeigen</string>
+    <string name="set_notification_showAlways">Dauerhaft anzeigen</string>
+    <string name="set_choose_theme">Generelles Design</string>
+    <string name="set_theme_light">Hell</string>
+    <string name="set_theme_dark">Dunkel</string>
+    <string name="set_theme_black">Schwarz</string>
+    <string name="set_theme_auto">Automatisch</string>
+
+
+    <!-- SubstitutionPlan -->
+    <string name="with_teacher">bei</string>
+
+    <!--    Table-->
+    <string name="subject">Fach</string>
+    <string name="teacher">Lehrer</string>
+    <string name="room">Raum</string>
+
+    <!-- Notification-->
+    <string name="notif_dismiss">Verbergen</string>
+
+    <!-- Sheriff Permissions -->
+    <string name="sheriff_permission_rational">Es werden ein paar Berechtigungen für diese Funktion benötigt. Um eine umfassende Funktionalität zu gewährleisten, gewähren Sie diese bitte.</string>
+    <string name="permission_required">Berechtigung wird benötigt!</string>
+    <string name="permission_required_description">Diese Berechtigung/en werden benötigt, um eine umfassende Funktionalität zu gewährleisten.</string>
+    <string name="permission_ok_button">Gewähren\u2026</string>
+    <string name="permission_cancel_button">Abbrechen</string>
+
+    <!-- TeacherlistFeatures -->
+    <string name="no_email_app">Du hast keine E-Mail App installiert.</string>
+    <string name="no_navigation_app">Du hast keine Navi-App installiert.</string>
+
+    <!-- Bottom Navigation Bar -->
+    <string name="set_notification_alarm">Zu einer best. Uhrzeit</string>
+
+    <!-- Profiles -->
+    <string name="profiles_delete_submit_heading">Bestätigen</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nein</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="name">Name</string>
+
+    <!-- About Author -->
+    <string name="version">Version</string>
+
+    <!-- Registration -->
+    <string name="dont_show_again">Nicht wieder anzeigen</string>
+
+
+    <!-- Share Message -->
+    <string name="share_msg_in_room">in Raum</string>
+
+    <string name="set_desc_alwaysNotification">Die Benachrichtigung kann nur noch manuell ausgeblendet werden</string>
+    <string name="set_desc_alarm">Die Benachrichtigung zu einer bestimmten Uhrzeit anzeigen</string>
+
+    <string name="monday">Montag</string>
+    <string name="tuesday">Dienstag</string>
+    <string name="wednesday">Mittwoch</string>
+    <string name="thursday">Donnerstag</string>
+    <string name="friday">Freitag</string>
+    <string name="saturday">Samstag</string>
+    <string name="sunday">Sonntag</string>
+    <string name="selected">Ausgewählt</string>
+
+    <string name="seven_days_of_the_week">7 Tage die Woche</string>
+    <string name="field_error">Feld darf nicht leer sein!</string>
+    <string name="time_error">Zeitfeld darf nicht leer sein!</string>
+    <string name="delete">Löschen</string>
+    <string name="add_subject">Stunde hinzufügen</string>
+    <string name="edit_subject">Stunde bearbeiten</string>
+    <string name="time">Zeit</string>
+    <string name="save">Speichern</string>
+    <string name="time_from_dialog">Von:</string>
+    <string name="time_to_dialog">Bis:</string>
+    <string name="subject_dialog">Fach:</string>
+    <string name="teacher_dialog">Lehrer:</string>
+    <string name="room_dialog">Raum:</string>
+    <string name="select_time">Uhrzeit</string>
+    <string name="select_start_time">Beginn</string>
+    <string name="select_end_time">Ende</string>
+    <string name="select_color">Farbe</string>
+    <string name="choose_color">Farbe auswählen</string>
+    <string name="colorPickerDialog_preset">Vorschläge</string>
+    <string name="choose_time">Zeit</string>
+    <string name="choose_date">Datum</string>
+
+    <string name="homeworks_activity_title">Hausaufgaben</string>
+    <string name="deadline_dialog">Deadline:</string>
+    <string name="description_dialog">Beschreibung:</string>
+    <string name="description">Beschreibung</string>
+    <string name="date_error">Datumsfeld darf nicht leer sein!</string>
+    <string name="edit_homework">Hausaufgabe bearbeiten</string>
+    <string name="add_homework">Hausaufgabe hinzufügen</string>
+    <string name="date">Datum</string>
+
+    <string name="notes_activity_title">Notizen</string>
+    <string name="title_dialog">Titel:</string>
+    <string name="add_note">Notiz hinzufügen</string>
+    <string name="edit_note">Notiz bearbeiten</string>
+    <string name="title_error">Titelfeld darf nicht leer sein!</string>
+    <string name="saved">Speichern</string>
+
+    <string name="exams_activity_title">Prüfungen</string>
+    <string name="add_exam">Prüfung hinzufügen</string>
+    <string name="date_dialog">Datum:</string>
+    <string name="time_dialog">Zeit:</string>
+
+    <string name="sevendays_setting">7 Tage pro Woche einstellen</string>
+    <string name="time_from">von</string>
+
+    <string name="edit">Bearbeiten</string>
+
+    <string name="do_not_disturb_permission_desc">Um automatisch in den Nicht-Stören-Modus zu wechseln, benötigt die App die entsprechende Berechtigung. Dies kann auch später noch in den Einstellungen geändert werden.</string>
+    <string name="do_not_disturb_setting">Automatisches Stummschalten</string>
+    <string name="do_not_disturb_settings_desc">Automatisch während Fächern in den Nicht-Stören-Modus wechseln und ihn danach wieder ausschalten</string>
+    <string name="do_not_disturb_turn_off">Auch wieder auf laut stellen</string>
+
+    <string name="backup_failed">Backup fehlgeschlagen</string>
+    <string name="import_successful">Wiederherstellen erfolgreich</string>
+    <string name="import_failed">Wiederherstellen fehlgeschlagen</string>
+    <string name="backup_successful">Backup in %1$s gespeichert</string>
+    <string name="no_backup_found_in_downloads">Kein Backup in %1$s gefunden</string>
+    <string name="Documents">Dokumente</string>
+    <string name="Downloads">Downloads</string>
+    <string name="remove_all_subjects">Alles löschen</string>
+    <string name="remove_all_subjects_content">Sollen alle Daten des Stundenplans unwiederbringliche gelöscht werden?
+        \nEs empfiehlt sich vorher ein Backup anzulegen!</string>
+    <string name="remove_all_successful">Erfolgreich Alles gelöscht</string>
+    <string name="remove_all_failed">Es ist ein Fehler aufgetreten</string>
+
+    <string name="no_calendar_app">Du hast keine Kalender-App installiert</string>
+    <string name="add_to_calendar">Soll diese Ereignis zu deinem Kalender hinzugefügt werden?</string>
+    <string name="school_website">Schulhomepage</string>
+    <string name="school_website_snackbar">Bitte stelle deine Schulhomepage in den Einstellungen ein.</string>
+    <string name="homeworks">Hausaufgaben</string>
+    <string name="title">Titel</string>
+    <string name="teachers">Lehrer</string>
+    <string name="add_teacher">Lehrer hinzufügen</string>
+    <string name="edit_teacher">Lehrer bearbeiten</string>
+    <string name="name_dialog">Name:</string>
+    <string name="post_dialog">Anschrift:</string>
+    <string name="phonenumber_dialog">Telefon:</string>
+    <string name="email_dialog">E-Mail:</string>
+    <string name="phone_number">Telefonnummer</string>
+    <string name="post">Anschrift</string>
+    <string name="email">E-Mail</string>
+    <string name="school_website_setting">Schulhomepage ändern</string>
+    <string name="school_website_setting_summary">URL deiner Schulhomepage ändern</string>
+    <string name="activity_title">Stundenplan</string>
+    <string name="notification_summary_title">Heutige Fächer</string>
+    <string name="notification_next_week_title">Nächstes Fach</string>
+    <string name="nav_drawer_description">Erstellt mit Hilfe von ulan17</string>
+    <string name="channel">Stundenplan</string>
+    <string name="channel_desc">Eine Benachrichtigung über deine Fächer</string>
+    <string name="delete_content">Soll %1$s gelöscht werden?</string>
+    <string name="delete_week">das Fach %1$s</string>
+    <string name="delete_note">die Notiz %1$s</string>
+    <string name="delete_exam">die Prüfung %1$s</string>
+
+</resources>

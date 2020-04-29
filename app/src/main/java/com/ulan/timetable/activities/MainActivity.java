@@ -373,7 +373,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         try {
             CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
                     .addDefaultShareMenuItem()
-//                    .setToolbarColor(PreferenceUtil.getPrimaryColor(this))
+                    .setToolbarColor(PreferenceUtil.getPrimaryColor(this))
                     .setShowTitle(true)
                     .build();
 

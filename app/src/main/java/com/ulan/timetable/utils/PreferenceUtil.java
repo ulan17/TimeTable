@@ -316,6 +316,11 @@ public class PreferenceUtil {
         return getThemeColor(android.R.attr.textColorPrimary, context);
     }
 
+    public static int getPrimaryColor(@NonNull Context context) {
+        return getThemeColor(R.attr.colorPrimary, context);
+    }
+
+
     private static int getThemeColor(int themeAttributeId, @NonNull Context context) {
         try {
             TypedValue outValue = new TypedValue();
