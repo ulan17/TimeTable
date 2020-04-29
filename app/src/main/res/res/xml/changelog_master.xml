@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Felix Hollederer
+  ~     This file is part of GymWenApp.
+  ~
+  ~     GymWenApp is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     GymWenApp is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with GymWenApp.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<changelog>
+    <release
+        version="1.2.1"
+        versioncode="121">
+        <change>Benachrichtigung über neue Artikel auf der Homepage</change>
+        <change>RSS-Feed über die Homepage hinzugefügt</change>
+        <change>Neue Shortcut-Icons</change>
+        <change>Bugfixes</change>
+    </release>
+    <release
+        version="1.2"
+        versioncode="120">
+        <change>Selbstprogrammierter Stundenplan mit integrierten Vertretungen, automatischem
+            Stummschalten und eigener Benachrichtigung hinzugefügt
+        </change>
+        <change>Raumplan hinzugefügt</change>
+        <change>Neue Benachrichtigungen (und passende Einstellungen)</change>
+        <change>App-Icon-Shortcuts hinzugefügt</change>
+        <change>Durchsuchen der Website hinzugefügt</change>
+        <change>Wendelsteiner Welle hinzugefügt (Deaktiviert -> Einstellungen)</change>
+        <change>Herunterwischen zum Aktualisieren</change>
+        <change>Einstellungen für Home-Screen Widgets hinzugefügt</change>
+        <change>Einstellung für den automatischen Update-Check hinzugefügt</change>
+        <change>Neue Icons</change>
+        <change>Speicherplatz reduziert</change>
+    </release>
+    <release
+        version="1.1.3"
+        versioncode="113">
+        <change>Neue Widgets hinzugefügt</change>
+        <change>Klassen/Kurse im ungefilterten Plan per Klick darauf zu deinen Kursen hinzufügen
+        </change>
+        <change>Und im gefilterten Plan per Klick entfernen</change>
+        <change>Neue Menüeinträge für einzelne Tage hinzugefügt</change>
+        <change>Schülerzeitung hinzugefügt</change>
+        <change>Routennavigation hinzugefügt</change>
+        <change>Einstellung zum Verbergen von Menü-Einträgen hinzugefügt</change>
+        <change>Neues Design vervollständigt</change>
+        <change>Individulalisierbares Design (-> Einstellungen)</change>
+        <change>Vergrößerbare Bilder auf der Homepage</change>
+        <change>Beschreibungen der Einstellungen hinzugefügt</change>
+        <change>Intelligentes Ausblenden bei "Auf einen Blick!"</change>
+        <change>Neue Screenshots in ColoRush</change>
+        <change>Neue Teilen-Nachricht</change>
+    </release>
+    <release
+        version="1.1.2"
+        versioncode="112">
+        <change>Neues Widget (auch mit Dark-Theme)</change>
+        <change>Neues Vertretungsplan-Design (Altes Design in Titelleiste reaktivierbar)</change>
+        <change>Aktivierbares Ersetzen der Kürzel durch richtige Namen</change>
+        <change>Schnelleinstellung in der Benachrichtiungsleiste hinzugefügt</change>
+        <change>Nutzerzähler</change>
+        <change>Speicherplatz reduziert</change>
+        <change>Bugfixes</change>
+    </release>
+    <release
+        version="1.1.1"
+        versioncode="111">
+        <change>Einführung hinzugefügt</change>
+        <change>Impressum überarbeitet</change>
+        <change>Dark Mode (Themeauswahl)</change>
+        <change>Notenverwaltung gefixed</change>
+        <change>Farbenauswahl (Beta)</change>
+        <change>Einstellungen überarbeitet</change>
+        <change>Benachrichtigung über fehlendes Internet (-> Nutzung des Offlinemodus)</change>
+        <change>Bugfixes</change>
+    </release>
+    <release
+        version="1.1"
+        versioncode="110">
+        <change>Einzelne Profile</change>
+        <change>Elternmodus</change>
+        <change>Offlinemodus</change>
+        <change>Selbstprogrammierte Notenverwaltung</change>
+        <change>Startbildschirm</change>
+        <change>Öffis, ColoRush und Formulare Buttons hinzugefügt</change>
+        <change>Zwei Benachrichtungen für beide Tage</change>
+        <change>Seperate Buttons für gefilterten und ungefilterten Plan</change>
+        <change>Einstellung Wochentage immer anzuzeigen hinzugefügt</change>
+        <change>Bugfixes</change>
+    </release>
+    <release
+        version="1.0.6"
+        versioncode="106">
+        <change>Englische Sprache hinzugefügt</change>
+        <change>Sprachendialog hinzugefügt</change>
+        <change>Anzeigen ob ein Tag schon vergangen ist</change>
+        <change>Änderung der Anzeige auf Wochentage</change>
+        <change>Summe der vertretenen Stunden in der Benachrichtigung</change>
+        <change>Senden der Benachrichtigung zu einer festen Zeit</change>
+    </release>
+    <release
+        version="1.0.5"
+        versioncode="105">
+        <change>Neues Design im Vertretungsplan (altes Design in den Einstellungen reaktivierbar)
+        </change>
+        <change>Aufnahme in F-Droid</change>
+        <change>Passwortverbergen beim Anmelden</change>
+        <change>Optimierungen</change>
+    </release>
+    <release
+        version="1.0.4"
+        versioncode="104">
+        <change>Klickbare Lehrerkürzel</change>
+        <change>Durchsuchbare Lehrerliste</change>
+        <change>Aktivierbare Beta-Features</change>
+        <change>Verbergen bestimmter Menü-Einträge</change>
+        <change>Neues Design im Impressum</change>
+        <change>Neue Icons</change>
+    </release>
+    <release
+        version="1.0.3"
+        versioncode="103">
+        <change>Lehrerliste</change>
+        <change>Automatisches Herunterladen und Installieren von Updates</change>
+        <change>GymWen Online Shop hinzugefügt</change>
+        <change>Code und Widget Optimierungen</change>
+    </release>
+    <release
+        version="1.0.2"
+        versioncode="102">
+        <change>Benachrichtigung ausschalten, verbergen oder nicht dauerhaft anzeigen</change>
+        <change>Uhrzeiten statt Stunden anzeigen</change>
+        <change>Absturzverarbeitung</change>
+        <change>Fehlende Internetverbindung zeigt nicht mehr an, dass nichts entfällt</change>
+        <change>Klare Anweisung über die einzugebenden Anmeldedaten</change>
+    </release>
+    <release
+        version="1.0.1"
+        versioncode="101">
+        <change>Home-Screen Widget</change>
+    </release>
+    <release
+        version="1.0.0"
+        versioncode="100">
+        <change>Erstes Release</change>
+    </release>
+</changelog>

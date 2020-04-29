@@ -1,8 +1,11 @@
 package com.ulan.timetable.activities;
+
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
-import com.ulan.timetable.fragments.SettingsFragment;
+
 import com.ulan.timetable.R;
+import com.ulan.timetable.fragments.SettingsFragment;
 
 public class SettingsActivity extends AppCompatActivity {
     public static final String

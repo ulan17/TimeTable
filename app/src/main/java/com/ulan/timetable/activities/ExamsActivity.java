@@ -1,6 +1,5 @@
 package com.ulan.timetable.activities;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
 import android.view.ActionMode;
@@ -11,11 +10,12 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.ulan.timetable.R;
 import com.ulan.timetable.adapters.ExamsAdapter;
 import com.ulan.timetable.model.Exam;
-import com.ulan.timetable.R;
 import com.ulan.timetable.utils.AlertDialogsHelper;
 import com.ulan.timetable.utils.DbHelper;
 
@@ -23,7 +23,8 @@ import java.util.ArrayList;
 
 public class ExamsActivity extends AppCompatActivity {
 
-    private Context context = this;
+    @NonNull
+    private final AppCompatActivity context = this;
     private ListView listView;
     private ExamsAdapter adapter;
     private DbHelper db;
@@ -52,14 +53,14 @@ public class ExamsActivity extends AppCompatActivity {
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         listView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
             @Override
-            public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
+            public void onItemCheckedStateChanged(@NonNull ActionMode mode, int position, long id, boolean checked) {
                 final int checkedCount = listView.getCheckedItemCount();
                 mode.setTitle(checkedCount + " " + getResources().getString(R.string.selected));
-                if(checkedCount == 0) mode.finish();
+                if (checkedCount == 0) mode.finish();
             }
 
             @Override
-            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+            public boolean onCreateActionMode(@NonNull ActionMode mode, Menu menu) {
                 MenuInflater menuInflater = mode.getMenuInflater();
                 menuInflater.inflate(R.menu.toolbar_action_mode, menu);
                 return true;
@@ -71,28 +72,26 @@ public class ExamsActivity extends AppCompatActivity {
             }
 
             @Override
-            public boolean onActionItemClicked(final ActionMode mode, MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.action_delete:
-                        ArrayList<Exam> removelist = new ArrayList<>();
-                        SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
-                        for (int i = 0; i < checkedItems.size(); i++) {
-                            int key = checkedItems.keyAt(i);
-                            if (checkedItems.get(key)) {
-                                db.deleteExamById(adapter.getItem(key));
-                                removelist.add(adapter.getExamList().get(key));
-                            }
+            public boolean onActionItemClicked(@NonNull final ActionMode mode, @NonNull MenuItem item) {
+                if (item.getItemId() == R.id.action_delete) {
+                    ArrayList<Exam> removelist = new ArrayList<>();
+                    SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
+                    for (int i = 0; i < checkedItems.size(); i++) {
+                        int key = checkedItems.keyAt(i);
+                        if (checkedItems.get(key)) {
+                            db.deleteExamById(adapter.getItem(key));
+                            removelist.add(adapter.getExamList().get(key));
                         }
-                        adapter.getExamList().removeAll(removelist);
-                        db.updateExam(adapter.getExam());
-                        adapter.notifyDataSetChanged();
-                        mode.finish();
-                        return true;
-
-                    default:
-                        return false;
+                    }
+                    adapter.getExamList().removeAll(removelist);
+                    db.updateExam(adapter.getExam());
+                    adapter.notifyDataSetChanged();
+                    mode.finish();
+                    return true;
                 }
+                return false;
             }
+
             @Override
             public void onDestroyActionMode(ActionMode mode) {
             }

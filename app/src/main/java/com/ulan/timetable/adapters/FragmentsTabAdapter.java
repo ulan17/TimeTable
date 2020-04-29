@@ -1,4 +1,5 @@
 package com.ulan.timetable.adapters;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -11,14 +12,16 @@ import java.util.List;
 /**
  * Created by Ulan on 05.09.2018.
  */
-public class FragmentsTabAdapter  extends FragmentStatePagerAdapter {
+public class FragmentsTabAdapter extends FragmentStatePagerAdapter {
 
     private final List<Fragment> mFragmentList = new ArrayList<>();
     private final List<String> mFragmentTitleList = new ArrayList<>();
 
-    public FragmentsTabAdapter(FragmentManager fm) {
-        super(fm);
+    public FragmentsTabAdapter(@NonNull FragmentManager fm) {
+        super(fm, FragmentsTabAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
     }
+
+    @NonNull
     @Override
     public Fragment getItem(int position) {
         return mFragmentList.get(position);
@@ -28,11 +31,13 @@ public class FragmentsTabAdapter  extends FragmentStatePagerAdapter {
         mFragmentList.add(fragment);
         mFragmentTitleList.add(title);
     }
+
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
         return mFragmentTitleList.get(position);
     }
+
     @Override
     public int getCount() {
         return mFragmentList.size();
@@ -43,6 +48,7 @@ public class FragmentsTabAdapter  extends FragmentStatePagerAdapter {
         return POSITION_NONE;
     }
 
+    @NonNull
     public List<Fragment> getFragmentList() {
         return mFragmentList;
     }

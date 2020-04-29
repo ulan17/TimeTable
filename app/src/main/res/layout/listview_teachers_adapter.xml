@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -114,7 +112,7 @@
                 android:id="@+id/personimage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/baseline_person_black_24"
+                app:srcCompat="@drawable/ic_person_black_24dp"
                 card_view:layout_constraintStart_toStartOf="@+id/line"
                 card_view:layout_constraintTop_toTopOf="@+id/postteacher" />
 
@@ -126,13 +124,13 @@
                 android:background="?selectableItemBackgroundBorderless"
                 card_view:layout_constraintEnd_toEndOf="parent"
                 card_view:layout_constraintTop_toTopOf="@+id/nameteacher"
-                card_view:srcCompat="@drawable/baseline_expand_more_black_24" />
+                card_view:srcCompat="@drawable/ic_expand_more_black_24dp" />
 
             <ImageView
                 android:id="@+id/imageView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/baseline_email_black_24"
+                app:srcCompat="@drawable/ic_email_black_24dp"
                 card_view:layout_constraintStart_toStartOf="@+id/imageView5"
                 card_view:layout_constraintTop_toTopOf="@+id/emailteacher" />
 
@@ -140,7 +138,7 @@
                 android:id="@+id/imageView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/baseline_phone_black_24"
+                app:srcCompat="@drawable/ic_phone_black_24dp"
                 card_view:layout_constraintStart_toStartOf="@+id/personimage"
                 card_view:layout_constraintTop_toTopOf="@+id/numberteacher" />
 

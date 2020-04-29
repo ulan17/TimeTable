@@ -5,15 +5,18 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.ulan.timetable.model.Note;
 import com.ulan.timetable.R;
+import com.ulan.timetable.model.Note;
 import com.ulan.timetable.utils.DbHelper;
 
 public class NoteInfoActivity extends AppCompatActivity {
 
     private DbHelper db;
+    @Nullable
     private Note note;
     private EditText text;
 
@@ -28,7 +31,7 @@ public class NoteInfoActivity extends AppCompatActivity {
         db = new DbHelper(NoteInfoActivity.this);
         note = (Note) getIntent().getSerializableExtra(NotesActivity.KEY_NOTE);
         text = findViewById(R.id.edittextNote);
-        if(note.getText() != null) {
+        if (note.getText() != null) {
             text.setText(note.getText());
         }
     }
@@ -42,7 +45,7 @@ public class NoteInfoActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 note.setText(text.getText().toString());

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Felix Hollederer
+  ~     This file is part of GymWenApp.
+  ~
+  ~     GymWenApp is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     GymWenApp is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with GymWenApp.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/windowBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/choice_button_senior"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/choice_first_difference"
+            android:background="?android:attr/windowBackground"
+            android:text="@string/choice_senior" />
+
+        <Button
+            android:id="@+id/choice_button_5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/choice_difference"
+            android:background="?android:attr/windowBackground"
+            android:text="@string/choice_5" />
+
+        <Button
+            android:id="@+id/choice_button_6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/choice_difference"
+            android:background="?android:attr/windowBackground"
+            android:text="@string/choice_6" />
+
+        <Button
+            android:id="@+id/choice_button_7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/choice_difference"
+            android:background="?android:attr/windowBackground"
+            android:text="@string/choice_7" />
+
+        <Button
+            android:id="@+id/choice_button_8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/choice_difference"
+            android:background="?android:attr/windowBackground"
+            android:text="@string/choice_8" />
+
+        <Button
+            android:id="@+id/choice_button_9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/choice_difference"
+            android:background="?android:attr/windowBackground"
+            android:text="@string/choice_9" />
+
+        <Button
+            android:id="@+id/choice_button_10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/choice_difference"
+            android:background="?android:attr/windowBackground"
+            android:text="@string/choice_10" />
+
+        <Button
+            android:id="@+id/choice_button_parents"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/choice_first_difference"
+            android:background="?android:attr/windowBackground"
+            android:text="@string/choice_parents" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/choice_first_difference"
+            android:background="?android:attr/windowBackground">
+
+            <EditText
+                android:id="@+id/choice_more_classes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/choice_more_classes"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+</ScrollView>

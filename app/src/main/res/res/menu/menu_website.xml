@@ -1,0 +1,58 @@
+<!--
+  ~ Copyright (c) 2020 Felix Hollederer
+  ~     This file is part of GymWenApp.
+  ~
+  ~     GymWenApp is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     GymWenApp is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with GymWenApp.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.activities.WebsiteActivity">
+    <item
+        android:id="@+id/action_website_search"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:orderInCategory="100"
+        android:title="@string/action_search"
+        app:iconTint="@android:color/white"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_website"
+        android:icon="@drawable/ic_compass"
+        android:orderInCategory="100"
+        android:title="@string/menu_website"
+        app:iconTint="@android:color/white"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_share"
+        android:icon="@drawable/ic_share_white_24dp"
+        android:orderInCategory="100"
+        android:title="@string/action_share"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_open_in_browser"
+        android:orderInCategory="100"
+        android:title="@string/action_open_in_browser"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_open_rss_feed"
+        android:orderInCategory="100"
+        android:title="@string/rss_feed"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/website_close"
+        android:orderInCategory="100"
+        android:title="@string/close"
+        app:showAsAction="never" />
+</menu>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_main_app"
+        android:icon="@drawable/ic_open_in_browser_white_24dp"
+        android:orderInCategory="100"
+        android:title="@string/action_open_main_app"
+        app:iconTint="@color/white"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_substitutionIntegration"
+        android:icon="@drawable/ic_assignment_late"
+        android:orderInCategory="100"
+        android:title="@string/integrate_substitution_in_timetable_on"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_timetable_backup"
+        android:orderInCategory="100"
+        android:title="@string/menu_backup"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_timetable_restore"
+        android:orderInCategory="100"
+        android:title="@string/menu_restore"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_timetable_remove_all"
+        android:orderInCategory="100"
+        android:title="@string/remove_all_subjects"
+        app:showAsAction="never" />
+
+</menu>

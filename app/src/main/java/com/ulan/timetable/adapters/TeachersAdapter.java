@@ -1,8 +1,5 @@
 package com.ulan.timetable.adapters;
 
-import android.app.Activity;
-
-
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -14,11 +11,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.cardview.widget.CardView;
 
-import com.ulan.timetable.model.Teacher;
 import com.ulan.timetable.R;
+import com.ulan.timetable.model.Teacher;
 import com.ulan.timetable.utils.AlertDialogsHelper;
 import com.ulan.timetable.utils.DbHelper;
 
@@ -30,7 +28,7 @@ import java.util.Objects;
  */
 public class TeachersAdapter extends ArrayAdapter<Teacher> {
 
-    private Activity mActivity;
+    private AppCompatActivity mActivity;
     private int mResource;
     private ArrayList<Teacher> teacherlist;
     private Teacher teacher;
@@ -45,7 +43,7 @@ public class TeachersAdapter extends ArrayAdapter<Teacher> {
         ImageView popup;
     }
 
-    public TeachersAdapter(Activity activity, ListView listView, int resource, ArrayList<Teacher> objects) {
+    public TeachersAdapter(AppCompatActivity activity, ListView listView, int resource, ArrayList<Teacher> objects) {
         super(activity, resource, objects);
         mActivity = activity;
         mListView = listView;

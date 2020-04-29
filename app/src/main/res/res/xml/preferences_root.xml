@@ -1,0 +1,94 @@
+<!--
+  ~ Copyright (c) 2020 Felix Hollederer
+  ~     This file is part of GymWenApp.
+  ~
+  ~     GymWenApp is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     GymWenApp is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with GymWenApp.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <Preference
+        android:title="@string/set_substitution_title"
+        app:fragment="com.asdoi.gymwen.ui.settingsFragments.SettingsFragmentSubstitution"
+        app:iconSpaceReserved="false" />
+    <Preference
+        android:title="@string/set_design_title"
+        app:fragment="com.asdoi.gymwen.ui.settingsFragments.SettingsFragmentDesign"
+        app:iconSpaceReserved="false" />
+    <Preference
+        android:title="@string/set_notification_title"
+        app:fragment="com.asdoi.gymwen.ui.settingsFragments.SettingsFragmentNotification"
+        app:iconSpaceReserved="false" />
+    <Preference
+        android:key="open_timetable_settings"
+        android:title="@string/menu_timetable"
+        app:iconSpaceReserved="false" />
+
+
+    <PreferenceCategory
+        android:title="@string/set_miscellaneous_title"
+        app:iconSpaceReserved="false">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="parents"
+            android:summary="@string/set_desc_parents"
+            android:title="@string/set_parents"
+            app:iconSpaceReserved="false" />
+        <MultiSelectListPreference
+            android:defaultValue="@array/shortcuts_array_values_default"
+            android:entries="@array/shortcuts_array"
+            android:entryValues="@array/shortcuts_array_values"
+            android:key="shortcuts_array"
+            android:summary="@string/set_desc_shortcuts"
+            android:title="Shortcuts"
+            app:iconSpaceReserved="false"
+            app:isPreferenceVisible="true" />
+        <Preference
+            android:key="show_more"
+            android:title="@string/set_show_more"
+            app:iconSpaceReserved="false" />
+        <Preference
+            android:key="language"
+            android:title="@string/menu_language"
+            app:iconSpaceReserved="false"
+            app:isPreferenceVisible="false" />
+        <Preference
+            android:key="updates"
+            android:summary="@string/set_desc_updates"
+            android:title="@string/menu_update"
+            app:iconSpaceReserved="false"
+            app:isPreferenceVisible="false" />
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="auto_update"
+            android:summary="@string/set_desc_check_background_updates"
+            android:title="@string/menu_auto_update_check"
+            app:iconSpaceReserved="true"
+            app:isPreferenceVisible="false" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="beta_features"
+            android:title="@string/set_beta_features"
+            app:iconSpaceReserved="false"
+            app:isPreferenceVisible="false" />
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="offline_mode"
+            android:summary="@string/set_desc_offline_mode"
+            android:title="@string/set_offline_mode"
+            app:iconSpaceReserved="false"
+            app:isPreferenceVisible="false" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Felix Hollederer
+  ~     This file is part of GymWenApp.
+  ~
+  ~     GymWenApp is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     GymWenApp is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with GymWenApp.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <!--    <item android:title="@string/menu_category_substitution">-->
+    <!--        <menu>-->
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_at_one_glance"
+            android:icon="@drawable/ic_today_tomorrow_black_24dp"
+            android:title="@string/menu_at_one_glance" />
+        <item
+            android:id="@+id/nav_today_both"
+            android:icon="@drawable/ic_today_black_24dp"
+            android:title="@string/today" />
+        <item
+            android:id="@+id/nav_tomorrow_both"
+            android:icon="@drawable/ic_tomorrow_black_24dp"
+            android:title="@string/tomorrow" />
+        <item
+            android:id="@+id/nav_days"
+            android:icon="@drawable/ic_today_tomorrow_black_24dp"
+            android:title="@string/menu_days"
+            android:visible="false" />
+        <item
+            android:id="@+id/nav_filtered_days"
+            android:icon="@drawable/ic_today_tomorrow_black_24dp"
+            android:title="@string/menu_filtered" />
+        <item
+            android:id="@+id/nav_unfiltered_days"
+            android:icon="@drawable/ic_today_tomorrow_black_24dp"
+            android:title="@string/menu_unfiltered" />
+        <item
+            android:id="@+id/nav_timetable"
+            android:checkable="false"
+            android:icon="@drawable/ic_timetable"
+            android:title="@string/menu_timetable" />
+    </group>
+    <!--        </menu>-->
+    <!--    </item>-->
+
+    <item android:title="@string/menu_category_school">
+        <menu>
+            <group android:checkableBehavior="none">
+                <item
+                    android:id="@+id/nav_website"
+                    android:icon="@drawable/ic_compass"
+                    android:title="@string/menu_website" />
+                <item
+                    android:id="@+id/nav_forms"
+                    android:icon="@drawable/ic_consent"
+                    android:title="@string/menu_forms" />
+                <item
+                    android:id="@+id/nav_teacherlist"
+                    android:icon="@drawable/ic_teacher_at_the_blackboard"
+                    android:title="@string/menu_teacher_list" />
+                <item
+                    android:id="@+id/nav_room_plan"
+                    android:icon="@drawable/ic_house_plan"
+                    android:title="@string/room_plan" />
+                <item
+                    android:id="@+id/nav_mebis"
+                    android:icon="@drawable/ic_graduate_cap"
+                    android:title="@string/menu_mebis" />
+                <item
+                    android:id="@+id/nav_claxss"
+                    android:icon="@drawable/ic_internet"
+                    android:title="@string/menu_claxss" />
+                <item
+                    android:id="@+id/nav_mensa"
+                    android:icon="@drawable/ic_restaurant"
+                    android:title="@string/menu_mensa" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="@string/menu_from_this_developer">
+        <menu>
+            <group android:checkableBehavior="none">
+                <item
+                    android:id="@+id/nav_colorush"
+                    android:icon="@drawable/ic_colorush2"
+                    android:title="@string/menu_colorush" />
+                <item
+                    android:id="@+id/nav_grades"
+                    android:icon="@drawable/ic_exam"
+                    android:title="@string/menu_grades" />
+            </group>
+        </menu>
+    </item>
+
+
+    <item android:title="@string/menu_category_other">
+        <menu>
+            <group android:checkableBehavior="none">
+                <item
+                    android:id="@+id/nav_public_transport"
+                    android:icon="@drawable/ic_directions_transit_black_24dp"
+                    android:title="@string/menu_public_transport" />
+                <item
+                    android:id="@+id/nav_news"
+                    android:icon="@drawable/ic_news"
+                    android:title="@string/menu_news" />
+                <item
+                    android:id="@+id/nav_shop"
+                    android:icon="@drawable/ic_t_shirt"
+                    android:title="@string/menu_shop"
+                    android:visible="false" />
+                <item
+                    android:id="@+id/nav_podcast"
+                    android:icon="@drawable/ic_podcast"
+                    android:title="@string/menu_podcast"
+                    android:visible="false" />
+                <item
+                    android:id="@+id/nav_call_office"
+                    android:icon="@drawable/ic_call_black_24dp"
+                    android:title="@string/menu_call_office" />
+                <item
+                    android:id="@+id/nav_navigation"
+                    android:icon="@drawable/ic_navigation_black_24dp"
+                    android:title="@string/menu_navigation" />
+                <item
+                    android:icon="@drawable/ic_cloud_download_black_24dp"
+                    android:title="@string/menu_backup"
+                    android:visible="false" />
+                <item
+                    android:id="@+id/nav_notes"
+                    android:icon="@drawable/ic_writing"
+                    android:title="@string/menu_notes" />
+            </group>
+        </menu>
+    </item>
+
+
+    <!--    <item android:title="@string/menu_category_settings">-->
+    <!--        <menu>-->
+    <group
+        android:checkableBehavior="none"
+        android:id="@+id/settings_group">
+        <item
+            android:id="@+id/nav_imprint"
+            android:icon="@drawable/ic_help_outline_black_24dp"
+            android:title="@string/menu_impressum" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="@string/menu_settings" />
+    </group>
+    <!--        </menu>-->
+    <!--    </item>-->
+</menu>

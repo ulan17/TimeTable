@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Felix Hollederer
+  ~     This file is part of GymWenApp.
+  ~
+  ~     GymWenApp is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     GymWenApp is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with GymWenApp.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/widget_substitution_frame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/widget_white">
+
+    <ListView
+        android:id="@+id/widget_substitution_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@null" />
+
+    <ImageButton
+        android:id="@+id/widget_substiution_refresh_button"
+        android:layout_width="@dimen/widget_image_width"
+        android:layout_height="@dimen/widget_image_height"
+        android:layout_gravity="end"
+        android:contentDescription="@string/action_refresh"
+        android:scaleType="fitCenter"
+
+        app:srcCompat="@drawable/ic_refresh_black_24dp" />
+
+    <ImageButton
+        android:id="@+id/widget_substitution_open_button"
+        android:layout_width="@dimen/widget_image_width"
+        android:layout_height="@dimen/widget_image_height"
+        android:layout_gravity="start"
+        android:contentDescription="@string/open_app"
+        android:scaleType="fitCenter"
+
+        android:visibility="gone"
+        app:srcCompat="@drawable/ic_open_in_browser_white_24dp" />
+
+    <TextView
+        android:id="@+id/widget_substiution_loading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/loading"
+        android:textColor="@android:color/black"
+        android:textSize="36sp"
+        android:textStyle="bold" />
+</FrameLayout>

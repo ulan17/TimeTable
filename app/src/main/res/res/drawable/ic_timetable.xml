@@ -1,0 +1,57 @@
+<!--
+  ~ Copyright (c) 2020 Felix Hollederer
+  ~     This file is part of GymWenApp.
+  ~
+  ~     GymWenApp is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     GymWenApp is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with GymWenApp.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="512"
+    android:viewportHeight="512">
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="m451,45c0,-8.402 -6.598,-15 -15,-15h-75v61h15c8.402,0 15,6.598 15,15 0,8.398 -6.598,15 -15,15h-60c-8.402,0 -15,-6.602 -15,-15 0,-8.402 6.598,-15 15,-15h15v-61h-90v61h15c8.402,0 15,6.598 15,15 0,8.398 -6.598,15 -15,15h-60c-8.402,0 -15,-6.602 -15,-15 0,-8.402 6.598,-15 15,-15h15v-61h-90v61h15c8.402,0 15,6.598 15,15 0,8.398 -6.598,15 -15,15h-60c-8.402,0 -15,-6.602 -15,-15 0,-8.402 6.598,-15 15,-15h15v-61h-76c-8.402,0 -15,6.598 -15,15v106h451zM451,45" />
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="m406,301c-57.891,0 -105,47.109 -105,105s47.109,106 105,106 106,-48.109 106,-106 -48.109,-105 -106,-105zM436,421h-30c-8.289,0 -15,-6.711 -15,-15v-30c0,-8.289 6.711,-15 15,-15s15,6.711 15,15v15h15c8.289,0 15,6.711 15,15s-6.711,15 -15,15zM436,421" />
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="m121,15c0,-8.402 -6.598,-15 -15,-15s-15,6.598 -15,15v15h30zM121,15" />
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="m241,15c0,-8.402 -6.598,-15 -15,-15s-15,6.598 -15,15v15h30zM241,15" />
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="m361,15c0,-8.402 -6.598,-15 -15,-15s-15,6.598 -15,15v15h30zM361,15" />
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="m211,376h30v30h-30zM211,376" />
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="m91,256h30v30h-30zM91,256" />
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="m91,376h30v30h-30zM91,376" />
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="m15,481h278.852c-14.402,-21.473 -22.852,-47.258 -22.852,-75v15c0,8.289 -6.711,15 -15,15h-60c-8.289,0 -15,-6.711 -15,-15v-60c0,-8.289 6.711,-15 15,-15h60c8.289,0 15,6.711 15,15v45c0,-35.867 14.289,-68.309 37.184,-92.508 -4.223,-2.652 -7.184,-7.133 -7.184,-12.492v-60c0,-8.289 6.711,-15 15,-15h60c8.289,0 15,6.711 15,15v31.516c4.988,-0.563 9.863,-1.516 15,-1.516 15.855,0 30.855,3.25 45,8.293v-98.293h-451v285c0,8.289 6.711,15 15,15zM181,241c0,-8.289 6.711,-15 15,-15h60c8.289,0 15,6.711 15,15v60c0,8.289 -6.711,15 -15,15h-60c-8.289,0 -15,-6.711 -15,-15zM61,241c0,-8.289 6.711,-15 15,-15h60c8.289,0 15,6.711 15,15v60c0,8.289 -6.711,15 -15,15h-60c-8.289,0 -15,-6.711 -15,-15zM61,361c0,-8.289 6.711,-15 15,-15h60c8.289,0 15,6.711 15,15v60c0,8.289 -6.711,15 -15,15h-60c-8.289,0 -15,-6.711 -15,-15zM61,361" />
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="m345.449,286c5.035,-2.555 10.18,-4.793 15.551,-6.707v-23.293h-30v30zM345.449,286" />
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="m211,256h30v30h-30zM211,256" />
+</vector>

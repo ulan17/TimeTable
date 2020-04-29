@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Felix Hollederer
+  ~     This file is part of GymWenApp.
+  ~
+  ~     GymWenApp is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     GymWenApp is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with GymWenApp.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="menu_both"
+        android:summary="@string/set_desc_both"
+        android:title="@string/menu_at_one_glance"
+        app:iconSpaceReserved="false" />
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="intelligent_hide"
+        android:summary="@string/set_desc_intelligent_hide"
+        android:title="@string/set_intelligent_hide"
+        app:iconSpaceReserved="true" />
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="show_days"
+        android:title="@string/set_single_days"
+        app:iconSpaceReserved="false" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="show_sections"
+        android:title="@string/set_design_show_sections"
+        app:iconSpaceReserved="false" />
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="menu_filtered"
+        android:title="@string/menu_filtered"
+        app:iconSpaceReserved="true" />
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="menu_unfiltered"
+        android:title="@string/menu_unfiltered"
+        app:iconSpaceReserved="true" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="show_no_sections"
+        android:title="@string/set_design_no_sections"
+        app:iconSpaceReserved="false" />
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="menu_news"
+        android:title="@string/menu_news"
+        app:iconSpaceReserved="false" />
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="menu_mensa"
+        android:title="@string/menu_mensa"
+        app:iconSpaceReserved="false" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="menu_shop"
+        android:title="@string/menu_shop"
+        app:iconSpaceReserved="false" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="menu_podcast"
+        android:title="@string/menu_podcast"
+        app:iconSpaceReserved="false" />
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="menu_call_office"
+        android:title="@string/menu_call_office"
+        app:iconSpaceReserved="false" />
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="menu_navigation"
+        android:title="@string/menu_navigation"
+        app:iconSpaceReserved="false" />
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="menu_public_transport"
+        android:title="@string/menu_public_transport"
+        app:iconSpaceReserved="false" />
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="menu_notes"
+        android:title="@string/menu_notes"
+        app:iconSpaceReserved="false" />
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="menu_timetable"
+        android:title="@string/menu_timetable"
+        app:iconSpaceReserved="false" />
+
+</PreferenceScreen>

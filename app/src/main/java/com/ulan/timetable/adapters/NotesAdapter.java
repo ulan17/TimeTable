@@ -1,6 +1,7 @@
 package com.ulan.timetable.adapters;
 
-import android.app.Activity;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -13,12 +14,15 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.cardview.widget.CardView;
+import androidx.core.widget.ImageViewCompat;
 
-import com.ulan.timetable.model.Note;
 import com.ulan.timetable.R;
+import com.ulan.timetable.model.Note;
 import com.ulan.timetable.utils.AlertDialogsHelper;
+import com.ulan.timetable.utils.ColorPalette;
 import com.ulan.timetable.utils.DbHelper;
 
 import java.util.ArrayList;
@@ -30,11 +34,12 @@ import java.util.Objects;
  */
 public class NotesAdapter extends ArrayAdapter<Note> {
 
-    private Activity mActivity;
-    private int mResource;
-    private ArrayList<Note> notelist;
+    @NonNull
+    private final AppCompatActivity mActivity;
+    @NonNull
+    private final ArrayList<Note> notelist;
     private Note note;
-    private ListView mListView;
+    private final ListView mListView;
 
     private static class ViewHolder {
         TextView title;
@@ -42,11 +47,10 @@ public class NotesAdapter extends ArrayAdapter<Note> {
         CardView cardView;
     }
 
-    public NotesAdapter(Activity activity, ListView listView, int resource, ArrayList<Note> objects) {
+    public NotesAdapter(@NonNull AppCompatActivity activity, ListView listView, int resource, @NonNull ArrayList<Note> objects) {
         super(activity, resource, objects);
         mActivity = activity;
         mListView = listView;
-        mResource = resource;
         notelist = objects;
     }
 
@@ -60,9 +64,9 @@ public class NotesAdapter extends ArrayAdapter<Note> {
         note = new Note(title, text, color);
         final ViewHolder holder;
 
-        if(convertView == null) {
+        if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(mActivity);
-            convertView = inflater.inflate(mResource, parent, false);
+            convertView = inflater.inflate(R.layout.listview_notes_adapter, parent, false);
             holder = new ViewHolder();
             holder.title = convertView.findViewById(R.id.titlenote);
             holder.popup = convertView.findViewById(R.id.popupbtn);
@@ -71,36 +75,42 @@ public class NotesAdapter extends ArrayAdapter<Note> {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+
+        //Setup colors based on Background
+        int textColor = ColorPalette.pickTextColorBasedOnBgColorSimple(color, Color.WHITE, Color.BLACK);
+        holder.title.setTextColor(textColor);
+        ImageViewCompat.setImageTintList(convertView.findViewById(R.id.popupbtn), ColorStateList.valueOf(textColor));
+
+
         holder.title.setText(note.getTitle());
         holder.cardView.setCardBackgroundColor(note.getColor());
-        holder.popup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final PopupMenu popup = new PopupMenu(mActivity, holder.popup);
-                final DbHelper db = new DbHelper(mActivity);
-                popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.delete_popup:
-                                db.deleteNoteById(getItem(position));
-                                db.updateNote(getItem(position));
-                                notelist.remove(position);
-                                notifyDataSetChanged();
-                                return true;
-
-                            case R.id.edit_popup:
-                                final View alertLayout = mActivity.getLayoutInflater().inflate(R.layout.dialog_add_note, null);
-                                AlertDialogsHelper.getEditNoteDialog(mActivity, alertLayout, notelist, mListView, position);
-                                notifyDataSetChanged();
-                                return true;
-                            default:
-                                return onMenuItemClick(item);
-                        }
+        holder.popup.setOnClickListener(v -> {
+            final PopupMenu popup = new PopupMenu(getContext(), holder.popup);
+            final DbHelper db = new DbHelper(mActivity);
+            popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
+            popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                public boolean onMenuItemClick(@NonNull MenuItem item) {
+                    int itemId = item.getItemId();
+                    if (itemId == R.id.delete_popup) {
+                        AlertDialogsHelper.getDeleteDialog(getContext(), () -> {
+                            db.deleteNoteById(getItem(position));
+                            db.updateNote(getItem(position));
+                            notelist.remove(position);
+                            notifyDataSetChanged();
+                        }, getContext().getString(R.string.timetable_delete_note, note.getTitle()));
+                        return true;
+                    } else if (itemId == R.id.edit_popup) {
+                        final View alertLayout = mActivity.getLayoutInflater().inflate(R.layout.dialog_add_note, null);
+                        AlertDialogsHelper.getEditNoteDialog(mActivity, alertLayout, notelist, mListView, position);
+                        notifyDataSetChanged();
+                        return true;
                     }
-                });
-                popup.show();
-            }
+                    return
+
+                            onMenuItemClick(item);
+                }
+            });
+            popup.show();
         });
 
         hidePopUpMenu(holder);
@@ -113,6 +123,7 @@ public class NotesAdapter extends ArrayAdapter<Note> {
         return super.getItemId(position);
     }
 
+    @NonNull
     public ArrayList<Note> getNoteList() {
         return notelist;
     }
@@ -121,14 +132,14 @@ public class NotesAdapter extends ArrayAdapter<Note> {
         return note;
     }
 
-     private void hidePopUpMenu(ViewHolder holder) {
+    private void hidePopUpMenu(@NonNull ViewHolder holder) {
         SparseBooleanArray checkedItems = mListView.getCheckedItemPositions();
         if (checkedItems.size() > 0) {
             for (int i = 0; i < checkedItems.size(); i++) {
                 int key = checkedItems.keyAt(i);
                 if (checkedItems.get(key)) {
                     holder.popup.setVisibility(View.INVISIBLE);
-                    }
+                }
             }
         } else {
             holder.popup.setVisibility(View.VISIBLE);

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ulan.timetable"
-    >
+    package="com.ulan.timetable">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
+        android:name=".Application"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -63,19 +64,31 @@
             android:parentActivityName=".activities.MainActivity" />
 
         <receiver
-            android:name=".utils.DailyReceiver"
+            android:name=".receivers.NotificationDismissButtonReceiver"
             android:enabled="true" />
-
         <receiver
-            android:name=".utils.WakeUpAlarmReceiver"
+            android:name="com.ulan.timetable.receivers.DailyReceiver"
             android:enabled="true">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <category android:name="android.intent.category.DEFAULT" />
+
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
             </intent-filter>
         </receiver>
+        <receiver
+            android:name="com.ulan.timetable.receivers.TurnOnReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
 
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.ulan.timetable.receivers.TurnOffReceiver"
+            android:enabled="true" />
     </application>
 
 </manifest>

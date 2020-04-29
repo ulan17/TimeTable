@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Felix Hollederer
+  ~     This file is part of GymWenApp.
+  ~
+  ~     GymWenApp is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     GymWenApp is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with GymWenApp.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.activities.RoomPlanActivity">
+    <item
+        android:id="@+id/action_room_search"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:orderInCategory="100"
+        android:title="@string/action_search"
+        app:iconTint="@android:color/white"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_room_plan"
+        android:icon="@drawable/ic_house_plan"
+        android:orderInCategory="100"
+        android:title="@string/room_plan"
+        app:iconTint="@android:color/white"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_navigation"
+        android:icon="@drawable/ic_navigation_black_24dp"
+        android:title="@string/menu_navigation"
+        app:iconTint="@android:color/white"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom" />
+</menu>

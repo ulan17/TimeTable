@@ -1,0 +1,627 @@
+<!--
+  ~ Copyright (c) 2020 Felix Hollederer
+  ~     This file is part of GymWenApp.
+  ~
+  ~     GymWenApp is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     GymWenApp is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with GymWenApp.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- German -->
+    <string name="app_name" translatable="false">GymWen</string>
+    <string name="title" translatable="false">Gymnasium Wendelstein</string>
+    <string name="subtitle">Offizielle App © Felix Hollederer</string>
+
+    <!-- Navigation Drawer -->
+    <string name="navigation_drawer_open">Navigation öffnen</string>
+    <string name="navigation_drawer_close">Navigation schließen</string>
+    <string name="today">Heute</string>
+    <string name="tomorrow">Morgen</string>
+    <string name="menu_settings">Einstellungen</string>
+    <string name="menu_website">Startseite</string>
+    <string name="menu_mebis">Mebis</string>
+    <string name="menu_mensa">Mensa (kitafino)</string>c
+    <string name="menu_category_other">Diverses</string>
+    <string name="menu_category_school">Gymnasium</string>
+    <string name="menu_at_one_glance">Auf einen Blick!</string>
+    <string name="menu_impressum">Über</string>
+    <string name="menu_update">Updates</string>
+    <string name="menu_auto_update_check">Im Hintergrund prüfen</string>
+    <string name="changelog">Änderungen</string>
+    <string name="menu_shop">Online Shop</string>
+    <string name="menu_teacher_list">Lehrerliste</string>
+    <string name="menu_notes">Notizen</string>
+    <string name="menu_timetable">Stundenplan</string>
+    <string name="menu_grades">Notenverwaltung (Excel)</string>
+    <string name="menu_days">Einzelne Tage</string>
+    <string name="menu_filtered">Gefiltert</string>
+    <string name="menu_unfiltered">Gesamt</string>
+    <string name="menu_language">Sprache</string>
+    <string name="menu_colorush" translatable="false">ColoRush</string>
+    <string name="menu_profiles">Profile</string>
+    <string name="menu_claxss" translatable="false">ClaXss</string>
+    <string name="menu_call_office">Sekretariat anrufen</string>
+    <string name="menu_public_transport">VGN</string>
+    <string name="menu_forms">Formulare</string>
+    <string name="menu_from_this_developer">Auch von diesem Entwickler</string>
+    <string name="menu_news">Schülerzeitung</string>
+    <string name="menu_navigation">Navigation</string>
+    <string name="menu_backup">Backup</string>
+    <string name="menu_restore">Wiederherstellen</string>
+    <string name="menu_podcast" translatable="false">Wendelsteiner Welle</string>
+    <string name="room_plan">Raumplan</string>
+
+    <!-- Main -->
+    <string name="action_share">Teilen</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="action_refresh">Aktualisieren</string>
+    <string name="open_app">App öffnen</string>
+    <string name="switch_design">Design ändern</string>
+
+    <!-- Settings -->
+    <string name="title_activity_settings">Einstellungen</string>
+    <string name="set_substitution_title">Vertretungsplan</string>
+    <string name="set_courses_title">Kurse/Klasse</string>
+    <string name="set_substitution_signin">Anmeldedaten</string>
+    <string name="set_substitution_username">Benutzername</string>
+    <string name="set_substitution_password">Passwort</string>
+    <string name="set_notification_title">Benachrichtigung</string>
+    <string name="set_notification_isOn">Benachrichtigung anzeigen</string>
+    <string name="set_notification_showAlways">Dauerhaft anzeigen</string>
+    <string name="set_hours">Uhrzeiten statt Stunden anzeigen</string>
+    <string name="set_show_borders">Umranden der Lehrerkürzel</string>
+    <string name="set_show_borders_specific">Nur beim gefilterten Plan</string>
+    <string name="set_miscellaneous_title">Sonstiges</string>
+    <string name="set_beta_features">Beta-Features</string>
+    <string name="set_old_substitution">Altes Design</string>
+    <string name="set_design_title">Design</string>
+    <string name="set_design_show_sections">Gefiltert \u0026 Gesamt einzeln anzeigen</string>
+    <string name="set_show_weekdates">Wochentage immer anzeigen</string>
+    <string name="set_parents">Elternmodus</string>
+    <string name="set_two_notifications">Tage einzeln als Benachrichtigung</string>
+    <string name="set_choose_theme">Generelles Design</string>
+    <string name="set_theme_light">Hell</string>
+    <string name="set_theme_dark">Dunkel</string>
+    <string name="set_theme_black">Schwarz</string>
+    <string name="set_theme_auto">Automatisch</string>
+    <string name="set_full_names">Echte Namen statt Kürzel anzeigen</string>
+    <string name="set_full_names_specific">Nur beim gefilterten Plan</string>
+    <string name="set_today_url">URL für den ersten Tag</string>
+    <string name="set_tomorrow_url">URL für den zweiten Tag</string>
+    <string name="set_offline_mode">Offlinemodus</string>
+    <string name="set_teacherlist_url">URL für die Lehrerliste</string>
+    <string name="set_substitution_category">Vertretungsplan</string>
+    <string name="set_summarize">Gleiche Stunden zusammenfassen</string>
+    <string name="also_at_old_design">Auch beim alten Design</string>
+    <string name="set_single_days">Tage einzeln anzeigen</string>
+    <string name="set_old_title">Alte Überschrift</string>
+    <string name="set_design_no_sections">Gefiltert \u0026 Gesamt zusammen anzeigen</string>
+    <string name="set_swipe_to_refresh">Herunterziehen zum Aktualisieren</string>
+    <string name="set_at_filtered_plan">Auch beim gefilterten Plan</string>
+    <string name="set_intelligent_hide">Intelligentes Ausblenden</string>
+    <string name="set_show_summary_notif_title">Zusammenfassende Benachrichtigung anzeigen</string>
+    <string name="set_show_summary_usual_title">Alle Profile in der zusammenfassenden Benachrichtigung anzeigen</string>
+    <string name="set_main_notif_for_all_title">Die prägnante Benachrichtigung für alle Profile senden</string>
+    <string name="set_show_more">Mehr anzeigen</string>
+
+
+    <!-- SubstitutionPlan -->
+    <string name="nothing">Keine Vertretung für dich.</string>
+    <string name="back_button">Erneut drücken zum Beenden</string>
+    <string name="downloading">Lädt\u2026</string>
+    <string name="footprint">Mit der GymWen App erzeugt: https://asdoi.gitlab.io/</string>
+    <string name="noInternet">Du bist nicht mit dem Internet verbunden!</string>
+    <string name="noInternetConnection">Keine Internetverbindung!</string>
+    <string name="share_substitution_plan">Vertretung senden an\u2026</string>
+    <string name="day_past">(Vergangen)</string>
+    <string name="with_teacher">bei</string>
+    <string name="missing_short" translatable="false">entf</string>
+    <string name="add_to_my_courses">Zu meinen Kursen hinzufügen</string>
+    <string name="remove_from_my_courses">Aus meinen Kursen entfernen</string>
+
+    <!--    Table-->
+    <string name="classes">Klasse</string>
+    <string name="classes_short">K</string>
+    <string name="courses">Kurs</string>
+    <string name="courses_short">K</string>
+    <string name="hours">Stunde</string>
+    <string name="hours_short">h</string>
+    <string name="hours_short_three">Std</string>
+    <string name="subject">Fach</string>
+    <string name="teacher">Lehrer</string>
+    <string name="teacher_short">L</string>
+    <string name="room">Raum</string>
+    <string name="room_short">R</string>
+    <string name="miscellaneous">Sonstiges</string>
+    <string name="miscellaneous_short">Sons.</string>
+
+    <!-- Sign In -->
+    <string name="title_activity_sign_in">Anmeldung</string>
+    <string name="login_failed">"Anmeldung fehlgeschlagen"</string>
+    <string name="login_success">Anmeldung erfolgreich</string>
+    <string name="login_sign_in">Anmelden</string>
+    <string name="please_wait">Bitte warten</string>
+    <string name="proofing">Anmeldedaten werden geprüft.</string>
+    <string name="username_hint">Benutzername</string>
+    <string name="password_hint">Passwort</string>
+    <string name="login_description">Bitte geben Sie hier die Anmeldedaten des Online-Vertretungsplans ein.</string>
+
+    <!-- Choice -->
+    <string name="title_activity_choice">Kurs-/Klassenwahl</string>
+    <string name="choice_senior">Oberstufe (Q11/Q12)</string>
+    <string name="choice_5">5. Klasse</string>
+    <string name="choice_6">6. Klasse</string>
+    <string name="choice_7">7. Klasse</string>
+    <string name="choice_8">8. Klasse</string>
+    <string name="choice_9">9. Klasse</string>
+    <string name="choice_10">10. Klasse</string>
+    <string name="choice_parents">Elternteil</string>
+    <string name="choice_more_classes">Andere Klasse</string>
+    <string name="choice_more_letters">Anderer Buchstabe</string>
+    <string name="choice_senior_one">Jahrgang 1 (11. Klasse, bei 1d4 die 1)</string>
+    <string name="choice_senior_two">Jahrgang 2 (12. Klasse, bei 2d4 die 2)</string>
+    <string name="choice_more_cours_digits">Anderer Jahrgang</string>
+    <string name="choice_title_4">Kurs der Pflichtfächer (Deutsch, Mathe, Geschichte, Sozialkunde)\n(z.B. bei 1d4, die 4)</string>
+    <string name="choice_main_courses">Kurs der Pflichtfächer</string>
+    <string name="choice_complete">Bitte vervollständige deine Kurswahl:</string>
+    <string name="choice_add_course">Weiteren Kurs hinzufügen.</string>
+    <string name="senior_empty">Bitte Kurse einfügen.</string>
+    <string name="additional_course">Zusätzlicher Kurs</string>
+    <string name="please_insert_digit">Bitte eine Zahl eingeben.</string>
+    <string name="please_insert_letter">Bitte einen Buchstaben eingeben.</string>
+    <!-- Subjects -->
+    <string name="math">Mathe</string>
+    <string name="german">Deutsch</string>
+    <string name="history">Geschichte</string>
+    <string name="social_education">Sozialkunde</string>
+    <string name="PE">Sport</string>
+    <string name="Religious_education">Religion</string>
+    <string name="english">Englisch</string>
+    <string name="france">Französisch</string>
+    <string name="latin">Latein</string>
+    <string name="spanish">Spanisch</string>
+    <string name="biology">Biologie</string>
+    <string name="chemistry">Chemie</string>
+    <string name="physics">Physik</string>
+    <string name="programming">Informatik</string>
+    <string name="geography">Geographie</string>
+    <string name="finance">Wirtschaft und Recht</string>
+    <string name="art">Kunst</string>
+    <string name="music">Musik</string>
+    <string name="W_Seminar">W-Seminar</string>
+    <string name="P_Seminar">P-Seminar</string>
+    <string name="profile_subject">Profilfach</string>
+    <string name="additum">Additum</string>
+    <!-- ShortNames Of Subjects -->
+    <string name="mathShort" translatable="false">m</string>
+    <string name="germanShort" translatable="false">d</string>
+    <string name="historyShort" translatable="false">g</string>
+    <string name="social_educationShort" translatable="false">sk</string>
+    <string name="PEShort" translatable="false">spo</string>
+    <string name="Religious_educationShort" translatable="false" />
+    <string name="englishShort" translatable="false">e</string>
+    <string name="franceShort" translatable="false">f</string>
+    <string name="latinShort" translatable="false">l</string>
+    <string name="spanishShort" translatable="false">sp</string>
+    <string name="biologyShort" translatable="false">b</string>
+    <string name="chemistryShort" translatable="false">c</string>
+    <string name="physicsShort" translatable="false">ph</string>
+    <string name="programmingShort" translatable="false">inf</string>
+    <string name="geographyShort" translatable="false">geo</string>
+    <string name="financeShort" translatable="false">wr</string>
+    <string name="artShort" translatable="false">ku</string>
+    <string name="musicShort" translatable="false">mu</string>
+    <string name="W_SeminarShort" translatable="false">W_</string>
+    <string name="P_SeminarShort" translatable="false">P_</string>
+    <string name="profile_subjectShort" translatable="false" />
+    <string name="anyShort" translatable="false">X</string>
+    <string name="additumShort" translatable="false">X_</string>
+
+    <!-- Impressum -->
+    <string name="impressum_AboutLibs_Title">Open-Source Bibliotheken</string>
+    <string name="privacy"><![CDATA[Die offizielle Gymnasium Wendelstein App (im folgenden GymWen App genannt) sammelt keine Daten über ihre Nutzer.<br>
+        D.h. es werden weder personenbezogene Daten noch gerätspezifische Daten gesammelt oder an Dritte weitergegeben.<br>
+        Ihre eingegebenen Daten werden ausschließlich lokal auf Ihrem Gerät gespeichert und von dort abgerufen.<br>
+        Außerdem werden ausschließlich schon bereits genutzte Datenbanken der Schule verwendet.
+        <br>Bei Absturzberichten muss jedoch beachtet werden, dass mir diverse Informationen übermittelt werden:
+        <br> - Version der App
+        <br> - Datum und Uhrzeit des Absturzes
+        <br> - Geräteinformationen wie Modell, Hersteller usw. (keine Seriennummer / IMEI)
+        <br> - Betriebssystem-Version
+        <br> - Stack-Trace zu dem Absturz]]></string>
+    <string name="share_app">App teilen mit\u2026</string>
+    <string name="share_app_message">Lade dir die offizielle GymWen App herunter, mit ihr wirst du automatisch über deine Vertretungen informiert, kannst Essen in der Mensa bestellen, die Lehrerliste durchsuchen und Vieles mehr:</string>
+
+    <!-- Website -->
+    <string name="action_open_in_browser">Im Browser öffnen</string>
+    <string name="share_link">Link teilen mit\u2026</string>
+    <string name="tap_picture">Bild antippen</string>
+    <string name="close">Schließen</string>
+    <string name="rss_notification_channel">Website</string>
+    <string name="set_rss_notification">Website-Benachrichtigung</string>
+    <string name="rss_notification_channel_description">Eine Benachrichtigung über die neuesten Artikel auf der Schulhomepage</string>
+    <string name="rss_feed">RSS-Feed</string>
+
+    <!-- Notification-->
+    <string name="notification_summary_channel_title">Vertretungsplan</string>
+    <string name="notification_summary_channel_description">Eine zusammenfassende Benachrichtigung über den Vertretungsplan</string>
+    <string name="notification_main_channel_title">Vertretungsplan Wichtig</string>
+    <string name="notification_main_channel_description">Eine Benachrichtigung, die dir deine aktuellen Vertretungen sendet</string>
+    <string name="notif_content_title">Vertretung:</string>
+    <string name="notif_dismiss">Verbergen</string>
+    <string name="notif_nothing">Keine Vertretung</string>
+    <string name="more">mehr</string>
+
+    <!-- AppUpdater -->
+    <string name="update_available_title">Update verfügbar!</string>
+    <string name="update_available_content">Lade dir die neueste Version herunter mit den neuesten Features, Verbesserungen und Fehlerbehebungen.</string>
+    <string name="update_not_available_title">Bereits aktuell!</string>
+    <string name="update_not_available_content">Du hast bereits die neueste Version installiert.</string>
+    <string name="update_now">Jetzt herunterladen</string>
+    <string name="update_later">Später</string>
+    <string name="update_down_title">Lädt Update herunter\u2026</string>
+
+    <!-- Acra -->
+    <string name="acra_dialog_text">Tut mir leid! Das hätte nicht passieren sollen. Die App ist abgestürzt.
+    \nBitte sende mir den Fehlerbericht, damit ich den Fehler so schnell wie möglich beheben kann.
+    \nVielen Dank!</string>
+    <string name="acra_dialog_content">Bitte füge hier einen Kommentar über das ein, was du gemacht hast:
+        \nBeim Klick auf OK öffnet sich die E-Mail-App und es werden persönliche Daten (wie Mail-Adresse, Gerätemodell, gespeicherte Werte, etc.) übermittelt!</string>
+    <string name="acra_dialog_title">Das hätte nicht passieren sollen.</string>
+
+    <!-- ckChangeLog -->
+    <string name="changelog_full_title">Änderungen \u0026 Verbesserungen</string>
+    <string name="changelog_title">Was ist neu</string>
+    <string name="changelog_ok_button">Alles Klar!</string>
+    <string name="changelog_show_full">Mehr\u2026</string>
+
+    <!-- Sheriff Permissions -->
+    <string name="sheriff_permission_rational">Es werden ein paar Berechtigungen für diese Funktion benötigt. Um eine umfassende Funktionalität zu gewährleisten, gewähren Sie diese bitte.</string>
+    <string name="permission_required">Berechtigung wird benötigt!</string>
+    <string name="permission_required_description">Diese Berechtigung/en werden benötigt, um eine umfassende Funktionalität zu gewährleisten.</string>
+    <string name="permission_ok_button">Gewähren\u2026</string>
+    <string name="permission_cancel_button">Abbrechen</string>
+
+    <!-- TeacherlistFeatures -->
+    <string name="no_email_app">Du hast keine E-Mail App installiert.</string>
+    <string name="teacher_no_teacher_found">Es wurde kein Lehrer mit diesen Daten gefunden.</string>
+    <string name="teacher_search_teacher_list">Durchsuchen\u2026</string>
+    <string name="teacher_mail">Mail</string>
+
+    <!-- Credits -->
+    <string name="credits" translatable="false"><![CDATA[
+        <div>Icons made by <a href="https://www.flaticon.com/authors/itim2101" title="itim2101">itim2101</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+        <div>Icons made by <a href="https://www.flaticon.com/authors/mavadee" title="mavadee">mavadee</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+        <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+        <div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+        <div>Icons made by <a href="https://www.flaticon.com/authors/dave-gandy" title="Dave Gandy">Dave Gandy</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+        <div>Icons made by <a href="https://www.flaticon.com/authors/mavadee" title="mavadee">mavadee</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+        <div>Icons made by <a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+        <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+        <div>Icons made by <a href="https://www.flaticon.com/authors/srip" title="srip">srip</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+        <div>Icons made by <a href="https://www.flaticon.com/authors/ddara" title="dDara">dDara</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+        <div>Icons made by <a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>]]>
+    </string>
+
+    <!-- Imprint -->
+    <string name="imprint_text" translatable="false"><![CDATA[
+        <div>Impressum des Gymnasiums Wendelstein:<br>
+        http://gym-wen.de/startseite/impressum/</div><br>
+        <div>Impressum des App-Entwicklers:<br>
+        https://asdoi.gitlab.io/imprint.html</div>]]></string>
+
+    <!-- Bottom Navigation Bar -->
+    <string name="nav_filter">Gefiltert</string>
+    <string name="nav_all">Gesamt</string>
+    <string name="set_notification_alarm">Zu einer best. Uhrzeit</string>
+
+    <!-- Time Picker-->
+
+    <!-- Reload & Save Docs-->
+
+    <!-- Profiles -->
+    <string name="title_activity_profile">Profile</string>
+    <string name="profiles_edit">Bearbeiten\u2026</string>
+    <string name="profiles_delete_submit_heading">Bestätigen</string>
+    <string name="profiles_delete_message">Soll der Nutzer %1$s gelöscht werden?</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nein</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="ok">OK</string>
+    <string name="profile_courses">Klasse/Kurse</string>
+    <string name="name">Name</string>
+    <string name="add">Hinzufügen</string>
+    <string name="profiles_add">Profile hinzufügen\u2026</string>
+    <string name="profile_empty_name">NeuesProfil</string>
+    <string name="profile_default_name">Standard</string>
+    <string name="add_profile_button">Weiteres Profil hinzufügen</string>
+
+    <!-- Grades Management -->
+    <string name="grades_no_app">Keine Excel App installiert!</string>
+    <string name="grades_down_title">Lädt Tabelle herunter\u2026</string>
+    <string name="grades_management">Notenverwaltung</string>
+
+    <!-- ColoRush -->
+    <string name="colorush_description">In diesem Spiel müsst ihr eine Kugel mit der passenden Farbe einfärben um über Barrieren im Boden zu gelangen.\nEs gibt fünf verschiedene Spielmodi, in drei davon wählst du die Farbe der Kugel durch drei Knöpfe aus (Rot, Gelb, Blau).\nIn den restlichen ist sie vorgegeben und du musst mit Hilfe von Knöpfen den falschen Barrieren ausweichen.\nIm Forgeschrittenen-Modus gibt es die Möglichkeit, die einzelnen Farb-Knöpfe gleichzeitig zu drücken und so neue Farben, wie Grün oder Orange, zu kreieren.\nAußerdem gibt es die Möglichkeit, Diamanten einzusammeln und sich davon neue Skins oder Hintergründe zu kaufen.\nDes Weiteren gibt es einen Multiplayermodus und ein tägliches Level.\nViel Spaß!</string>
+    <string name="colorush_online_version">Online Version</string>
+    <string name="colorush_android_app">Android App</string>
+    <string name="colorush_screen1">Boss-modus</string>
+    <string name="colorush_screen2">Choosing-modus</string>
+    <string name="colorush_screen3">Level 1</string>
+    <string name="colorush_screen4">Hauptmenü</string>
+
+    <!-- Download Manager -->
+    <string name="download_start">Lädt herunter\u2026</string>
+    <string name="title_activity_about">Über</string>
+
+    <!-- About Author -->
+    <string name="show_intro">Einführung</string>
+    <string name="fork_on_gitlab">Fork auf GitLab</string>
+    <string name="licenses">Lizenz</string>
+    <string name="author" tools:ignore="Typos">Autor</string>
+    <string name="author_name" translatable="false">Felix Hollederer</string>
+    <string name="write_email">Mail schreiben</string>
+    <string name="visit_website">Website besuchen</string>
+    <string name="support_development">Entwicklung unterstützen</string>
+    <string name="report_bugs">Fehler melden</string>
+    <string name="menu_privacy">Datenschutzerklärung</string>
+    <string name="image_sources">Bildquellen</string>
+    <string name="libs">Open-Source Bibliotheken</string>
+    <string name="share">Teilen</string>
+    <string name="colorush" translatable="false">ColoRush</string>
+    <string name="color_accent">Akzentfarbe</string>
+    <string name="color_primary">Hauptfarbe</string>
+    <string name="legal">Rechtliches</string>
+    <string name="imprint">Impressum</string>
+    <string name="version">Version</string>
+    <string name="menu_items">Menüeinträge</string>
+
+    <!-- Intro -->
+    <string name="intro_one_title" translatable="false">Gymnasium Wendelstein App</string>
+    <string name="intro_one_desc">Diese App ist für alle Schüler und Eltern des Gymnasiums Wendelstein programmiert worden.</string>
+    <string name="intro_two_title">Vertretungsplan</string>
+    <string name="intro_two_desc">Mit Hilfe dieser App kannst du den Vertretungsplan individuell filtern und anzeigen lassen und du wirst über deine Vertretungen automatisch benachrichtigt.</string>
+    <string name="intro_three_title">Lehrerliste</string>
+    <string name="intro_three_desc">Du kannst die Lehrerliste durchsuchen und sofort eine E-Mail an den Lehrer schreiben.</string>
+    <string name="intro_four_title">Elternmodus</string>
+    <string name="intro_four_desc">Außerdem ist diese App auch für Eltern sehr nützlich. So kann man verschiedene Profile für jedes Kind anlegen und bestimmte Funktionen, die besonders für Eltern vorteilhaft sind, benutzen.</string>
+    <string name="intro_five_title">Viele tolle Features</string>
+    <string name="intro_five_desc">Des Weiteren kannst du eine für Smartphones optimierte Version der Schulhomepage aufrufen sowie deine Noten und deinen Stundenplan verwalten. Außerdem gibt es noch viele weitere Dinge, für die hier leider kein Platz mehr ist.</string>
+
+    <!-- Registration -->
+    <string name="dont_show_again">Nicht wieder anzeigen</string>
+    <string name="registration_dialog_title">Nutzerzählung</string>
+    <string name="registration_dialog_content">Um herauszufinden, wie viele Personen diese App nutzen, möchte ich eine Nutzerzählung durchführen. Dabei werden (nur die) Metadaten deiner Internetverbindung, wie die IP-Adresse oder die Uhrzeit gespeichert.\n
+        Möchtest du daran teilnehmen?</string>
+
+    <!-- Quick Settings Tile -->
+    <string name="tile_name">Benachr. anzeigen</string>
+    <string name="on">An</string>
+    <string name="off">Aus</string>
+
+    <!-- Share Message -->
+    <string name="share_msg_nothing_at">Keine Vertretung am</string>
+    <string name="share_msg_substitution_at">Vertretung am</string>
+    <string name="share_msg_nothing_hour_senior">Stunde entfällt für Kurs</string>
+    <string name="share_msg_hour_senior">Stunde für Kurs</string>
+    <string name="share_msg_in_room">in Raum</string>
+    <string name="share_msg_nothing_hour">Stunde entfällt</string>
+    <string name="share_msg_hour">Stunde</string>
+    <string name="share_msg_for_courses">für die Kurse</string>
+
+
+    <string name="gnu_license" tools:ignore="TypographyOther">
+        <![CDATA[
+        <strong>Diese Übersetzung ist kein rechtskräftiger Ersatz für die <a href="http://www.gnu.org/licenses/gpl.html">englischsprachige Originalversion</a>! </strong><br><p>
+        <blockquote>
+        <p><tt>
+        Copyright (C) [2019-2020]&nbsp;&nbsp;[<i>Felix Hollederer</i>]
+        </tt></p>
+        <p><tt>
+        Dieses Programm ist freie Software. Sie können es unter den
+        Bedingungen der GNU General Public License, wie von der Free
+        Software Foundation veröffentlicht, weitergeben und/oder
+        modifizieren, entweder gemäß Version 3 der Lizenz oder (nach
+        Ihrer Option) jeder späteren Version.
+        </tt></p>
+        <p><tt>
+        Die Veröffentlichung dieses Programms erfolgt in der Hoffnung,
+        dass es Ihnen von Nutzen sein wird, aber OHNE IRGENDEINE GARANTIE,
+        sogar ohne die implizite Garantie der MARKTREIFE oder der
+        VERWENDBARKEIT FÜR EINEN BESTIMMTEN ZWECK. Details finden Sie in
+        der GNU General Public License.
+        </tt></p>
+        <p><tt>
+        Sie sollten ein Exemplar der GNU General Public License zusammen
+        mit diesem Programm erhalten haben. Falls nicht, siehe
+        &lt;<a href="https://www.gnu.org/licenses/" >http://www.gnu.org/licenses/</a>&gt;.
+        </tt></p>
+        </blockquote>
+        ]]></string>
+
+
+    <!-- Settings descriptions -->
+    <string name="set_desc_courses">Einzelne Kurse mit einem # zwischen den Kursen trennen, z.B. 1ph3#1d4#1bio2</string>
+    <string name="set_desc_hours">Die Stundenanzeige durch die jeweilige Uhrzeit ersetzen, z.B. 8:10 statt 1</string>
+    <string name="set_desc_summarize">Einzelne Stunden mit demselben Inhalt zusammenfassen (Beispielsweise der Raumtausch einer Doppelstunde).</string>
+    <string name="set_desc_week_dates">Immer den zum Datum gehörenden Wochentag anzeigen (auch wenn der Tag schon vergangen ist)</string>
+    <string name="set_desc_show_full_names">Alle Lehrerkürzel durch den jeweiligen Nachnamen ersetzen</string>
+    <string name="set_desc_credentials_fragment">Einstellungen für das Herunterladen des Vertretungsplans/Lehrerliste</string>
+
+    <string name="set_desc_username">Der Benutzername für den Vertretungsplan</string>
+    <string name="set_desc_password">Das Passwort für den Vertretungsplan</string>
+    <string name="set_desc_today_url">Link zum ersten Tag (üblicherweise der heutige Tag)</string>
+    <string name="set_desc_tomorrow_url">Link zum zweiten Tag (üblicherweise der morgige Tag)</string>
+    <string name="set_desc_teacherlist_url">Link zur Lehrerliste</string>
+
+    <string name="set_desc_accentColor">Die Farbe, mit der Wichtiges hervorgehoben wird, z.B. die Stunden beim Vertretungsplan</string>
+    <string name="set_desc_primaryColor">Die Farbe der Titelleiste</string>
+    <string name="set_desc_menu_items_fragment">Bestimmte Einträge der Navigationsleiste verbergen oder anzeigen</string>
+    <string name="set_desc_show_borders">Alle Lehrerkürzel, die angeklickt werden können, umranden</string>
+    <string name="set_desc_old_substitution">Altes Aussehen des Vertretungsplans (kann auch über die Farbpalette in der Titelleiste geändert werden)</string>
+    <string name="set_desc_old_title">Die Überschrift im alten Design anzeigen.</string>
+
+    <string name="set_desc_alwaysNotification">Die Benachrichtigung kann nur noch manuell ausgeblendet werden</string>
+    <string name="set_desc_two_notifs">Für jeden Tag eine eigene Benachrichtigung anzeigen</string>
+    <string name="set_desc_alarm">Die Benachrichtigung zu einer bestimmten Uhrzeit anzeigen</string>
+    <string name="set_main_notif_for_all_desc">Man kann in der Profil-Bearbeiten-Ansicht ein Profil mit einem Stern auswählen. Normalerweise wird nur für dieses einzelne Profil eine prägnante Benachrichtigung gesendet. Ist gar keines ausgewählt, wird auch keine prägnante Benachrichtigung gesendet.</string>
+    <string name="set_show_summary_usual_desc">Normalerweise werden die Profile, die in der prägnanten Benachrichtigung sind, nicht in der zusammenfassenden gesendet</string>
+
+    <string name="set_desc_parents">Bestimmte Funktionen aktivieren, die v.a. für Eltern nützlich sind, z.B. ClaXss</string>
+    <string name="set_desc_updates">Auf Aktualisierungen überprüfen</string>
+    <string name="set_desc_check_background_updates">Automatisch im Hintergrund auf Aktualisierungen prüfen</string>
+    <string name="set_desc_offline_mode">Bestimmte Dinge lokal speichern, damit die App ohne Internet funktioniert</string>
+    <string name="set_desc_shortcuts">Shortcuts, die über einen langen Klick auf das App-Icon erzeugt werden können. Bitte maximal 4 auswählen!</string>
+
+    <string name="set_desc_both">Wird, auch falls deaktiviert, immer beim ersten App-Start geladen!</string>
+    <string name="set_desc_intelligent_hide">Vergangene oder nicht mehr relevante Tage werden ausgeblendet.</string>
+
+
+    <!-- widget -->
+    <string name="loading">Lädt\u2026</string>
+    <string name="select_profile">Profile auswählen</string>
+    <string name="selected_all_profiles">Alle Profile ausgewählt</string>
+
+    <!-- Shortcuts -->
+    <string name="shortcut_website">Website</string>
+    <string name="shortcut_navigation">Navigation</string>
+    <string name="shortcut_call_office">Sekretariat</string>
+    <string name="shortcut_newspaper">Zeitung</string>
+    <string name="shortcut_mebis" translatable="false">Mebis</string>
+    <string name="shortcut_mensa">Mensa</string>
+    <string name="shortcut_teacher_list">Lehrerliste</string>
+    <string name="shortcut_grades_management">Noten</string>
+    <string name="shortcut_claxss">ClaXss</string>
+    <string name="shortcut_forms">Formulare</string>
+    <string name="shortcut_room_plan">Raumplan</string>
+    <string name="shortcut_room_plan_search">Raum suchen</string>
+
+    <!-- Room plan -->
+    <string name="not_found">nicht gefunden</string>
+    <string name="cannot_load_room_plan">Raumplan konnte nicht geladen werden</string>
+    <string name="action_search">Suchen</string>
+    <string name="main_floor">Erdgeschoss</string>
+    <string name="floor">Stock</string>
+    <string name="unkown_floor">Unbekanntes Stockwerk</string>
+    <string name="gym">Sporthalle</string>
+    <string name="lost_and_found">Fundbüro</string>
+    <string name="homework_room">Hausaufgabenraum</string>
+    <string name="senior_room">Oberstufenraum</string>
+    <string name="ogts" translatable="false">OGTS</string>
+    <string name="art_working_room">Werkraum</string>
+    <string name="library">Bibliothek</string>
+    <string name="senior_helpers">Oberstufenkoordination</string>
+    <string name="first_aid">Erste Hilfe</string>
+    <string name="director_office">Direktorat</string>
+    <string name="office">Sekretariat</string>
+    <string name="teachers_room">Lehrerzimmer</string>
+
+
+    <!-- TimeTable -->
+    <!-- Generated by Automatic String Resource Translation -->
+    <!--          https://asrt.gluege.boerde.de             -->
+    <string name="monday">Montag</string>
+    <string name="tuesday">Dienstag</string>
+    <string name="wednesday">Mittwoch</string>
+    <string name="thursday">Donnerstag</string>
+    <string name="friday">Freitag</string>
+    <string name="saturday">Samstag</string>
+    <string name="sunday">Sonntag</string>
+    <string name="selected">Ausgewählt</string>
+
+    <string name="timetable_activity_title">Stundenplan</string>
+    <string name="seven_days_of_the_week">7 Tage die Woche</string>
+    <string name="field_error">Feld darf nicht leer sein!</string>
+    <string name="time_error">Zeitfeld darf nicht leer sein!</string>
+    <string name="delete">Löschen</string>
+    <string name="add_subject">Stunde hinzufügen</string>
+    <string name="edit_subject">Stunde bearbeiten</string>
+    <string name="time">Zeit</string>
+    <string name="save">Speichern</string>
+    <string name="time_from_dialog">Von:</string>
+    <string name="time_to_dialog">Bis:</string>
+    <string name="subject_dialog">Fach:</string>
+    <string name="teacher_dialog">Lehrer:</string>
+    <string name="room_dialog">Raum:</string>
+    <string name="select_time">Uhrzeit</string>
+    <string name="select_start_time">Beginn</string>
+    <string name="select_end_time">Ende</string>
+    <string name="select_color">Farbe</string>
+    <string name="choose_color">Farbe auswählen</string>
+    <string name="colorPickerDialog_preset">Vorschläge</string>
+    <string name="choose_time">Zeit</string>
+    <string name="choose_date">Datum</string>
+
+    <string name="homeworks_activity_title">Hausaufgaben</string>
+    <string name="deadline_dialog">Deadline:</string>
+    <string name="description_dialog">Beschreibung:</string>
+    <string name="description">Beschreibung</string>
+    <string name="date_error">Datumsfeld darf nicht leer sein!</string>
+    <string name="edit_homework">Hausaufgabe bearbeiten</string>
+    <string name="add_homework">Hausaufgabe hinzufügen</string>
+    <string name="date">Datum</string>
+
+    <string name="notes_activity_title">Notizen</string>
+    <string name="note">Notiz</string>
+    <string name="title_dialog">Titel:</string>
+    <string name="add_note">Notiz hinzufügen</string>
+    <string name="edit_note">Notiz bearbeiten</string>
+    <string name="title_error">Titelfeld darf nicht leer sein!</string>
+    <string name="saved">Speichern</string>
+
+    <string name="exams_activity_title">Prüfungen</string>
+    <string name="add_exam">Prüfung hinzufügen</string>
+    <string name="date_dialog">Datum:</string>
+    <string name="time_dialog">Zeit:</string>
+
+    <string name="sevendays_setting">7 Tage pro Woche einstellen</string>
+    <string name="timetable_notification_summary_title">Der heutige Unterricht:</string>
+    <string name="timetable_notification_next_week_title">Nächstes Fach</string>
+    <string name="timetable_credit">Entstanden mit Hilfe von ulan17</string>
+    <string name="time_from">von</string>
+    <string name="integrate_substitution_in_timetable">Vertretungen im Stundenplan anzeigen</string>
+    <string name="integrate_substitution_in_timetable_desc">Zum Editieren des Stundenplans besser ausschalten</string>
+    <string name="integrate_substitution_in_timetable_on">Vertretungen ausblenden</string>
+    <string name="integrate_substitution_in_timetable_off">Vertretungen anzeigen</string>
+    <string name="open_all_settings">Alle Einstellungen öffnen</string>
+
+    <string name="edit">Bearbeiten</string>
+    <string name="automatic_update_check">Automatisch auf Updates prüfen</string>
+    <string name="url" translatable="false">URL</string>
+
+    <string name="timetable_channel">Stundenplan</string>
+    <string name="timetable_channel_desc">Eine Benachrichtigung mit deinen Fächern</string>
+    <string name="do_not_disturb_permission_desc">Um automatisch in den Nicht-Stören-Modus zu wechseln, benötigt die App die entsprechende Berechtigung. Dies kann auch später noch in den Einstellungen geändert werden.</string>
+    <string name="do_not_disturb_setting">Automatisches Stummschalten</string>
+    <string name="do_not_disturb_settings_desc">Automatisch während Fächern in den Nicht-Stören-Modus wechseln und ihn danach wieder ausschalten</string>
+    <string name="do_not_disturb_turn_off">Auch wieder auf laut stellen</string>
+
+    <string name="action_open_main_app">Hauptapp</string>
+    <string name="backup_failed">Backup fehlgeschlagen</string>
+    <string name="import_successful">Wiederherstellen erfolgreich</string>
+    <string name="import_failed">Wiederherstellen fehlgeschlagen</string>
+    <string name="backup_successful">Backup in %1$s gespeichert</string>
+    <string name="no_backup_found_in_downloads">Kein Backup in %1$s gefunden</string>
+    <string name="Documents">Dokumente</string>
+    <string name="Downloads">Downloads</string>
+    <string name="timetable_delete_content">Soll %1$s gelöscht werden?</string>
+    <string name="timetable_delete_week">das Fach %1$s</string>
+    <string name="timetable_delete_note">die Notiz %1$s</string>
+    <string name="timetable_delete_exam">die Prüfung %1$s</string>
+    <string name="remove_all_subjects">Alles löschen</string>
+    <string name="remove_all_subjects_content">Sollen alle Daten des Stundenplans unwiederbringliche gelöscht werden?
+        \nEs empfiehlt sich vorher ein Backup anzulegen!</string>
+    <string name="remove_all_successful">Erfolgreich Alles gelöscht</string>
+    <string name="remove_all_failed">Es ist ein Fehler aufgetreten</string>
+
+</resources>
