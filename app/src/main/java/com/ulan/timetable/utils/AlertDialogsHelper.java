@@ -104,6 +104,7 @@ public class AlertDialogsHelper {
                     .withColor(((ColorDrawable) select_color.getBackground()).getColor()) // the default / initial color
                     .withPresets(ColorPalette.PRIMARY_COLORS)
                     .withTitle(activity.getString(R.string.choose_color))
+                    .withTheme(PreferenceUtil.getGeneralTheme(activity))
                     .withCornerRadius(16)
                     .withAlphaEnabled(false)
                     .withListener((dialog, color) -> {
@@ -250,6 +251,7 @@ public class AlertDialogsHelper {
             new ColorPickerDialog()
                     .withColor(((ColorDrawable) select_color.getBackground()).getColor()) // the default / initial color
                     .withTitle(activity.getString(R.string.choose_color))
+                    .withTheme(PreferenceUtil.getGeneralTheme(activity))
                     .withCornerRadius(16)
                     .withAlphaEnabled(false)
                     .withListener((dialog, color) -> {
@@ -390,6 +392,7 @@ public class AlertDialogsHelper {
                     .withColor(((ColorDrawable) select_color.getBackground()).getColor()) // the default / initial color
                     .withPresets(ColorPalette.PRIMARY_COLORS)
                     .withTitle(activity.getString(R.string.choose_color))
+                    .withTheme(PreferenceUtil.getGeneralTheme(activity))
                     .withCornerRadius(16)
                     .withAlphaEnabled(false)
                     .withListener((dialog, color) -> {
@@ -539,6 +542,7 @@ public class AlertDialogsHelper {
                     .withColor(((ColorDrawable) select_color.getBackground()).getColor()) // the default / initial color
                     .withPresets(ColorPalette.PRIMARY_COLORS)
                     .withTitle(activity.getString(R.string.choose_color))
+                    .withTheme(PreferenceUtil.getGeneralTheme(activity))
                     .withCornerRadius(16)
                     .withAlphaEnabled(false)
                     .withListener((dialog, color) -> {
@@ -693,6 +697,7 @@ public class AlertDialogsHelper {
                     .withColor(((ColorDrawable) select_color.getBackground()).getColor()) // the default / initial color
                     .withPresets(ColorPalette.PRIMARY_COLORS)
                     .withTitle(activity.getString(R.string.choose_color))
+                    .withTheme(PreferenceUtil.getGeneralTheme(activity))
                     .withCornerRadius(16)
                     .withAlphaEnabled(false)
                     .withListener((dialog, color) -> {
@@ -767,6 +772,7 @@ public class AlertDialogsHelper {
                     .withColor(((ColorDrawable) select_color.getBackground()).getColor()) // the default / initial color
                     .withPresets(ColorPalette.PRIMARY_COLORS)
                     .withTitle(activity.getString(R.string.choose_color))
+                    .withTheme(PreferenceUtil.getGeneralTheme(activity))
                     .withCornerRadius(16)
                     .withAlphaEnabled(false)
                     .withListener((dialog, color) -> {
@@ -851,6 +857,7 @@ public class AlertDialogsHelper {
                     .withColor(((ColorDrawable) select_color.getBackground()).getColor()) // the default / initial color
                     .withPresets(ColorPalette.PRIMARY_COLORS)
                     .withTitle(activity.getString(R.string.choose_color))
+                    .withTheme(PreferenceUtil.getGeneralTheme(activity))
                     .withCornerRadius(16)
                     .withAlphaEnabled(false)
                     .withListener((dialog, color) -> {
@@ -909,6 +916,7 @@ public class AlertDialogsHelper {
                     .withColor(((ColorDrawable) select_color.getBackground()).getColor()) // the default / initial color
                     .withPresets(ColorPalette.PRIMARY_COLORS)
                     .withTitle(activity.getString(R.string.choose_color))
+                    .withTheme(PreferenceUtil.getGeneralTheme(activity))
                     .withCornerRadius(16)
                     .withAlphaEnabled(false)
                     .withListener((dialog, color) -> {
@@ -1013,6 +1021,7 @@ public class AlertDialogsHelper {
                     .withColor(((ColorDrawable) select_color.getBackground()).getColor()) // the default / initial color
                     .withPresets(ColorPalette.PRIMARY_COLORS)
                     .withTitle(activity.getString(R.string.choose_color))
+                    .withTheme(PreferenceUtil.getGeneralTheme(activity))
                     .withCornerRadius(16)
                     .withAlphaEnabled(false)
                     .withListener((dialog, color) -> {
@@ -1199,6 +1208,7 @@ public class AlertDialogsHelper {
                     .withColor(((ColorDrawable) select_color.getBackground()).getColor()) // the default / initial color
                     .withPresets(ColorPalette.PRIMARY_COLORS)
                     .withTitle(activity.getString(R.string.choose_color))
+                    .withTheme(PreferenceUtil.getGeneralTheme(activity))
                     .withCornerRadius(16)
                     .withAlphaEnabled(false)
                     .withListener((dialog, color) -> {

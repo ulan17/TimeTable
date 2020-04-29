@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.util.SparseBooleanArray;
 import android.util.TypedValue;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +29,7 @@ import com.ulan.timetable.model.Teacher;
 import com.ulan.timetable.utils.AlertDialogsHelper;
 import com.ulan.timetable.utils.ColorPalette;
 import com.ulan.timetable.utils.DbHelper;
+import com.ulan.timetable.utils.PreferenceUtil;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -150,9 +152,9 @@ public class TeachersAdapter extends ArrayAdapter<Teacher> {
         holder.popup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final PopupMenu popup = new PopupMenu(mActivity, holder.popup);
                 final DbHelper db = new DbHelper(mActivity);
-                popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
+                ContextThemeWrapper theme = new ContextThemeWrapper(mActivity, PreferenceUtil.isDark(getContext()) ? R.style.Widget_AppCompat_PopupMenu : R.style.Widget_AppCompat_Light_PopupMenu);
+                final PopupMenu popup = new PopupMenu(theme, holder.popup);
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {

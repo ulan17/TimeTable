@@ -18,5 +18,17 @@
 
 <resources>
     <!-- Reply Preference -->
+    <string-array name="theme_array">
+        <item>@string/set_theme_light</item>
+        <item>@string/set_theme_dark</item>
+        <item>@string/set_theme_black</item>
+        <item>@string/set_theme_auto</item>
+    </string-array>
 
+    <string-array name="theme_array_values">
+        <item>light</item>
+        <item>dark</item>
+        <item>black</item>
+        <item>switch</item>
+    </string-array>
 </resources>

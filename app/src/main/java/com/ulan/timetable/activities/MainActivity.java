@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(PreferenceUtil.getGeneralThemeNoActionBar(this));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
@@ -81,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         title.setText(R.string.timetable_activity_title);
 
         TextView desc = headerview.findViewById(R.id.nav_header_main_desc);
-        desc.setText(R.string.timetable_credit);
+        desc.setText(R.string.timetable_description);
 
         PreferenceManager.setDefaultValues(this, R.xml.settings, false);
         Toolbar toolbar = findViewById(R.id.toolbar);

@@ -19,6 +19,7 @@ import com.ulan.timetable.adapters.NotesAdapter;
 import com.ulan.timetable.model.Note;
 import com.ulan.timetable.utils.AlertDialogsHelper;
 import com.ulan.timetable.utils.DbHelper;
+import com.ulan.timetable.utils.PreferenceUtil;
 
 import java.util.ArrayList;
 
@@ -34,6 +35,7 @@ public class NotesActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(PreferenceUtil.getGeneralTheme(this));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes);
         initAll();

@@ -27,10 +27,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.util.TypedValue;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.StyleRes;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 
@@ -225,5 +231,104 @@ public class PreferenceUtil {
         AlarmManager am = (AlarmManager) context.getSystemService(ALARM_SERVICE);
         am.cancel(pendingIntent);
         pendingIntent.cancel();
+    }
+
+
+    @StyleRes
+    public static int getGeneralTheme(Context context) {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        return getThemeResFromPrefValue(sharedPref.getString("theme", "switch"), context);
+    }
+
+    @StyleRes
+    private static int getThemeResFromPrefValue(@NonNull String themePrefValue, Context context) {
+        switch (themePrefValue) {
+            case "dark":
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                return R.style.AppTheme_Dark;
+            case "black":
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                return R.style.AppTheme_Black;
+            case "switch":
+                int nightModeFlags = context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+                switch (nightModeFlags) {
+                    case Configuration.UI_MODE_NIGHT_YES:
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                        return R.style.AppTheme_Dark;
+                    default:
+                    case Configuration.UI_MODE_NIGHT_NO:
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                        return R.style.AppTheme_Light;
+                }
+            case "light":
+            default:
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                return R.style.AppTheme_Light;
+        }
+    }
+
+    @StyleRes
+    public static int getGeneralThemeNoActionBar(Context context) {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        return getThemeResFromPrefValueNoActionBar(sharedPref.getString("theme", "switch"), context);
+    }
+
+    @StyleRes
+    private static int getThemeResFromPrefValueNoActionBar(@NonNull String themePrefValue, Context context) {
+        switch (themePrefValue) {
+            case "dark":
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                return R.style.AppTheme_Dark_NoActionBar;
+            case "black":
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                return R.style.AppTheme_Black_NoActionBar;
+            case "switch":
+                int nightModeFlags = context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+                switch (nightModeFlags) {
+                    case Configuration.UI_MODE_NIGHT_YES:
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                        return R.style.AppTheme_Dark_NoActionBar;
+                    default:
+                    case Configuration.UI_MODE_NIGHT_NO:
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                        return R.style.AppTheme_Light_NoActionBar;
+                }
+            case "light":
+            default:
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                return R.style.AppTheme_Light_NoActionBar;
+        }
+    }
+
+    public static boolean isDark(Context context) {
+        int theme = getGeneralTheme(context);
+        switch (theme) {
+            case R.style.AppTheme_Dark:
+            case R.style.AppTheme_Black:
+                return true;
+            case R.style.AppTheme_Light:
+            default:
+                return false;
+        }
+    }
+
+    public static int getTextColorPrimary(@NonNull Context context) {
+        return getThemeColor(android.R.attr.textColorPrimary, context);
+    }
+
+    private static int getThemeColor(int themeAttributeId, @NonNull Context context) {
+        try {
+            TypedValue outValue = new TypedValue();
+            Resources.Theme theme = context.getTheme();
+            boolean wasResolved = theme.resolveAttribute(themeAttributeId, outValue, true);
+            if (wasResolved) {
+                return ContextCompat.getColor(context, outValue.resourceId);
+            } else {
+                // fallback colour handling
+                return Color.BLACK;
+            }
+        } catch (Exception e) {
+            return Color.BLACK;
+        }
     }
 }

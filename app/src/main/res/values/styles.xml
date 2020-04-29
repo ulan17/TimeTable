@@ -19,18 +19,49 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme.Light" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="webPageBackground">@color/web_background_homepages</item>
+        <item name="cardBackgroundColor">@android:color/white</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
+        <item name="popupMenuStyle">@style/ThemeOverlay.AppCompat.Light</item>
     </style>
 
-    <style name="AppTheme.NoActionBar" parent="AppTheme">
+    <style name="AppTheme.Dark" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:forceDarkAllowed">true</item>
+        <item name="popupMenuStyle">@style/ThemeOverlay.AppCompat.Dark</item>
+    </style>
+
+    <style name="AppTheme.Black" parent="AppTheme.Dark">
+        <item name="android:windowBackground">@android:color/black</item>
+        <item name="cardBackgroundColor">@color/grey</item>
+        <item name="md_background_color">@color/grey</item>
+        <item name="popupMenuStyle">@style/OptionsMenuBlack</item>
+    </style>
+
+    <style name="OptionsMenuBlack" parent="@style/ThemeOverlay.AppCompat.Dark">
+        <item name="android:itemBackground">@android:color/black</item>
+        <item name="android:windowBackground">@android:color/black</item>
+    </style>
+
+    <style name="AppTheme.Light.NoActionBar" parent="AppTheme.Light">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.Dark.NoActionBar" parent="AppTheme.Dark">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.Black.NoActionBar" parent="AppTheme.Black">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
 </resources>

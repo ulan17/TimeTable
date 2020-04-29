@@ -18,6 +18,7 @@ import com.ulan.timetable.adapters.ExamsAdapter;
 import com.ulan.timetable.model.Exam;
 import com.ulan.timetable.utils.AlertDialogsHelper;
 import com.ulan.timetable.utils.DbHelper;
+import com.ulan.timetable.utils.PreferenceUtil;
 
 import java.util.ArrayList;
 
@@ -31,6 +32,7 @@ public class ExamsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(PreferenceUtil.getGeneralTheme(this));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exams);
         initAll();

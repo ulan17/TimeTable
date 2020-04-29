@@ -5,6 +5,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.util.SparseBooleanArray;
 import android.util.TypedValue;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +28,7 @@ import com.ulan.timetable.model.Exam;
 import com.ulan.timetable.utils.AlertDialogsHelper;
 import com.ulan.timetable.utils.ColorPalette;
 import com.ulan.timetable.utils.DbHelper;
+import com.ulan.timetable.utils.PreferenceUtil;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -120,7 +122,8 @@ public class ExamsAdapter extends ArrayAdapter<Exam> {
 
         holder.cardView.setCardBackgroundColor(exam.getColor());
         holder.popup.setOnClickListener(v -> {
-            final PopupMenu popup = new PopupMenu(getContext(), holder.popup);
+            ContextThemeWrapper theme = new ContextThemeWrapper(mActivity, PreferenceUtil.isDark(getContext()) ? R.style.Widget_AppCompat_PopupMenu : R.style.Widget_AppCompat_Light_PopupMenu);
+            final PopupMenu popup = new PopupMenu(theme, holder.popup);
             final DbHelper db = new DbHelper(mActivity);
             popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
             popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {

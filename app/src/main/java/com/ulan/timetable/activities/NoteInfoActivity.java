@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.ulan.timetable.R;
 import com.ulan.timetable.model.Note;
 import com.ulan.timetable.utils.DbHelper;
+import com.ulan.timetable.utils.PreferenceUtil;
 
 public class NoteInfoActivity extends AppCompatActivity {
 
@@ -22,6 +23,7 @@ public class NoteInfoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(PreferenceUtil.getGeneralTheme(this));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_info);
         setupIntent();

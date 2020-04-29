@@ -54,6 +54,4 @@ dependencies {
     implementation 'com.afollestad.material-dialogs:core:0.9.6'
     implementation 'com.afollestad.material-dialogs:commons:0.9.6.0'
     implementation 'com.github.IamIsPra:Sheriff:1.0.0'
-//    implementation 'com.jaredrummler:cyanea:1.0.2'
-
 }

@@ -118,7 +118,7 @@
     <string name="exams_activity_title">Exams</string>
     <string name="timetable_notification_summary_title">Today\'s lessons:</string>
     <string name="timetable_notification_next_week_title">Next lesson</string>
-    <string name="timetable_credit">Credits go to ulan17</string>
+    <string name="timetable_description">Fork from ulan17</string>
     <string name="time_from">from</string>
 
     <string name="timetable_channel">Timetable</string>
@@ -150,5 +150,11 @@
     <string name="no_navigation_app">No navigation app installed</string>
     <string name="no_calendar_app">No calendar app installed</string>
     <string name="add_to_calendar">Should this event be added to your calendar?</string>
+
+    <string name="set_choose_theme">Generelles Design</string>
+    <string name="set_theme_light">Hell</string>
+    <string name="set_theme_dark">Dunkel</string>
+    <string name="set_theme_black">Schwarz</string>
+    <string name="set_theme_auto">Automatisch</string>
 
 </resources>
