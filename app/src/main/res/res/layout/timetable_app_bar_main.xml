@@ -56,6 +56,6 @@
 
     <include
         android:id="@+id/include"
-        layout="@layout/timetable_content_main" />
+        layout="@layout/content_main" />
 
 </LinearLayout>

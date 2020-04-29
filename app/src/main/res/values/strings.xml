@@ -109,20 +109,20 @@
 
     <string name="description">Description</string>
 
-    <string name="timetable_activity_title">Timetable</string>
+    <string name="activity_title">Timetable</string>
     <string name="select_start_time">Start</string>
     <string name="select_end_time">End</string>
 
     <string name="homeworks_activity_title">Homework</string>
     <string name="notes_activity_title">Notes</string>
     <string name="exams_activity_title">Exams</string>
-    <string name="timetable_notification_summary_title">Today\'s lessons:</string>
-    <string name="timetable_notification_next_week_title">Next lesson</string>
-    <string name="timetable_description">Fork from ulan17</string>
+    <string name="notification_summary_title">Today\'s lessons:</string>
+    <string name="notification_next_week_title">Next lesson</string>
+    <string name="nav_drawer_description">Fork from ulan17</string>
     <string name="time_from">from</string>
 
-    <string name="timetable_channel">Timetable</string>
-    <string name="timetable_channel_desc">A notification about your lessons</string>
+    <string name="channel">Timetable</string>
+    <string name="channel_desc">A notification about your lessons</string>
     <string name="do_not_disturb_permission_desc">In order to automatically switch to do not disturb mode, the app requires the appropriate authorization</string>
     <string name="do_not_disturb_setting">Automatic Do not disturb</string>
     <string name="do_not_disturb_settings_desc">Automatically switch to do not disturb mode during subjects and then switch it off again</string>
@@ -136,10 +136,10 @@
     <string name="Documents">Documents</string>
     <string name="Downloads">Downloads</string>
     <string name="colorPickerDialog_preset">Presets</string>
-    <string name="timetable_delete_content">Should %1$s be deleted?</string>
-    <string name="timetable_delete_week">the subject %1$s</string>
-    <string name="timetable_delete_note">the note %1$s</string>
-    <string name="timetable_delete_exam">the exam %1$s</string>
+    <string name="delete_content">Should %1$s be deleted?</string>
+    <string name="delete_week">the subject %1$s</string>
+    <string name="delete_note">the note %1$s</string>
+    <string name="delete_exam">the exam %1$s</string>
     <string name="remove_all_subjects">Delete everything</string>
     <string name="remove_all_subjects_content">Should all data in the timetable be irretrievably deleted?
         \nIt is advisable to create a backup beforehand!</string>
@@ -151,10 +151,10 @@
     <string name="no_calendar_app">No calendar app installed</string>
     <string name="add_to_calendar">Should this event be added to your calendar?</string>
 
-    <string name="set_choose_theme">Generelles Design</string>
-    <string name="set_theme_light">Hell</string>
-    <string name="set_theme_dark">Dunkel</string>
-    <string name="set_theme_black">Schwarz</string>
-    <string name="set_theme_auto">Automatisch</string>
+    <string name="set_choose_theme">Choose theme</string>
+    <string name="set_theme_light">Light</string>
+    <string name="set_theme_dark">Dark</string>
+    <string name="set_theme_black">Black</string>
+    <string name="set_theme_auto">Automatic</string>
 
 </resources>

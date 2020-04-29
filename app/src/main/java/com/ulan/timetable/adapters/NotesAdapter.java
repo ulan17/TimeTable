@@ -100,7 +100,7 @@ public class NotesAdapter extends ArrayAdapter<Note> {
                             db.updateNote(getItem(position));
                             notelist.remove(position);
                             notifyDataSetChanged();
-                        }, getContext().getString(R.string.timetable_delete_note, note.getTitle()));
+                        }, getContext().getString(R.string.delete_note, note.getTitle()));
                         return true;
                     } else if (itemId == R.id.edit_popup) {
                         final View alertLayout = mActivity.getLayoutInflater().inflate(R.layout.dialog_add_note, null);

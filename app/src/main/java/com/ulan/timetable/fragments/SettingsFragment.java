@@ -34,7 +34,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             return true;
         });
 
-        myPref = findPreference("timetable_alarm");
+        myPref = findPreference("alarm");
         myPref.setOnPreferenceClickListener((Preference p) -> {
             int[] oldTimes = PreferenceUtil.getAlarmTime(getContext());
             TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(),
@@ -86,7 +86,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     private void setNotif() {
         boolean show = PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("timetableNotif", true);
         findPreference("alwaysNotification").setVisible(show);
-        findPreference("timetable_alarm").setVisible(show);
+        findPreference("alarm").setVisible(show);
     }
 
     private void setTurnOff() {

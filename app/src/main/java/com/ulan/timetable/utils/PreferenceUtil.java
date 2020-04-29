@@ -72,27 +72,27 @@ public class PreferenceUtil {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = sharedPref.edit();
         setAlarm(context, true);
-        editor.putInt("timetable_Alarm_hour", times[0]);
-        editor.putInt("timetable_Alarm_minute", times[1]);
-        editor.putInt("timetable_Alarm_second", times[2]);
+        editor.putInt("Alarm_hour", times[0]);
+        editor.putInt("Alarm_minute", times[1]);
+        editor.putInt("Alarm_second", times[2]);
         editor.commit();
     }
 
     @NonNull
     public static int[] getAlarmTime(Context context) {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
-        return new int[]{sharedPref.getInt("timetable_Alarm_hour", 7), sharedPref.getInt("timetable_Alarm_minute", 55), sharedPref.getInt("timetable_Alarm_second", 0)};
+        return new int[]{sharedPref.getInt("Alarm_hour", 7), sharedPref.getInt("Alarm_minute", 55), sharedPref.getInt("Alarm_second", 0)};
     }
 
     private static void setAlarm(@NonNull Context context, boolean value) {
         SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
-        editor.putBoolean("timetable_alarm", value);
+        editor.putBoolean("alarm", value);
         editor.commit();
     }
 
 
     public static boolean isAlarmOn(@NonNull Context context) {
-        return getBooleanSettings(context, "timetable_alarm", false);
+        return getBooleanSettings(context, "alarm", false);
     }
 
     public static boolean doNotDisturbDontAskAgain(Context context) {

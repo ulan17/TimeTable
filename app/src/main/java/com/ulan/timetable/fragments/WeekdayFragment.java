@@ -81,7 +81,7 @@ public class WeekdayFragment extends Fragment {
 
     private void setupAdapter(@NonNull View view) {
         db = new DbHelper(getActivity());
-        listView = view.findViewById(R.id.timetable_daylist);
+        listView = view.findViewById(R.id.daylist);
         ArrayList<Week> weeks = db.getWeek(key);
         adapter = new WeekAdapter((AppCompatActivity) getActivity(), listView, 0, weeks);
         listView.setAdapter(adapter);

@@ -1361,7 +1361,7 @@ public class AlertDialogsHelper {
     public static void getDeleteDialog(@NonNull Context context, @NonNull Runnable runnable, String deleteSubject) {
         new MaterialDialog.Builder(context)
                 .title(context.getString(R.string.profiles_delete_submit_heading))
-                .content(context.getString(R.string.timetable_delete_content, deleteSubject))
+                .content(context.getString(R.string.delete_content, deleteSubject))
                 .positiveText(context.getString(R.string.yes))
                 .onPositive((dialog, which) -> {
                     runnable.run();

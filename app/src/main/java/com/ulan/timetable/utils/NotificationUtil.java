@@ -51,7 +51,7 @@ import java.util.UUID;
 public class NotificationUtil {
     private static final int NOTIFICATION_SUMMARY_ID = 9090;
     private static final int NOTIFICATION_NEXT_WEEK_ID = 3030;
-    private static final String CHANNEL_ID = "timetable_notification";
+    private static final String CHANNEL_ID = "notification";
 
     public static void sendNotificationSummary(@NonNull Context context, boolean alert) {
         new Thread(() -> {
@@ -62,7 +62,7 @@ public class NotificationUtil {
 
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                     .setSmallIcon(R.drawable.ic_assignment_black_24dp)
-                    .setContentTitle(context.getString(R.string.timetable_notification_summary_title))
+                    .setContentTitle(context.getString(R.string.notification_summary_title))
                     .setStyle(new NotificationCompat.BigTextStyle().bigText(lessons));
 
             sendNotification(context, alert, builder, NOTIFICATION_SUMMARY_ID);
@@ -101,10 +101,10 @@ public class NotificationUtil {
 
 
             NotificationCompat.MessagingStyle style = new NotificationCompat.MessagingStyle(new Person.Builder().setName("me").build());
-            style.setConversationTitle(context.getString(R.string.timetable_notification_next_week_title));
+            style.setConversationTitle(context.getString(R.string.notification_next_week_title));
             int color = nextWeek.getColor();
             int textColor = ColorPalette.pickTextColorBasedOnBgColorSimple(nextWeek.getColor(), Color.WHITE, Color.BLACK);
-            int textSize = context.getResources().getInteger(R.integer.notification_max_text_size) - context.getResources().getInteger(R.integer.notification_text_size_timetable_factor) * nextWeek.getRoom().length();
+            int textSize = context.getResources().getInteger(R.integer.notification_max_text_size) - context.getResources().getInteger(R.integer.notification_text_size_factor) * nextWeek.getRoom().length();
             if (textSize < context.getResources().getInteger(R.integer.notification_min_text_size))
                 textSize = context.getResources().getInteger(R.integer.notification_min_text_size);
             Drawable drawable = new ShapeTextDrawable(ShapeForm.ROUND, color, 10f, nextWeek.getRoom(), textColor, true, Typeface.create("sans-serif-light", Typeface.NORMAL), textSize, Color.TRANSPARENT, 0);
@@ -164,8 +164,8 @@ public class NotificationUtil {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, context.getString(R.string.timetable_channel), NotificationManager.IMPORTANCE_DEFAULT);
-            channel.setDescription(context.getString(R.string.timetable_channel_desc));
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, context.getString(R.string.channel), NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription(context.getString(R.string.channel_desc));
             channel.enableLights(false);
             channel.setSound(null, null);
             channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);

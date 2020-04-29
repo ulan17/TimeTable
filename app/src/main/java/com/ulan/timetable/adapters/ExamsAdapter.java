@@ -135,7 +135,7 @@ public class ExamsAdapter extends ArrayAdapter<Exam> {
                             db.updateExam(getItem(position));
                             examlist.remove(position);
                             notifyDataSetChanged();
-                        }, getContext().getString(R.string.timetable_delete_exam, exam.getSubject()));
+                        }, getContext().getString(R.string.delete_exam, exam.getSubject()));
                         return true;
                     } else if (itemId == R.id.edit_popup) {
                         final View alertLayout = mActivity.getLayoutInflater().inflate(R.layout.dialog_add_exam, null);

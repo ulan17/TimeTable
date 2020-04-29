@@ -133,7 +133,7 @@ public class WeekAdapter extends ArrayAdapter<Week> {
                             db.updateWeek(getItem(position));
                             weeklist.remove(position);
                             notifyDataSetChanged();
-                        }, getContext().getString(R.string.timetable_delete_week, week.getSubject()));
+                        }, getContext().getString(R.string.delete_week, week.getSubject()));
                         return true;
                     } else if (itemId == R.id.edit_popup) {
                         final View alertLayout = mActivity.getLayoutInflater().inflate(R.layout.dialog_add_subject, null);

@@ -17,20 +17,20 @@
         android:id="@+id/action_substitutionIntegration"
         android:icon="@drawable/ic_assignment_late"
         android:orderInCategory="100"
-        android:title="@string/integrate_substitution_in_timetable_on"
+        android:title="@string/integrate_substitution_in_on"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_timetable_backup"
+        android:id="@+id/action_backup"
         android:orderInCategory="100"
         android:title="@string/menu_backup"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_timetable_restore"
+        android:id="@+id/action_restore"
         android:orderInCategory="100"
         android:title="@string/menu_restore"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_timetable_remove_all"
+        android:id="@+id/action_remove_all"
         android:orderInCategory="100"
         android:title="@string/remove_all_subjects"
         app:showAsAction="never" />

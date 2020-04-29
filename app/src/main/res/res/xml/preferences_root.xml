@@ -31,7 +31,7 @@
         app:fragment="com.asdoi.gymwen.ui.settingsFragments.SettingsFragmentNotification"
         app:iconSpaceReserved="false" />
     <Preference
-        android:key="open_timetable_settings"
+        android:key="open_settings"
         android:title="@string/menu_timetable"
         app:iconSpaceReserved="false" />
 

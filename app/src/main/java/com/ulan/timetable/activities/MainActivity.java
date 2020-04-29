@@ -79,10 +79,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         View headerview = navigationView.getHeaderView(0);
         headerview.findViewById(R.id.nav_header_main_settings).setOnClickListener((View v) -> startActivity(new Intent(this, SettingsActivity.class)));
         TextView title = headerview.findViewById(R.id.nav_header_main_title);
-        title.setText(R.string.timetable_activity_title);
+        title.setText(R.string.activity_title);
 
         TextView desc = headerview.findViewById(R.id.nav_header_main_desc);
-        desc.setText(R.string.timetable_description);
+        desc.setText(R.string.nav_drawer_description);
 
         PreferenceManager.setDefaultValues(this, R.xml.settings, false);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -193,11 +193,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (item.getItemId() == R.id.action_settings) {
             Intent settings = new Intent(MainActivity.this, SettingsActivity.class);
             startActivity(settings);
-        } else if (item.getItemId() == R.id.action_timetable_backup) {
+        } else if (item.getItemId() == R.id.action_backup) {
             backup();
-        } else if (item.getItemId() == R.id.action_timetable_restore) {
+        } else if (item.getItemId() == R.id.action_restore) {
             restore();
-        } else if (item.getItemId() == R.id.action_timetable_remove_all) {
+        } else if (item.getItemId() == R.id.action_remove_all) {
             deleteAll();
         }
         return super.onOptionsItemSelected(item);

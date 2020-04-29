@@ -32,15 +32,15 @@
         android:summary="@string/set_desc_alwaysNotification"
         android:title="@string/set_notification_showAlways" />
     <Preference
-        android:key="timetable_alarm"
+        android:key="alarm"
         android:summary="@string/set_desc_alarm"
         android:title="@string/set_notification_alarm" />
 
     <SwitchPreferenceCompat
         android:defaultValue="true"
         android:icon="@drawable/ic_assignment_late_black_24dp"
-        android:key="timetable_subs"
-        android:summary="@string/integrate_substitution_in_timetable_desc"
+        android:key="subs"
+        android:summary="@string/integrate_substitution_in_desc"
         android:title="@string/integrate_substitution_in_timetable" />
 
     <EditTextPreference
