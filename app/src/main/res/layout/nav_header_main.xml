@@ -72,7 +72,7 @@
             android:background="@null"
             android:clickable="true"
             android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground"
+            android:foreground="?attr/selectableItemBackground"
             android:padding="@dimen/nav_header_settings_padding"
             app:tint="?android:attr/textColorPrimary"
             app:srcCompat="@drawable/ic_settings_black_24dp" />

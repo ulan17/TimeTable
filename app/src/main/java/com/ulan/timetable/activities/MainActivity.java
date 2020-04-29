@@ -1,7 +1,6 @@
 package com.ulan.timetable.activities;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -254,7 +253,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        Date myDate = new Date();
 //        String filename = timeStampFormat.format(myDate);
 
-        Activity activity = this;
+        AppCompatActivity activity = this;
 
         SQLiteToExcel sqliteToExcel = new SQLiteToExcel(this, DbHelper.DB_NAME, path);
         sqliteToExcel.exportAllTables(filename, new SQLiteToExcel.ExportListener() {
@@ -303,7 +302,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return;
         }
 
-        Activity activity = this;
+        AppCompatActivity activity = this;
         DbHelper dbHelper = new DbHelper(this);
         dbHelper.deleteAll();
 

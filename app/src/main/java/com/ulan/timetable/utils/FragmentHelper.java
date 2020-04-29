@@ -1,6 +1,5 @@
 package com.ulan.timetable.utils;
 
-import android.app.Activity;
 import android.util.SparseBooleanArray;
 import android.view.ActionMode;
 import android.view.Menu;
@@ -9,9 +8,11 @@ import android.view.MenuItem;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.ulan.timetable.R;
 import com.ulan.timetable.adapters.WeekAdapter;
 import com.ulan.timetable.model.Week;
-import com.ulan.timetable.R;
 
 import java.util.ArrayList;
 
@@ -20,7 +21,7 @@ import java.util.ArrayList;
  */
 public class FragmentHelper {
 
-    public static AbsListView.MultiChoiceModeListener setupListViewMultiSelect(final Activity activity, final ListView listView, final WeekAdapter adapter, final DbHelper db) {
+    public static AbsListView.MultiChoiceModeListener setupListViewMultiSelect(final AppCompatActivity activity, final ListView listView, final WeekAdapter adapter, final DbHelper db) {
         return new AbsListView.MultiChoiceModeListener() {
             @Override
             public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
