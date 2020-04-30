@@ -1,7 +1,6 @@
 package com.ulan.timetable.activities;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -208,7 +207,7 @@ public class SummaryActivity extends AppCompatActivity {
 
             setName(name.toString());
 
-            setColor(w.getColor() == Color.BLACK ? Color.WHITE : w.getColor());
+            setColor(w.getColor());
         }
 
         public Week getWeek() {

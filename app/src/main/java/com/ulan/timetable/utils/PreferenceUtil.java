@@ -352,17 +352,11 @@ public class PreferenceUtil {
 
     public static void setStartTime(Context context, @NonNull int... times) {
         if (times.length != 3) {
-            if (times.length > 0 && times[0] == 0) {
-                setAlarm(context, false);
-            } else {
-                System.out.println("wrong parameters");
-            }
             return;
         }
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = sharedPref.edit();
-        setAlarm(context, true);
         editor.putInt("start_hour", times[0]);
         editor.putInt("start_minute", times[1]);
         editor.putInt("start_second", times[2]);
