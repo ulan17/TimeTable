@@ -67,6 +67,7 @@ public class SummaryActivity extends AppCompatActivity {
             recreate();
         } else if (item.getItemId() == R.id.action_settings) {
             startActivity(new Intent(this, SummarySettingsActivity.class));
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }

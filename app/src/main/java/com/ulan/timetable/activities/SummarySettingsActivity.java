@@ -1,5 +1,6 @@
 package com.ulan.timetable.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,5 +20,17 @@ public class SummarySettingsActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.settings, new SummarySettingsFragment())
                 .commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, SummaryActivity.class));
+        super.onBackPressed();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return super.onSupportNavigateUp();
     }
 }

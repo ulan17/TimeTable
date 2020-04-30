@@ -20,6 +20,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -28,9 +29,11 @@ import com.google.android.material.snackbar.Snackbar;
 import com.pd.chocobar.ChocoBar;
 import com.ulan.timetable.R;
 import com.ulan.timetable.adapters.ExamsAdapter;
+import com.ulan.timetable.adapters.FragmentsTabAdapter;
 import com.ulan.timetable.adapters.HomeworksAdapter;
 import com.ulan.timetable.adapters.NotesAdapter;
 import com.ulan.timetable.adapters.TeachersAdapter;
+import com.ulan.timetable.fragments.WeekdayFragment;
 import com.ulan.timetable.model.Exam;
 import com.ulan.timetable.model.Homework;
 import com.ulan.timetable.model.Note;
@@ -200,7 +203,7 @@ public class AlertDialogsHelper {
         });
     }
 
-    public static void getAddSubjectDialog(@NonNull final AppCompatActivity activity, @NonNull final View alertLayout, Runnable runOnSafe, String fragmentKey) {
+    public static void getAddSubjectDialog(@NonNull final AppCompatActivity activity, @NonNull final View alertLayout, @NonNull final FragmentsTabAdapter adapter, @NonNull final ViewPager viewPager) {
         final HashMap<Integer, EditText> editTextHashs = new HashMap<>();
         final EditText subject = alertLayout.findViewById(R.id.subject_dialog);
         subject.requestFocus();
@@ -335,14 +338,12 @@ public class AlertDialogsHelper {
             } else {
                 ColorDrawable buttonColor = (ColorDrawable) select_color.getBackground();
                 week.setSubject(subject.getText().toString());
+                week.setFragment(((WeekdayFragment) adapter.getItem(viewPager.getCurrentItem())).getKey());
                 week.setTeacher(teacher.getText().toString());
                 week.setRoom(room.getText().toString());
                 week.setColor(buttonColor.getColor());
-                week.setFragment(fragmentKey);
                 new DbHelper(activity).insertWeek(week);
-
-                runOnSafe.run();
-
+                adapter.notifyDataSetChanged();
                 subject.getText().clear();
                 teacher.getText().clear();
                 room.getText().clear();

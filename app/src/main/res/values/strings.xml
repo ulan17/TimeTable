@@ -161,8 +161,8 @@
 
     <string name="summary_activity_title">Summary</string>
     <string name="change_summary_library">Change presentation</string>
-    <string name="start_of_school">School start</string>
-    <string name="length_of_period">Hour length</string>
+    <string name="start_of_school">Start of school</string>
+    <string name="length_of_period">Length of the lesson</string>
     <string name="minutes">minutes</string>
 
     <string-array name="timetable_header">
