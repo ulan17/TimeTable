@@ -24,3 +24,5 @@
 -keep public class org.apache.poi.hssf.** {*;}
 -keep public class org.apache.poi.ss.** {*;}
 -keep public class me.jfenn.colorpickerdialog.** {*;}
+-dontobfuscate
+-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*,!code/allocation/variable

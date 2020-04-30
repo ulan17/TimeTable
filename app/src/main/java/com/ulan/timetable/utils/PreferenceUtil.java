@@ -42,6 +42,7 @@ import androidx.preference.PreferenceManager;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.ulan.timetable.R;
+import com.ulan.timetable.activities.SettingsActivity;
 import com.ulan.timetable.receivers.DoNotDisturbReceiversKt;
 
 import java.util.Calendar;
@@ -335,5 +336,50 @@ public class PreferenceUtil {
         } catch (Exception e) {
             return Color.BLACK;
         }
+    }
+
+    public static boolean isSevenDays(Context context) {
+        return getBooleanSettings(context, SettingsActivity.KEY_SEVEN_DAYS_SETTING, false);
+    }
+
+    public static boolean isSummaryLibrary1(Context context) {
+        return getBooleanSettings(context, "summary_lib", true);
+    }
+
+    public static void setSummaryLibrary(Context context, boolean value) {
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putBoolean("summary_lib", value).commit();
+    }
+
+    public static void setStartTime(Context context, @NonNull int... times) {
+        if (times.length != 3) {
+            if (times.length > 0 && times[0] == 0) {
+                setAlarm(context, false);
+            } else {
+                System.out.println("wrong parameters");
+            }
+            return;
+        }
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        setAlarm(context, true);
+        editor.putInt("start_hour", times[0]);
+        editor.putInt("start_minute", times[1]);
+        editor.putInt("start_second", times[2]);
+        editor.commit();
+    }
+
+    @NonNull
+    public static int[] getStartTime(Context context) {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        return new int[]{sharedPref.getInt("start_hour", 8), sharedPref.getInt("start_minute", 0), sharedPref.getInt("start_second", 0)};
+    }
+
+    public static void setPeriodLength(Context context, int length) {
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putInt("period_length", length).apply();
+    }
+
+    public static int getPeriodLength(Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context).getInt("period_length", 60);
     }
 }

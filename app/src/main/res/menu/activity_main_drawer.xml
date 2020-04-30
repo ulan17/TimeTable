@@ -14,6 +14,10 @@
         android:id="@+id/menu_mid"
         android:checkableBehavior="none">
         <item
+            android:id="@+id/summary"
+            android:icon="@drawable/ic_assignment_black_24dp"
+            android:title="@string/summary_activity_title" />
+        <item
             android:id="@+id/exams"
             android:icon="@drawable/ic_school_black_24dp"
             android:title="@string/exams_activity_title" />

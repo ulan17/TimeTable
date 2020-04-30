@@ -32,6 +32,7 @@ import androidx.core.graphics.drawable.toBitmap
 import com.ulan.timetable.R
 import com.ulan.timetable.activities.HomeworksActivity
 import com.ulan.timetable.activities.NotesActivity
+import com.ulan.timetable.activities.SummaryActivity
 
 
 @RequiresApi(25)
@@ -44,6 +45,7 @@ class ShortcutUtils {
             val shortcutList = mutableListOf<ShortcutInfo>()
             shortcutList.add(createAddHomeworkShortcut(context))
             shortcutList.add(createNotesShortcut(context))
+            shortcutList.add(createSummaryShortcut(context))
 
             shortcutManager!!.dynamicShortcuts = shortcutList
         }
@@ -74,6 +76,10 @@ class ShortcutUtils {
 
         private fun createNotesShortcut(context: Context): ShortcutInfo {
             return createShortcut(context, "open_notes", context.getString(R.string.notes_activity_title), R.drawable.ic_event_note_black_24dp, Intent(context, NotesActivity::class.java).setAction(Intent.ACTION_VIEW))
+        }
+
+        private fun createSummaryShortcut(context: Context): ShortcutInfo {
+            return createShortcut(context, "summary", context.getString(R.string.summary_activity_title), R.drawable.ic_assignment_black_24dp, Intent(context, SummaryActivity::class.java).setAction(Intent.ACTION_VIEW))
         }
     }
 }

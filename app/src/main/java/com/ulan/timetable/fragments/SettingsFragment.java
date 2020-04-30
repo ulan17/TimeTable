@@ -35,12 +35,14 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         });
 
         myPref = findPreference("alarm");
+        Preference finalMyPref = myPref;
         myPref.setOnPreferenceClickListener((Preference p) -> {
             int[] oldTimes = PreferenceUtil.getAlarmTime(getContext());
             TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(),
                     (view, hourOfDay, minute) -> {
                         PreferenceUtil.setAlarmTime(getContext(), hourOfDay, minute, 0);
                         PreferenceUtil.setRepeatingAlarm(getContext(), DailyReceiver.class, hourOfDay, minute, 0, DailyReceiver.DailyReceiverID, AlarmManager.INTERVAL_DAY);
+                        finalMyPref.setSummary(hourOfDay + ":" + minute);
                     }, oldTimes[0], oldTimes[1], true);
             timePickerDialog.setTitle(R.string.choose_time);
             timePickerDialog.show();

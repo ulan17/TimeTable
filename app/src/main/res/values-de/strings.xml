@@ -187,5 +187,10 @@
     <string name="delete_note">die Notiz %1$s</string>
     <string name="delete_exam">die Prüfung %1$s</string>
     <string name="about_libs_title">Open-Source Bibliotheken</string>
+    <string name="start_of_school">Schulstart</string>
+    <string name="length_of_period">Stundenlänge</string>
+    <string name="minutes">Minuten</string>
+    <string name="change_summary_library">Darstellung ändern</string>
+    <string name="summary_activity_title">Zusammenfassung</string>
 
 </resources>

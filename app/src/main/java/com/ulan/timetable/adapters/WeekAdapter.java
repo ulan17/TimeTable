@@ -137,7 +137,7 @@ public class WeekAdapter extends ArrayAdapter<Week> {
                         return true;
                     } else if (itemId == R.id.edit_popup) {
                         final View alertLayout = mActivity.getLayoutInflater().inflate(R.layout.dialog_add_subject, null);
-                        AlertDialogsHelper.getEditSubjectDialog(mActivity, alertLayout, mListView, weeklist.get(position));
+                        AlertDialogsHelper.getEditSubjectDialog(mActivity, alertLayout, () -> notifyDataSetChanged(), weeklist.get(position));
                         notifyDataSetChanged();
                         return true;
                     }

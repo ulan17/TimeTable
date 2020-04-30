@@ -3,7 +3,6 @@ package com.ulan.timetable.activities;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -41,6 +40,7 @@ import com.ulan.timetable.utils.AlertDialogsHelper;
 import com.ulan.timetable.utils.DbHelper;
 import com.ulan.timetable.utils.NotificationUtil;
 import com.ulan.timetable.utils.PreferenceUtil;
+import com.ulan.timetable.utils.ShortcutUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -64,6 +64,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setTheme(PreferenceUtil.getGeneralThemeNoActionBar(this));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (Build.VERSION.SDK_INT >= 25) {
+            ShortcutUtils.Companion.createShortcuts(this);
+        }
     }
 
     @Override
@@ -165,12 +168,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void setupCustomDialog() {
         final View alertLayout = getLayoutInflater().inflate(R.layout.dialog_add_subject, null);
-        AlertDialogsHelper.getAddSubjectDialog(MainActivity.this, alertLayout, adapter, viewPager);
+        AlertDialogsHelper.getAddSubjectDialog(MainActivity.this, alertLayout, () -> adapter.notifyDataSetChanged(), ((WeekdayFragment) adapter.getItem(viewPager.getCurrentItem())).getKey());
     }
 
     private void setupSevenDaysPref() {
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        switchSevenDays = sharedPref.getBoolean(SettingsActivity.KEY_SEVEN_DAYS_SETTING, false);
+        switchSevenDays = PreferenceUtil.isSevenDays(this);
     }
 
     @Override
@@ -241,6 +243,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         } else if (itemId == R.id.teachers) {
             Intent teacher = new Intent(MainActivity.this, TeachersActivity.class);
+            startActivity(teacher);
+        } else if (itemId == R.id.summary) {
+            Intent teacher = new Intent(MainActivity.this, SummaryActivity.class);
             startActivity(teacher);
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

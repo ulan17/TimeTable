@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ulan.timetable"
-    xmlns:dist="http://schemas.android.com/apk/distribution">
+    xmlns:dist="http://schemas.android.com/apk/distribution"
+    package="com.ulan.timetable">
 
     <dist:module dist:instant="true" />
 
@@ -30,35 +30,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
-
         <activity
             android:name=".activities.HomeworksActivity"
             android:label="@string/homeworks"
             android:parentActivityName=".activities.MainActivity" />
-
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value=".activities.HomeworksActivity" />
-
         <activity
             android:name=".activities.NotesActivity"
-            android:label="Notes"
+            android:label="@string/notes_activity_title"
             android:parentActivityName=".activities.MainActivity" />
         <activity
             android:name=".activities.NoteInfoActivity"
-            android:label="Notes"
+            android:label="@string/notes_activity_title"
             android:parentActivityName=".activities.NotesActivity" />
         <activity
             android:name=".activities.TeachersActivity"
-            android:label="Teachers"
+            android:label="@string/teacher"
             android:parentActivityName=".activities.MainActivity" />
         <activity
             android:name=".activities.SettingsActivity"
-            android:label="Settings"
+            android:label="@string/action_settings"
             android:parentActivityName=".activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -66,17 +56,29 @@
         </activity>
         <activity
             android:name=".activities.ExamsActivity"
-            android:label="Exams"
+            android:label="@string/exams_activity_title"
             android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name=".activities.SummaryActivity"
+            android:label="@string/summary_activity_title"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name=".activities.SummarySettingsActivity"
+            android:label="@string/action_settings"
+            android:parentActivityName=".activities.SummaryActivity" />
         <activity
             android:name="com.mikepenz.aboutlibraries.ui.LibsActivity"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
         <receiver
             android:name=".receivers.NotificationDismissButtonReceiver"
             android:enabled="true" />
         <receiver
-            android:name="com.ulan.timetable.receivers.DailyReceiver"
+            android:name=".receivers.DailyReceiver"
             android:enabled="true">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
@@ -86,7 +88,7 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name="com.ulan.timetable.receivers.TurnOnReceiver"
+            android:name=".receivers.TurnOnReceiver"
             android:enabled="true">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
@@ -96,7 +98,7 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name="com.ulan.timetable.receivers.TurnOffReceiver"
+            android:name=".receivers.TurnOffReceiver"
             android:enabled="true" />
     </application>
 
