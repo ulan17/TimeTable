@@ -195,11 +195,12 @@
     <string name="summary_activity_title">Zusammenfassung</string>
 
     <string-array name="timetable_header">
-        <item></item>
         <item>Mon</item>
         <item>Die</item>
         <item>Mit</item>
         <item>Don</item>
         <item>Fre</item>
+        <item>Sam</item>
+        <item>Son</item>
     </string-array>
 </resources>

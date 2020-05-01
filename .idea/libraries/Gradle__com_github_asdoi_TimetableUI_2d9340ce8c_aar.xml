@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.asdoi:TimetableUI:2d9340ce8c@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b222e41d05263781fd247fcf572426f7/jetified-TimetableUI-2d9340ce8c/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b222e41d05263781fd247fcf572426f7/jetified-TimetableUI-2d9340ce8c/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.asdoi/TimetableUI/2d9340ce8c/c30521008fca7415b66a8537269dfaeb059341df/TimetableUI-2d9340ce8c-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
