@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.RemoteViews;
 
 import com.ulan.timetable.R;
+import com.ulan.timetable.activities.MainActivity;
 import com.ulan.timetable.appwidget.Dao.AppWidgetDao;
 
 import java.text.SimpleDateFormat;
@@ -57,40 +58,26 @@ public class DayAppWidgetProvider extends AppWidgetProvider {
             RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.day_appwidget);
             rv.setRemoteAdapter(R.id.lv_day_appwidget, intent);
             rv.setEmptyView(R.id.lv_day_appwidget, R.id.empty_view);
-            rv.setTextViewText(R.id.tv_date, getDateText(appWidgetId, currentTimeMillis, simpleDateFormat, context));
+            rv.setTextViewText(R.id.tv_date, getDateText(currentTimeMillis, simpleDateFormat));
             rv.setInt(R.id.fl_root, "setBackgroundColor", AppWidgetDao.getAppWidgetBackgroundColor(appWidgetId, Color.TRANSPARENT, context));
 
             rv.setOnClickPendingIntent(R.id.imgBtn_restore, makePendingIntent(context, appWidgetId, ACTION_RESTORE));
             rv.setOnClickPendingIntent(R.id.imgBtn_yesterday, makePendingIntent(context, appWidgetId, ACTION_YESTERDAY));
             rv.setOnClickPendingIntent(R.id.imgBtn_tomorrow, makePendingIntent(context, appWidgetId, ACTION_TOMORROW));
 
+            Intent listviewClickIntent = new Intent(context, MainActivity.class);
+            listviewClickIntent.setAction(Intent.ACTION_VIEW);
+            PendingIntent listviewPendingIntent = PendingIntent.getBroadcast(context, 0, listviewClickIntent, 0);
+            rv.setPendingIntentTemplate(R.id.lv_day_appwidget, listviewPendingIntent);
+
             appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.lv_day_appwidget);
             appWidgetManager.updateAppWidget(appWidgetId, rv);
         }
     }
 
-    private static String getDateText(int appWidgetId, long currentTimeMillis, SimpleDateFormat simpleDateFormat, Context context) {
+    private static String getDateText(long currentTimeMillis, SimpleDateFormat simpleDateFormat) {
         String date = simpleDateFormat.format(currentTimeMillis);
-        if (AppWidgetDao.getAppWidgetWeekStyle(appWidgetId, AppWidgetConstants.WEEK_STYLE_DISABLE, context) == AppWidgetConstants.WEEK_STYLE_ENABLE) {
-            return date + " " + /*(CalendarUtil.getCurrentWeek(currentTimeMillis) + 1)*/ "week";
-        } else {
-            return date;
-        }
-    }
-
-    public static void noticeAppWidgetViewDataChanger(Context context) {
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(context,
-                DayAppWidgetProvider.class));
-
-        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.lv_day_appwidget);
-
-        for (int appWidgetId : appWidgetIds) {
-
-            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.day_appwidget);
-            views.setTextViewText(R.id.tv_date, getDateText(appWidgetId, System.currentTimeMillis(), new SimpleDateFormat("D M E", Locale.getDefault()), context));
-            appWidgetManager.partiallyUpdateAppWidget(appWidgetId, views);
-        }
+        return date;
     }
 
     @Override
@@ -119,8 +106,8 @@ public class DayAppWidgetProvider extends AppWidgetProvider {
         return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
-    static void updateAppWidgetConfig(AppWidgetManager appWidgetManager, int appWidgetId, int backgroundColor, int timeStyle, int weekStyle, Context context) {
-        AppWidgetDao.saveAppWidgetConfig(appWidgetId, backgroundColor, timeStyle, weekStyle, context);
+    static void updateAppWidgetConfig(AppWidgetManager appWidgetManager, int appWidgetId, int backgroundColor, int timeStyle, Context context) {
+        AppWidgetDao.saveAppWidgetConfig(appWidgetId, backgroundColor, timeStyle, context);
 
         Intent intent = new Intent(context, DayAppWidgetService.class);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
@@ -130,7 +117,7 @@ public class DayAppWidgetProvider extends AppWidgetProvider {
         views.setRemoteAdapter(R.id.lv_day_appwidget, intent);
         views.setEmptyView(R.id.lv_day_appwidget, R.id.empty_view);
         views.setInt(R.id.fl_root, "setBackgroundColor", backgroundColor);
-        views.setTextViewText(R.id.tv_date, getDateText(appWidgetId, System.currentTimeMillis(), new SimpleDateFormat("d M E", Locale.getDefault()), context));
+        views.setTextViewText(R.id.tv_date, getDateText(System.currentTimeMillis(), new SimpleDateFormat("d.M E", Locale.getDefault())));
         appWidgetManager.partiallyUpdateAppWidget(appWidgetId, views);
     }
 
@@ -170,7 +157,7 @@ public class DayAppWidgetProvider extends AppWidgetProvider {
             }
 
             AppWidgetDao.saveAppWidgetCurrentTime(appWidgetId, newTime, context);
-            rv.setTextViewText(R.id.tv_date, getDateText(appWidgetId, newTime, simpleDateFormat, context));
+            rv.setTextViewText(R.id.tv_date, getDateText(newTime, simpleDateFormat));
 
             appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.lv_day_appwidget);
             appWidgetManager.partiallyUpdateAppWidget(appWidgetId, rv);

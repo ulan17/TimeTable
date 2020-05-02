@@ -16,13 +16,12 @@ public class AppWidgetDao extends BaseDao {
 
     private static final String TABLE_NAME = "app_widget";
 
-    public static void saveAppWidgetConfig(int appWidgetId, int backgroundColor, int timeStyle, int weekStyle, Context context) {
+    public static void saveAppWidgetConfig(int appWidgetId, int backgroundColor, int timeStyle, Context context) {
         SQLiteDatabase db = DBManager.getDb(context);
 
         ContentValues values = new ContentValues(4);
         values.put("backgroundColor", backgroundColor);
         values.put("timeStyle", timeStyle);
-        values.put("weekStyle", weekStyle);
 
         String whereClause = "appWidgetId = ?";
         String[] whereArgs = {String.valueOf(appWidgetId)};
@@ -117,33 +116,6 @@ public class AppWidgetDao extends BaseDao {
         cursor.close();
 
         return timeStyle;
-    }
-
-    public static int getAppWidgetWeekStyle(int appWidgetId, int defaultWeekStyle, Context context) {
-        SQLiteDatabase db = DBManager.getDb(context);
-        String selection = "appWidgetId = ?";
-        String[] selectionArgs = {String.valueOf(appWidgetId)};
-        String[] columns = {"weekStyle"};
-        Cursor cursor = queryComplex(db, TABLE_NAME, columns, selection, selectionArgs, null, null, null, null);
-        int count = cursor.getCount();
-
-        if (count == 0) {
-            cursor.close();
-            return defaultWeekStyle;
-        }
-
-        int weekStyleIndex = cursor.getColumnIndex("weekStyle");
-        int weekStyle;
-
-        if (cursor.moveToNext()) {// id只存在一个，所以不用while
-            weekStyle = cursor.getInt(weekStyleIndex);
-        } else {
-            weekStyle = defaultWeekStyle;
-        }
-
-        cursor.close();
-
-        return weekStyle;
     }
 
     public static void saveAppWidgetCurrentTime(int appWidgetId, long currentTime, Context context) {

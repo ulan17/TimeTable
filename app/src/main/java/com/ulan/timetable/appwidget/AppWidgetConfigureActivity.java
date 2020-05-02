@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -21,8 +19,7 @@ import java.util.Map;
 /**
  * From https://github.com/SubhamTyagi/TimeTable
  */
-public class AppWidgetConfigureActivity extends Activity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener, RadioGroup
-        .OnCheckedChangeListener, CompoundButton.OnCheckedChangeListener {
+public class AppWidgetConfigureActivity extends Activity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener, RadioGroup.OnCheckedChangeListener {
 
     private int mAppWidgetId;
     private RadioGroup mRgBgColor;
@@ -30,7 +27,6 @@ public class AppWidgetConfigureActivity extends Activity implements View.OnClick
     private SeekBar mSbIntensity;
     private TextView mTvIntensity;
     private TextView mTvTimeStyle;
-    private CheckBox mCbWeek;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,7 +63,6 @@ public class AppWidgetConfigureActivity extends Activity implements View.OnClick
         mSbIntensity = findViewById(R.id.sb_intensity);
         mRgTimeStyle = findViewById(R.id.rg_time_style);
         mTvTimeStyle = findViewById(R.id.tv_time_style);
-        mCbWeek = findViewById(R.id.cb_week);
     }
 
     private void setListener() {
@@ -75,7 +70,6 @@ public class AppWidgetConfigureActivity extends Activity implements View.OnClick
         findViewById(R.id.btn_cancel).setOnClickListener(this);
         mSbIntensity.setOnSeekBarChangeListener(this);
         mRgTimeStyle.setOnCheckedChangeListener(this);
-        mCbWeek.setOnCheckedChangeListener(this);
     }
 
     private void setConfig(Map<String, Integer> configMap) {
@@ -108,11 +102,6 @@ public class AppWidgetConfigureActivity extends Activity implements View.OnClick
                     break;
             }
         }
-
-        Integer weekStyle = configMap.get("weekStyle");
-        if (weekStyle != null && weekStyle != -1) {
-            mCbWeek.setChecked(weekStyle == AppWidgetConstants.WEEK_STYLE_ENABLE);
-        }
     }
 
     @Override
@@ -123,17 +112,13 @@ public class AppWidgetConfigureActivity extends Activity implements View.OnClick
                 break;
             case R.id.btn_confirm:
                 AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getApplicationContext());
-                DayAppWidgetProvider.updateAppWidgetConfig(appWidgetManager, mAppWidgetId, getSettingColor(), getTimeStyle(), getWeekStyle(), this);
+                DayAppWidgetProvider.updateAppWidgetConfig(appWidgetManager, mAppWidgetId, getSettingColor(), getTimeStyle(), this);
                 Intent resultValue = new Intent();
                 resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);
                 setResult(RESULT_OK, resultValue);
                 finish();
                 break;
         }
-    }
-
-    private int getWeekStyle() {
-        return mCbWeek.isChecked() ? AppWidgetConstants.WEEK_STYLE_ENABLE : AppWidgetConstants.WEEK_STYLE_DISABLE;
     }
 
     public int getSettingColor() {
@@ -174,21 +159,6 @@ public class AppWidgetConfigureActivity extends Activity implements View.OnClick
             case R.id.rb_time_style_3:
                 mTvTimeStyle.setText(getString(R.string.app_widget_configure_time_style, "Upper 1"));
                 break;
-        }
-    }
-
-    @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if (buttonView.getId() == R.id.cb_week) {
-            setWeekHintText(isChecked);
-        }
-    }
-
-    private void setWeekHintText(boolean isChecked) {
-        if (isChecked) {
-            mCbWeek.setText(R.string.app_widget_configure_week_style_enable);
-        } else {
-            mCbWeek.setText(R.string.app_widget_configure_week_style_disable);
         }
     }
 

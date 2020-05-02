@@ -199,8 +199,6 @@
 
     <string name="app_widget_configure_intensity">Background color intensity（%d%%）</string>
     <string name="app_widget_configure_time_style">Time style（%s）</string>
-    <string name="app_widget_configure_week_style_enable">Display the number of weeks（Example:December 5th Wednesday 15）</string>
-    <string name="app_widget_configure_week_style_disable">Show the number of weeks (Example: Wednesday, December 5)</string>
     <string name="configure_widget_controls">Configure widget controls</string>
     <string name="background_color">Background Color</string>
     <string name="black">Black</string>
