@@ -175,28 +175,42 @@
         <item>Sun</item>
     </string-array>
 
+    <string-array name="preselected_subjects">
+        <item>Art</item>
+        <item>Biology</item>
+        <item>Chemistry</item>
+        <item>English</item>
+        <item>French</item>
+        <item>Geography</item>
+        <item>German</item>
+        <item>History</item>
+        <item>Math</item>
+        <item>Music</item>
+        <item>Physics</item>
+        <item>Politics</item>
+        <item>Religion</item>
+        <item>Spanish</item>
+        <item>Sport</item>
+    </string-array>
+
+    <string name="pick_a_subject">Pick a subject</string>
+    <string name="new_subject">New subject</string>
+
 
     <string name="app_widget_configure_intensity">Background color intensity（%d%%）</string>
     <string name="app_widget_configure_time_style">Time style（%s）</string>
     <string name="app_widget_configure_week_style_enable">Display the number of weeks（Example:December 5th Wednesday 15）</string>
     <string name="app_widget_configure_week_style_disable">Show the number of weeks (Example: Wednesday, December 5)</string>
-
     <string name="configure_widget_controls">Configure widget controls</string>
     <string name="background_color">Background Color</string>
     <string name="black">Black</string>
     <string name="white">White</string>
     <string name="background_color_intensity_15">Background color intensity（15%）</string>
     <string name="time_style_first_session_of_the_morning">Time style (first session of the morning)</string>
-
     <string name="style_1">Style 1</string>
     <string name="style_2">Style 2</string>
     <string name="style_3">Style 3</string>
-
     <string name="no_class">No schedule</string>
-    <string name="alternate_week">Alternate week</string>
-    <string name="one_week">One week</string>
-    <string name="two_week">Two week</string>
-
     <string name="confirm">Confirm</string>
 
 

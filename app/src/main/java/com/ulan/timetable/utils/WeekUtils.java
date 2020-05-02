@@ -20,12 +20,17 @@ package com.ulan.timetable.utils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
+import com.ulan.timetable.R;
 import com.ulan.timetable.fragments.WeekdayFragment;
 import com.ulan.timetable.model.Week;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 
 public class WeekUtils {
     @Nullable
@@ -69,29 +74,38 @@ public class WeekUtils {
         return weeks;
     }
 
-    @NonNull
-    public static String getNextOccurenceOfSubject(DbHelper dbHelper, String subject) {
-/*        ArrayList<Week> weeks = new ArrayList<Week>();
+    public static ArrayList<Week> getAllWeeksAndRemoveDuplicates(DbHelper dbHelper) {
+        ArrayList<Week> weeks = getAllWeeks(dbHelper);
+        ArrayList<Week> returnValue = new ArrayList<>();
+        ArrayList<String> returnValueSubjects = new ArrayList<>();
+        for (Week w : weeks) {
+            if (!returnValueSubjects.contains(w.getSubject().toUpperCase())) {
+                returnValue.add(w);
+                returnValueSubjects.add(w.getSubject().toUpperCase());
+            }
+        }
+        return returnValue;
+    }
 
-        Calendar calendar = Calendar.getInstance();
-        switch (calendar.get(Calendar.DAY_OF_WEEK)) {
-            case Calendar.MONDAY:
-                break;
-            case Calendar.TUESDAY:
-                break;
-            case Calendar.WEDNESDAY:
-                break;
-            case Calendar.THURSDAY:
-                break;
-            case Calendar.FRIDAY:
-                break;
-            case Calendar.SATURDAY:
-                break;
-            case Calendar.SUNDAY:
-                break;
+    @NotNull
+    public static ArrayList<Week> getPreselection(@NonNull AppCompatActivity activity) {
+        DbHelper dbHelper = new DbHelper(activity);
+
+        ArrayList<Week> customWeeks = getAllWeeksAndRemoveDuplicates(dbHelper);
+        ArrayList<String> subjects = new ArrayList<>();
+        for (Week w : customWeeks) {
+            subjects.add(w.getSubject().toUpperCase());
         }
 
-        String.format("%02d-%02d-%02d", year, month + 1, dayOfMonth)*/
-        return ""; //TODO
+        String[] preselected = activity.getResources().getStringArray(R.array.preselected_subjects);
+        int[] preselectedColors = activity.getResources().getIntArray(R.array.preselected_subjects_colors);
+
+        for (int i = preselected.length - 1; i >= 0; i--) {
+            if (!subjects.contains(preselected[i].toUpperCase()))
+                customWeeks.add(0, new Week(preselected[i], "", "", "", "", preselectedColors[i]));
+        }
+
+        Collections.sort(customWeeks, (week1, week2) -> week1.getSubject().compareToIgnoreCase(week2.getSubject()));
+        return customWeeks;
     }
 }

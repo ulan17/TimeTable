@@ -24,4 +24,21 @@
     <color name="black">#D9000000</color>
     <color name="white">#FFFFFF</color>
     <color name="grey">#212121</color>
+
+    <color name="religion">#9C27B0</color>
+    <color name="physics">#9C27B0</color>
+    <color name="german">#F44336</color>
+    <color name="math">#3F51B5</color>
+    <color name="biology">#00FF00</color>
+    <color name="chemistry">#FFC107</color>
+    <color name="pe">#FFFFFF</color>
+    <color name="music">#000000</color>
+    <color name="history">#FFFFFF</color>
+    <color name="politics">#00BCD4</color>
+    <color name="art">#9e9e9e</color>
+    <color name="english">#4CAF50</color>
+    <color name="french">#009688</color>
+    <color name="spanish">#FF5722</color>
+    <color name="geography">#795548</color>
+
 </resources>

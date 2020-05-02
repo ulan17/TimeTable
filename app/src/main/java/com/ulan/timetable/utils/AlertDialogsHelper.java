@@ -311,8 +311,33 @@ public class AlertDialogsHelper {
         Button submit = alertLayout.findViewById(R.id.save);
         alert.setView(alertLayout);
         final AlertDialog dialog = alert.create();
+
+        //Preselection
         FloatingActionButton fab = activity.findViewById(R.id.fab);
-        fab.setOnClickListener(view -> dialog.show());
+        fab.setOnClickListener(view -> {
+            ArrayList<Week> customWeeks = WeekUtils.getPreselection(activity);
+
+            ArrayList<String> subjects = new ArrayList<>();
+            for (Week w : customWeeks) {
+                subjects.add(w.getSubject());
+            }
+
+            new MaterialDialog.Builder(activity)
+                    .title(R.string.pick_a_subject)
+                    .items(subjects)
+                    .itemsCallback((dialog1, view1, which, text) -> {
+                        Week w = customWeeks.get(which);
+                        subject.setText(w.getSubject());
+                        teacher.setText(w.getTeacher());
+                        room.setText(w.getRoom());
+                        select_color.setBackgroundColor(w.getColor());
+                        select_color.setTextColor(ColorPalette.pickTextColorBasedOnBgColorSimple(w.getColor(), Color.WHITE, Color.BLACK));
+                        dialog.show();
+                    })
+                    .positiveText(R.string.new_subject)
+                    .onPositive((dialog1, which) -> dialog.show())
+                    .show();
+        });
 
         cancel.setOnClickListener(v -> {
             subject.getText().clear();

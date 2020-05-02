@@ -203,4 +203,39 @@
         <item>Sam</item>
         <item>Son</item>
     </string-array>
+
+    <string-array name="preselected_subjects">
+        <item>Kunst</item>
+        <item>Biologie</item>
+        <item>Chemie</item>
+        <item>Englisch</item>
+        <item>Französisch</item>
+        <item>Geographie</item>
+        <item>Deutsch</item>
+        <item>Geschichte</item>
+        <item>Mathe</item>
+        <item>Musik</item>
+        <item>Physik</item>
+        <item>Sozialkunde</item>
+        <item>Religion</item>
+        <item>Spanisch</item>
+        <item>Sport</item>
+    </string-array>
+    <string name="pick_a_subject">Fach auswählen</string>
+    <string name="new_subject">Neues Fach</string>
+    <string name="app_widget_configure_time_style">Zeitdesign  (%s)</string>
+    <string name="app_widget_configure_week_style_enable">Wochenzahl anzeigen（Beispielsweise: Dezember 5. Mittwoch 15）</string>
+    <string name="configure_widget_controls">Widget konfigurieren</string>
+    <string name="background_color">Hintergrundfarbe</string>
+    <string name="black">Schwarz</string>
+    <string name="white">Weiß</string>
+    <string name="background_color_intensity_15">Intensität der Hintergrundfarbe (15%)</string>
+    <string name="time_style_first_session_of_the_morning">Zeitansicht</string>
+    <string name="style_1">Stil 1</string>
+    <string name="style_2">Stil 2</string>
+    <string name="style_3">Stil 3</string>
+    <string name="no_class">Keine Fächer</string>
+    <string name="confirm">Bestätigen</string>
+    <string name="app_widget_configure_intensity">Intensität der Hintergrundfarbe（%d%%）</string>
+    <string name="app_widget_configure_week_style_disable">Wochenzahl anzeigen</string>
 </resources>

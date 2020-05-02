@@ -31,4 +31,22 @@
         <item>black</item>
         <item>switch</item>
     </string-array>
+
+    <integer-array name="preselected_subjects_colors">
+        <item>@color/art</item>
+        <item>@color/biology</item>
+        <item>@color/chemistry</item>
+        <item>@color/english</item>
+        <item>@color/french</item>
+        <item>@color/geography</item>
+        <item>@color/german</item>
+        <item>@color/history</item>
+        <item>@color/math</item>
+        <item>@color/music</item>
+        <item>@color/physics</item>
+        <item>@color/politics</item>
+        <item>@color/religion</item>
+        <item>@color/spanish</item>
+        <item>@color/pe</item>
+    </integer-array>
 </resources>

@@ -103,18 +103,6 @@
 
     </RadioGroup>
 
-    <CheckBox
-        android:id="@+id/cb_week"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center_vertical"
-        android:text="@string/app_widget_configure_week_style_disable"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rg_time_style" />
-
     <Button
         android:id="@+id/btn_confirm"
         android:layout_width="wrap_content"
