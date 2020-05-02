@@ -178,7 +178,7 @@ public class NotificationUtil {
     }
 
     @Nullable
-    private static String getLessons(@NonNull ArrayList<Week> weeks, @NonNull Context context) {
+    public static String getLessons(@NonNull ArrayList<Week> weeks, @NonNull Context context) {
         StringBuilder lessons = new StringBuilder();
         for (Week week : weeks) {
             if (week != null) {

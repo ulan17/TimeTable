@@ -1,0 +1,10 @@
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:configure="com.ulan.timetable.appwidget.AppWidgetConfigureActivity"
+    android:initialLayout="@layout/day_appwidget"
+    android:minHeight="110dp"
+    android:minResizeHeight="40dp"
+    android:minWidth="250dp"
+    android:previewImage="@drawable/home_widget"
+    android:resizeMode="horizontal|vertical"
+    android:updatePeriodMillis="14400000"
+    android:widgetCategory="home_screen" />

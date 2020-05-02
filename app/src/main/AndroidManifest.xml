@@ -102,6 +102,30 @@
         <receiver
             android:name=".receivers.TurnOffReceiver"
             android:enabled="true" />
+
+
+        <activity
+            android:name=".appwidget.AppWidgetConfigureActivity"
+            android:label="@string/configure_widget_controls"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Material.Light">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
+
+        <receiver android:name=".appwidget.DayAppWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.sunrain.timetablev4.ACTION_NEW_DAY" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/day_appwidget_info" />
+        </receiver>
+        <service
+            android:name=".appwidget.DayAppWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
     </application>
 
 </manifest>
