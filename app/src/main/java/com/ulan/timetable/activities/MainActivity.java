@@ -67,6 +67,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (Build.VERSION.SDK_INT >= 25) {
             ShortcutUtils.Companion.createShortcuts(this);
         }
+        if (!PreferenceUtil.hasStartActivityBeenShown(this)) {
+            new MaterialDialog.Builder(this)
+                    .content(R.string.first_start_setup)
+                    .positiveText(R.string.ok)
+                    .onPositive((v, w) -> startActivity(new Intent(this, TimeSettingsActivity.class)))
+                    .show();
+        }
     }
 
     @Override

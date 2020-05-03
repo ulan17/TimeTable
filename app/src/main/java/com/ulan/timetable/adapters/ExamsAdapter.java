@@ -29,6 +29,7 @@ import com.ulan.timetable.utils.AlertDialogsHelper;
 import com.ulan.timetable.utils.ColorPalette;
 import com.ulan.timetable.utils.DbHelper;
 import com.ulan.timetable.utils.PreferenceUtil;
+import com.ulan.timetable.utils.WeekUtils;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -72,7 +73,7 @@ public class ExamsAdapter extends ArrayAdapter<Exam> {
         String time = Objects.requireNonNull(getItem(position)).getTime();
         int color = Objects.requireNonNull(getItem(position)).getColor();
 
-        exam = new Exam(subject, teacher, date, time, room, color);
+        exam = new Exam(subject, teacher, time, date, room, color);
         final ViewHolder holder;
 
         if (convertView == null) {
@@ -118,7 +119,10 @@ public class ExamsAdapter extends ArrayAdapter<Exam> {
         holder.room.setText(exam.getRoom());
 
         holder.date.setText(exam.getDate());
-        holder.time.setText(exam.getTime());
+        if (PreferenceUtil.showTimes(getContext()))
+            holder.time.setText(exam.getTime());
+        else if (!exam.getTime().trim().isEmpty())
+            holder.time.setText("" + WeekUtils.getMatchingScheduleBegin(exam.getTime(), PreferenceUtil.getStartTime(getContext()), PreferenceUtil.getPeriodLength(getContext())));
 
         holder.cardView.setCardBackgroundColor(exam.getColor());
         holder.popup.setOnClickListener(v -> {

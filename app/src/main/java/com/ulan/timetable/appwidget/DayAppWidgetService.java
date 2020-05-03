@@ -7,10 +7,11 @@ import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import com.ulan.timetable.R;
-import com.ulan.timetable.activities.MainActivity;
 import com.ulan.timetable.appwidget.Dao.AppWidgetDao;
 import com.ulan.timetable.model.Week;
 import com.ulan.timetable.utils.DbHelper;
+import com.ulan.timetable.utils.PreferenceUtil;
+import com.ulan.timetable.utils.WeekUtils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -70,13 +71,26 @@ class DayAppWidgetRemoteViewsFactory implements RemoteViewsService.RemoteViewsFa
 
 //        String lessons = getLessons(content, mContext);
         if (week != null) {
-            String text = week.getSubject() + ": " + week.getFromTime() + "-" + week.getToTime() + ", " + week.getRoom() + " (" + week.getTeacher() + ")";
+            String time;
+            if (PreferenceUtil.showTimes(mContext))
+                time = week.getFromTime() + " - " + week.getToTime();
+            else {
+                int start = WeekUtils.getMatchingScheduleBegin(week.getFromTime(), PreferenceUtil.getStartTime(mContext), PreferenceUtil.getPeriodLength(mContext));
+                int end = WeekUtils.getMatchingScheduleEnd(week.getToTime(), PreferenceUtil.getStartTime(mContext), PreferenceUtil.getPeriodLength(mContext));
+                if (start == end) {
+                    time = start + ". " + mContext.getString(R.string.lesson);
+                } else {
+                    time = start + ".-" + end + ". " + mContext.getString(R.string.lesson);
+                }
+            }
+
+            String text = week.getSubject() + ": " + time + ", " + week.getRoom() + " (" + week.getTeacher() + ")";
             rv.setTextViewText(R.id.widget_text, text);
         }
 
         //Set OpenApp Button intent
-        Intent intent = new Intent(mContext, MainActivity.class);
-        intent.setAction(Intent.ACTION_VIEW);
+        Intent intent = new Intent();
+        intent.putExtra("keyData", position);
         rv.setOnClickFillInIntent(R.id.widget_linear, intent);
         return rv;
     }

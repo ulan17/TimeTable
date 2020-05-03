@@ -2,6 +2,7 @@ package com.ulan.timetable.fragments;
 
 import android.app.AlarmManager;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceManager;
 
 import com.ulan.timetable.R;
+import com.ulan.timetable.activities.TimeSettingsActivity;
 import com.ulan.timetable.receivers.DailyReceiver;
 import com.ulan.timetable.utils.PreferenceUtil;
 
@@ -66,6 +68,12 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             return false;
         });
         mp.setSummary(getThemeName());
+
+        myPref = findPreference("time_settings");
+        myPref.setOnPreferenceClickListener(p -> {
+            startActivity(new Intent(getActivity(), TimeSettingsActivity.class));
+            return true;
+        });
     }
 
     private String getThemeName() {

@@ -12,11 +12,11 @@ import com.ulan.timetable.R;
 import com.ulan.timetable.utils.PreferenceUtil;
 
 
-public class SummarySettingsFragment extends PreferenceFragmentCompat {
+public class TimeSettingsFragment extends PreferenceFragmentCompat {
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        setPreferencesFromResource(R.xml.settings_summary, rootKey);
+        setPreferencesFromResource(R.xml.settings_time, rootKey);
 
         Preference myPref = findPreference("start_time");
         Preference finalMyPref = myPref;
@@ -49,6 +49,7 @@ public class SummarySettingsFragment extends PreferenceFragmentCompat {
             });
             new MaterialDialog.Builder(getContext())
                     .customView(numberPicker, false)
+                    .positiveText(R.string.select)
                     .show();
             return true;
         });

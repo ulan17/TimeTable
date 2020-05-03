@@ -118,9 +118,22 @@
             android:id="@+id/timeexam_dialog"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight=".7"
+            android:layout_weight=".45"
             android:background="?attr/selectableItemBackground"
             android:text="@string/select_time"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/hourexam_dialog"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".25"
+            android:background="?attr/selectableItemBackground"
+            android:text="@string/lesson"
             android:textAlignment="center"
             android:textAllCaps="true"
             android:textColor="?android:attr/textColorPrimary"

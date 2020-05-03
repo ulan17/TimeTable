@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">TimeTable</string>
+    <string name="app_name">TimeTable</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
@@ -41,6 +41,7 @@
     <string name="choose_time">Choose time</string>
     <string name="choose_date">Choose date</string>
     <string name="choose_color">Choose color</string>
+    <string name="select">Select</string>
 
     <!-- Homeworks Activity strings -->
     <string name="homeworks">Homeworks</string>
@@ -164,6 +165,9 @@
     <string name="start_of_school">Start of school</string>
     <string name="length_of_period">Length of the lesson</string>
     <string name="minutes">minutes</string>
+    <string name="lesson">lesson</string>
+    <string name="show_times_instead_of_lessons">Show times of lessons</string>
+    <string name="show_times_instead_of_lessons_desc">Show the times instead of the lessons number, e.g. 8:00 instead of 1</string>
 
     <string-array name="timetable_header">
         <item>Mon</item>
@@ -211,5 +215,8 @@
     <string name="no_class">No schedule</string>
     <string name="confirm">Confirm</string>
 
-
+    <string name="time_settings">Time settings</string>
+    <string name="time_settings_desc">Settings about the start of your school and the length of your lessons.</string>
+    <string name="ok">Ok</string>
+    <string name="first_start_setup">Some things have to be set at the beginning.</string>
 </resources>

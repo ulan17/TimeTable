@@ -21,10 +21,10 @@ import com.ulan.timetable.model.Week;
 import com.ulan.timetable.utils.AlertDialogsHelper;
 import com.ulan.timetable.utils.DbHelper;
 import com.ulan.timetable.utils.PreferenceUtil;
+import com.ulan.timetable.utils.WeekUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
 
 import me.yaoandy107.ntut_timetable.CourseTableLayout;
@@ -65,7 +65,7 @@ public class SummaryActivity extends AppCompatActivity {
             PreferenceUtil.setSummaryLibrary(this, !PreferenceUtil.isSummaryLibrary1(this));
             recreate();
         } else if (item.getItemId() == R.id.action_settings) {
-            startActivity(new Intent(this, SummarySettingsActivity.class));
+            startActivity(new Intent(this, TimeSettingsActivity.class));
             finish();
         }
         return super.onOptionsItemSelected(item);
@@ -120,7 +120,7 @@ public class SummaryActivity extends AppCompatActivity {
                     newW.setFromTime(schoolStart);
                     newW.setToTime(weeks.get(j).get(i).getFromTime());
                 }
-                difference_to_week_before = getDurationOfWeek(newW, true);
+                difference_to_week_before = WeekUtils.getDurationOfWeek(newW, true, lessonDuration);
 
                 durations.get(j).add(i, getDurationOfWeek(weeks.get(j).get(i)) + difference_to_week_before);
                 durationStrings.get(j).add(i, generateLessonsString(getDurationOfWeek(weeks.get(j).get(i)), ago + difference_to_week_before));
@@ -156,35 +156,7 @@ public class SummaryActivity extends AppCompatActivity {
     }
 
     private int getDurationOfWeek(Week w) {
-        return getDurationOfWeek(w, false);
-    }
-
-    private int getDurationOfWeek(Week w, boolean countOnlyIfFitsLessonsTime) {
-        Calendar weekCalendarStart = Calendar.getInstance();
-        int startHour = Integer.parseInt(w.getFromTime().substring(0, w.getFromTime().indexOf(":")));
-        weekCalendarStart.set(Calendar.HOUR_OF_DAY, startHour);
-        int startMinute = Integer.parseInt(w.getFromTime().substring(w.getFromTime().indexOf(":") + 1));
-        weekCalendarStart.set(Calendar.MINUTE, startMinute);
-
-        Calendar weekCalendarEnd = Calendar.getInstance();
-        int endHour = Integer.parseInt(w.getToTime().substring(0, w.getToTime().indexOf(":")));
-        weekCalendarEnd.set(Calendar.HOUR_OF_DAY, endHour);
-        int endMinute = Integer.parseInt(w.getToTime().substring(w.getToTime().indexOf(":") + 1));
-        weekCalendarEnd.set(Calendar.MINUTE, endMinute);
-
-        long differencesInMillis = weekCalendarEnd.getTimeInMillis() - weekCalendarStart.getTimeInMillis();
-        int inMinutes = (int) (differencesInMillis / 1000 / 60);
-
-        if (inMinutes < lessonDuration && countOnlyIfFitsLessonsTime)
-            return 0;
-
-        int multiplier;
-        if (inMinutes % lessonDuration > 0 && !countOnlyIfFitsLessonsTime) {
-            multiplier = inMinutes / lessonDuration + 1;
-        } else
-            multiplier = inMinutes / lessonDuration;
-
-        return multiplier;
+        return WeekUtils.getDurationOfWeek(w, false, lessonDuration);
     }
 
     private static String generateLessonsString(int duration, int hoursBefore) {

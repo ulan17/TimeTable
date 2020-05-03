@@ -236,4 +236,13 @@
     <string name="no_class">Keine Fächer</string>
     <string name="confirm">Bestätigen</string>
     <string name="app_widget_configure_intensity">Intensität der Hintergrundfarbe（%d%%）</string>
+    <string name="app_name">Stundenplan</string>
+    <string name="select">Auswählen</string>
+    <string name="lesson">Stunde</string>
+    <string name="show_times_instead_of_lessons">Uhrzeiten statt Stunden anzeigen</string>
+    <string name="show_times_instead_of_lessons_desc">Zeige die Uhrzeiten anstatt der Stundenzahl an. Zum Beispiel 8:00 statt 1</string>
+    <string name="time_settings">Zeiteinstellungen</string>
+    <string name="time_settings_desc">Einstellungen über deinen Schulstart und deine Stundenlänge</string>
+    <string name="ok">Ok</string>
+    <string name="first_start_setup">Einige Dinge müssen zu Beginn eingestellt werden.</string>
 </resources>

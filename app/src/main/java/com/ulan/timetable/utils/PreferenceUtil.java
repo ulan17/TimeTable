@@ -52,8 +52,8 @@ import static android.content.Context.ALARM_SERVICE;
 
 public class PreferenceUtil {
 
-    private static boolean getBooleanSettings(Context context, String key, boolean defaulValue) {
-        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, defaulValue);
+    private static boolean getBooleanSettings(Context context, String key, boolean defaultValue) {
+        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, defaultValue);
     }
 
     public static boolean isNotification(Context context) {
@@ -375,5 +375,17 @@ public class PreferenceUtil {
 
     public static int getPeriodLength(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context).getInt("period_length", 60);
+    }
+
+    public static boolean hasStartActivityBeenShown(Context context) {
+        return getBooleanSettings(context, "start_activity", false);
+    }
+
+    public static void setStartActivityShown(Context context, boolean value) {
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putBoolean("start_activity", value).commit();
+    }
+
+    public static boolean showTimes(Context context) {
+        return getBooleanSettings(context, "show_times", false);
     }
 }

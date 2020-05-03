@@ -45,8 +45,6 @@ public class DayAppWidgetProvider extends AppWidgetProvider {
             registerNewDayBroadcast(context);
         }
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("d M E", Locale.getDefault());
-
         for (int appWidgetId : appWidgetIds) {
             Intent intent = new Intent(context, DayAppWidgetService.class);
             intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
@@ -58,7 +56,7 @@ public class DayAppWidgetProvider extends AppWidgetProvider {
             RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.day_appwidget);
             rv.setRemoteAdapter(R.id.lv_day_appwidget, intent);
             rv.setEmptyView(R.id.lv_day_appwidget, R.id.empty_view);
-            rv.setTextViewText(R.id.tv_date, getDateText(currentTimeMillis, simpleDateFormat));
+            rv.setTextViewText(R.id.tv_date, getDateText(currentTimeMillis));
             rv.setInt(R.id.fl_root, "setBackgroundColor", AppWidgetDao.getAppWidgetBackgroundColor(appWidgetId, Color.TRANSPARENT, context));
 
             rv.setOnClickPendingIntent(R.id.imgBtn_restore, makePendingIntent(context, appWidgetId, ACTION_RESTORE));
@@ -66,8 +64,9 @@ public class DayAppWidgetProvider extends AppWidgetProvider {
             rv.setOnClickPendingIntent(R.id.imgBtn_tomorrow, makePendingIntent(context, appWidgetId, ACTION_TOMORROW));
 
             Intent listviewClickIntent = new Intent(context, MainActivity.class);
+            listviewClickIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
             listviewClickIntent.setAction(Intent.ACTION_VIEW);
-            PendingIntent listviewPendingIntent = PendingIntent.getBroadcast(context, 0, listviewClickIntent, 0);
+            PendingIntent listviewPendingIntent = PendingIntent.getActivity(context, appWidgetId, listviewClickIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             rv.setPendingIntentTemplate(R.id.lv_day_appwidget, listviewPendingIntent);
 
             appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.lv_day_appwidget);
@@ -75,9 +74,8 @@ public class DayAppWidgetProvider extends AppWidgetProvider {
         }
     }
 
-    private static String getDateText(long currentTimeMillis, SimpleDateFormat simpleDateFormat) {
-        String date = simpleDateFormat.format(currentTimeMillis);
-        return date;
+    private static String getDateText(long currentTimeMillis) {
+        return new SimpleDateFormat("E  d.M.", Locale.getDefault()).format(currentTimeMillis);
     }
 
     @Override
@@ -117,7 +115,7 @@ public class DayAppWidgetProvider extends AppWidgetProvider {
         views.setRemoteAdapter(R.id.lv_day_appwidget, intent);
         views.setEmptyView(R.id.lv_day_appwidget, R.id.empty_view);
         views.setInt(R.id.fl_root, "setBackgroundColor", backgroundColor);
-        views.setTextViewText(R.id.tv_date, getDateText(System.currentTimeMillis(), new SimpleDateFormat("d.M E", Locale.getDefault())));
+        views.setTextViewText(R.id.tv_date, getDateText(System.currentTimeMillis()));
         appWidgetManager.partiallyUpdateAppWidget(appWidgetId, views);
     }
 
@@ -132,13 +130,9 @@ public class DayAppWidgetProvider extends AppWidgetProvider {
         }
 
         if (ACTION_RESTORE.equals(action) || ACTION_YESTERDAY.equals(action) || ACTION_TOMORROW.equals(action)) {
-
-            //TODO: date format
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("d M E", Locale.getDefault());
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
             RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.day_appwidget);
-            int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager
-                    .INVALID_APPWIDGET_ID);
+            int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
 
             long currentTime;
             long newTime;
@@ -155,9 +149,12 @@ public class DayAppWidgetProvider extends AppWidgetProvider {
                 currentTime = AppWidgetDao.getAppWidgetCurrentTime(appWidgetId, System.currentTimeMillis(), context);
                 newTime = currentTime + ONE_DAY_MILLIS;
             }
+            if (("" + newTime).substring(0, 7).equalsIgnoreCase(("" + System.currentTimeMillis()).substring(0, 7))) {
+                rv.setViewVisibility(R.id.imgBtn_restore, View.INVISIBLE);
+            }
 
             AppWidgetDao.saveAppWidgetCurrentTime(appWidgetId, newTime, context);
-            rv.setTextViewText(R.id.tv_date, getDateText(newTime, simpleDateFormat));
+            rv.setTextViewText(R.id.tv_date, getDateText(newTime));
 
             appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.lv_day_appwidget);
             appWidgetManager.partiallyUpdateAppWidget(appWidgetId, rv);

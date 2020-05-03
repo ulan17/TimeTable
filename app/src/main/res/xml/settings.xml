@@ -17,6 +17,12 @@
         android:summary="@string/school_website_setting_summary"
         android:title="@string/school_website_setting" />
 
+    <Preference
+        android:icon="@drawable/ic_access_time_black_24dp"
+        android:key="time_settings"
+        android:summary="@string/time_settings_desc"
+        android:title="@string/time_settings" />
+
     <ListPreference
         android:defaultValue="switch"
         android:entries="@array/theme_array"

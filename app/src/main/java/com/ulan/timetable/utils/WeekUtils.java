@@ -31,6 +31,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Locale;
 
 public class WeekUtils {
     @Nullable
@@ -107,5 +108,67 @@ public class WeekUtils {
 
         Collections.sort(customWeeks, (week1, week2) -> week1.getSubject().compareToIgnoreCase(week2.getSubject()));
         return customWeeks;
+    }
+
+    public static int getMatchingScheduleBegin(String time, int[] startTime, int lessonDuration) {
+        int schedule = getDurationOfWeek(new Week("", "", "", startTime[0] + ":" + (startTime[1] - 1), time, 0), false, lessonDuration);
+        if (schedule == 0)
+            return 1;
+        else
+            return schedule;
+    }
+
+    public static int getMatchingScheduleEnd(String time, int[] startTime, int lessonDuration) {
+        int schedule = getDurationOfWeek(new Week("", "", "", startTime[0] + ":" + startTime[1], time, 0), false, lessonDuration);
+        if (schedule == 0)
+            return 1;
+        else
+            return schedule;
+    }
+
+    public static String getMatchingTimeBegin(int hour, int[] startTime, int lessonDuration) {
+        Calendar startOfSchool = Calendar.getInstance();
+        startOfSchool.set(Calendar.HOUR_OF_DAY, startTime[0]);
+        startOfSchool.set(Calendar.MINUTE, startTime[1]);
+        startOfSchool.setTimeInMillis(startOfSchool.getTimeInMillis() + (hour - 1) * lessonDuration * 60 * 1000);
+
+        return String.format(Locale.getDefault(), "%02d:%02d", startOfSchool.get(Calendar.HOUR_OF_DAY), startOfSchool.get(Calendar.MINUTE));
+    }
+
+    public static String getMatchingTimeEnd(int hour, int[] startTime, int lessonDuration) {
+        Calendar startOfSchool = Calendar.getInstance();
+        startOfSchool.set(Calendar.HOUR_OF_DAY, startTime[0]);
+        startOfSchool.set(Calendar.MINUTE, startTime[1]);
+        startOfSchool.setTimeInMillis(startOfSchool.getTimeInMillis() + (hour) * lessonDuration * 60 * 1000);
+
+        return String.format(Locale.getDefault(), "%02d:%02d", startOfSchool.get(Calendar.HOUR_OF_DAY), startOfSchool.get(Calendar.MINUTE));
+    }
+
+    public static int getDurationOfWeek(Week w, boolean countOnlyIfFitsLessonsTime, int lessonDuration) {
+        Calendar weekCalendarStart = Calendar.getInstance();
+        int startHour = Integer.parseInt(w.getFromTime().substring(0, w.getFromTime().indexOf(":")));
+        weekCalendarStart.set(Calendar.HOUR_OF_DAY, startHour);
+        int startMinute = Integer.parseInt(w.getFromTime().substring(w.getFromTime().indexOf(":") + 1));
+        weekCalendarStart.set(Calendar.MINUTE, startMinute);
+
+        Calendar weekCalendarEnd = Calendar.getInstance();
+        int endHour = Integer.parseInt(w.getToTime().substring(0, w.getToTime().indexOf(":")));
+        weekCalendarEnd.set(Calendar.HOUR_OF_DAY, endHour);
+        int endMinute = Integer.parseInt(w.getToTime().substring(w.getToTime().indexOf(":") + 1));
+        weekCalendarEnd.set(Calendar.MINUTE, endMinute);
+
+        long differencesInMillis = weekCalendarEnd.getTimeInMillis() - weekCalendarStart.getTimeInMillis();
+        int inMinutes = (int) (differencesInMillis / 1000 / 60);
+
+        if (inMinutes < lessonDuration && countOnlyIfFitsLessonsTime)
+            return 0;
+
+        int multiplier;
+        if (inMinutes % lessonDuration > 0 && !countOnlyIfFitsLessonsTime) {
+            multiplier = inMinutes / lessonDuration + 1;
+        } else
+            multiplier = inMinutes / lessonDuration;
+
+        return multiplier;
     }
 }
