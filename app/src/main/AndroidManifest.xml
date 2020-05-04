@@ -106,9 +106,7 @@
 
         <activity
             android:name=".appwidget.AppWidgetConfigureActivity"
-            android:label="@string/configure_widget_controls"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Material.Light">
+            android:label="@string/configure_widget_controls">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>

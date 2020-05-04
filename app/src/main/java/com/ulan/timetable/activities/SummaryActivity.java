@@ -94,11 +94,6 @@ public class SummaryActivity extends AppCompatActivity {
         weeks.add(dbHelper.getWeek(WeekdayFragment.KEY_SATURDAY_FRAGMENT));
         weeks.add(dbHelper.getWeek(WeekdayFragment.KEY_SUNDAY_FRAGMENT));
 
-        List<List<Integer>> durations = new ArrayList<>();
-        for (int i = 0; i < 7; i++) {
-            durations.add(new ArrayList<>());
-        }
-
         List<List<String>> durationStrings = new ArrayList<>();
         for (int i = 0; i < 7; i++) {
             durationStrings.add(new ArrayList<>());
@@ -106,24 +101,10 @@ public class SummaryActivity extends AppCompatActivity {
 
         for (int j = 0; j < weeks.size(); j++) {
             for (int i = 0; i < weeks.get(j).size(); i++) {
-                int ago = 0;
-                for (int k = i - 1; k >= 0; k--) {
-                    ago += durations.get(j).get(k);
-                }
-
-                int difference_to_week_before;
-                Week newW = new Week();
-                if (i != 0) {
-                    newW.setFromTime(weeks.get(j).get(i - 1).getToTime());
-                    newW.setToTime(weeks.get(j).get(i).getFromTime());
-                } else {
-                    newW.setFromTime(schoolStart);
-                    newW.setToTime(weeks.get(j).get(i).getFromTime());
-                }
-                difference_to_week_before = WeekUtils.getDurationOfWeek(newW, true, lessonDuration);
-
-                durations.get(j).add(i, getDurationOfWeek(weeks.get(j).get(i)) + difference_to_week_before);
-                durationStrings.get(j).add(i, generateLessonsString(getDurationOfWeek(weeks.get(j).get(i)), ago + difference_to_week_before));
+                Week w = weeks.get(j).get(i);
+                int start = WeekUtils.getMatchingScheduleBegin(w.getFromTime(), PreferenceUtil.getStartTime(this), PreferenceUtil.getPeriodLength(this));
+                int end = WeekUtils.getMatchingScheduleEnd(w.getToTime(), PreferenceUtil.getStartTime(this), PreferenceUtil.getPeriodLength(this));
+                durationStrings.get(j).add(i, generateLessonsString(end - start + 1, start - 1));
             }
         }
 

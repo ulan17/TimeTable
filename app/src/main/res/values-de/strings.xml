@@ -244,5 +244,5 @@
     <string name="time_settings">Zeiteinstellungen</string>
     <string name="time_settings_desc">Einstellungen über deinen Schulstart und deine Stundenlänge</string>
     <string name="ok">Ok</string>
-    <string name="first_start_setup">Einige Dinge müssen zu Beginn eingestellt werden.</string>
+    <string name="first_start_setup">Es müssen ein paar Dinge zu Beginn eingestellt werden.</string>
 </resources>

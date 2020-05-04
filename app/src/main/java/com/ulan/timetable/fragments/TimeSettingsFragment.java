@@ -42,14 +42,14 @@ public class TimeSettingsFragment extends PreferenceFragmentCompat {
             numberPicker.setMaxValue(180);
             numberPicker.setMinValue(1);
             numberPicker.setValue(PreferenceUtil.getPeriodLength(getContext()));
-            numberPicker.setOnValueChangedListener((NumberPicker np, int i, int i1) -> {
-                int value = np.getValue();
-                PreferenceUtil.setPeriodLength(getContext(), value);
-                finalMyPref1.setSummary(value + " " + getString(R.string.minutes));
-            });
             new MaterialDialog.Builder(getContext())
                     .customView(numberPicker, false)
                     .positiveText(R.string.select)
+                    .onPositive((d, w) -> {
+                        int value = numberPicker.getValue();
+                        PreferenceUtil.setPeriodLength(getContext(), value);
+                        finalMyPref1.setSummary(value + " " + getString(R.string.minutes));
+                    })
                     .show();
             return true;
         });

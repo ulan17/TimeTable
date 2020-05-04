@@ -74,14 +74,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .onPositive((v, w) -> startActivity(new Intent(this, TimeSettingsActivity.class)))
                     .show();
         }
+
+        NotificationUtil.sendNotificationCurrentLesson(this, false);
+        initAll();
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        NotificationUtil.sendNotificationCurrentLesson(this, false);
         PreferenceUtil.setDoNotDisturb(this, PreferenceUtil.doNotDisturbDontAskAgain(this));
-        initAll();
     }
 
     private void initAll() {

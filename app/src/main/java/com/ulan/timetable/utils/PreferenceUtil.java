@@ -38,6 +38,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StyleRes;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.preference.PreferenceManager;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -115,6 +116,13 @@ public class PreferenceUtil {
             // Check if the notification policy access has been granted for the app.
             if (!notificationManager.isNotificationPolicyAccessGranted() && !dontAskAgain) {
                 Drawable drawable = ContextCompat.getDrawable(activity, R.drawable.ic_do_not_disturb_on_black_24dp);
+                try {
+                    Drawable wrappedDrawable = DrawableCompat.wrap(drawable);
+                    DrawableCompat.setTint(wrappedDrawable, PreferenceUtil.getTextColorPrimary(activity));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
                 new MaterialDialog.Builder(activity)
                         .title(R.string.permission_required)
                         .content(R.string.do_not_disturb_permission_desc)
