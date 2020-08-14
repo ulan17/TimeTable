@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Felix Hollederer
+  ~     This file is part of GymWenApp.
+  ~
+  ~     GymWenApp is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     GymWenApp is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with GymWenApp.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <EditTextPreference
+        android:key="courses"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:summary="@string/set_desc_courses"
+        android:title="@string/set_courses_title"
+        app:iconSpaceReserved="false" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="hours"
+        android:summary="@string/set_desc_hours"
+        android:title="@string/set_hours"
+        app:iconSpaceReserved="false" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="summarize"
+        android:summary="@string/set_desc_summarize"
+        android:title="@string/set_summarize"
+        app:iconSpaceReserved="false" />
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="summarize_old"
+        android:title="@string/also_at_old_design"
+        app:iconSpaceReserved="true"
+        app:isPreferenceVisible="false" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="week_dates"
+        android:summary="@string/set_desc_week_dates"
+        android:title="@string/set_show_weekdates"
+        app:iconSpaceReserved="false" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="show_full_names"
+        android:summary="@string/set_desc_show_full_names"
+        android:title="@string/set_full_names"
+        app:iconSpaceReserved="false" />
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="show_full_names_specific"
+        android:title="@string/set_full_names_specific"
+        app:iconSpaceReserved="true" />
+    <Preference
+        android:summary="@string/set_desc_credentials_fragment"
+        android:title="@string/set_substitution_signin"
+        app:fragment="com.asdoi.gymwen.ui.settingsFragments.SettingsFragmentSignIn"
+        app:iconSpaceReserved="false" />
+</PreferenceScreen>

@@ -1,0 +1,27 @@
+<!--
+  ~ Copyright (c) 2020 Felix Hollederer
+  ~     This file is part of GymWenApp.
+  ~
+  ~     GymWenApp is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     GymWenApp is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with GymWenApp.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="512dp"
+    android:height="512dp"
+    android:viewportWidth="512"
+    android:viewportHeight="512">
+    <path
+        android:fillColor="@color/notification_icon_nothing_background"
+        android:pathData="m256,0c-141.164,0 -256,114.836 -256,256s114.836,256 256,256 256,-114.836 256,-256 -114.836,-256 -256,-256zM385.75,201.75 L247.082,340.414c-4.16,4.16 -9.621,6.254 -15.082,6.254s-10.922,-2.094 -15.082,-6.254l-69.332,-69.332c-8.344,-8.34 -8.344,-21.824 0,-30.164 8.34,-8.344 21.82,-8.344 30.164,0l54.25,54.25 123.586,-123.582c8.34,-8.344 21.82,-8.344 30.164,0 8.34,8.34 8.34,21.82 0,30.164zM385.75,201.75" />
+</vector>

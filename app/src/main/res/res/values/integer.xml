@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Felix Hollederer
+  ~     This file is part of GymWenApp.
+  ~
+  ~     GymWenApp is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     GymWenApp is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with GymWenApp.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+    <!--    substitutionplan Specific entry-->
+    <integer name="substitution_specific_entry_hour">3</integer>
+    <integer name="substitution_specific_entry_subject">3</integer>
+    <integer name="substitution_specific_entry_teacher">2</integer>
+    <integer name="substitution_specific_entry_room">3</integer>
+    <integer name="substitution_specific_entry_other">3</integer>
+    <integer name="substitution_specific_entry_course">1</integer>
+
+    <integer name="substitution_specific_entry_hour_long">4</integer>
+    <integer name="substitution_specific_entry_subject_long">3</integer>
+    <integer name="substitution_specific_entry_hour_summary">4</integer>
+
+    <!--    substitutionplan All entry-->
+    <integer name="substitution_all_hour">1</integer>
+    <integer name="substitution_all_subject">2</integer>
+    <integer name="substitution_all_teacher">2</integer>
+    <integer name="substitution_all_room">2</integer>
+    <integer name="substitution_all_other">4</integer>
+    <integer name="substitution_all_course">2</integer>
+
+    <integer name="substitution_all_hour_long">3</integer>
+    <integer name="substitution_all_hour_summary">2</integer>
+
+
+    <!-- Notification -->
+    <integer name="notification_bitmap_size">256</integer>
+    <integer name="notification_max_text_size">230</integer>
+    <integer name="notification_min_text_size">80</integer>
+    <integer name="notification_text_size_substitution_factor">30</integer>
+    <integer name="notification_text_size_factor">30</integer>
+
+</resources>

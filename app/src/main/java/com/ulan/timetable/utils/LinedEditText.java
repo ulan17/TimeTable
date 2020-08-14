@@ -3,12 +3,11 @@ package com.ulan.timetable.utils;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.widget.EditText;
-
-import com.ulan.timetable.R;
 
 /**
  * Created by Ulan on 28.09.2018.
@@ -25,7 +24,7 @@ public class LinedEditText extends EditText {
         mRect = new Rect();
         mPaint = new Paint();
         mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
-        mPaint.setColor(R.color.colorPrimaryDark);
+        mPaint.setColor(Color.parseColor("#008577"));
     }
 
     @Override

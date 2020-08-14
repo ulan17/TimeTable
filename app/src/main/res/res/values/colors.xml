@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Felix Hollederer
+  ~     This file is part of GymWenApp.
+  ~
+  ~     GymWenApp is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     GymWenApp is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with GymWenApp.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <!--    Website Activity-->
+    <color name="web_background_homepages">#80f2f2f2</color>
+    <color name="web_background_homepages_dark">#803A3636</color>
+
+    <!-- Intro -->
+    <color name="intro_background_one">@color/colorPrimary</color>
+    <color name="intro_background_two">#FFD32F2F</color>
+    <!--    <color name="intro_background_three">#0A72A0</color>-->
+    <color name="intro_background_three">#FF2196F3</color>
+    <color name="intro_background_four">#D5A206</color>
+    <!--    <color name="intro_background_four">#FFFFB300</color>-->
+    <color name="intro_background_five">@color/colorPrimary</color>
+
+    <color name="grey">#212121</color>
+
+    <!-- Widget -->
+    <color name="widget_white">#D9FFFFFF</color>
+    <color name="widget_black">#D9000000</color>
+    <color name="colorWidgetForeground">#fff</color>
+    <color name="colorWidgetBackground">#7f000000</color>
+
+
+    <!-- Substitution New Design -->
+    <color name="past">#3F51B5</color>
+    <color name="today">#E31E13</color>
+    <color name="tomorrow">#FFC107</color>
+    <color name="future">#3AC540</color>
+    <color name="nothing">#3AC540</color>
+
+    <color name="past_text">@android:color/white</color>
+    <color name="today_text">@android:color/white</color>
+    <color name="tomorrow_text">@android:color/black</color>
+    <color name="future_text">@android:color/black</color>
+    <color name="nothing_text">@android:color/black</color>
+
+    <color name="nothing_background_light">#99FF0000</color>
+
+    <!-- Notification -->
+    <color name="notification_icon_text_omitted">@android:color/black</color>
+    <color name="notification_icon_background_omitted">#FF0000</color>
+    <!--    <color name="notification_icon_background_omitted">#BAFF0000</color>-->
+    <!--    <color name="notification_icon_text_substitution">#525252</color>-->
+    <color name="notification_icon_text_substitution">@android:color/black</color>
+    <color name="notification_icon_background_substitution">#fbdd0d</color>
+    <!--  FFC93E fbdd0d  -->
+    <color name="notification_icon_nothing_background">#3AC540</color>
+
+    <color name="white">#FFFFFF</color>
+</resources>

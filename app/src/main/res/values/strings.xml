@@ -2,8 +2,6 @@
     <string name="app_name">TimeTable</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
     <!-- Fragments strings -->
@@ -14,21 +12,17 @@
     <string name="friday">Friday</string>
     <string name="saturday">Saturday</string>
     <string name="sunday">Sunday</string>
-    <string name="select_snackbar">Please, select one item.</string>
     <string name="selected">Selected</string>
 
     <!-- Main Activity strings -->
-    <string name="timetable">TimeTable</string>
-    <string name="ulan_nurymov_gmail_com">ulan.nurymov@gmail.com</string>
     <string name="seven_days_of_the_week">7 Days of the Week</string>
     <string name="subject">Subject</string>
     <string name="field_error">field can not be empty!</string>
     <string name="time_error">Time field can not be empty!</string>
-    <string name="week">Week</string>
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
     <string name="school_website">School website</string>
-    <string name="school_website_snackbar">Please, set URL of your school website in settings.</string>
+    <string name="school_website_snackbar">Please set URL of your school website in settings.</string>
 
     <string name="add_subject">Add subject</string>
     <string name="edit_subject">Edit subject</string>
@@ -47,23 +41,18 @@
     <string name="choose_time">Choose time</string>
     <string name="choose_date">Choose date</string>
     <string name="choose_color">Choose color</string>
+    <string name="select">Select</string>
 
     <!-- Homeworks Activity strings -->
-    <string name="title_activity_homeworks">HomeworksActivity</string>
     <string name="homeworks">Homeworks</string>
-    <string name="select_date">Select date</string>
     <string name="deadline_dialog">Deadline:</string>
-    <string name="deadline">Deadline</string>
     <string name="description_dialog">Description:</string>
-    <string name="desctiption">Desctiption</string>
     <string name="date_error">Date field can not be empty!</string>
     <string name="edit_homework">Edit homework</string>
     <string name="add_homework">Add homework</string>
-    <string name="deadline_snackbar">"Deadline field can not be empty!</string>
     <string name="date">Date</string>
 
     <!-- Notes Activity strings -->
-    <string name="notes">Notes</string>
     <string name="title_dialog">Title:</string>
     <string name="add_note">Add note</string>
     <string name="edit_note">Edit note</string>
@@ -85,7 +74,6 @@
     <string name="email">Email</string>
 
     <!-- Exams Activity strings -->
-    <string name="exams">Exams</string>
     <string name="add_exam">Add exam</string>
     <string name="date_dialog">Date:</string>
     <string name="time_dialog">Time:</string>
@@ -95,8 +83,140 @@
     <string name="school_website_setting">Change school website</string>
     <string name="school_website_setting_summary">Change URL of your school website</string>
 
-    <!-- Notification -->
-    <string name="notification_title">Today\'s lessons</string>
-    <string name="do_not_have_lessons">You do not have lessons!</string>
+    <string name="set_notification_isOn">Show notification</string>
+    <string name="set_notification_showAlways">Show permanently</string>
 
+    <string name="notif_dismiss">Hide</string>
+
+    <string name="sheriff_permission_rational">A few permissions are required for this function. To ensure comprehensive functionality, please grant them.</string>
+    <string name="permission_required">Authorization is required!</string>
+    <string name="permission_required_description">These authorization (s) are required to ensure comprehensive functionality</string>
+    <string name="permission_ok_button">Grant\u2026</string>
+    <string name="permission_cancel_button">Cancel</string>
+
+    <string name="set_notification_alarm">On fixed time</string>
+    <string name="no">No</string>
+    <string name="profiles_delete_submit_heading">Are you sure?</string>
+    <string name="yes">Yes</string>
+    <string name="dont_show_again">Don\'t show again</string>
+    <string name="with_teacher">with</string>
+    <string name="share_msg_in_room">in room</string>
+    <string name="version">Version</string>
+    <string name="menu_backup">Backup</string>
+
+    <string name="set_desc_alwaysNotification">The notification can only be hidden manually</string>
+    <string name="set_desc_alarm">Show the notification at a specific time</string>
+
+
+    <string name="description">Description</string>
+
+    <string name="activity_title">Timetable</string>
+    <string name="select_start_time">Start</string>
+    <string name="select_end_time">End</string>
+
+    <string name="homeworks_activity_title">Homework</string>
+    <string name="notes_activity_title">Notes</string>
+    <string name="exams_activity_title">Exams</string>
+    <string name="notification_summary_title">Today\'s lessons:</string>
+    <string name="notification_next_week_title">Next lesson</string>
+    <string name="nav_drawer_description">Forked from ulan17</string>
+    <string name="time_from">from</string>
+
+    <string name="channel">Timetable</string>
+    <string name="channel_desc">A notification about your lessons</string>
+    <string name="do_not_disturb_permission_desc">In order to automatically switch to do not disturb mode, the app requires the appropriate authorization</string>
+    <string name="do_not_disturb_setting">Automatic Do not disturb</string>
+    <string name="do_not_disturb_settings_desc">Automatically switch to do not disturb mode during subjects and then switch it off again</string>
+    <string name="do_not_disturb_turn_off">Also turning off</string>
+    <string name="backup_successful">Backup has been saved to %1$s</string>
+    <string name="backup_failed">Backup failed</string>
+    <string name="import_successful">Restore succeeded</string>
+    <string name="import_failed">Restore failed</string>
+    <string name="menu_restore">Restore</string>
+    <string name="no_backup_found_in_downloads">No Backup found in %1$s</string>
+    <string name="Documents">Documents</string>
+    <string name="Downloads">Downloads</string>
+    <string name="colorPickerDialog_preset">Presets</string>
+    <string name="delete_content">Should %1$s be deleted?</string>
+    <string name="delete_week">the subject %1$s</string>
+    <string name="delete_note">the note %1$s</string>
+    <string name="delete_exam">the exam %1$s</string>
+    <string name="remove_all_subjects">Delete everything</string>
+    <string name="remove_all_subjects_content">Should all data in the timetable be irretrievably deleted?
+        \nIt is advisable to create a backup beforehand!</string>
+    <string name="remove_all_successful">Successfully deleted everything</string>
+    <string name="remove_all_failed">An error occurred</string>
+
+    <string name="no_email_app">No e-mail app installed</string>
+    <string name="no_navigation_app">No navigation app installed</string>
+    <string name="no_calendar_app">No calendar app installed</string>
+    <string name="add_to_calendar">Should this event be added to your calendar?</string>
+
+    <string name="set_choose_theme">Choose theme</string>
+    <string name="set_theme_light">Light</string>
+    <string name="set_theme_dark">Dark</string>
+    <string name="set_theme_black">Black</string>
+    <string name="set_theme_auto">Automatic</string>
+
+    <string name="about_libs_title">Open-Source Libraries</string>
+
+    <string name="summary_activity_title">Summary</string>
+    <string name="change_summary_library">Change presentation</string>
+    <string name="start_of_school">Start of school</string>
+    <string name="length_of_period">Length of the lesson</string>
+    <string name="minutes">minutes</string>
+    <string name="lesson">lesson</string>
+    <string name="show_times_instead_of_lessons">Show times of lessons</string>
+    <string name="show_times_instead_of_lessons_desc">Show the times instead of the lessons number, e.g. 8:00 instead of 1</string>
+
+    <string-array name="timetable_header">
+        <item>Mon</item>
+        <item>Tue</item>
+        <item>Wed</item>
+        <item>Thu</item>
+        <item>Fri</item>
+        <item>Sat</item>
+        <item>Sun</item>
+    </string-array>
+
+    <string-array name="preselected_subjects">
+        <item>Art</item>
+        <item>Biology</item>
+        <item>Chemistry</item>
+        <item>English</item>
+        <item>French</item>
+        <item>Geography</item>
+        <item>German</item>
+        <item>History</item>
+        <item>Math</item>
+        <item>Music</item>
+        <item>Physics</item>
+        <item>Politics</item>
+        <item>Religion</item>
+        <item>Spanish</item>
+        <item>Sport</item>
+    </string-array>
+
+    <string name="pick_a_subject">Pick a subject</string>
+    <string name="new_subject">New subject</string>
+
+
+    <string name="app_widget_configure_intensity">Background color intensity（%d%%）</string>
+    <string name="app_widget_configure_time_style">Time style（%s）</string>
+    <string name="configure_widget_controls">Configure widget controls</string>
+    <string name="background_color">Background Color</string>
+    <string name="black">Black</string>
+    <string name="white">White</string>
+    <string name="background_color_intensity_15">Background color intensity（15%）</string>
+    <string name="time_style_first_session_of_the_morning">Time style (first session of the morning)</string>
+    <string name="style_1">Style 1</string>
+    <string name="style_2">Style 2</string>
+    <string name="style_3">Style 3</string>
+    <string name="no_class">No schedule</string>
+    <string name="confirm">Confirm</string>
+
+    <string name="time_settings">Time settings</string>
+    <string name="time_settings_desc">Settings about the start of your school and the length of your lessons.</string>
+    <string name="ok">Ok</string>
+    <string name="first_start_setup">Some things have to be set at the beginning.</string>
 </resources>

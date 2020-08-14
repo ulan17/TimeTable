@@ -17,7 +17,7 @@
             android:layout_weight=".3"
             android:text="@string/subject_dialog"
             android:textAlignment="textStart"
-            android:textColor="@android:color/black"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="14sp" />
 
         <EditText
@@ -27,7 +27,7 @@
             android:layout_weight=".7"
             android:imeOptions="actionDone"
             android:singleLine="true"
-            android:textColor="@android:color/black" />
+            android:textColor="?android:attr/textColorPrimary" />
     </LinearLayout>
 
     <LinearLayout
@@ -42,7 +42,7 @@
             android:layout_weight=".3"
             android:text="@string/teacher_dialog"
             android:textAlignment="textStart"
-            android:textColor="@android:color/black"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="14sp" />
 
         <EditText
@@ -52,7 +52,7 @@
             android:layout_weight=".7"
             android:imeOptions="actionDone"
             android:singleLine="true"
-            android:textColor="@android:color/black" />
+            android:textColor="?android:attr/textColorPrimary" />
     </LinearLayout>
 
     <LinearLayout
@@ -67,7 +67,7 @@
             android:layout_weight=".3"
             android:text="@string/room_dialog"
             android:textAlignment="textStart"
-            android:textColor="@android:color/black"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="14sp" />
 
         <EditText
@@ -76,9 +76,9 @@
             android:layout_height="wrap_content"
             android:layout_weight=".7"
             android:imeOptions="actionDone"
-            android:inputType="number"
+            android:inputType="textVisiblePassword"
             android:singleLine="true"
-            android:textColor="@android:color/black" />
+            android:textColor="?android:attr/textColorPrimary" />
     </LinearLayout>
 
     <LinearLayout
@@ -93,17 +93,32 @@
             android:layout_weight=".3"
             android:text="@string/time_from_dialog"
             android:textAlignment="textStart"
-            android:textColor="@android:color/black"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="14sp" />
 
         <TextView
             android:id="@+id/from_time"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight=".3"
-            android:text="@string/select_time"
+            android:layout_weight=".45"
+            android:background="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:text="@string/select_start_time"
             android:textAllCaps="true"
-            android:textColor="@android:color/black"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/from_hour"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".25"
+            android:background="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:text="@string/lesson"
+            android:textAllCaps="true"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -120,17 +135,32 @@
             android:layout_weight=".3"
             android:text="@string/time_to_dialog"
             android:textAlignment="textStart"
-            android:textColor="@android:color/black"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="14sp" />
 
         <TextView
             android:id="@+id/to_time"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight=".3"
-            android:text="@string/select_time"
+            android:layout_weight=".45"
+            android:background="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:text="@string/select_end_time"
             android:textAllCaps="true"
-            android:textColor="@android:color/black"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/to_hour"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".25"
+            android:background="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:text="@string/lesson"
+            android:textAllCaps="true"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -145,10 +175,10 @@
             android:id="@+id/select_color"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="5dp"
+            android:layout_marginEnd="50dp"
             android:layout_marginBottom="5dp"
-            android:layout_marginRight="50dp"
-            android:layout_marginLeft="50dp"
             android:background="@color/white"
             android:text="@string/select_color"
             android:textAlignment="center"
@@ -161,21 +191,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <Button
-            android:text="@string/cancel"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/cancel"
-            style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog" />
 
         <Button
-            android:text="@string/save"
-            android:layout_weight="1"
+            android:id="@+id/cancel"
+            style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/cancel" />
+
+        <Button
             android:id="@+id/save"
-            style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog" />
+            style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/save" />
 
     </LinearLayout>
 

@@ -1,10 +1,11 @@
 package com.ulan.timetable.adapters;
 
-import android.app.Activity;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.PopupMenu;
+import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.util.SparseBooleanArray;
+import android.util.TypedValue;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,10 +15,21 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.ulan.timetable.model.Exam;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.PopupMenu;
+import androidx.cardview.widget.CardView;
+import androidx.core.widget.ImageViewCompat;
+
 import com.ulan.timetable.R;
+import com.ulan.timetable.activities.TeachersActivity;
+import com.ulan.timetable.model.Exam;
 import com.ulan.timetable.utils.AlertDialogsHelper;
+import com.ulan.timetable.utils.ColorPalette;
 import com.ulan.timetable.utils.DbHelper;
+import com.ulan.timetable.utils.PreferenceUtil;
+import com.ulan.timetable.utils.WeekUtils;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -27,11 +39,12 @@ import java.util.Objects;
  */
 public class ExamsAdapter extends ArrayAdapter<Exam> {
 
-    private Activity mActivity;
-    private int mResource;
-    private ArrayList<Exam> examlist;
+    @NonNull
+    private final AppCompatActivity mActivity;
+    @NonNull
+    private final ArrayList<Exam> examlist;
     private Exam exam;
-    private ListView mListView;
+    private final ListView mListView;
 
     private static class ViewHolder {
         TextView subject;
@@ -43,17 +56,16 @@ public class ExamsAdapter extends ArrayAdapter<Exam> {
         ImageView popup;
     }
 
-    public ExamsAdapter(Activity activity, ListView listView, int resource, ArrayList<Exam> objects) {
+    public ExamsAdapter(@NonNull AppCompatActivity activity, ListView listView, int resource, @NonNull ArrayList<Exam> objects) {
         super(activity, resource, objects);
         mActivity = activity;
         mListView = listView;
-        mResource = resource;
         examlist = objects;
     }
 
     @NonNull
     @Override
-    public View getView(final int position, View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         String subject = Objects.requireNonNull(getItem(position)).getSubject();
         String teacher = Objects.requireNonNull(getItem(position)).getTeacher();
         String room = Objects.requireNonNull(getItem(position)).getRoom();
@@ -61,12 +73,12 @@ public class ExamsAdapter extends ArrayAdapter<Exam> {
         String time = Objects.requireNonNull(getItem(position)).getTime();
         int color = Objects.requireNonNull(getItem(position)).getColor();
 
-        exam = new Exam(subject, teacher, date, time, room, color);
+        exam = new Exam(subject, teacher, time, date, room, color);
         final ViewHolder holder;
 
         if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(mActivity);
-            convertView = inflater.inflate(mResource, parent, false);
+            convertView = inflater.inflate(R.layout.listview_exams_adapter, parent, false);
             holder = new ViewHolder();
             holder.subject = convertView.findViewById(R.id.subjectexams);
             holder.teacher = convertView.findViewById(R.id.teacherexams);
@@ -79,40 +91,66 @@ public class ExamsAdapter extends ArrayAdapter<Exam> {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+
+        //Setup colors based on Background
+        int textColor = ColorPalette.pickTextColorBasedOnBgColorSimple(color, Color.WHITE, Color.BLACK);
+        holder.subject.setTextColor(textColor);
+        holder.teacher.setTextColor(textColor);
+        holder.room.setTextColor(textColor);
+        holder.date.setTextColor(textColor);
+        holder.time.setTextColor(textColor);
+        ImageViewCompat.setImageTintList(convertView.findViewById(R.id.roomimage), ColorStateList.valueOf(textColor));
+        ImageViewCompat.setImageTintList(convertView.findViewById(R.id.teacherimage), ColorStateList.valueOf(textColor));
+        ImageViewCompat.setImageTintList(convertView.findViewById(R.id.teacherimage), ColorStateList.valueOf(textColor));
+        ImageViewCompat.setImageTintList(convertView.findViewById(R.id.timeimage), ColorStateList.valueOf(textColor));
+        ImageViewCompat.setImageTintList(convertView.findViewById(R.id.popupbtn), ColorStateList.valueOf(textColor));
+        convertView.findViewById(R.id.line).setBackgroundColor(textColor);
+
+
         holder.subject.setText(exam.getSubject());
         holder.teacher.setText(exam.getTeacher());
-        holder.room.setText(exam.getRoom());
-        holder.date.setText(exam.getDate());
-        holder.time.setText(exam.getTime());
-        holder.cardView.setCardBackgroundColor(exam.getColor());
-        holder.popup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final PopupMenu popup = new PopupMenu(mActivity, holder.popup);
-                final DbHelper db = new DbHelper(mActivity);
-                popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.delete_popup:
-                                db.deleteExamById(getItem(position));
-                                db.updateExam(getItem(position));
-                                examlist.remove(position);
-                                notifyDataSetChanged();
-                                return true;
+        holder.teacher.setOnClickListener((View v) -> {
+            mActivity.startActivity(new Intent(mActivity, TeachersActivity.class));
+        });
+        TypedValue outValue = new TypedValue();
+        getContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground, outValue, true);
+        holder.teacher.setBackgroundResource(outValue.resourceId);
 
-                            case R.id.edit_popup:
-                                final View alertLayout = mActivity.getLayoutInflater().inflate(R.layout.dialog_add_exam, null);
-                                AlertDialogsHelper.getEditExamDialog(mActivity, alertLayout, examlist, mListView, position);
-                                notifyDataSetChanged();
-                                return true;
-                            default:
-                                return onMenuItemClick(item);
-                        }
+        holder.room.setText(exam.getRoom());
+
+        holder.date.setText(exam.getDate());
+        if (PreferenceUtil.showTimes(getContext()))
+            holder.time.setText(exam.getTime());
+        else if (!exam.getTime().trim().isEmpty())
+            holder.time.setText("" + WeekUtils.getMatchingScheduleBegin(exam.getTime(), PreferenceUtil.getStartTime(getContext()), PreferenceUtil.getPeriodLength(getContext())));
+
+        holder.cardView.setCardBackgroundColor(exam.getColor());
+        holder.popup.setOnClickListener(v -> {
+            ContextThemeWrapper theme = new ContextThemeWrapper(mActivity, PreferenceUtil.isDark(getContext()) ? R.style.Widget_AppCompat_PopupMenu : R.style.Widget_AppCompat_Light_PopupMenu);
+            final PopupMenu popup = new PopupMenu(theme, holder.popup);
+            final DbHelper db = new DbHelper(mActivity);
+            popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
+            popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                public boolean onMenuItemClick(@NonNull MenuItem item) {
+                    int itemId = item.getItemId();
+                    if (itemId == R.id.delete_popup) {
+                        AlertDialogsHelper.getDeleteDialog(getContext(), () -> {
+                            db.deleteExamById(getItem(position));
+                            db.updateExam(getItem(position));
+                            examlist.remove(position);
+                            notifyDataSetChanged();
+                        }, getContext().getString(R.string.delete_exam, exam.getSubject()));
+                        return true;
+                    } else if (itemId == R.id.edit_popup) {
+                        final View alertLayout = mActivity.getLayoutInflater().inflate(R.layout.dialog_add_exam, null);
+                        AlertDialogsHelper.getEditExamDialog(mActivity, alertLayout, examlist, mListView, position);
+                        notifyDataSetChanged();
+                        return true;
                     }
-                });
-                popup.show();
-            }
+                    return onMenuItemClick(item);
+                }
+            });
+            popup.show();
         });
 
         hidePopUpMenu(holder);
@@ -125,6 +163,7 @@ public class ExamsAdapter extends ArrayAdapter<Exam> {
         return super.getItemId(position);
     }
 
+    @NonNull
     public ArrayList<Exam> getExamList() {
         return examlist;
     }
@@ -133,7 +172,7 @@ public class ExamsAdapter extends ArrayAdapter<Exam> {
         return exam;
     }
 
-    private void hidePopUpMenu(ViewHolder holder) {
+    private void hidePopUpMenu(@NonNull ViewHolder holder) {
         SparseBooleanArray checkedItems = mListView.getCheckedItemPositions();
         if (checkedItems.size() > 0) {
             for (int i = 0; i < checkedItems.size(); i++) {

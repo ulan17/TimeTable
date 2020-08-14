@@ -1,0 +1,43 @@
+<!--
+  ~ Copyright (c) 2020 Felix Hollederer
+  ~     This file is part of GymWenApp.
+  ~
+  ~     GymWenApp is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     GymWenApp is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with GymWenApp.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="500.24976dp"
+    android:height="506.79642dp"
+    android:viewportWidth="500.2505"
+    android:viewportHeight="506.79642">
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M137.723,354.93 L2.93,489.726c-3.906,3.906 -3.906,10.238 0,14.145 1.953,1.949 4.512,2.926 7.07,2.926 2.559,0 5.117,-0.977 7.07,-2.93L151.867,369.074c3.902,-3.906 3.902,-10.238 0,-14.145 -3.906,-3.902 -10.238,-3.902 -14.145,0zM2.93,489.726" />
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M444.015,56.235C407.751,19.971 359.534,-0 308.25,-0c-51.284,0 -99.501,19.972 -135.765,56.235 -36.264,36.264 -56.235,84.481 -56.235,135.765 0,51.284 19.972,99.501 56.235,135.765 36.264,36.264 84.481,56.235 135.765,56.235 35.109,0 69.463,-9.568 99.346,-27.671 7.087,-4.292 9.352,-13.515 5.06,-20.599 -4.292,-7.087 -13.518,-9.352 -20.602,-5.06 -25.195,15.261 -54.176,23.329 -83.804,23.329 -84.27,0 -153.706,-64.679 -161.3,-147h95.482c6.841,30.023 33.753,52.5 65.818,52.5 32.065,0 58.978,-22.477 65.818,-52.5h95.479c-2.496,26.622 -11.622,52.263 -26.766,74.915 -4.605,6.885 -2.754,16.201 4.134,20.807 6.885,4.603 16.201,2.751 20.807,-4.134 21.278,-31.831 32.528,-68.69 32.528,-106.588 0,-51.284 -19.972,-99.501 -56.235,-135.765zM308.25,30c84.27,0 153.706,64.679 161.3,147h-95.482c-6.841,-30.023 -33.753,-52.5 -65.818,-52.5 -32.065,0 -58.978,22.477 -65.818,52.5L146.95,177C154.544,94.678 223.981,30 308.25,30ZM308.25,229.5c-20.678,0 -37.5,-16.822 -37.5,-37.5 0,-20.678 16.822,-37.5 37.5,-37.5 20.678,0 37.5,16.822 37.5,37.5 0,20.678 -16.822,37.5 -37.5,37.5zM308.25,229.5"
+        android:strokeWidth="0.75000107" />
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="m254.38,358.371 l-82.961,82.333c-3.906,3.906 -3.906,10.238 0,14.145 1.953,1.949 4.512,2.926 7.07,2.926 2.559,0 5.117,-0.977 7.07,-2.93l82.965,-82.329c3.902,-3.906 3.902,-10.238 0,-14.145 -3.906,-3.902 -10.238,-3.902 -14.145,0z"
+        android:strokeWidth="1" />
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M118.597,238.114 L7.824,349.523c-3.906,3.906 -3.906,10.238 0,14.145 1.953,1.949 4.512,2.926 7.07,2.926 2.559,0 5.117,-0.977 7.07,-2.93L132.742,252.259c3.902,-3.906 3.902,-10.238 0,-14.145 -3.906,-3.902 -10.238,-3.902 -14.145,0z"
+        android:strokeWidth="1" />
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M137.723,354.93 L2.93,489.726c-3.906,3.906 -3.906,10.238 0,14.145 1.953,1.949 4.512,2.926 7.07,2.926 2.559,0 5.117,-0.977 7.07,-2.93L151.867,369.074c3.902,-3.906 3.902,-10.238 0,-14.145 -3.906,-3.902 -10.238,-3.902 -14.145,0zM2.93,489.726"
+        android:strokeWidth="1" />
+</vector>

@@ -1,8 +1,6 @@
 package com.ulan.timetable.activities;
 
 import android.content.Context;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
 import android.view.ActionMode;
@@ -13,14 +11,17 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+
+import com.ulan.timetable.R;
 import com.ulan.timetable.adapters.TeachersAdapter;
 import com.ulan.timetable.model.Teacher;
-import com.ulan.timetable.R;
 import com.ulan.timetable.utils.AlertDialogsHelper;
 import com.ulan.timetable.utils.DbHelper;
+import com.ulan.timetable.utils.PreferenceUtil;
 
 import java.util.ArrayList;
-
 
 
 public class TeachersActivity extends AppCompatActivity {
@@ -32,6 +33,7 @@ public class TeachersActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(PreferenceUtil.getGeneralTheme(this));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teachers);
         initAll();
@@ -58,7 +60,7 @@ public class TeachersActivity extends AppCompatActivity {
             public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
                 final int checkedCount = listView.getCheckedItemCount();
                 mode.setTitle(checkedCount + " " + getResources().getString(R.string.selected));
-                if(checkedCount == 0) mode.finish();
+                if (checkedCount == 0) mode.finish();
             }
 
             @Override
@@ -79,7 +81,7 @@ public class TeachersActivity extends AppCompatActivity {
                     case R.id.action_delete:
                         ArrayList<Teacher> removelist = new ArrayList<>();
                         SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
-                        for(int i = 0; i < checkedItems.size(); i++) {
+                        for (int i = 0; i < checkedItems.size(); i++) {
                             int key = checkedItems.keyAt(i);
                             if (checkedItems.get(key)) {
                                 db.deleteTeacherById(adapter.getItem(key));
@@ -96,6 +98,7 @@ public class TeachersActivity extends AppCompatActivity {
                         return false;
                 }
             }
+
             @Override
             public void onDestroyActionMode(ActionMode mode) {
             }

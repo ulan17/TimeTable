@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Felix Hollederer
+  ~     This file is part of GymWenApp.
+  ~
+  ~     GymWenApp is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     GymWenApp is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with GymWenApp.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_switch_design"
+        android:icon="@drawable/ic_art"
+        android:title="@string/switch_design"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_settings"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_refresh"
+        android:icon="@drawable/ic_refresh_white_24dp"
+        android:title="@string/action_refresh"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_refresh2"
+        android:title="@string/action_refresh"
+        android:visible="false"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_update"
+        android:title="@string/menu_update"
+        android:visible="false"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_profiles"
+        android:title="@string/menu_profiles"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_changelog"
+        android:title="@string/changelog"
+        android:visible="false"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_imprint"
+        android:title="@string/menu_impressum"
+        android:visible="true"
+        app:showAsAction="never" />
+
+
+</menu>

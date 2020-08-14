@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Felix Hollederer
+  ~     This file is part of GymWenApp.
+  ~
+  ~     GymWenApp is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     GymWenApp is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with GymWenApp.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory
+        android:title="Allgemein"
+        app:iconSpaceReserved="false">
+
+        <ListPreference
+            android:defaultValue="switch"
+            android:entries="@array/theme_array"
+            android:entryValues="@array/theme_array_values"
+            android:key="theme"
+            android:title="@string/set_choose_theme"
+            app:iconSpaceReserved="false" />
+        <Preference
+            android:key="accentColor"
+            android:summary="@string/set_desc_accentColor"
+            android:title="@string/color_accent"
+            app:iconSpaceReserved="false" />
+        <Preference
+            android:key="primaryColor"
+            android:summary="@string/set_desc_primaryColor"
+            android:title="@string/color_primary"
+            app:iconSpaceReserved="false" />
+        <Preference
+            android:summary="@string/set_desc_menu_items_fragment"
+            android:title="@string/menu_items"
+            app:fragment="com.asdoi.gymwen.ui.settingsFragments.SettingsFragmentHideMenuItems"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/set_substitution_category"
+        app:iconSpaceReserved="false">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="old_vertretung"
+            android:summary="@string/set_desc_old_substitution"
+            android:title="@string/set_old_substitution"
+            app:iconSpaceReserved="false" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="old_vertretung_title"
+            android:summary="@string/set_desc_old_title"
+            android:title="@string/set_old_title"
+            app:iconSpaceReserved="true" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="show_borders"
+            android:summary="@string/set_desc_show_borders"
+            android:title="@string/set_show_borders"
+            app:iconSpaceReserved="false" />
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="show_border_specific"
+            android:title="@string/set_show_borders_specific"
+            app:iconSpaceReserved="true" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="swipe_to_refresh"
+            android:title="@string/set_swipe_to_refresh"
+            app:iconSpaceReserved="false" />
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="swipe_to_refresh_filtered"
+            android:title="@string/set_at_filtered_plan"
+            app:iconSpaceReserved="true" />
+    </PreferenceCategory>
+</PreferenceScreen>

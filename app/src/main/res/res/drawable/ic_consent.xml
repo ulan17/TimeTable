@@ -1,0 +1,27 @@
+<!--
+  ~ Copyright (c) 2020 Felix Hollederer
+  ~     This file is part of GymWenApp.
+  ~
+  ~     GymWenApp is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     GymWenApp is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with GymWenApp.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="512dp"
+    android:height="512dp"
+    android:viewportWidth="512"
+    android:viewportHeight="512">
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="m173,492c0,11.047 -8.953,20 -20,20h-46c-44.113,0 -80,-35.887 -80,-80v-352c0,-44.113 35.887,-80 80,-80h245.891c44.109,0 80,35.887 80,80v119c0,11.047 -8.957,20 -20,20 -11.047,0 -20,-8.953 -20,-20v-119c0,-22.055 -17.945,-40 -40,-40h-245.891c-22.055,0 -40,17.945 -40,40v352c0,22.055 17.945,40 40,40h46c11.047,0 20,8.953 20,20zM352.887,140c0,-11.047 -8.953,-20 -20,-20h-206c-11.043,0 -20,8.953 -20,20s8.957,20 20,20h206c11.047,0 20,-8.953 20,-20zM273,220c0,-11.047 -8.953,-20 -20,-20h-126.113c-11.043,0 -20,8.953 -20,20s8.957,20 20,20h126.113c11.047,0 20,-8.953 20,-20zM126.887,280c-11.043,0 -20,8.953 -20,20s8.957,20 20,20h83.113c11.047,0 20,-8.953 20,-20s-8.953,-20 -20,-20zM475.809,497.121c-7.695,9.457 -19.051,14.879 -31.156,14.879h-195.305c-12.172,0 -23.563,-5.418 -31.25,-14.863 -7.734,-9.504 -10.738,-21.852 -8.242,-33.875 6.461,-31.125 23.574,-59.445 48.184,-79.746 9.32,-7.688 19.563,-14.086 30.422,-19.086 -12.102,-13.746 -19.461,-31.758 -19.461,-51.465 0,-43.012 34.988,-78 78,-78s78,34.988 78,78c0,19.707 -7.359,37.719 -19.461,51.465 10.859,5 21.102,11.395 30.422,19.086 24.117,19.895 41.031,47.492 47.781,77.879 0.156,0.527 0.289,1.059 0.402,1.602 2.508,12.094 -0.531,24.531 -8.336,34.125zM309,312.965c0,20.953 17.047,38 38,38s38,-17.047 38,-38 -17.047,-38 -38,-38 -38,17.047 -38,38zM444.988,471.434c-0.004,-0.012 -0.008,-0.027 -0.008,-0.039 -9.605,-46.254 -50.813,-79.828 -97.98,-79.828s-88.379,33.574 -97.98,79.828c-0.09,0.449 0.219,0.594 0.219,0.598 0.008,0 0.043,0.008 0.109,0.008h195.305c0.012,-0.012 0.281,-0.215 0.336,-0.566zM444.988,471.434" />
+</vector>

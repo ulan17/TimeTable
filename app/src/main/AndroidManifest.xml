@@ -1,57 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ulan.timetable"
-    >
+    xmlns:dist="http://schemas.android.com/apk/distribution"
+    package="com.ulan.timetable">
+
+    <dist:module dist:instant="true" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/SplashTheme">
         <activity
             android:name=".activities.MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
-
         <activity
             android:name=".activities.HomeworksActivity"
             android:label="@string/homeworks"
             android:parentActivityName=".activities.MainActivity" />
-
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value=".activities.HomeworksActivity" />
-
         <activity
             android:name=".activities.NotesActivity"
-            android:label="Notes"
+            android:label="@string/notes_activity_title"
             android:parentActivityName=".activities.MainActivity" />
         <activity
             android:name=".activities.NoteInfoActivity"
-            android:label="Notes"
+            android:label="@string/notes_activity_title"
             android:parentActivityName=".activities.NotesActivity" />
         <activity
             android:name=".activities.TeachersActivity"
-            android:label="Teachers"
+            android:label="@string/teacher"
             android:parentActivityName=".activities.MainActivity" />
         <activity
             android:name=".activities.SettingsActivity"
-            android:label="Settings"
+            android:label="@string/action_settings"
             android:parentActivityName=".activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -59,23 +57,73 @@
         </activity>
         <activity
             android:name=".activities.ExamsActivity"
-            android:label="Exams"
+            android:label="@string/exams_activity_title"
             android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name=".activities.SummaryActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/summary_activity_title"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name=".activities.TimeSettingsActivity"
+            android:label="@string/time_settings"
+            android:parentActivityName=".activities.SummaryActivity" />
+        <activity
+            android:name="com.mikepenz.aboutlibraries.ui.LibsActivity"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
         <receiver
-            android:name=".utils.DailyReceiver"
+            android:name=".receivers.NotificationDismissButtonReceiver"
             android:enabled="true" />
-
         <receiver
-            android:name=".utils.WakeUpAlarmReceiver"
+            android:name=".receivers.DailyReceiver"
             android:enabled="true">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <category android:name="android.intent.category.DEFAULT" />
+
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
             </intent-filter>
         </receiver>
+        <receiver
+            android:name=".receivers.TurnOnReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
 
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".receivers.TurnOffReceiver"
+            android:enabled="true" />
+
+
+        <activity
+            android:name=".appwidget.AppWidgetConfigureActivity"
+            android:label="@string/configure_widget_controls">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
+
+        <receiver android:name=".appwidget.DayAppWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.sunrain.timetablev4.ACTION_NEW_DAY" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/day_appwidget_info" />
+        </receiver>
+        <service
+            android:name=".appwidget.DayAppWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
     </application>
 
 </manifest>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Felix Hollederer
+  ~     This file is part of GymWenApp.
+  ~
+  ~     GymWenApp is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     GymWenApp is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with GymWenApp.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <EditTextPreference
+        android:key="username"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="@string/set_substitution_username"
+        app:iconSpaceReserved="false"
+        android:summary="@string/set_desc_username" />
+    <EditTextPreference
+        android:key="password"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="@string/set_substitution_password"
+        app:iconSpaceReserved="false"
+        android:summary="@string/set_desc_password" />
+    <EditTextPreference
+        android:defaultValue="http://gym-wen.de/vp/heute.htm"
+        android:key="today_url"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="@string/set_today_url"
+        app:iconSpaceReserved="false"
+        android:summary="@string/set_desc_today_url" />
+    <EditTextPreference
+        android:defaultValue="http://gym-wen.de/vp/morgen.htm"
+        android:key="tomorrow_url"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="@string/set_tomorrow_url"
+        app:iconSpaceReserved="false"
+        android:summary="@string/set_desc_tomorrow_url" />
+    <EditTextPreference
+        android:defaultValue="http://www.gym-wen.de/information/sprechstunden/"
+        android:key="teacherlist_url"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="@string/set_teacherlist_url"
+        app:iconSpaceReserved="false"
+        android:summary="@string/set_desc_teacherlist_url" />
+</PreferenceScreen>

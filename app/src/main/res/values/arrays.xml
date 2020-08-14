@@ -1,0 +1,52 @@
+<!--
+  ~ Copyright (c) 2020 Felix Hollederer
+  ~     This file is part of GymWenApp.
+  ~
+  ~     GymWenApp is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     GymWenApp is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with GymWenApp.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+    <!-- Reply Preference -->
+    <string-array name="theme_array">
+        <item>@string/set_theme_light</item>
+        <item>@string/set_theme_dark</item>
+        <item>@string/set_theme_black</item>
+        <item>@string/set_theme_auto</item>
+    </string-array>
+
+    <string-array name="theme_array_values">
+        <item>light</item>
+        <item>dark</item>
+        <item>black</item>
+        <item>switch</item>
+    </string-array>
+
+    <integer-array name="preselected_subjects_colors">
+        <item>@color/art</item>
+        <item>@color/biology</item>
+        <item>@color/chemistry</item>
+        <item>@color/english</item>
+        <item>@color/french</item>
+        <item>@color/geography</item>
+        <item>@color/german</item>
+        <item>@color/history</item>
+        <item>@color/math</item>
+        <item>@color/music</item>
+        <item>@color/physics</item>
+        <item>@color/politics</item>
+        <item>@color/religion</item>
+        <item>@color/spanish</item>
+        <item>@color/pe</item>
+    </integer-array>
+</resources>

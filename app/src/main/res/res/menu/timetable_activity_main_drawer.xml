@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group
+        android:id="@+id/menu_mid"
+        android:checkableBehavior="none">
+
+        <item
+            android:id="@+id/exams"
+            android:icon="@drawable/ic_school_black_24dp"
+            android:title="@string/exams_activity_title" />
+
+        <item
+            android:id="@+id/homework"
+            android:icon="@drawable/ic_book_black_24dp"
+            android:title="@string/homeworks_activity_title" />
+        <item
+            android:id="@+id/notes"
+            android:icon="@drawable/ic_event_note_black_24dp"
+            android:title="@string/notes_activity_title" />
+    </group>
+
+    <group
+        android:id="@+id/menu_down"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/settings"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="@string/action_settings" />
+        <item
+            android:id="@+id/menu_main_app"
+            android:icon="@drawable/ic_open_in_browser_white_24dp"
+            android:title="@string/action_open_main_app" />
+    </group>
+</menu>

@@ -1,0 +1,33 @@
+<!--
+  ~ Copyright (c) 2020 Felix Hollederer
+  ~     This file is part of GymWenApp.
+  ~
+  ~     GymWenApp is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     GymWenApp is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with GymWenApp.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="512dp"
+    android:height="512dp"
+    android:viewportWidth="512"
+    android:viewportHeight="512">
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="m377,330.986c41.355,0 75,-33.645 75,-75v-120c0,-41.355 -33.645,-75 -75,-75s-75,33.645 -75,75v120c0,41.355 33.645,75 75,75z" />
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="m497,180.986c-8.284,0 -15,6.716 -15,15v60c0,57.897 -47.103,105 -105,105s-105,-47.103 -105,-105v-60c0,-8.284 -6.716,-15 -15,-15s-15,6.716 -15,15v60c0,69.369 52.594,126.676 120,134.162v60.838h-45c-8.284,0 -15,6.716 -15,15s6.716,15 15,15h120c8.284,0 15,-6.716 15,-15s-6.716,-15 -15,-15h-45v-60.838c67.406,-7.486 120,-64.793 120,-134.162v-60c0,-8.285 -6.716,-15 -15,-15z" />
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="m272,135.986c0,-8.284 -6.716,-15 -15,-15h-21.729l-25.854,-51.708c-5.772,-11.544 -22.544,-10.862 -27.343,1.137l-44.792,111.979 -47.052,-141.152c-4.541,-13.622 -23.91,-13.653 -28.461,0l-26.581,79.743h-20.188c-8.284,0 -15,6.716 -15,15s6.716,15 15,15h31c6.456,0 12.188,-4.131 14.23,-10.257l15.77,-47.308 45.77,137.309c1.991,5.972 7.498,10.065 13.79,10.25 6.208,0.184 12,-3.505 14.367,-9.423l47.595,-118.986 15.063,30.124c2.54,5.082 7.734,8.292 13.416,8.292h31c8.283,0 14.999,-6.716 14.999,-15z" />
+</vector>

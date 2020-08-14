@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Felix Hollederer
+  ~     This file is part of GymWenApp.
+  ~
+  ~     GymWenApp is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     GymWenApp is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with GymWenApp.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="showNotification"
+        android:title="@string/set_notification_isOn"
+        app:iconSpaceReserved="false" />
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="alwaysNotification"
+        android:summary="@string/set_desc_alwaysNotification"
+        android:title="@string/set_notification_showAlways"
+        app:iconSpaceReserved="false" />
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="RSS_notif"
+        android:summary="@string/rss_notification_channel_description"
+        android:title="@string/set_rss_notification"
+        app:iconSpaceReserved="false" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="two_notifs"
+        android:summary="@string/set_desc_two_notifs"
+        android:title="@string/set_two_notifications"
+        app:iconSpaceReserved="false" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="main_notif_for_all"
+        android:summary="@string/set_main_notif_for_all_desc"
+        android:title="@string/set_main_notif_for_all_title"
+        app:iconSpaceReserved="false" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="showSummaryNotification"
+        android:title="@string/set_show_summary_notif_title"
+        app:iconSpaceReserved="false" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="summary_notif_as_usual"
+        android:summary="@string/set_show_summary_usual_desc"
+        android:title="@string/set_show_summary_usual_title"
+        app:iconSpaceReserved="true" />
+    <Preference
+        android:key="alarm"
+        android:summary="@string/set_desc_alarm"
+        android:title="@string/set_notification_alarm"
+        app:iconSpaceReserved="false" />
+</PreferenceScreen>

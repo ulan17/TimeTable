@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class DbHelper extends SQLiteOpenHelper{
 
     private static final int DB_VERSION = 6;
-    private static final String DB_NAME = "timetabledb";
+    public static final String DB_NAME = "timetabledb";
     private static final String TIMETABLE = "timetable";
     private static final String WEEK_ID = "id";
     private static final String WEEK_SUBJECT = "subject";
@@ -398,5 +398,17 @@ public class DbHelper extends SQLiteOpenHelper{
         cursor.close();
         db.close();
         return examslist;
+    }
+
+
+    public void deleteAll() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DROP TABLE IF EXISTS " + TIMETABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + HOMEWORKS);
+        db.execSQL("DROP TABLE IF EXISTS " + NOTES);
+        db.execSQL("DROP TABLE IF EXISTS " + TEACHERS);
+        db.execSQL("DROP TABLE IF EXISTS " + EXAMS);
+        db.close();
+        onCreate(this.getWritableDatabase());
     }
 }

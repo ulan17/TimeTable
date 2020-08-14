@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.stephenvinouze:shapetextdrawable:1.0.0@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5a2f87aa92617a07b7f090d0909278aa/jetified-shapetextdrawable-1.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5a2f87aa92617a07b7f090d0909278aa/jetified-shapetextdrawable-1.0.0/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.stephenvinouze/shapetextdrawable/1.0.0/36cf0cbd7e1ec1a464dad93d23e00e9f4c2039d4/shapetextdrawable-1.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

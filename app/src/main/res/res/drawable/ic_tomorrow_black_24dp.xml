@@ -1,0 +1,31 @@
+<!--
+  ~ Copyright (c) 2020 Felix Hollederer
+  ~     This file is part of GymWenApp.
+  ~
+  ~     GymWenApp is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     GymWenApp is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with GymWenApp.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24.0"
+    android:viewportHeight="24.0">
+
+
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="m 4.5932203,3.9152543 h 1 v -2 h 2 v 2 H 15.59322 v -2 h 2 v 2 h 1 c 1.11,0 1.99,0.9 1.99,2 l 0.01,13.9999997 c 0,1.1 -0.89,2 -2,2 H 4.5932203 c -1.1,0 -2,-0.9 -2,-2 V 5.9152543 c 0,-1.1 0.9,-2 2,-2 z m 0,15.9999997 H 18.59322 V 8.9152543 H 4.5932203 Z m 11.9999997,-9 h -5 v 5 h 5 z" />
+
+
+</vector>

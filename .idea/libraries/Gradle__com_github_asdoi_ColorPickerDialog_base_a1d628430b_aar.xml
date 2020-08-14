@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.asdoi.ColorPickerDialog:base:a1d628430b@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f21a14dda16a4b6ddde0616f277e8a49/jetified-base-a1d628430b/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f21a14dda16a4b6ddde0616f277e8a49/jetified-base-a1d628430b/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.asdoi.ColorPickerDialog/base/a1d628430b/103526558a6cfff613fffc10a7af6f184627e372/base-a1d628430b-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

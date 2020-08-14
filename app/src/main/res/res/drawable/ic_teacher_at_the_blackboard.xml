@@ -1,0 +1,33 @@
+<!--
+  ~ Copyright (c) 2020 Felix Hollederer
+  ~     This file is part of GymWenApp.
+  ~
+  ~     GymWenApp is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     GymWenApp is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with GymWenApp.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="937"
+    android:viewportHeight="937">
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M513.1,360.85c5.601,0 11,0.9 16.2,2.4l97,-118.9c6.2,-7.6 17.7,-9 25.2,-2.6c7.3,6.1 8.3,17 2.2,24.4l-95.9,117.6c6.5,9 10.4,20.101 10.4,32.101c0,22.3 -13.4,41.6 -32.5,50.199H912c13.8,0 25,-11.199 25,-25v-316.5c0,-13.8 -11.2,-25 -25,-25H434c-13.8,0 -25,11.2 -25,25v207.8l22.6,28.6h81.5V360.85z" />
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M201.3,121.85m-102.4,0a102.4,102.4 0,1 1,204.8 0a102.4,102.4 0,1 1,-204.8 0" />
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M306.3,892.55c0,13.801 -11.2,25 -25,25h-42c-13.8,0 -25,-11.199 -25,-25v-209.6c0,-7.4 -6,-13.4 -13.4,-13.4l0,0c-7.4,0 -13.4,6 -13.4,13.4v208.6c0,14.301 -11.7,26 -26,26h-41.1c-13.8,0 -25,-11.199 -25,-25l-0.2,-506c0,-6.8 -5.5,-12.399 -12.4,-12.399l0,0c-6.8,0 -12.4,5.5 -12.4,12.399V581.15c0,13.8 -11.2,25 -25,25H25c-13.8,0 -25,-11.2 -25,-25v-266.8c0,-31.7 25.7,-57.3 57.3,-57.3H285c24.399,0 47.5,11.2 62.7,30.3l61.199,77.2l12.9,16.3c0,0 58,0 91.4,0.1c13.8,0 25,11.2 25,25v19.9c0,13.8 -11.2,25 -25,25H405c-10.7,0 -20.8,-4.9 -27.4,-13.301l-45.6,-58.6c-2.3,-3 -6,-4.8 -9.8,-4.8H319.1c-6.8,0 -12.399,5.5 -12.399,12.399L306.3,892.55z" />
+</vector>

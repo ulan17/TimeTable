@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.preference.SwitchPreferenceCompat
+        android:defaultValue="false"
+        android:icon="@drawable/ic_view_week_black_24dp"
+        android:key="sevendays"
+        android:summary="@string/sevendays_setting"
+        android:title="@string/seven_days_of_the_week" />
+
+    <SwitchPreferenceCompat
+        android:defaultValue="true"
+        android:icon="@drawable/ic_do_not_disturb_on_black_24dp"
+        android:key="automatic_do_not_disturb"
+        android:summary="@string/do_not_disturb_settings_desc"
+        android:title="@string/do_not_disturb_setting" />
+
+    <SwitchPreferenceCompat
+        android:defaultValue="false"
+        android:key="do_not_disturb_turn_off"
+        android:title="@string/do_not_disturb_turn_off" />
+
+    <SwitchPreferenceCompat
+        android:defaultValue="true"
+        android:icon="@drawable/ic_slideshow_black_24dp"
+        android:key="timetableNotif"
+        android:title="@string/set_notification_isOn" />
+
+    <SwitchPreferenceCompat
+        android:defaultValue="true"
+        android:key="alwaysNotification"
+        android:summary="@string/set_desc_alwaysNotification"
+        android:title="@string/set_notification_showAlways" />
+    <Preference
+        android:key="alarm"
+        android:summary="@string/set_desc_alarm"
+        android:title="@string/set_notification_alarm" />
+
+    <SwitchPreferenceCompat
+        android:defaultValue="true"
+        android:icon="@drawable/ic_assignment_late_black_24dp"
+        android:key="subs"
+        android:summary="@string/integrate_substitution_in_desc"
+        android:title="@string/integrate_substitution_in_timetable" />
+
+    <EditTextPreference
+        android:key="courses"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:summary="@string/set_desc_courses"
+        android:title="@string/set_courses_title" />
+
+    <Preference
+        android:icon="@drawable/ic_open_in_browser_white_24dp"
+        android:key="allprefs"
+        android:title="@string/open_all_settings" />
+</PreferenceScreen>

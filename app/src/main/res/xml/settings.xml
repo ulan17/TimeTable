@@ -1,17 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.v7.preference.SwitchPreferenceCompat
+    <SwitchPreferenceCompat
         android:defaultValue="false"
+        android:icon="@drawable/ic_view_week_black_24dp"
         android:key="sevendays"
-        android:icon="@drawable/baseline_view_week_black_18"
-        android:title="@string/seven_days_of_the_week"
-        android:summary="@string/sevendays_setting" />
+        android:summary="@string/sevendays_setting"
+        android:title="@string/seven_days_of_the_week" />
+
     <EditTextPreference
+        android:icon="@drawable/ic_open_in_browser_white_24dp"
         android:key="schoolwebsite"
         android:selectAllOnFocus="true"
-        android:icon="@drawable/baseline_open_in_browser_black_18"
         android:singleLine="true"
-        android:title="@string/school_website_setting"
-        android:summary="@string/school_website_setting_summary"/>
+        android:summary="@string/school_website_setting_summary"
+        android:title="@string/school_website_setting" />
+
+    <Preference
+        android:icon="@drawable/ic_access_time_black_24dp"
+        android:key="time_settings"
+        android:summary="@string/time_settings_desc"
+        android:title="@string/time_settings" />
+
+    <ListPreference
+        android:defaultValue="switch"
+        android:entries="@array/theme_array"
+        android:entryValues="@array/theme_array_values"
+        android:icon="@drawable/ic_palette_black_24dp"
+        android:key="theme"
+        android:title="@string/set_choose_theme" />
+
+    <SwitchPreferenceCompat
+        android:defaultValue="true"
+        android:icon="@drawable/ic_do_not_disturb_on_black_24dp"
+        android:key="automatic_do_not_disturb"
+        android:summary="@string/do_not_disturb_settings_desc"
+        android:title="@string/do_not_disturb_setting" />
+
+    <SwitchPreferenceCompat
+        android:defaultValue="false"
+        android:key="do_not_disturb_turn_off"
+        android:title="@string/do_not_disturb_turn_off" />
+
+    <SwitchPreferenceCompat
+        android:defaultValue="true"
+        android:icon="@drawable/ic_slideshow_black_24dp"
+        android:key="timetableNotif"
+        android:title="@string/set_notification_isOn" />
+
+    <SwitchPreferenceCompat
+        android:defaultValue="false"
+        android:key="alwaysNotification"
+        android:summary="@string/set_desc_alwaysNotification"
+        android:title="@string/set_notification_showAlways" />
+    <Preference
+        android:key="alarm"
+        android:summary="@string/set_desc_alarm"
+        android:title="@string/set_notification_alarm" />
+
+    <Preference
+        android:key="cyanea"
+        android:title="Theming"
+        app:isPreferenceVisible="false" />
 </PreferenceScreen>
